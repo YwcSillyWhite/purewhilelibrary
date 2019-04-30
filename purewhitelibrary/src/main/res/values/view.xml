@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BottomMenu">
+        //选中文字颜色
+        <attr name="checkTv_true" format="color"></attr>
+        //未选中文字颜色
+        <attr name="checkTv_flase" format="color"></attr>
+        //选中图片
+        <attr name="checkImg_true" format="reference"></attr>
+        //为选中图片
+        <attr name="checkImg_flase" format="reference"></attr>
+        //为选中图片
+        <attr name="Tvsize" format="dimension"></attr>
+        //是否开启动画
+        <attr name="anmiable" format="boolean"></attr>
+        //设置初始值
+        <attr name="text" format="string"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="BottomLayout">
+        //默认选中哪个
+        <attr name="checkPosition" format="integer"></attr>
+    </declare-styleable>
+
+
+    <!--//RatingBar 样式-->
+    <!--<style name="RatingBarStype" parent="Base.Widget.AppCompat.RatingBar">-->
+        <!--<item name="android:progressDrawable">@drawable/ratingbar_custom</item>-->
+        <!--<item name="android:minHeight">22dip</item>-->
+        <!--<item name="android:maxHeight">22dip</item>-->
+    <!--</style>-->
+
+    <!--//RatingBar 颜色-->
+    <!--<style name="RatingBarColor" parent="Base.Widget.AppCompat.RatingBar.Indicator">-->
+        <!--&lt;!&ndash;Background Color&ndash;&gt;-->
+        <!--<item name="colorControlNormal">#D7D7D7</item>-->
+        <!--&lt;!&ndash;Progress Color&ndash;&gt;-->
+        <!--<item name="colorControlActivated">@color/red</item>-->
+    <!--</style>-->
+
+
+    <!--//ratioimageview-->
+    <!--<declare-styleable name="ScaleView">-->
+        <!--<attr name="scale" format="float"></attr>-->
+        <!--<attr name="scale_wight" format="integer"></attr>-->
+        <!--<attr name="scale_height" format="integer"></attr>-->
+    <!--</declare-styleable>-->
+
+
+    <!--<declare-styleable name="ScrollViewPager">-->
+        <!--//不能滑动-->
+        <!--<attr name="canScroll" format="boolean"></attr>-->
+    <!--</declare-styleable>-->
+    <!---->
+    <!--<declare-styleable name="WrapViewPager">-->
+        <!--//是否使用缓存高度-->
+        <!--<attr name="cache" format="boolean"></attr>-->
+    <!--</declare-styleable>-->
+    <!---->
+    <!---->
+    <!--<declare-styleable name="TrapezoidView">-->
+        <!--<attr name="trap_padding" format="dimension"></attr>-->
+        <!--<attr name="trap_color" format="color"></attr>-->
+    <!--</declare-styleable>-->
+
+
+    <!--<style name="BaseDialog" parent="@android:style/Theme.Dialog">-->
+        <!--<item name="android:windowFrame">@null</item>-->
+        <!--&lt;!&ndash; 边框 &ndash;&gt;-->
+        <!--<item name="android:windowIsFloating">true</item>-->
+        <!--&lt;!&ndash; 是否浮现在activity之上 &ndash;&gt;-->
+        <!--<item name="android:windowIsTranslucent">false</item>-->
+        <!--&lt;!&ndash; 半透明 &ndash;&gt;-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--&lt;!&ndash; 无标题 &ndash;&gt;-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <!--&lt;!&ndash; 模糊 &ndash;&gt;-->
+    <!--</style>-->
+
+</resources>
