@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
+import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
 
 /**
@@ -113,5 +114,9 @@ public abstract class BaseFragment<DB extends ViewDataBinding> extends Fragment{
     }
 
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxDisposableManager.getInstance().removeDis(this);
+    }
 }

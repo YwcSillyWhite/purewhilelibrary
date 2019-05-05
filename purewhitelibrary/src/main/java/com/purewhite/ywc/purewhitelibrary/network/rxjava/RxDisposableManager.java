@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable;
  */
 public final class RxDisposableManager {
     private static volatile RxDisposableManager sInstance;
-    private HashMap<Object, CompositeDisposable> mCompositeDisposables;
+    private Map<Object, CompositeDisposable> mCompositeDisposables;
     private RxDisposableManager() {
         mCompositeDisposables = new HashMap<>();
     }

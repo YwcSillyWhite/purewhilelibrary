@@ -1,7 +1,5 @@
 package com.purewhite.ywc.purewhitelibrary.network.rxjava;
 
-
-
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.NetWorkUtils;
@@ -18,10 +16,19 @@ import retrofit2.HttpException;
  */
 public abstract class HttpObserver<T> implements Observer<T> {
 
+    private Object object;
+
+    public HttpObserver() {
+        this(AppUtils.getContext());
+    }
+
+    public HttpObserver(Object object) {
+        this.object = object;
+    }
 
     @Override
     public void onSubscribe(Disposable d) {
-        RxDisposableManager.getInstance().addDis(AppUtils.getContext(),d);
+        RxDisposableManager.getInstance().addDis(object,d);
     }
 
     @Override
