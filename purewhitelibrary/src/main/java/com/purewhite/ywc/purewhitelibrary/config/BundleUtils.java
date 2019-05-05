@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.app;
+package com.purewhite.ywc.purewhitelibrary.config;
 
 import android.os.Bundle;
 

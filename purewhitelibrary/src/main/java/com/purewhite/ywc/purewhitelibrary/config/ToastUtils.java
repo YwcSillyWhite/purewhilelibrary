@@ -5,6 +5,9 @@ import android.widget.Toast;
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 
 
+/**
+ * @author yuwenchao
+ */
 public class ToastUtils {
     private static Toast toast;
     public static void show(String content)

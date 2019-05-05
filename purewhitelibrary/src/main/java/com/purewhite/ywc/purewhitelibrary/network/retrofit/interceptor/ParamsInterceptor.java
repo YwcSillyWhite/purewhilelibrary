@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.network.retrofit.base.interceptor;
+package com.purewhite.ywc.purewhitelibrary.network.retrofit.interceptor;
 
 import java.io.IOException;
 

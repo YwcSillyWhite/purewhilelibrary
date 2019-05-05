@@ -4,7 +4,7 @@ package com.purewhite.ywc.purewhitelibrary.network.retrofit.base;
 
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.BaseUri;
-import com.purewhite.ywc.purewhitelibrary.network.retrofit.base.interceptor.ParamsInterceptor;
+import com.purewhite.ywc.purewhitelibrary.network.retrofit.interceptor.ParamsInterceptor;
 
 import java.util.HashMap;
 import java.util.Map;
