@@ -4,13 +4,10 @@ import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
-import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
-import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
 
@@ -20,7 +17,7 @@ import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
  * @date 2018/11/3
  */
 
-public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompatActivity implements PermissonCallBack {
+public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompatActivity{
 
     //是否横屏
     protected DB mDataBinding;
@@ -96,23 +93,6 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompat
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        PermissonUtils.permissionsResult(this,requestCode,permissions,grantResults,this);
-    }
 
-
-    //权限开始失败
-    @Override
-    public void onPermissonRepulse(int requestCode, String... permisssons) {
-
-    }
-
-    //权限开启成功
-    @Override
-    public void onPermissonSuccess(int requestCode) {
-
-    }
 
 }

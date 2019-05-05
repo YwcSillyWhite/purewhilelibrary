@@ -63,5 +63,4 @@ dependencies {
     //阿里vlayout的框架
     implementation 'com.alibaba.android:vlayout:1.3.0@aar'
 
-
 }

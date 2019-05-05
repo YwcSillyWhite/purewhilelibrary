@@ -9,6 +9,6 @@ public class BaseApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        AppUtils.init(this);
+        AppUtils.init(this,"http://v2.api.haodanku.com");
     }
 }

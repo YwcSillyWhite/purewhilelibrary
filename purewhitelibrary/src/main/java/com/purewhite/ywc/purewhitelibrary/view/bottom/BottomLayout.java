@@ -27,8 +27,15 @@ public class BottomLayout extends LinearLayout{
     private BottomMenu lastView;
     private BottomMenu lastLastView;
 
+    //添加绑定
     public void addOnBottomLayoutChageListener(OnBottomLayoutChageListener onBottomLayoutChageListener) {
         this.onBottomLayoutChageListener = onBottomLayoutChageListener;
+    }
+
+    //解除绑定
+    public void removeOnBottomLayoutChageListener()
+    {
+        this.onBottomLayoutChageListener=null;
     }
 
     public BottomLayout(Context context) {
@@ -103,7 +110,7 @@ public class BottomLayout extends LinearLayout{
 
     private void childChange(BottomMenu view)
     {
-        if (onBottomLayoutChageListener==null||lastView==view)
+        if (lastView==view)
             return;
         if (lastView!=null)
         {
@@ -112,7 +119,8 @@ public class BottomLayout extends LinearLayout{
         }
         lastView=view;
         view.setCheck(true);
-        onBottomLayoutChageListener.onCheckChange(view);
+        if (onBottomLayoutChageListener!=null)
+            onBottomLayoutChageListener.onCheckChange(view);
     }
 
 

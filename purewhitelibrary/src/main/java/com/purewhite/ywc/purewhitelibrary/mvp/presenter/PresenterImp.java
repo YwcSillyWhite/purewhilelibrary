@@ -2,7 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.mvp.presenter;
 
 
 
-import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseView;
+import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
 
 import java.lang.ref.WeakReference;
 
@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
  * Presenter实现类
  */
 
-public class PresenterImp<V extends BaseView> implements BasePresenter<V> {
+public class PresenterImp<V extends BaseUiView> implements BasePresenter<V> {
 
     protected V mView;
     private WeakReference<V> vWeakReference;

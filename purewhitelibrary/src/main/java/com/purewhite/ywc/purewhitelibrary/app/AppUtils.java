@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseActivity;
+import com.purewhite.ywc.purewhitelibrary.network.BaseUri;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
 import java.util.Stack;
@@ -75,7 +77,17 @@ public final class  AppUtils {
 
     //初始化
     public static void init(Application application) {
+        init(application);
+    }
+
+    public static void init(Application application,String uri)
+    {
+        AppUtils.application =application;
         application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
+        if (!TextUtils.isEmpty(uri))
+        {
+            BaseUri.baseUri=uri;
+        }
     }
 
 

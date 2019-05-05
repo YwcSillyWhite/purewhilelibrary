@@ -4,7 +4,7 @@ import android.content.Context;
 import android.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
-import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseView;
+import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
 
 
 /**
@@ -13,8 +13,8 @@ import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseView;
  * @date 2018/11/5
  */
 
-public abstract class MvpActivity<DB extends ViewDataBinding,P extends PresenterImp>
-        extends BaseActivity<DB> implements BaseView {
+public abstract class MvpPureActivity<DB extends ViewDataBinding,P extends PresenterImp>
+        extends BaseActivity<DB> implements BaseUiView {
 
     protected P mPresenter;
     @Override

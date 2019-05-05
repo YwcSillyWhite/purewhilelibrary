@@ -3,6 +3,7 @@ package com.purewhite.ywc.purewhitelibrary.network.retrofit.base;
 
 
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
+import com.purewhite.ywc.purewhitelibrary.network.BaseUri;
 import com.purewhite.ywc.purewhitelibrary.network.retrofit.base.interceptor.ParamsInterceptor;
 
 import java.util.HashMap;
@@ -23,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BaseRetrofit {
     //好单库api接口
-    private final String baseUri="http://v2.api.haodanku.com";
+
     private static BaseRetrofit basRetrofit;
     private Map<String,Retrofit> map=new HashMap<>();
 
@@ -105,7 +106,7 @@ public class BaseRetrofit {
 
 
     public <T> T create(Class<T> service) {
-        return create(baseUri,service);
+        return create(BaseUri.baseUri,service);
     }
 
     public <T> T create(String baseUri,Class<T> service)

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
-import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 
 
 /**
@@ -19,7 +18,7 @@ import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
  * @author yuwenchao
  * @date 2018/11/14
  */
-public abstract class BaseFragment<DB extends ViewDataBinding> extends Fragment implements PermissonCallBack {
+public abstract class BaseFragment<DB extends ViewDataBinding> extends Fragment{
 
     protected DB mDataBinding;
     //唯一加载
@@ -114,18 +113,5 @@ public abstract class BaseFragment<DB extends ViewDataBinding> extends Fragment 
     }
 
 
-    @Override
-    public void onPermissonSuccess(int requestCode) {
 
-    }
-
-    /**
-     * 这个权限类有点不完善，所以只能在activity的返回
-     * @param requestCode
-     * @param permisssons
-     */
-    @Override
-    public void onPermissonRepulse(int requestCode, String... permisssons) {
-
-    }
 }

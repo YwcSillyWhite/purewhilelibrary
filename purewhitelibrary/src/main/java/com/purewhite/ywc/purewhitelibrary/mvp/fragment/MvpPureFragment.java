@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
-import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseView;
+import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
 
 
 /**
@@ -14,8 +14,8 @@ import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseView;
  * @date 2018/11/14
  */
 
-public abstract class MvpFragment<DB extends ViewDataBinding,P extends PresenterImp>
-        extends BaseFragment<DB> implements BaseView {
+public abstract class MvpPureFragment<DB extends ViewDataBinding,P extends PresenterImp>
+        extends BaseFragment<DB> implements BaseUiView {
 
     protected P mPresenter;
 

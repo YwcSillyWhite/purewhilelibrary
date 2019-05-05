@@ -9,7 +9,7 @@ import android.content.Context;
  * ；ui视图接口
  */
 
-public interface BaseView {
+public interface BaseUiView {
 
     Context getContext();
 }

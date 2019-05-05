@@ -50,10 +50,10 @@ public class BottomMenu extends RelativeLayout{
         bottomNum = ((TextView) view.findViewById(R.id.bottomNum));
         //获取xml属性
         TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.BottomMenu);
-        checkTv_true = typedArray.getColor(R.styleable.BottomMenu_checkTv_true, 0Xfff);
-        checkTv_flase = typedArray.getColor(R.styleable.BottomMenu_checkTv_flase, 0X333);
-        checkImg_flase = typedArray.getResourceId(R.styleable.BottomMenu_checkImg_flase, -1);
-        checkImg_true = typedArray.getResourceId(R.styleable.BottomMenu_checkImg_true, -1);
+        checkTv_true = typedArray.getColor(R.styleable.BottomMenu_checkTv_true, 0Xffffffff);
+        checkTv_flase = typedArray.getColor(R.styleable.BottomMenu_checkTv_flase, 0Xff333333);
+        checkImg_flase = typedArray.getResourceId(R.styleable.BottomMenu_checkImg_flase, R.mipmap.icon_load_error);
+        checkImg_true = typedArray.getResourceId(R.styleable.BottomMenu_checkImg_true,  R.mipmap.icon_load_error);
         dimensionPixelSize = typedArray.getDimension(R.styleable.BottomMenu_Tvsize, 15);
         anmiable = typedArray.getBoolean(R.styleable.BottomMenu_anmiable, true);
         text = typedArray.getString(R.styleable.BottomMenu_text);
