@@ -17,6 +17,6 @@ public class HomeFragment extends MvpFragment<FragHomeBinding,HomePresenter> imp
 
     @Override
     protected void initView() {
-
+        mPresenter.obtianShop();
     }
 }

@@ -5,7 +5,6 @@ import com.google.gson.internal.$Gson$Types;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import okhttp3.Response;
 
 /**
  * @author yuwenchao
@@ -47,7 +46,6 @@ public abstract class OkCallBack<T> {
 
     }
 
-    public abstract T onTypeCast(Response response);
 
     public abstract void onFail(Exception e);
 
@@ -55,10 +53,6 @@ public abstract class OkCallBack<T> {
 
     public static OkCallBack CALLBACK_DEFAULT=new OkCallBack()
     {
-        @Override
-        public Object onTypeCast(Response response) {
-            return null;
-        }
 
         @Override
         public void onFail(Exception e) {

@@ -35,10 +35,7 @@ public class PresenterImp<V extends BaseUiView> implements BasePresenter<V> {
     }
 
     //当前页数
-    private int page;
-    public int getPage() {
-        return page;
-    }
+    protected int page;
 
     //初始化页数
     public void initPage()

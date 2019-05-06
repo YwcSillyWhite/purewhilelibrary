@@ -12,6 +12,6 @@ public class HomeContract {
 
     interface Presenter extends BasePresenter<UiView>
     {
-
+        void obtianShop();
     }
 }

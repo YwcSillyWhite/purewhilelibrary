@@ -15,7 +15,7 @@ public class NetManager {
     /**
      * http://v2.api.haodanku.com
      */
-    public static String baseUri="";
+    public static String baseUri="http://v2.api.haodanku.com";
 
 
     /**
