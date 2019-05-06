@@ -1,12 +1,14 @@
-package com.purewhite.ywc.frame1.network;
+package com.purewhite.ywc.purewhitelibrary.network.okhttp;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
-import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
 
 import java.util.Map;
 
-public class OkHttp {
+/**
+ * @author yuwenchao
+ */
+public class OkNetUtils {
 
     public static <T> void get(String url, Map<String, String> paramsRequest, OkCallBack<T> okCallBack)
     {

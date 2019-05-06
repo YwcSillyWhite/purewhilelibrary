@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.network.okhttp;
 
 
 import com.google.gson.Gson;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.NetManager;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.GetBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostBuilder;
@@ -59,7 +58,7 @@ public class OkHttpUtils {
     public void enqueue(OkCallBack okCallBack,Request request)
     {
         if (okCallBack==null)
-            okCallBack=OkCallBack.CALLBACK_DEFAULT;
+            return;
         final OkCallBack finalOkCallBack=okCallBack;
         okCallBack.onBefore();
         okHttpClient.newCall(request).enqueue(new Callback() {
@@ -81,8 +80,8 @@ public class OkHttpUtils {
                         if (response.code()==200)
                         {
                             String responseBody = response.body().string();
-                            LogUtils.debug("okhttp",finalOkCallBack.mType+","+String.class);
-                            if (finalOkCallBack.mType==String.class)
+                            if (finalOkCallBack.mType==null||
+                                    finalOkCallBack.mType==String.class)
                             {
                                 sendSuccessResultCallback(responseBody,finalOkCallBack);
                             }

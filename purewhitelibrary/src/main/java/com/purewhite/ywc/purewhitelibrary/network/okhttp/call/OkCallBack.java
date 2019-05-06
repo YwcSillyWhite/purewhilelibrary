@@ -1,9 +1,11 @@
 package com.purewhite.ywc.purewhitelibrary.network.okhttp.call;
 
-import com.google.gson.internal.$Gson$Types;
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+
+import static com.google.gson.internal.$Gson$Types.canonicalize;
 
 
 /**
@@ -12,6 +14,7 @@ import java.lang.reflect.Type;
 public abstract class OkCallBack<T> {
 
     public Type mType;
+
     public OkCallBack() {
         mType=getSuperclassTypeParameter(getClass());
     }
@@ -22,12 +25,14 @@ public abstract class OkCallBack<T> {
      * @return
      */
     static Type getSuperclassTypeParameter(Class<?> subclass) {
-        Type superclass = subclass.getGenericSuperclass();
-        if (superclass instanceof Class) {
-            throw new RuntimeException("Missing type parameter.");
+        Type type = subclass.getGenericSuperclass();
+        if (type instanceof Class) {
+            LogUtils.debug("okhttp","不存在范型");
+            return null;
         }
-        ParameterizedType parameterized = (ParameterizedType) superclass;
-        return $Gson$Types.canonicalize(parameterized.getActualTypeArguments()[0]);
+        LogUtils.debug("okhttp","存在范型");
+        ParameterizedType parameterized = (ParameterizedType) type;
+        return canonicalize(parameterized.getActualTypeArguments()[0]);
     }
 
     /**
@@ -51,18 +56,6 @@ public abstract class OkCallBack<T> {
 
     public abstract void onSuccess(T t);
 
-    public static OkCallBack CALLBACK_DEFAULT=new OkCallBack()
-    {
 
-        @Override
-        public void onFail(Exception e) {
-
-        }
-
-        @Override
-        public void onSuccess(Object o) {
-
-        }
-    };
 
 }
