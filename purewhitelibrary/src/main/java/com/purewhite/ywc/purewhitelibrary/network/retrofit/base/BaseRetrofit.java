@@ -1,17 +1,11 @@
 package com.purewhite.ywc.purewhitelibrary.network.retrofit.base;
 
 
-
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.NetManager;
-import com.purewhite.ywc.purewhitelibrary.network.retrofit.interceptor.ParamsInterceptor;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -50,7 +44,7 @@ public class BaseRetrofit {
         {
             retrofit=new Retrofit.Builder()
                     .baseUrl(baseUri)
-                    .client(getOkHttp())
+                    .client(NetManager.getOkHttp())
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
@@ -59,26 +53,6 @@ public class BaseRetrofit {
         return retrofit;
     }
 
-
-    /**
-     * 设置拦截器
-     * @return okhttpclient
-     */
-    private OkHttpClient getOkHttp()
-    {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        //log拦截
-        builder.addInterceptor(NetManager.obtainLog());
-        //参数拦截
-        builder.addInterceptor(new ParamsInterceptor());
-
-        //时间设置  请求，读取，写入
-        builder.readTimeout(10000,TimeUnit.MILLISECONDS);
-        builder.writeTimeout(10000,TimeUnit.MILLISECONDS);
-        builder.readTimeout(10000,TimeUnit.MILLISECONDS);
-
-        return builder.build();
-    }
 
 
 
