@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">纯白梦个人app</string>
+
+    <string-array name="home_tab_title">
+        <item>全部</item>
+        <item>男装</item>
+        <item>内衣</item>
+        <item>美妆</item>
+        <item>配饰</item>
+        <item>鞋品</item>
+        <item>箱包</item>
+        <item>儿童</item>
+        <item>母婴</item>
+        <item>居家</item>
+        <item>美食</item>
+        <item>数码</item>
+        <item>家电</item>
+        <item>其他</item>
+        <item>车品</item>
+        <item>文体</item>
+        <item>宠物</item>
+    </string-array>
 </resources>
