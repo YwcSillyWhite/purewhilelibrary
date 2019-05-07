@@ -10,8 +10,8 @@ import java.util.Arrays;
 
 public class HomeFragment extends MvpFragment<FragHomeBinding,PresenterImp>{
     @Override
-    protected HomePresenter creartPresenter() {
-        return new HomePresenter();
+    protected PresenterImp creartPresenter() {
+        return null;
     }
 
     @Override
@@ -25,5 +25,6 @@ public class HomeFragment extends MvpFragment<FragHomeBinding,PresenterImp>{
         HomePagerAdapter homePagerAdapter = new HomePagerAdapter(getChildFragmentManager(), Arrays.asList(home_tag_title));
         mDataBinding.viewPager.setAdapter(homePagerAdapter);
         mDataBinding.tabLayout.setupWithViewPager(mDataBinding.viewPager);
+        mDataBinding.viewPager.setOffscreenPageLimit(home_tag_title.length);
     }
 }

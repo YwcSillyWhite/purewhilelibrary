@@ -36,4 +36,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':purewhitelibrary')
     implementation 'com.android.support:design:28.0.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    //为了databing的初始化
+    implementation 'in.srain.cube:ultra-ptr:1.0.11'
 }
