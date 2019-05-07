@@ -54,7 +54,7 @@ public abstract class OkCallBack<T> {
 
     public abstract void onFail(Exception e);
 
-    public abstract void onSuccess(T t);
+    public abstract void onSuccess(T t) throws Exception;
 
 
 

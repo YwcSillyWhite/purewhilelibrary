@@ -366,6 +366,10 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         fullView.setOnFullListener(onFullListener);
     }
 
+    public void setFullState(int statue)
+    {
+        fullView.setFullState(statue,true);
+    }
 
     public void setFullState(int statue,boolean flush)
     {

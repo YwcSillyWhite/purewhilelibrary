@@ -54,6 +54,10 @@ public abstract class BasePtrFrameLayout extends PtrFrameLayout {
         //手动刷新
         autoRefresh(true);
 
+
+        setEnabled(false);
+
+
     }
 
 
@@ -73,9 +77,19 @@ public abstract class BasePtrFrameLayout extends PtrFrameLayout {
 
     public void refreshComplete(int pasgezie)
     {
-        if (pasgezie==1)
+        refreshComplete(pasgezie==1);
+    }
+
+    public void refreshComplete(boolean flush)
+    {
+        if (flush)
         {
             refreshComplete();
+            if (!isEnabled())
+            {
+                setEnabled(true);
+            }
         }
     }
+
 }

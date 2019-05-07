@@ -4,7 +4,10 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-//解决与viewpager使用的时候滑动冲突
+/**
+ * //解决与viewpager使用的时候滑动冲突
+ * @author yuwenchao
+ */
 public class ScrollPtrLayout extends PtrLayout{
 
     //上一次x,y的位置；

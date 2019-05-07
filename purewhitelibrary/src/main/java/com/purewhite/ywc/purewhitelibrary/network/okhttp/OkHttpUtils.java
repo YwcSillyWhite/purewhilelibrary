@@ -148,8 +148,18 @@ public class OkHttpUtils {
         okThreadSave.executor(new Runnable() {
             @Override
             public void run() {
-                okCallBack.onSuccess(object);
-                okCallBack.onAfter();
+                //在处理数据中出现错误，不会导致app崩溃
+                try
+                {
+                    okCallBack.onSuccess(object);
+                    okCallBack.onAfter();
+                }
+                catch (Exception e)
+                {
+                    okCallBack.onFail(e);
+                }
+
+
             }
         });
     }
