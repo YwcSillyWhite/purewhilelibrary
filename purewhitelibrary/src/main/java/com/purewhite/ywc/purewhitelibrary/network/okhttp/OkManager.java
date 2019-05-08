@@ -1,26 +1,17 @@
-package com.purewhite.ywc.purewhitelibrary.network;
+package com.purewhite.ywc.purewhitelibrary.network.okhttp;
 
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-import com.purewhite.ywc.purewhitelibrary.network.retrofit.interceptor.ParamsInterceptor;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.interceptor.ParamsInterceptor;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
-import static com.google.gson.internal.$Gson$Types.canonicalize;
-
 /**
  * @author yuwenchao
  */
-public class NetManager {
-    /**
-     * http://v2.api.haodanku.com
-     */
-    public static String baseUri="http://v2.api.haodanku.com";
-
+public class OkManager {
 
     /**
      * 设置拦截器
@@ -28,17 +19,23 @@ public class NetManager {
      */
     public static OkHttpClient getOkHttp()
     {
+        return getOkHttp(true);
+    }
+
+    public static OkHttpClient getOkHttp(boolean params)
+    {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         //log拦截
         builder.addInterceptor(obtainLog());
-        //参数拦截
-        builder.addInterceptor(new ParamsInterceptor());
-
+        if (params)
+        {
+            //公共参数
+            builder.addInterceptor(new ParamsInterceptor());
+        }
         //时间设置  请求，读取，写入
         builder.readTimeout(10000,TimeUnit.MILLISECONDS);
         builder.writeTimeout(10000,TimeUnit.MILLISECONDS);
         builder.readTimeout(10000,TimeUnit.MILLISECONDS);
-
         return builder.build();
     }
 
@@ -60,5 +57,4 @@ public class NetManager {
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return httpLoggingInterceptor;
     }
-
 }

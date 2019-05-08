@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.network.okhttp;
 
 
 import com.google.gson.Gson;
-import com.purewhite.ywc.purewhitelibrary.network.NetManager;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.GetBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
@@ -40,15 +39,30 @@ public class OkHttpUtils {
         return okhttpUtils;
     }
 
-
     public OkHttpUtils() {
         if (okHttpClient==null)
         {
-            okHttpClient=NetManager.getOkHttp();
+            okHttpClient=OkManager.getOkHttp();
         }
     }
 
-
+    public void cancleTag(Object tag)
+    {
+        for (Call call:okHttpClient.dispatcher().queuedCalls())
+        {
+            if (tag.equals(call.request().tag()))
+            {
+                call.cancel();
+            }
+        }
+        for (Call call:okHttpClient.dispatcher().runningCalls())
+        {
+            if (tag.equals(call.request().tag()))
+            {
+                call.cancel();
+            }
+        }
+    }
 
 
     /**

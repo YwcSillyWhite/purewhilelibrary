@@ -1,18 +1,13 @@
 package com.purewhite.ywc.frame1.ui.fragment.mine;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.purewhite.ywc.frame1.bean.ShopBean;
 import com.purewhite.ywc.frame1.bean.base.BaseBean;
 import com.purewhite.ywc.frame1.network.UrlUtils;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.ReNetUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.HttpObserver;
-import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxSchedulers;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

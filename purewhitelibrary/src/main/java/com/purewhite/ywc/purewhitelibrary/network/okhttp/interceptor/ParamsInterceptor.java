@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.network.retrofit.interceptor;
+package com.purewhite.ywc.purewhitelibrary.network.okhttp.interceptor;
 
 import java.io.IOException;
 

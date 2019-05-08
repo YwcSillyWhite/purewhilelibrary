@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseActivity;
-import com.purewhite.ywc.purewhitelibrary.network.NetManager;
+import com.purewhite.ywc.purewhitelibrary.network.retrofit.RetrofitUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
 import java.util.Stack;
@@ -77,7 +77,7 @@ public final class  AppUtils {
 
     //初始化
     public static void init(Application application) {
-        init(application);
+        init(application,null);
     }
 
     public static void init(Application application,String uri)
@@ -86,7 +86,7 @@ public final class  AppUtils {
         application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
         if (!TextUtils.isEmpty(uri))
         {
-            NetManager.baseUri=uri;
+            RetrofitUtils.baseUri=uri;
         }
     }
 

@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
 
@@ -89,6 +90,7 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompat
     protected void onDestroy() {
         super.onDestroy();
         RxDisposableManager.getInstance().removeDis(this);
+        OkHttpUtils.newInstance().cancleTag(this);
 
     }
 

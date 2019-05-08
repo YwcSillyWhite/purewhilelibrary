@@ -1,10 +1,8 @@
 package com.purewhite.ywc.purewhitelibrary.network;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.retrofit.RetrofitApi;
-import com.purewhite.ywc.purewhitelibrary.network.retrofit.base.BaseRetrofit;
+import com.purewhite.ywc.purewhitelibrary.network.retrofit.RetrofitUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.HttpObserver;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxSchedulers;
 
@@ -22,7 +20,7 @@ public class ReNetUtils {
 
     public static Observable<ResponseBody> get(String url, Map<String, Object> paramsRequest)
     {
-        RetrofitApi retrofitApi = BaseRetrofit.newInstance().create(RetrofitApi.class);
+        RetrofitApi retrofitApi = RetrofitUtils.newInstance().create(RetrofitApi.class);
         if (paramsRequest!=null)
         {
             return retrofitApi.get(url,paramsRequest);
