@@ -12,6 +12,6 @@ public class MineContract {
 
     interface Presenter extends BasePresenter<UiView>
     {
-
+        void obtianShop();
     }
 }

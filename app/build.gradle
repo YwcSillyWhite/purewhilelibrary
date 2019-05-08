@@ -39,4 +39,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     //为了databing的初始化
     implementation 'in.srain.cube:ultra-ptr:1.0.11'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
 }

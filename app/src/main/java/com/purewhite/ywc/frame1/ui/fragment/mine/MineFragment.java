@@ -4,7 +4,7 @@ import com.purewhite.ywc.frame1.R;
 import com.purewhite.ywc.frame1.databinding.FragMineBinding;
 import com.purewhite.ywc.frame1.ui.mvp.MvpFragment;
 
-public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> {
+public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> implements MineContract.UiView {
     @Override
     protected MinePresenter creartPresenter() {
         return new MinePresenter();
@@ -17,6 +17,6 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> {
 
     @Override
     protected void initView() {
-
+        mPresenter.obtianShop();
     }
 }

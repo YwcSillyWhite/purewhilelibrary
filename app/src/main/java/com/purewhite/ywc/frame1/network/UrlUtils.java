@@ -6,4 +6,6 @@ public class UrlUtils {
 
 
     public static String shop=baseUri+"/itemlist";
+
+    public static String shop_re="/itemlist";
 }
