@@ -8,6 +8,7 @@
 * vlayout的封装<br>
 * pageradapter适配器的封装<br>
 * rxjava+retrofit的封装<br>
+* okhttp的封装<br>
 * glide的封装<br>
 * activityUtils的封装<br>
 * 防止多次点击的封装clickUtils<br>
