@@ -7,6 +7,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.purewhite.ywc.purewhitelibrary.R;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  *
@@ -127,13 +132,12 @@ public class ImageLoadWrapperImp implements ImageLoadWrapper{
         //清理内存缓存 可以在UI主线程中进行
         Glide.get(context).clearMemory();
         //清理磁盘缓存 需要在子线程中执行
-        new Thread(new Runnable() {
+        Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
-            public void run() {
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
                 Glide.get(context).clearDiskCache();
             }
-        }).start();
-
+        }).subscribeOn(Schedulers.io()).subscribe();
     }
 
     @Override

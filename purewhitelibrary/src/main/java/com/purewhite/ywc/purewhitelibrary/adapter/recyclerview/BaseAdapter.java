@@ -161,13 +161,19 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     //添加数据
     public void  refreshComplete(boolean network,int page,List<T> list)
     {
+        refreshComplete(network,page==1,list);
+
+    }
+
+    public void  refreshComplete(boolean network,boolean flush,List<T> list)
+    {
         if (list!=null&&list.size()>0)
         {
-            addDataFlush(page,list);
+            addDataFlush(flush,list);
         }
         else
         {
-            if (page==1)
+            if (flush)
             {
                 setLoadState(LoadView.REST,false);
                 if (getDataCount()==0)
@@ -183,9 +189,18 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
 
     }
 
+
+
+
     public void addDataFlush(int page,List<T> list)
     {
-        if (page==1)
+        addDataFlush(page==1,list);
+    }
+
+
+    public void addDataFlush(boolean flush,List<T> list)
+    {
+        if (flush)
         {
             flush(list);
         }
@@ -194,6 +209,8 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
             addData(list);
         }
     }
+
+
 
 
     //刷新数据

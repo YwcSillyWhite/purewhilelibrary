@@ -25,10 +25,7 @@ public class HomeChildPresenter extends PresenterImp<HomeChildContract.UiView>
         map.put("back","10");
         map.put("min_id",page+"");
         OkNetUtils.get(UrlUtils.shop, map, new OkCallBack<BaseBean<List<ShopBean>>>() {
-            @Override
-            public void onFail(Exception e) {
-                LogUtils.error("okhttp",e.toString());
-            }
+
 
             @Override
             public void onSuccess(BaseBean<List<ShopBean>> baseBean) {
@@ -38,15 +35,28 @@ public class HomeChildPresenter extends PresenterImp<HomeChildContract.UiView>
                     List<ShopBean> beanList = baseBean.getT();
                     if (beanList!=null&&beanList.size()>0)
                     {
-                        mView.getAdapter().addDataFlush(flush?1:0,beanList);
+                        handlerAdapter(true,beanList);
+                        return;
                     }
                 }
+                handlerAdapter(true,null);
             }
+
+            @Override
+            public void onFail(Exception e) {
+                handlerAdapter(false,null);
+            }
+
 
             @Override
             public void onAfter() {
                 super.onAfter();
                 mView.respon(flush);
+            }
+
+            private void handlerAdapter(boolean network,List<ShopBean> list)
+            {
+                mView.getAdapter().refreshComplete(network,flush,list);
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.purewhite.ywc.frame1.ui.fragment.home.child;
 
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -77,12 +78,15 @@ public class HomeChildFragment extends MvpFragment<FragHomeChildBinding,HomeChil
         position = arguments.getInt(TagUtils.home_child_tag, 0);
         homeChildAdapter = new HomeChildAdapter();
         homeChildAdapter.setFullState(FullView.LODA);
+        homeChildAdapter.setPageSize(10);
         mDataBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mDataBinding.recyclerView.setAdapter(homeChildAdapter);
+//        mDataBinding.recyclerView.setItemAnimator(new DefaultItemAnimator());
         homeChildAdapter.setOnLoadListener(onLoadListenerImp);
         homeChildAdapter.setOnFullListener(onFullListener);
         homeChildAdapter.setOnItemListener(onItemListener);
         mDataBinding.ptrLayout.setOnPtrListener(onPtrListener);
+
     }
 
 
