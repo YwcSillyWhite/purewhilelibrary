@@ -30,9 +30,8 @@ public abstract class OkCallBack<T> {
             LogUtils.debug("okhttp","不存在范型");
             return null;
         }
-        LogUtils.debug("okhttp","存在范型");
-        ParameterizedType parameterized = (ParameterizedType) type;
-        return canonicalize(parameterized.getActualTypeArguments()[0]);
+        Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
+        return canonicalize(actualTypeArguments[0]);
     }
 
     /**

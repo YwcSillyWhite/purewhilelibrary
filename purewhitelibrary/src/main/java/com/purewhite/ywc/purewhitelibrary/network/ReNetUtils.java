@@ -9,7 +9,6 @@ import com.purewhite.ywc.purewhitelibrary.network.rxjava.HttpObserver;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxSchedulers;
 
 
-import java.lang.reflect.Type;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -31,6 +30,11 @@ public class ReNetUtils {
         return retrofitApi.get(url);
     }
 
+    public static void get(String url, Map<String, Object> paramsRequest,HttpObserver<ResponseBody> httpObserver)
+    {
+        get(url,paramsRequest).compose(RxSchedulers.<ResponseBody>ioToMain()).subscribe(httpObserver);
+    }
+
 
     public static <T> Observable<T> get(String url, Map<String, Object> paramsRequest, final Class<T> cls)
     {
@@ -43,9 +47,25 @@ public class ReNetUtils {
     }
 
 
-    public static <T>void get(String url, Map<String, Object> paramsRequest, Class<T> cls , HttpObserver<T> httpObserver)
+    public static <T>void get(String url, Map<String, Object> paramsRequest, Class<T> cls
+            , HttpObserver<T> httpObserver)
     {
         get(url,paramsRequest,cls).compose(RxSchedulers.<T>ioToMain()).subscribe(httpObserver);
     }
+
+
+
+    public static <T> Observable<T> getT(String url, Map<String,Object> paramsRequest, final T t)
+    {
+        return (Observable<T>) get(url,paramsRequest,t.getClass());
+    }
+
+    public static <T> void getT(String url, Map<String, Object> paramsRequest,T t
+            , HttpObserver<T> httpObserver)
+    {
+        getT(url,paramsRequest,t).compose(RxSchedulers.<T>ioToMain()).subscribe(httpObserver);
+    }
+
+
 
 }

@@ -1,5 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.network.rxjava;
 
+import android.text.TextUtils;
+
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 
@@ -71,7 +73,7 @@ public abstract class HttpObserver<T> implements Observer<T> {
 
     protected  void onFail(Throwable throwable)
     {
-        LogUtils.error(throwable.getMessage());
+        LogUtils.error(throwable!=null&&!TextUtils.isEmpty(throwable.getMessage())?throwable.getMessage():"请求失败");
         onAfter();
     }
 

@@ -3,10 +3,14 @@ package com.purewhite.ywc.purewhitelibrary.network;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.retrofit.interceptor.ParamsInterceptor;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+
+import static com.google.gson.internal.$Gson$Types.canonicalize;
 
 /**
  * @author yuwenchao
@@ -56,7 +60,5 @@ public class NetManager {
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return httpLoggingInterceptor;
     }
-
-
 
 }

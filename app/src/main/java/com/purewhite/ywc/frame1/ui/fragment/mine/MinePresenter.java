@@ -26,10 +26,15 @@ public class MinePresenter extends PresenterImp<MineContract.UiView> implements 
         map.put("cid",0);
         map.put("back",10);
         map.put("min_id",1);
-        ReNetUtils.get(UrlUtils.shop_re, map, BaseBean.class,new HttpObserver<BaseBean>() {
+        ReNetUtils.getT(UrlUtils.shop_re, map, new BaseBean<List<ShopBean>>()
+                ,new HttpObserver<BaseBean<List<ShopBean>>>() {
             @Override
-            protected void onSuccess(BaseBean listBaseBean) {
-                ToastUtils.show("请求成功");
+            protected void onSuccess(BaseBean<List<ShopBean>> baseBean) {
+                if (baseBean.getCode()==1&&baseBean.getT()!=null&&baseBean.getT().size()>0)
+                {
+                    LogUtils.debug("请求成功");
+                }
+
             }
         });
     }
