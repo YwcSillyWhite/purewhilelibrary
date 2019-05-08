@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.network.rxjava;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-import com.purewhite.ywc.purewhitelibrary.config.NetWorkUtils;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -39,27 +38,27 @@ public abstract class HttpObserver<T> implements Observer<T> {
         }
         else
         {
-            onFail("数据为空");
+            onFail(new Error("data is null"));
         }
     }
 
     @Override
     public void onError(Throwable e) {
-        if (!NetWorkUtils.isConnected())
+        if (e instanceof SocketTimeoutException)
         {
-            onFail("网络异常");
+            onFail(e);
         }
-        else if (e instanceof SocketTimeoutException||e instanceof ConnectException)
+        else if (e instanceof ConnectException)
         {
-            onFail("请求超时");
+            onFail(e);
         }
         else if (e instanceof HttpException)
         {
-            onFail("服务器异常");
+            onFail(e);
         }
         else
         {
-            onFail(e.getMessage()!=null&&!e.getMessage().isEmpty()?e.getMessage():"请求失败");
+            onFail(e);
         }
     }
 
@@ -70,9 +69,9 @@ public abstract class HttpObserver<T> implements Observer<T> {
 
     protected abstract void onSuccess(T t);
 
-    protected  void onFail(String content)
+    protected  void onFail(Throwable throwable)
     {
-        LogUtils.error(content);
+        LogUtils.error(throwable.getMessage());
         onAfter();
     }
 

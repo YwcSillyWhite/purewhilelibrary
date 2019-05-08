@@ -1,6 +1,7 @@
-package com.purewhite.ywc.purewhitelibrary.network.okhttp;
+package com.purewhite.ywc.purewhitelibrary.network;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
 
 import java.util.Map;
