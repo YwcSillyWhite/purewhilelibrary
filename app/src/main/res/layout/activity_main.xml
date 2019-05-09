@@ -12,46 +12,13 @@
             android:id="@+id/frag_layout">
         </FrameLayout>
         <include layout="@layout/view_line"></include>
-        <com.purewhite.ywc.purewhitelibrary.view.bottom.BottomLayout
+        <android.support.design.widget.BottomNavigationView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_view"
             android:background="@color/write"
-            android:id="@+id/bottom_layout">
-            <com.purewhite.ywc.purewhitelibrary.view.bottom.BottomMenu
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                app:text="首页"
-                app:Tvsize="12sp"
-                android:id="@+id/bottom_one"
-                app:checkTv_true="#f1f"
-                app:checkTv_flase="#333">
-            </com.purewhite.ywc.purewhitelibrary.view.bottom.BottomMenu>
-
-            <com.purewhite.ywc.purewhitelibrary.view.bottom.BottomMenu
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                app:text="数据"
-                app:Tvsize="12sp"
-                android:id="@+id/bottom_two"
-                app:checkTv_true="#f1f"
-                app:checkTv_flase="#333">
-            </com.purewhite.ywc.purewhitelibrary.view.bottom.BottomMenu>
-
-            <com.purewhite.ywc.purewhitelibrary.view.bottom.BottomMenu
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                app:text="我的"
-                app:Tvsize="12sp"
-                android:id="@+id/bottom_three"
-                app:checkTv_true="#f1f"
-                app:checkTv_flase="#333">
-            </com.purewhite.ywc.purewhitelibrary.view.bottom.BottomMenu>
-
-        </com.purewhite.ywc.purewhitelibrary.view.bottom.BottomLayout>
+            app:menu="@menu/menu_main_bottom"
+            app:itemTextColor="@drawable/bottom_view_text_color">
+        </android.support.design.widget.BottomNavigationView>
     </LinearLayout>
 </layout>

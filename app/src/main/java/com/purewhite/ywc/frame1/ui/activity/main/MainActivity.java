@@ -1,7 +1,10 @@
 package com.purewhite.ywc.frame1.ui.activity.main;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.util.SparseArray;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.purewhite.ywc.frame1.R;
@@ -12,32 +15,30 @@ import com.purewhite.ywc.frame1.ui.fragment.rest.RestFragment;
 import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
 import com.purewhite.ywc.frame1.ui.mvp.MvpFragment;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
-import com.purewhite.ywc.purewhitelibrary.view.bottom.BottomLayout;
 
 public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> {
-
 
     private SparseArray<MvpFragment> sparseArray;
     private int lastPosition=-1;
 
-    private BottomLayout.OnBottomLayoutChageListener onBottomLayoutChageListener
-            =new BottomLayout.OnBottomLayoutChageListener() {
+    private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener=new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
-        public void onCheckChange(View view) {
-            switch (view.getId())
-            {
-                case R.id.bottom_one:
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.menu_home:
                     replaceFrag(0);
-                    break;
-                case R.id.bottom_two:
+                    return true;
+                case R.id.home_found:
                     replaceFrag(1);
-                    break;
-                case R.id.bottom_three:
+                    return true;
+                case R.id.home_me:
                     replaceFrag(2);
-                    break;
+                    return true;
             }
+            return false;
         }
     };
+
 
     @Override
     protected PresenterImp creartPresenter() {
@@ -51,11 +52,12 @@ public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> 
 
     @Override
     protected void initView() {
-        mDataBinding.bottomLayout.addOnBottomLayoutChageListener(onBottomLayoutChageListener);
         sparseArray=new SparseArray<>();
         sparseArray.append(0,new HomeFragment());
         sparseArray.append(1,new RestFragment());
         sparseArray.append(2,new MineFragment());
+        mDataBinding.bottomView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
+        mDataBinding.bottomView.setItemIconTintList(null);
         replaceFrag(0);
     }
 
@@ -92,6 +94,5 @@ public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mDataBinding.bottomLayout.removeOnBottomLayoutChageListener();
     }
 }

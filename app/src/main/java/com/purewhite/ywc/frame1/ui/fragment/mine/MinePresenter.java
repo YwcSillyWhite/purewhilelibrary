@@ -21,6 +21,7 @@ public class MinePresenter extends PresenterImp<MineContract.UiView> implements 
         map.put("cid",0);
         map.put("back",10);
         map.put("min_id",1);
+
         ReNetUtils.getT(UrlUtils.shop_re, map, new BaseBean<List<ShopBean>>()
                 ,new HttpObserver<BaseBean<List<ShopBean>>>() {
             @Override

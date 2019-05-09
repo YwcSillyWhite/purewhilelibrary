@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_selector_selectable_home_index"
+        android:title="首页"/>
+    <item
+        android:id="@+id/home_found"
+        android:icon="@drawable/ic_selector_selectable_home_found"
+        android:title="发现"/>
+
+    <item
+        android:id="@+id/home_me"
+        android:icon="@drawable/ic_selector_selectable_home_me"
+        android:title="我的"/>
+</menu>
