@@ -6,13 +6,19 @@
         <item name="android:windowBackground">@color/back</item>
         <!-- 状态拦颜色 -->
         <item name="colorPrimaryDark">@color/write</item>
+        <!--Button、TextView的文字颜色-->
+        <item name="android:textColor">@color/text_default</item>
         <!-- Button、TextView的提示文字颜色 -->
-        <item name="android:textColorHint">@color/text_default</item>
+        <item name="android:textColorHint">@color/text_hint_default</item>
+        <!-- 解决 Android 5.1 及以上版本 Button 英文字符串自动变大写的问题 -->
+        <item name="android:textAllCaps">false</item>
+    </style>
 
-
-
-
-        <!--<item name="android:background">#f6f6f6</item>-->
+    <style name="StartTheme" parent="AppTheme">
+        <!-- 透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 布局透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
 </resources>

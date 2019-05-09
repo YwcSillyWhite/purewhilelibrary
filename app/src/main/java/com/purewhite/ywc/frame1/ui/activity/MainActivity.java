@@ -1,4 +1,4 @@
-package com.purewhite.ywc.frame1.ui.activity.main;
+package com.purewhite.ywc.frame1.ui.activity;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;

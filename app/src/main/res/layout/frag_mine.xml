@@ -1,7 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <com.purewhite.ywc.purewhitelibrary.view.scrollview.PureScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.purewhite.ywc.purewhitelibrary.view.scrollview.PureScrollView>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/actionbar_one" android:id="@+id/action_bar"></include>
+        <include layout="@layout/view_line"></include>
+        <com.purewhite.ywc.purewhitelibrary.view.scrollview.PureScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@color/write">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="头像"
+                        android:textColor="#333"
+                        android:textSize="15sp"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/head_img"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:paddingLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/write"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/bottom_navigation"
+                    android:text="自定义BottomNavigationView"
+                    android:textColor="#333"/>
+            </LinearLayout>
+        </com.purewhite.ywc.purewhitelibrary.view.scrollview.PureScrollView>
+
+    </LinearLayout>
 </layout>

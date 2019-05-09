@@ -12,8 +12,7 @@ import android.view.animation.TranslateAnimation;
  * @author yuwenchao
  */
 public class PureScrollView extends ClashScrollView {
-    //上次位置的y
-    private int pureY;
+
     private View childView;
     private boolean isAnim;
     //用来纪录位置
@@ -35,19 +34,11 @@ public class PureScrollView extends ClashScrollView {
         super.onFinishInflate();
         if (getChildCount()>0)
         {
+            //子类
             childView=getChildAt(0);
         }
     }
 
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (ev.getAction()==MotionEvent.ACTION_DOWN)
-        {
-            pureY= ((int) ev.getY());
-        }
-        return super.dispatchTouchEvent(ev);
-    }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
@@ -56,9 +47,10 @@ public class PureScrollView extends ClashScrollView {
             int newY = (int) ev.getY();
             if (ev.getAction()==MotionEvent.ACTION_MOVE)
             {
-                int moveY=newY-pureY;
+                int moveY=newY-lastY;
                 if (isMove())
                 {
+
                     //rect没有纪录值
                     if (rect.isEmpty())
                     {
@@ -75,7 +67,7 @@ public class PureScrollView extends ClashScrollView {
                     anim();
                 }
             }
-            pureY=newY;
+            lastY=newY;
         }
         return super.onTouchEvent(ev);
     }

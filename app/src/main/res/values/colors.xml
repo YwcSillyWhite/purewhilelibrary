@@ -7,4 +7,6 @@
     <color name="write">#fff</color>
 
     <color name="text_default">#333</color>
+
+    <color name="text_hint_default">#999</color>
 </resources>

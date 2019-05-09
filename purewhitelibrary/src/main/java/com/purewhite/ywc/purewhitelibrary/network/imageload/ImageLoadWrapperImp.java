@@ -42,48 +42,37 @@ import io.reactivex.schedulers.Schedulers;
 public class ImageLoadWrapperImp implements ImageLoadWrapper{
 
     private RequestOptions options,optionsCricle;
+    private final int cricle=1;
+    private final int defalut=0;
 
-    public RequestOptions getOptionsCricle() {
-        if (optionsCricle==null)
+    public RequestOptions getOptions(int what) {
+        RequestOptions requestOptions;
+        if (what==cricle)
         {
-            optionsCricle=new RequestOptions();
-            //不加载动画
-            optionsCricle.dontTransform()
-                    //占位图片
-                    .placeholder(R.mipmap.icon_load_error)
-                    //加载失败的图片
-                    .error(R.mipmap.icon_load_error)
-                    //圆形图片
-                    .circleCrop();
+            if (optionsCricle == null) {
+                optionsCricle = new RequestOptions();
+                //不加载动画
+                optionsCricle.dontTransform()
+                        //圆形图片
+                        .circleCrop();
+            }
+            requestOptions=optionsCricle;
         }
-        return optionsCricle;
-    }
-
-    private RequestOptions getOptions(boolean skipMrmpry)
-    {
-        if (options==null)
+        else
         {
-            options=new RequestOptions();
-            //不加载动画
-            options.dontTransform()
-                    //占位图片
-                    .placeholder(R.mipmap.icon_load_error)
-                    //加载失败的图片
-                    .error(R.mipmap.icon_load_error);
-        }
-        //是否禁止使用内存缓存，false是使用内存缓存，true是禁止使用.默认是开启的
-        options.skipMemoryCache(skipMrmpry);
+            if (options == null) {
+                options = new RequestOptions();
+                //不加载动画
+                options.dontTransform()
+                        //占位图片
+                        .placeholder(R.mipmap.icon_load_error)
+                        //加载失败的图片
+                        .error(R.mipmap.icon_load_error);
+            }
+            requestOptions=options;
 
-        /**
-         * 磁盘缓存的使用
-         * options .diskCacheStrategy(DiskCacheStrategy.NONE);
-         * DiskCacheStrategy.NONE： 表示不缓存任何内容。
-         * DiskCacheStrategy.DATA： 表示只缓存原始图片。
-         * DiskCacheStrategy.RESOURCE： 表示只缓存转换过后的图片。
-         * DiskCacheStrategy.ALL ： 表示既缓存原始图片，也缓存转换过后的图片。
-         * DiskCacheStrategy.AUTOMATIC： 表示让Glide根据图片资源智能地选择使用哪一种缓存策略（默认选项）。
-         */
-        return options;
+        }
+        return requestOptions;
     }
 
 
@@ -93,7 +82,7 @@ public class ImageLoadWrapperImp implements ImageLoadWrapper{
     public void init(ImageView imageView, Object url) {
         Glide.with(imageView.getContext())
                 .load(url)
-                .apply(getOptions(false))
+                .apply(getOptions(defalut))
                 .into(imageView);
     }
 
@@ -102,11 +91,9 @@ public class ImageLoadWrapperImp implements ImageLoadWrapper{
         Glide.with(imageView.getContext())
                 .asBitmap()
                 .load(url)
-                .apply(getOptionsCricle())
+                .apply(getOptions(cricle))
                 .into(imageView);
-
                 //只允许加载静态图片
-
     }
 
     @Override
@@ -114,7 +101,7 @@ public class ImageLoadWrapperImp implements ImageLoadWrapper{
         Glide.with(imageView.getContext())
                 .asBitmap()
                 .load(url)
-                .apply(getOptionsCricle())
+                .apply(getOptions(cricle))
                 .into(imageView);
     }
 
@@ -123,7 +110,7 @@ public class ImageLoadWrapperImp implements ImageLoadWrapper{
         Glide.with(imageView.getContext())
                 .asBitmap()
                 .load(url)
-                .apply(getOptions(true))
+                .apply(getOptions(defalut))
                 .into(imageView);
     }
 

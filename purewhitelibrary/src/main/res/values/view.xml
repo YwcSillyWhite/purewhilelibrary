@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="BottomMenu">
-        //选中文字颜色
-        <attr name="checkTv_true" format="color"></attr>
-        //未选中文字颜色
-        <attr name="checkTv_flase" format="color"></attr>
         //选中图片
-        <attr name="checkImg_true" format="reference"></attr>
+        <attr name="img_check_true" format="reference"></attr>
         //为选中图片
-        <attr name="checkImg_flase" format="reference"></attr>
-        //为选中图片
-        <attr name="Tvsize" format="dimension"></attr>
+        <attr name="img_check_false" format="reference"></attr>
+        //图片大小
+        <attr name="img_size" format="dimension"></attr>
+        //选中文字颜色
+        <attr name="text_check_true" format="color"></attr>
+        //未选中文字颜色
+        <attr name="text_check_false" format="color"></attr>
+        //文字大小
+        <attr name="text_size" format="dimension"></attr>
+        //设置初始值
+        <attr name="text_content" format="string"></attr>
         //是否开启动画
         <attr name="anmiable" format="boolean"></attr>
-        //设置初始值
-        <attr name="text" format="string"></attr>
+        //图片距离文字距离
+        <attr name="center_distance" format="dimension"></attr>
     </declare-styleable>
 
     <declare-styleable name="BottomLayout">

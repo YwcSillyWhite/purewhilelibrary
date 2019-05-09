@@ -11,7 +11,7 @@ import android.widget.ScrollView;
  */
 public class ClashScrollView extends ScrollView {
 
-    private int lastX,lastY;
+    protected int lastX,lastY;
 
     public ClashScrollView(Context context) {
         super(context);

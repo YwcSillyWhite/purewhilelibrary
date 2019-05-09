@@ -6,21 +6,24 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".app.BaseApp"
         android:theme="@style/AppTheme">
         //启动页
-        <activity android:name=".ui.activity.start.StartActivity">
+        <activity android:name=".ui.activity.StartActivity"
+            android:theme="@style/StartTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.main.MainActivity"></activity>
+        <!-- 首页 -->
+        <activity android:name=".ui.activity.MainActivity"></activity>
+        <!-- 自定义首页 -->
+        <activity android:name=".ui.activity.start.CustomMainActivity"/>
     </application>
 
 </manifest>
