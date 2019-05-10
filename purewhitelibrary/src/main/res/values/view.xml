@@ -26,6 +26,11 @@
         <attr name="checkPosition" format="integer"></attr>
     </declare-styleable>
 
+    
+    
+    <declare-styleable name="NoSlideViewPager">
+        <attr name="slide" format="boolean"></attr>
+    </declare-styleable>
 
     <!--//RatingBar 样式-->
     <!--<style name="RatingBarStype" parent="Base.Widget.AppCompat.RatingBar">-->

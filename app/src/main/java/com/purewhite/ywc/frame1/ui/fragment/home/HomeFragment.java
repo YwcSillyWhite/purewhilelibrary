@@ -1,14 +1,26 @@
 package com.purewhite.ywc.frame1.ui.fragment.home;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.View;
+
 import com.purewhite.ywc.frame1.R;
 import com.purewhite.ywc.frame1.databinding.FragHomeBinding;
 import com.purewhite.ywc.frame1.ui.adapter.HomePagerAdapter;
 import com.purewhite.ywc.frame1.ui.mvp.MvpFragment;
+import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
 import java.util.Arrays;
 
 public class HomeFragment extends MvpFragment<FragHomeBinding,PresenterImp>{
+
+
+    @Override
+    protected View onBarTitleView() {
+        return mDataBinding.tabLayout;
+    }
+
     @Override
     protected PresenterImp creartPresenter() {
         return null;
@@ -18,6 +30,7 @@ public class HomeFragment extends MvpFragment<FragHomeBinding,PresenterImp>{
     protected int getLayout() {
         return R.layout.frag_home;
     }
+
 
     @Override
     protected void initView() {

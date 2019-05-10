@@ -6,7 +6,8 @@
     <color name="back">#f6f6f6</color>
     <color name="write">#fff</color>
 
+    //文字颜色
     <color name="text_default">#333</color>
-
+    //文字提示颜色
     <color name="text_hint_default">#999</color>
 </resources>

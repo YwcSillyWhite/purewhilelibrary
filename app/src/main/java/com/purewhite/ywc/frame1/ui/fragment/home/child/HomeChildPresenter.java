@@ -3,7 +3,6 @@ package com.purewhite.ywc.frame1.ui.fragment.home.child;
 import com.purewhite.ywc.frame1.bean.ShopBean;
 import com.purewhite.ywc.frame1.bean.base.BaseBean;
 import com.purewhite.ywc.frame1.network.UrlUtils;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.OkNetUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;

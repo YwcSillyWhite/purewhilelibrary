@@ -12,6 +12,11 @@ import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 
 public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> implements MineContract.UiView {
 
+    @Override
+    protected View onBarTitleView() {
+        return mDataBinding.actionBar.barLayout;
+    }
+
     private OnSingleListener onSingleListener=new OnSingleListener() {
         @Override
         public void onSingleClick(View v) {

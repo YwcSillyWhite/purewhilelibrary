@@ -5,7 +5,7 @@ ext{
             minSdkVersion       : 15,
             targetSdkVersion    : 28,
             compileSdkVersion   : 28,
-            appVersionCode      : 1,
+            appVersionCode      : 10000,
             appVersionName      : '1.1.0',
     ]
 
