@@ -10,7 +10,7 @@ import okhttp3.RequestBody;
 /**
  * @author yuwenchao
  */
-public class PostBuilder extends OkRequestBuilder{
+public class PostBuilder extends OkRequestBuilder<PostBuilder>{
 
 
     public PostBuilder() {
@@ -21,7 +21,7 @@ public class PostBuilder extends OkRequestBuilder{
     }
 
     @Override
-    public OkRequestBuilder addParam(String key, String value) {
+    public PostBuilder addParam(String key, String value) {
         if (paramsRequest==null)
         {
             paramsRequest=new HashMap<>();
@@ -30,7 +30,7 @@ public class PostBuilder extends OkRequestBuilder{
     }
 
     @Override
-    public OkRequestBuilder addParams(Map<String, String> map) {
+    public PostBuilder addParams(Map<String, String> map) {
         if (map!=null)
         {
             paramsRequest=map;
@@ -39,7 +39,7 @@ public class PostBuilder extends OkRequestBuilder{
     }
 
     @Override
-    public OkRequestBuilder build() {
+    public PostBuilder build() {
         builder.post(obtianBody());
         builder.url(url);
         if (objectTag!=null)

@@ -11,7 +11,7 @@ import okhttp3.Request;
 /**
  * @author yuwenchao
  */
-public abstract class OkRequestBuilder {
+public abstract class OkRequestBuilder<B extends OkRequestBuilder> {
 
     protected String url;
     protected Object objectTag;
@@ -28,26 +28,26 @@ public abstract class OkRequestBuilder {
         this.paramsRequest=paramsRequest;
     }
 
-    public OkRequestBuilder url(String url)
+    public B url(String url)
     {
         this.url=url;
         builder.url(url);
-        return this;
+        return (B)this;
     }
 
-    public OkRequestBuilder tag(Object objectTag)
+    public B tag(Object objectTag)
     {
         this.objectTag=objectTag;
         builder.tag(objectTag);
-        return this;
+        return (B)this;
     }
 
-    public abstract OkRequestBuilder addParam(String key, String value);
+    public abstract B addParam(String key, String value);
 
-    public abstract OkRequestBuilder addParams(Map<String,String> map);
+    public abstract B addParams(Map<String,String> map);
 
 
-    public abstract OkRequestBuilder build();
+    public abstract B build();
 
     public  void enqueue(OkCallBack okCallBack)
     {

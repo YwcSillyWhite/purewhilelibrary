@@ -10,7 +10,8 @@ import java.util.Map;
 /**
  * @author yuwenchao
  */
-public class GetBuilder extends OkRequestBuilder {
+public class GetBuilder extends OkRequestBuilder<GetBuilder> {
+
 
     public GetBuilder() {
     }
@@ -20,7 +21,7 @@ public class GetBuilder extends OkRequestBuilder {
     }
 
     @Override
-    public OkRequestBuilder addParam(String key, String value) {
+    public GetBuilder addParam(String key, String value) {
         if (paramsRequest==null)
         {
             paramsRequest=new HashMap<>();
@@ -30,7 +31,7 @@ public class GetBuilder extends OkRequestBuilder {
     }
 
     @Override
-    public OkRequestBuilder addParams(Map<String, String> map) {
+    public GetBuilder addParams(Map<String, String> map) {
         if (map!=null)
         {
             paramsRequest=map;
@@ -39,7 +40,7 @@ public class GetBuilder extends OkRequestBuilder {
     }
 
     @Override
-    public OkRequestBuilder build() {
+    public GetBuilder build() {
         builder.get();
         if (objectTag!=null)
         {
@@ -66,6 +67,5 @@ public class GetBuilder extends OkRequestBuilder {
         this.url=build.build().toString();
 
     }
-
 
 }
