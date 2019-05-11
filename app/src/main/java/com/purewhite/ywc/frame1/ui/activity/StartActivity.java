@@ -10,6 +10,7 @@ import com.purewhite.ywc.frame1.R;
 import com.purewhite.ywc.frame1.databinding.ActivityStartBinding;
 import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.app.ActivityUtils;
+import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
 public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp> {
@@ -45,6 +46,15 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
     @Override
     protected void initView() {
         initStartAnim();
+    }
+
+    @Override
+    protected void initBar() {
+        BarUtils.obtianBarConfig()
+                .with(this)
+                .setNavigationHideFlag()
+                .setStatusBarHideFlag()
+                .build();
     }
 
 

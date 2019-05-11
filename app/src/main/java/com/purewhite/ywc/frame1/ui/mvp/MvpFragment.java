@@ -1,8 +1,6 @@
 package com.purewhite.ywc.frame1.ui.mvp;
 
 import android.databinding.ViewDataBinding;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
@@ -19,12 +17,11 @@ public abstract class MvpFragment<DB extends ViewDataBinding,P extends Presenter
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    protected void initBar() {
+        super.initBar();
         final View view = onBarTitleView();
-        BarUtils.obtianTitleConfig().setTitleBaeHeight(view);
+        BarUtils.obtianTitleConfig().setTitleBarPadding(view);
     }
-
 
 
     @Override

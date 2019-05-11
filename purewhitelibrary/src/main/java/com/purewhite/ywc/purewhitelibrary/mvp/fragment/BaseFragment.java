@@ -51,12 +51,18 @@ public abstract class BaseFragment<DB extends ViewDataBinding> extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        initBar();
         soleLoad=true;
         if (getUserVisibleHint())
         {
             decideSoleLoad();
         }
         showLoad();
+    }
+
+    protected void initBar()
+    {
+
     }
 
 

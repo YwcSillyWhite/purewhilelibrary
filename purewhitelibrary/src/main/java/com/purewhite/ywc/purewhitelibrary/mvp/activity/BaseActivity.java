@@ -43,7 +43,9 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompat
         //DataBinding绑定
         mDataBinding = DataBindingUtil.setContentView(this, getLayout());
         initView();
+        initBar();
     }
+
 
     //设置横竖屏幕
     protected void setOrientation(boolean vertical)
@@ -73,6 +75,11 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompat
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 
+
+    }
+
+    protected void initBar()
+    {
 
     }
 

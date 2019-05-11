@@ -30,7 +30,7 @@ public class TitleConfig {
     }
 
 
-    public TitleConfig setTitleBaeHeight(final View view)
+    public TitleConfig setTitleBarPadding(final View view)
     {
         if (view!=null)
         {

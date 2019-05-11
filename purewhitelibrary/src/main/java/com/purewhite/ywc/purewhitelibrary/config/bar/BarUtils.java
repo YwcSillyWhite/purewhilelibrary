@@ -1,7 +1,5 @@
 package com.purewhite.ywc.purewhitelibrary.config.bar;
 
-import android.view.View;
-
 /**
  * 状态栏工具类
  * @author yuwenchao
