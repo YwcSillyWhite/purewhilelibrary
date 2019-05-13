@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="30dp"
-    android:background="@color/write">
+    android:background="@drawable/shape_write_15">
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"

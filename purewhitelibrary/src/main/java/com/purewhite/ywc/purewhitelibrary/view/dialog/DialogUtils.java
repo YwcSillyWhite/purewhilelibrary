@@ -104,6 +104,9 @@ public class DialogUtils {
     }
 
 
+
+
+
     public DialogUtils setChildRecycler(@IdRes int id, RecyclerView.Adapter adapter
             ,RecyclerView.LayoutManager layout)
     {
@@ -128,6 +131,12 @@ public class DialogUtils {
             lp.width =(int)(SizeUtils.getScreenWidth()*num);
             window.setAttributes(lp);
         }
+        return this;
+    }
+
+    public DialogUtils setGravity(int gravity)
+    {
+        window.setGravity(gravity);
         return this;
     }
 

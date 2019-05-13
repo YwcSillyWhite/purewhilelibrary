@@ -1,18 +1,23 @@
 package com.purewhite.ywc.frame1.ui.activity.mine;
 
 import android.app.Dialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.Gravity;
 import android.view.View;
 
 import com.purewhite.ywc.frame1.R;
 import com.purewhite.ywc.frame1.databinding.ActivityDialogBinding;
+import com.purewhite.ywc.frame1.ui.adapter.DialogAdapter;
 import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.view.dialog.DialogUtils;
 
+import java.util.Arrays;
+
 public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterImp> {
 
-    private DialogUtils dialog;
+    private DialogUtils dialog,dialogList;
     private OnSingleListener onSingleListener=new OnSingleListener() {
         @Override
         public void onSingleClick(View v) {
@@ -25,11 +30,21 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                     }
                     dialog.show();
                     break;
+                case R.id.dialog_two:
+                    if (dialogList==null)
+                    {
+                        dialogList=dialogList();
+                    }
+                    dialogList.show();
+                    break;
                 case R.id.dialog_sure:
                     dialog.dismiss();
                     break;
                 case R.id.dialog_clear:
                     dialog.dismiss();
+                    break;
+                case R.id.list_clear:
+                    dialogList.dismiss();
                     break;
             }
         }
@@ -44,7 +59,21 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                 .setChildText(R.id.dialog_clear,true)
                 .setScreenWidth(0.8f)
                 .setAnim(DialogUtils.DialogStyle.left_anim);
+    }
 
+
+    private DialogUtils dialogList()
+    {
+
+        DialogAdapter dialogAdapter = new DialogAdapter(Arrays.asList(getResources().getStringArray(R.array.dialog_list)));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        return new DialogUtils(this).setDialogView(R.layout.dialog_two)
+                .setOnClick(onSingleListener)
+                .setChildText(R.id.list_clear,true)
+                .setChildRecycler(R.id.recycler_view,dialogAdapter,linearLayoutManager)
+                .setScreenWidth(1f)
+                .setAnim(DialogUtils.DialogStyle.bottom_anim)
+                .setGravity(Gravity.BOTTOM);
     }
 
 
@@ -67,12 +96,16 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
     protected void initView() {
         mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
         mDataBinding.actionBar.centerText.setText("dialog");
+        mDataBinding.dialogTwo.setOnClickListener(onSingleListener);
         mDataBinding.dialog.setOnClickListener(onSingleListener);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        dialog.onDestroy();
+        if (dialog!=null)
+            dialog.onDestroy();
+        if (dialogList!=null)
+            dialogList.onDestroy();
     }
 }

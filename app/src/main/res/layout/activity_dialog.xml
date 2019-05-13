@@ -10,8 +10,16 @@
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:background="@color/write"
-            android:text="dialog"
+            android:text="左进dialog"
             android:gravity="center"
             android:id="@+id/dialog"/>
+        <include layout="@layout/view_line"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/write"
+            android:text="下进列表dialog"
+            android:gravity="center"
+            android:id="@+id/dialog_two"/>
     </LinearLayout>
 </layout>

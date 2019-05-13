@@ -20,4 +20,14 @@
         <item>文体</item>
         <item>宠物</item>
     </string-array>
+
+
+    <string-array name="dialog_list">
+        <item>list_1</item>
+        <item>list_2</item>
+        <item>list_3</item>
+        <item>list_4</item>
+        <item>list_5</item>
+        <item>list_6</item>
+    </string-array>
 </resources>
