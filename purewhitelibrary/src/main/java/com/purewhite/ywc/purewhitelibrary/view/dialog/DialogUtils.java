@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.IdRes;
 import android.support.annotation.StyleRes;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -29,12 +30,19 @@ public class DialogUtils {
     public Dialog getDialog() {
         return dialog;
     }
-
     private Context context;
     private View view;
     private SparseArray<View> sparseArray;
     private OnSingleListener onSingleListener;
     private Window window;
+
+    public static final class DialogStyle
+    {
+        public static final int left_anim=R.style.LeftAnimStyle;
+        public static final int right_anim=R.style.RightAnimStyle;
+        public static final int top_anim=R.style.TopAnimStyle;
+        public static final int bottom_anim=R.style.BottomAnimStyle;
+    }
 
     public DialogUtils(Context context) {
       this(context,R.style.BaseDialog);
@@ -96,6 +104,21 @@ public class DialogUtils {
     }
 
 
+    public DialogUtils setChildRecycler(@IdRes int id, RecyclerView.Adapter adapter
+            ,RecyclerView.LayoutManager layout)
+    {
+        View childView = fdChildView(id);
+        if (childView!=null&&childView instanceof RecyclerView)
+        {
+            RecyclerView recyclerView = (RecyclerView) childView;
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(layout);
+        }
+        return this;
+    }
+
+
+
     //设置屏幕大小
     public DialogUtils setScreenWidth(float num)
     {
@@ -108,22 +131,18 @@ public class DialogUtils {
         return this;
     }
 
-
-    protected void setAnim(@StyleRes int resId)
+    //动画
+    public DialogUtils setAnim(@StyleRes int resId)
     {
 
         window.setWindowAnimations(resId);
+        return this;
     }
-
-
-
-
-
 
 
     public DialogUtils setChildText(@IdRes int id,String content,boolean click)
     {
-        View childView = fdView(id);
+        View childView = fdChildView(id);
         if (!TextUtils.isEmpty(content)&&childView instanceof TextView)
         {
             ((TextView) childView).setText(content);
@@ -141,14 +160,15 @@ public class DialogUtils {
 
     public DialogUtils setChildImg(@IdRes int id,Object object,boolean click)
     {
-        View childView = fdView(id);
-        if (object!=null&&childView instanceof ImageView)
+        View childView = fdChildView(id);
+        if (object!=null&&childView!=null&&childView instanceof ImageView)
         {
             ImageLoader.newInstance().init(((ImageView) childView),object);
         }
         setClick(click,childView);
         return this;
     }
+
 
     public void show()
     {
@@ -166,6 +186,9 @@ public class DialogUtils {
         }
     }
 
+    /**
+     * 防止内存泄露
+     */
     public void onDestroy()
     {
         dismiss();
@@ -176,14 +199,17 @@ public class DialogUtils {
     }
 
 
-    private View fdView(@IdRes int id){
+    public <V extends View>V fdChildView(@IdRes int id){
         View viewChild = sparseArray.get(id);
         if (viewChild==null)
         {
-            viewChild=view.findViewById(id);
-            sparseArray.put(id,viewChild);
+            if (view!=null)
+            {
+                viewChild=view.findViewById(id);
+                sparseArray.put(id,viewChild);
+            }
         }
-        return viewChild;
+        return (V) viewChild;
     }
 
     private void setClick(boolean click,View view)

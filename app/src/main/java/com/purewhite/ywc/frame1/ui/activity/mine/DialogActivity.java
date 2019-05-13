@@ -42,7 +42,8 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                 .setChildText(R.id.dialog_content,"纯白框架必然是精品",false)
                 .setChildText(R.id.dialog_sure,true)
                 .setChildText(R.id.dialog_clear,true)
-                .setScreenWidth(0.8f);
+                .setScreenWidth(0.8f)
+                .setAnim(DialogUtils.DialogStyle.left_anim);
 
     }
 

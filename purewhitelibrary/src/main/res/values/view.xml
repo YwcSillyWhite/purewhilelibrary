@@ -27,22 +27,9 @@
     </declare-styleable>
 
     
-    
     <declare-styleable name="NoSlideViewPager">
         <attr name="slide" format="boolean"></attr>
     </declare-styleable>
 
-    <style name="BaseDialog" parent="@android:style/Theme.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <!-- 边框 -->
-        <item name="android:windowIsFloating">true</item>
-        <!-- 是否浮现在activity之上 -->
-        <item name="android:windowIsTranslucent">false</item>
-        <!-- 半透明 -->
-        <item name="android:windowNoTitle">true</item>
-        <!-- 无标题 -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <!-- 模糊 -->
-    </style>
 
 </resources>
