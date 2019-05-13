@@ -1,4 +1,4 @@
-package com.purewhite.ywc.frame1.ui.activity.start;
+package com.purewhite.ywc.frame1.ui.activity.mine;
 
 import android.view.View;
 

@@ -23,7 +23,9 @@
         <!-- 首页 -->
         <activity android:name=".ui.activity.MainActivity"></activity>
         <!-- 自定义首页 -->
-        <activity android:name=".ui.activity.start.CustomMainActivity"/>
+        <activity android:name=".ui.activity.mine.CustomMainActivity"/>
+        <!-- dialog页面 -->
+        <activity android:name=".ui.activity.mine.DialogActivity"/>
     </application>
 
 </manifest>

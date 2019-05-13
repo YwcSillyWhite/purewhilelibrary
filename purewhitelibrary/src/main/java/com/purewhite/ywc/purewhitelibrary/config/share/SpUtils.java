@@ -17,17 +17,17 @@ public class SpUtils {
     private static final String default_name="pureWhite";
 
 
-    public SBuilder builder(boolean gain)
+    public static SBuilder builder(boolean gain)
     {
         return builder(gain,default_name);
     }
 
-    public SBuilder builder(boolean gain,String content)
+    public static SBuilder builder(boolean gain,String content)
     {
         return new SBuilder(gain,content);
     }
 
-    class SBuilder<B extends SBuilder>
+    static class  SBuilder<B extends SBuilder>
     {
         private SharedPreferences sharedPreferences;
         private SharedPreferences.Editor editor;
