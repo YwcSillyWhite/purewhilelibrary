@@ -12,8 +12,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
-import com.purewhite.ywc.purewhitelibrary.app.ActivityUtils;
+import com.purewhite.ywc.purewhitelibrary.app.activity.ActivityUtils;
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
+import com.purewhite.ywc.purewhitelibrary.app.activity.StartBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -229,7 +230,7 @@ public class PermissonUtils {
     {
         Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES
                 ,Uri.parse("package:"+context.getPackageManager()));
-        ActivityUtils.startActivity(intent,context,requestCode);
+        ActivityUtils.startDefalut().startActivity(intent,context,requestCode);
     }
 
     /**

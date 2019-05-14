@@ -58,7 +58,8 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                 .setChildText(R.id.dialog_sure,true)
                 .setChildText(R.id.dialog_clear,true)
                 .setScreenWidth(0.8f)
-                .setAnim(DialogUtils.DialogStyle.left_anim);
+                .setAnim(DialogUtils.DialogStyle.left_anim)
+                .setCancelable(false);
     }
 
 
@@ -73,7 +74,8 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                 .setChildRecycler(R.id.recycler_view,dialogAdapter,linearLayoutManager)
                 .setScreenWidth(1f)
                 .setAnim(DialogUtils.DialogStyle.bottom_anim)
-                .setGravity(Gravity.BOTTOM);
+                .setGravity(Gravity.BOTTOM)
+                .setAllFinish(this);
     }
 
 

@@ -7,7 +7,7 @@ import com.purewhite.ywc.frame1.databinding.FragMineBinding;
 import com.purewhite.ywc.frame1.ui.activity.mine.CustomMainActivity;
 import com.purewhite.ywc.frame1.ui.activity.mine.DialogActivity;
 import com.purewhite.ywc.frame1.ui.mvp.MvpFragment;
-import com.purewhite.ywc.purewhitelibrary.app.ActivityUtils;
+import com.purewhite.ywc.purewhitelibrary.app.activity.ActivityUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 
@@ -24,10 +24,10 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
             switch (v.getId())
             {
                 case R.id.bottom_navigation:
-                    ActivityUtils.startActivity(CustomMainActivity.class);
+                    ActivityUtils.startDefalut().startActivity(CustomMainActivity.class);
                     break;
                 case R.id.dialog:
-                    ActivityUtils.startActivity(DialogActivity.class);
+                    ActivityUtils.startDefalut().startActivity(DialogActivity.class);
                     break;
             }
         }

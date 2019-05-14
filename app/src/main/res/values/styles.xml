@@ -16,13 +16,15 @@
         <!-- 没有actionBar -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!-- windown是否透明 -->
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="AppTheme" parent="BaseTheme"></style>
 
     <style name="StartTheme" parent="AppTheme">
-        <!-- windown是否透明 -->
-        <item name="android:windowIsTranslucent">true</item>
+        <!--&lt;!&ndash; windown是否透明 &ndash;&gt;-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
         <!-- windown布局页面背景颜色 -->
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>

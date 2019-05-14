@@ -1,12 +1,15 @@
 package com.purewhite.ywc.purewhitelibrary.view.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.IdRes;
 import android.support.annotation.StyleRes;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.SparseArray;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 
 import com.purewhite.ywc.purewhitelibrary.R;
+import com.purewhite.ywc.purewhitelibrary.app.activity.ActivityUtils;
 import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
@@ -134,6 +138,8 @@ public class DialogUtils {
         return this;
     }
 
+
+    //位置
     public DialogUtils setGravity(int gravity)
     {
         window.setGravity(gravity);
@@ -147,6 +153,42 @@ public class DialogUtils {
         window.setWindowAnimations(resId);
         return this;
     }
+
+    /**
+     * setCancelable 默认是true ，是点击返回dialog销毁，false就是不销毁
+     * @param flag
+     * @return
+     */
+    public DialogUtils setCancelable(boolean flag)
+    {
+
+        dialog.setCancelable(flag);
+        return this;
+    }
+
+    /**
+     *
+     */
+    public DialogUtils setAllFinish(final Activity context)
+    {
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    // 关闭 Dialog
+                    dialog.dismiss();
+                    // 关闭当前 Activity
+                    ActivityUtils.finish().finish(context);
+                    // 返回 true，表示返回事件已被处理，不再向下传递
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+        return this;
+    }
+
 
 
     public DialogUtils setChildText(@IdRes int id,String content,boolean click)
