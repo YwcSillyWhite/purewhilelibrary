@@ -18,9 +18,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.purewhite.ywc.purewhitelibrary.R;
-import com.purewhite.ywc.purewhitelibrary.app.activity.ActivityUtils;
+import com.purewhite.ywc.purewhitelibrary.app.activity.ActivityRollbackUtils;
 import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
@@ -178,7 +177,7 @@ public class DialogUtils {
                     // 关闭 Dialog
                     dialog.dismiss();
                     // 关闭当前 Activity
-                    ActivityUtils.finish().finish(context);
+                    ActivityRollbackUtils.finish(context);
                     // 返回 true，表示返回事件已被处理，不再向下传递
                     return true;
                 } else {

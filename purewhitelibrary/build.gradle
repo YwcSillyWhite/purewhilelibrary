@@ -37,25 +37,25 @@ android {
 
 }
 
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation rootProject.ext.dependencies["appcompat-v7"]
-    implementation rootProject.ext.dependencies["design"]
-    testImplementation rootProject.ext.dependencies["junit"]
+    api rootProject.ext.dependencies["appcompat-v7"]
+    api rootProject.ext.dependencies["design"]
     //rxjava
-    implementation rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxjava_adapter"]
-    implementation rootProject.ext.dependencies["rxjava_gson"]
-    implementation rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxjava_gson"]
+    api rootProject.ext.dependencies["rxandroid"]
     //网络请求框架 retrofit
-    implementation rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofit"]
     //okhttp log日志
-    implementation rootProject.ext.dependencies["okhttp_interceptor"]
+    api rootProject.ext.dependencies["okhttp_interceptor"]
     //下拉刷新框架
-    implementation rootProject.ext.dependencies["ptr"]
+    api rootProject.ext.dependencies["ptr"]
     //网络加载框架我 glide
-    implementation rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["glide"]
     //阿里vlayout的框架
-    implementation rootProject.ext.dependencies["vlayout"]
+    api rootProject.ext.dependencies["vlayout"]
 
 }

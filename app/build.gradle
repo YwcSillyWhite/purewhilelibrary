@@ -24,13 +24,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["constraint"]
     testImplementation rootProject.ext.dependencies["junit"]
     implementation project(':purewhitelibrary')
-    implementation rootProject.ext.dependencies["design"]
-    //为了databing的初始化
-    implementation rootProject.ext.dependencies["ptr"]
-    implementation rootProject.ext.dependencies["rxjava"]
-    implementation rootProject.ext.dependencies["gson"]
+
+
 }
