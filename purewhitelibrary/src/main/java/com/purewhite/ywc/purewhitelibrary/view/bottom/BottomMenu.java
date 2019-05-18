@@ -32,9 +32,7 @@ public class BottomMenu extends FrameLayout {
     //消息数
     private TextView bottomNum;
 
-    private boolean anmiable;
-
-    private String text;
+    private int animPosition;
     private int text_check_true;
     private int text_check_false;
     private String text_content;
@@ -66,7 +64,7 @@ public class BottomMenu extends FrameLayout {
         img_check_true = typedArray.getResourceId(R.styleable.BottomMenu_img_check_true, R.mipmap.icon_load_error);
         img_check_false = typedArray.getResourceId(R.styleable.BottomMenu_img_check_false, R.mipmap.icon_load_error);
         img_size = typedArray.getDimension(R.styleable.BottomMenu_img_size, -1);
-        anmiable = typedArray.getBoolean(R.styleable.BottomMenu_anmiable, true);
+        animPosition = typedArray.getInt(R.styleable.BottomMenu_anim_position, 0);
 
         center_distance = typedArray.getDimension(R.styleable.BottomMenu_center_distance, -1);
         //设置数值
@@ -100,28 +98,52 @@ public class BottomMenu extends FrameLayout {
     }
 
 
-    private void animOne(boolean seleter,boolean init)
-    {
-        ValueAnimator valueAnimator;
-        if (seleter)
-        {
-            valueAnimator= ValueAnimator.ofFloat(1, 1.1f);
 
-        }
-        else
+
+
+    private void anim(boolean seleter,boolean init)
+    {
+        if (animPosition==0)
         {
-            valueAnimator=ValueAnimator.ofFloat(1.1f,1);
-        }
-        valueAnimator.setDuration(init?0:200);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float animatedValue = (float) animation.getAnimatedValue();
-                setScaleX(animatedValue);
-                setScaleY(animatedValue);
+            ValueAnimator valueAnimator;
+            if (seleter)
+            {
+                valueAnimator= ValueAnimator.ofFloat(1, 1.1f);
+
             }
-        });
-        valueAnimator.start();
+            else
+            {
+                valueAnimator=ValueAnimator.ofFloat(1.1f,1);
+            }
+            valueAnimator.setDuration(init?0:200);
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float animatedValue = (float) animation.getAnimatedValue();
+                    setScaleX(animatedValue);
+                    setScaleY(animatedValue);
+                }
+            });
+            valueAnimator.start();
+        }
+        else if (animPosition==1)
+        {
+
+            if (seleter&&!init)
+            {
+                ValueAnimator valueAnimator=ValueAnimator.ofFloat(1,1.1f,1);
+                valueAnimator.setDuration(200);
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float animatedValue = (float) animation.getAnimatedValue();
+                        setScaleX(animatedValue);
+                        setScaleY(animatedValue);
+                    }
+                });
+                valueAnimator.start();
+            }
+        }
     }
 
 
@@ -140,7 +162,7 @@ public class BottomMenu extends FrameLayout {
             setMessageNum(0);
         }
         //状态变化之后动画
-        animOne(isCheck,false);
+        anim(isCheck,false);
     }
 
     /**
@@ -149,7 +171,7 @@ public class BottomMenu extends FrameLayout {
     public void setInitCheck() {
         isCheck=true;
         setData();
-        animOne(isCheck,true);
+        anim(isCheck,true);
     }
 
     //设置选中状态

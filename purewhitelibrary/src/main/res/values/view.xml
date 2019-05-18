@@ -16,7 +16,7 @@
         //设置初始值
         <attr name="text_content" format="string"></attr>
         //是否开启动画
-        <attr name="anmiable" format="boolean"></attr>
+        <attr name="anim_position" format="integer"></attr>
         //图片距离文字距离
         <attr name="center_distance" format="dimension"></attr>
     </declare-styleable>
