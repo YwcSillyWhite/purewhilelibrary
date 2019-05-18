@@ -1,35 +1,53 @@
 package com.purewhite.ywc.purewhitelibrary.config;
 
 import android.os.Bundle;
+import android.os.Parcelable;
+
+import io.reactivex.annotations.Nullable;
 
 /**
  * @author yuwenchao
  */
 public class BundleUtils {
 
-    private Bundle bundle;
-    public BundleUtils() {
-         bundle = new Bundle();
-    }
-
-    public static BundleUtils newInstance() {
-        return new BundleUtils();
-    }
-
-    public BundleUtils putInt(String key,int value)
+    public static BBuidler buidler()
     {
-        bundle.putInt(key,value);
-        return this;
+        return new BBuidler();
     }
 
-    public BundleUtils putString(String key,String value)
+    static class BBuidler
     {
-        bundle.putString(key,value);
-        return this;
+        private Bundle bundle;
+        public BBuidler() {
+            bundle = new Bundle();
+        }
+
+        public BBuidler put(@Nullable String key,@Nullable Object object)
+        {
+            if (object instanceof Integer)
+            {
+                bundle.putInt(key, ((Integer) object));
+            }
+            else if (object instanceof String)
+            {
+                bundle.putString(key, ((String) object));
+            }
+            else if (object instanceof Parcelable)
+            {
+                bundle.putParcelable(key, ((Parcelable) object));
+            }
+            else if (object instanceof Float)
+            {
+                bundle.putFloat(key, ((Float) object));
+            }
+            return this;
+        }
+
+        public Bundle build()
+        {
+            return bundle;
+        }
+
     }
 
-    public Bundle build()
-    {
-        return bundle;
-    }
 }

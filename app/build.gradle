@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
-        applicationId    rootProject.ext.android["applicationId"]
-        minSdkVersion    rootProject.ext.android["minSdkVersion"]
-        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
-        versionCode      rootProject.ext.android["versionCode"]
-        versionName      rootProject.ext.android["versionName"]
+        applicationId    rootProject.ext.android.applicationId
+        minSdkVersion    rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode      rootProject.ext.android.versionCode
+        versionName      rootProject.ext.android.versionName
     }
 
     buildTypes {
