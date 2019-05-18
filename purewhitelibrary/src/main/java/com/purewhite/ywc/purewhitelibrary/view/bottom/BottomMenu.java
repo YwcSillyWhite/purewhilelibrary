@@ -100,24 +100,31 @@ public class BottomMenu extends FrameLayout {
     }
 
 
-    //动画
-    private void animBig()
+    private void animOne(boolean seleter,boolean init)
     {
-        ValueAnimator valueAnimator=ValueAnimator.ofFloat(0,1);
-        setPivotX(getWidth()/2);
-        setPivotY(getHeight()/2);
-        valueAnimator.setDuration(200);
+        ValueAnimator valueAnimator;
+        if (seleter)
+        {
+            valueAnimator= ValueAnimator.ofFloat(1, 1.1f);
+
+        }
+        else
+        {
+            valueAnimator=ValueAnimator.ofFloat(1.1f,1);
+        }
+        valueAnimator.setDuration(init?0:200);
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                float progress = (float) animation.getAnimatedValue();
-                setScaleX(1+progress*0.1f);
-                setScaleY(1+progress*0.1f);
+                float animatedValue = (float) animation.getAnimatedValue();
+                setScaleX(animatedValue);
+                setScaleY(animatedValue);
             }
         });
         valueAnimator.start();
-
     }
+
+
 
 
 
@@ -130,15 +137,10 @@ public class BottomMenu extends FrameLayout {
         setData();
         if (isCheck)
         {
-            if (anmiable)
-                animBig();
             setMessageNum(0);
         }
-        else
-        {
-            setScaleX(1);
-            setScaleY(1);
-        }
+        //状态变化之后动画
+        animOne(isCheck,false);
     }
 
     /**
@@ -147,8 +149,7 @@ public class BottomMenu extends FrameLayout {
     public void setInitCheck() {
         isCheck=true;
         setData();
-        setScaleX(1.1f);
-        setScaleY(1.1f);
+        animOne(isCheck,true);
     }
 
     //设置选中状态
