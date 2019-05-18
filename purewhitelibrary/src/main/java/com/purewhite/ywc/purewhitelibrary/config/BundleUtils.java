@@ -15,7 +15,7 @@ public class BundleUtils {
         return new BBuidler();
     }
 
-    static class BBuidler
+    public static class BBuidler
     {
         private Bundle bundle;
         public BBuidler() {

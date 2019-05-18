@@ -27,7 +27,7 @@ public class SpUtils {
         return new SBuilder(gain,content);
     }
 
-    static class  SBuilder<B extends SBuilder>
+    public static class  SBuilder<B extends SBuilder>
     {
         private SharedPreferences sharedPreferences;
         private SharedPreferences.Editor editor;
