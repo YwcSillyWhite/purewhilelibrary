@@ -24,10 +24,10 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
             switch (v.getId())
             {
                 case R.id.bottom_navigation:
-                    ActivitySkipUtils.startActivity(CustomMainActivity.class);
+                    ActivitySkipUtils.startActivityAnim(CustomMainActivity.class);
                     break;
                 case R.id.dialog:
-                    ActivitySkipUtils.startActivity(DialogActivity.class);
+                    ActivitySkipUtils.startActivityAnim(DialogActivity.class);
                     break;
             }
         }

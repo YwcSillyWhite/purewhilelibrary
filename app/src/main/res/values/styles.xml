@@ -16,7 +16,7 @@
         <!-- 没有actionBar -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowAnimationStyle">@style/activityAnimation</item>
+        <!--<item name="android:windowAnimationStyle">@style/activityAnimation</item>-->
     </style>
 
 

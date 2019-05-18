@@ -9,11 +9,14 @@ import android.view.animation.ScaleAnimation;
 import com.purewhite.ywc.frame1.R;
 import com.purewhite.ywc.frame1.databinding.ActivityStartBinding;
 import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
+import com.purewhite.ywc.purewhitelibrary.app.activity.ActivityRollbackUtils;
 import com.purewhite.ywc.purewhitelibrary.app.activity.ActivitySkipUtils;
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
 public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp> {
+
+
 
     private Animation.AnimationListener animationListener=new Animation.AnimationListener() {
         @Override
@@ -23,8 +26,8 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
 
         @Override
         public void onAnimationEnd(Animation animation) {
+            ActivityRollbackUtils.finish();
             ActivitySkipUtils.startActivity(MainActivity.class);
-//            ActivityUtils.finish().finish(StartActivity.this);
         }
 
         @Override
@@ -46,6 +49,7 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
     @Override
     protected void initView() {
         initStartAnim();
+        setFinishAnim(false);
     }
 
     @Override

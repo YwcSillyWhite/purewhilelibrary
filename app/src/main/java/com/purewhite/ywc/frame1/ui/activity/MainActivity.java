@@ -1,9 +1,12 @@
 package com.purewhite.ywc.frame1.ui.activity;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.util.SparseArray;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 
 import com.purewhite.ywc.frame1.R;
@@ -13,12 +16,27 @@ import com.purewhite.ywc.frame1.ui.fragment.mine.MineFragment;
 import com.purewhite.ywc.frame1.ui.fragment.rest.RestFragment;
 import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.adapter.pagerview.BaseFragmentAdapterImp;
+import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
 public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> {
 
     private SparseArray<Fragment> sparseArray;
-    private int lastPosition=-1;
+    private boolean handlerDestroy=false;
+    private final int handlerCode=1000;
+    private Handler handler=new Handler()
+    {
+        @Override
+        public void dispatchMessage(Message msg) {
+            super.dispatchMessage(msg);
+            switch (msg.what)
+            {
+                case handlerCode:
+                    handlerDestroy=false;
+                    break;
+            }
+        }
+    };
 
     private BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener
             =new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -62,7 +80,27 @@ public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> 
         mDataBinding.viewPager.setOffscreenPageLimit(sparseArray.size()-1);
         mDataBinding.bottomView.setItemIconTintList(null);
         mDataBinding.bottomView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
-
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK)
+        {
+            if (!handlerDestroy)
+            {
+                ToastUtils.show("再按一下一次退出");
+                handlerDestroy=true;
+                handler.sendEmptyMessageDelayed(handlerCode,2000);
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
 }
