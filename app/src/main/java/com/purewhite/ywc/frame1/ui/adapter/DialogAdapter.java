@@ -28,6 +28,6 @@ public class DialogAdapter extends BindAdapter<String> {
 
     private void initAdapterDialog(AdapterDialogTwoBinding binding, int position, String s) {
         binding.dialogListText.setText(s);
-        binding.viewLine.setVisibility(position==getDataCount()-1?View.GONE:View.VISIBLE);
+        binding.viewLine.setVisibility(position==obtianDataCount()-1?View.GONE:View.VISIBLE);
     }
 }

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnFullListener;
-import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemDataListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnLoadListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.fullview.FullView;
@@ -41,7 +40,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     private Handler handler=new Handler();
     //加载最多项
     private int pageSize=10;
-    public void setPageSize(int pageSize) {
+    public final void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
     private List<T> mData;
@@ -51,31 +50,242 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     private LinearLayout mFooterLayout;
     //全局布局
     private FullView fullView=new FullViewImp();
+    public final void setFullView(FullView fullView) {
+        if (loadView==null) {
+            throw new UnsupportedOperationException("fullview can not null");
+        }
+        this.fullView = fullView;
+    }
+    public final void setOnFullListener(OnFullListener onFullListener)
+    {
+        fullView.setOnFullListener(onFullListener);
+    }
+    //设置full状态，并且是不刷新
+    public void setFullState(int statue)
+    {
+        fullView.setFullState(statue,false);
+    }
+    //设置full状态，并且是否刷新
+    public void setFullState(int statue,boolean flush)
+    {
+        fullView.setFullState(statue,flush);
+    }
     //加载布局
     private LoadView loadView=new LoadViewImp();
+    public final void setLoadView(LoadView loadView) {
+        if (loadView==null) {
+            throw new UnsupportedOperationException("loadview can not null");
+        }
+        this.loadView = loadView;
+    }
+    //设置加载布局状态，加载布局是否刷新
+    private final void setLoadState(int statue,boolean flush)
+    {
+        loadView.setState(statue);
+        if (flush) {
+            notifyItemChanged(getItemCount()-1);
+        }
+    }
+    //滑动监听
+    protected OnLoadListener onLoadListener;
+    public final void setOnLoadListener(OnLoadListener onLoadListener) {
+        this.onLoadListener = onLoadListener;
+    }
+    //父View是否可以点击
+    private boolean parentClick=true;
+    public final void setParentClick(boolean parentClick) {
+        this.parentClick = parentClick;
+    }
+    //点击事件
+    protected OnItemListener onItemListener;
+    public final void setOnItemListener(OnItemListener onItemListener) {
+        this.onItemListener = onItemListener;
+    }
 
     private final int HEAD_ITEM=Integer.MIN_VALUE;
     private final int FOOT_ITEM=Integer.MIN_VALUE+1;
     private final int LOAD_ITEM=Integer.MIN_VALUE+2;
     private final int FULL_ITEM=Integer.MIN_VALUE+3;
 
+
     public BaseAdapter(List<T> list) {
         this.mData = list!=null?list:new ArrayList<T>();
         fullView.setAdapter(this);
     }
 
-    //获取数据对象
-    public T obtainT(int position)
+    /**
+     * 获取数据
+     * @return
+     */
+    protected final List<T> obtainData()
     {
-        if (position<mData.size())
+        return mData;
+    }
+
+    /**
+     * 根据index获取list对应的数据
+     * @param position
+     * @return
+     */
+    public final T obtainT(int position)
+    {
+        if (position<obtianDataCount())
         {
             return mData.get(position);
         }
         return null;
     }
 
+
+    /************  item的长度  ****************/
+    /**
+     * data数据的长度
+     * @return
+     */
+    public int obtianDataCount()
+    {
+        return mData!=null?mData.size():0;
+    }
+
+    /**
+     * 让方法变成final 不让子类集成
+     * @return
+     */
     @Override
-    public V onCreateViewHolder(ViewGroup parent, int viewType) {
+    public final int getItemCount() {
+        return getFullCount()>0?getFullCount():getHeadCount()+obtianDataCount()+getFootCount()+getLoadCount();
+    }
+
+    /**
+     * 没有数据的长度
+     * @return
+     */
+    private final int getFullCount()
+    {
+        if (obtianDataCount()>0) {
+            return 0;
+        }
+        return fullView.isShow()?1:0;
+    }
+
+    /**
+     * 头部数据的长度
+     * @return
+     */
+    private final int getHeadCount()
+    {
+        if (mHeaderLayout!=null&&mHeaderLayout.getChildCount()>0) {
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * 尾部长度
+     * @return
+     */
+    private final int getFootCount()
+    {
+        if (mFooterLayout!=null&&mFooterLayout.getChildCount()>0) {
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * 加载更多的长度
+     * @return
+     */
+    private final int getLoadCount()
+    {
+        if (onLoadListener==null) {
+            return 0;
+        }
+        return 1;
+    }
+    /************  item的长度  ****************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /************  item的类型 ****************/
+    /**
+     * item类型，final化避免重写
+     * @param position
+     * @return
+     */
+    @Override
+    public final int getItemViewType(int position) {
+        if (getFullCount()>0) {
+            return FULL_ITEM;
+        }
+        if (position==0&&getHeadCount()!=0)
+        {
+            return HEAD_ITEM;
+        }
+        else if (position<getHeadCount()+obtianDataCount())
+        {
+            return obtianDataType(position-getHeadCount());
+        }
+        else if(position<getHeadCount()+obtianDataCount()+getFootCount())
+        {
+            return FOOT_ITEM;
+        }
+        else
+        {
+            return LOAD_ITEM;
+        }
+    }
+
+    /**
+     * 获取当前数据类型
+     * @param position
+     * @return
+     */
+    protected int obtianDataType(int position)
+    {
+        return super.getItemViewType(position+getHeadCount());
+    }
+
+    //判断是不是data数据类型
+    public boolean dataType(RecyclerView.ViewHolder viewhold)
+    {
+        return dataType(viewhold.getItemViewType());
+    }
+
+    public boolean dataType(int viewType)
+    {
+        return viewType!=HEAD_ITEM&&viewType!=FOOT_ITEM
+                &&viewType!=LOAD_ITEM&&viewType!=FULL_ITEM;
+    }
+    /************  item的类型 ****************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /************  onCreateViewHolder ****************/
+    @Override
+    public final V onCreateViewHolder(ViewGroup parent, int viewType) {
         V viewhold;
         if (viewType==FULL_ITEM)
         {
@@ -94,8 +304,8 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         }
         else if (viewType==LOAD_ITEM)
         {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(loadView.getLayoutId(), parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(loadView.getLayoutId(),
+                    parent, false);
             viewhold=createV(view);
             view.setOnClickListener(new OnSingleListener() {
                 @Override
@@ -118,9 +328,8 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         return viewhold;
     }
 
-
     //创建viewhold
-    private V createV(View view)
+    private final V createV(View view)
     {
         return ((V) new BaseViewHolder(view));
     }
@@ -128,8 +337,42 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     protected abstract V onCreateData(ViewGroup parent, int viewType);
 
 
+    private final void bindDataListener(final V viewhold)
+    {
+        if (viewhold == null&&!parentClick&&onItemListener==null) {
+            return;
+        }
+        final View view = viewhold.itemView;
+        //这里给view设置一个id ,这样可以和子类点击一起使用
+        view.setId(Integer.MAX_VALUE);
+        if (view == null) {
+            return;
+        }
+        view.setOnClickListener(new OnSingleListener() {
+            @Override
+            public void onSingleClick(View v) {
+                if (onItemListener!=null&&parentClick)
+                {
+                    int position=viewhold.getLayoutPosition() - getFootCount();
+                    onItemListener.OnClick(BaseAdapter.this,view, position,true);
+                }
+            }
+        });
+    }
+    /************  onCreateViewHolder ****************/
+
+
+
+
+
+
+
+
+
+
+    /************  onBindViewHolder ****************/
     @Override
-    public void onBindViewHolder(V holder, int position) {
+    public final void onBindViewHolder(V holder, int position) {
         loadMore(position);
         int itemViewType = holder.getItemViewType();
         if (itemViewType==LOAD_ITEM)
@@ -146,154 +389,8 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         }
     }
 
-    //赋值数据
-    protected abstract void onData(V holder,int position,T t);
-
-
-
-
-
-
-
-
-
-    /************  数据处理   ****************/
-    //添加数据
-    public void  refreshComplete(boolean network,int page,List<T> list)
-    {
-        refreshComplete(network,page==1,list);
-
-    }
-
-    public void  refreshComplete(boolean network,boolean flush,List<T> list)
-    {
-        if (list!=null&&list.size()>0)
-        {
-            addDataFlush(flush,list);
-        }
-        else
-        {
-            if (flush)
-            {
-                setLoadState(LoadView.REST,false);
-                if (getDataCount()==0)
-                {
-                    setFullState(network?FullView.DATA:FullView.NETWORK,true);
-                }
-            }
-            else
-            {
-                setLoadState(network?LoadView.DATA:LoadView.NETWORK,true);
-            }
-        }
-
-    }
-
-
-
-
-    public void addDataFlush(int page,List<T> list)
-    {
-        addDataFlush(page==1,list);
-    }
-
-
-    public void addDataFlush(boolean flush,List<T> list)
-    {
-        if (flush)
-        {
-            flush(list);
-        }
-        else
-        {
-            addData(list);
-        }
-    }
-
-
-
-
-    //刷新数据
-    public void flush(List<T> list)
-    {
-        if (mData.size()>0)
-        {
-            mData.clear();
-        }
-        if (list!=null&&list.size()>0)
-        {
-            mData.addAll(list);
-            setLoadState(list.size()>=pageSize?LoadView.FINISH:LoadView.REST,false);
-        }
-        else
-        {
-            setLoadState(LoadView.REST,false);
-        }
-        notifyDataSetChanged();
-    }
-
-    //添加数据
-    public void addData(List<T> list)
-    {
-        if (mData==null&&mData.size()==0)
-        {
-            flush(list);
-        }
-        else
-        {
-            if (list!=null&&list.size()>0)
-            {
-                if (list.size()>=pageSize)
-                {
-                    setLoadState(LoadView.FINISH,false);
-                }
-                else
-                {
-                    setLoadState(LoadView.DATA,true);
-                }
-                mData.addAll(list);
-                notifyItemRangeInserted(mData.size()-list.size() + getHeadCount(), list.size());
-            }
-            else
-            {
-                setLoadState(LoadView.DATA,true);
-            }
-        }
-    }
-
-    //删除数据
-    public void removeFlush(int position)
-    {
-        if (mData!=null&&mData.size()>position)
-        {
-            mData.remove(position);
-            notifyDataSetChanged();
-        }
-    }
-
-    //删除数据
-    public void remove(int position)
-    {
-        if (mData!=null&&mData.size()>position)
-        {
-            mData.remove(position);
-            notifyItemRemoved(position);
-        }
-    }
-
-
-
-
-
-
-    /************  滑动监听   ****************/
-    //滑动监听
-    protected OnLoadListener onLoadListener;
-    public void setOnLoadListener(OnLoadListener onLoadListener) {
-        this.onLoadListener = onLoadListener;
-    }
     //判断是不是加载更多
-    protected  void loadMore(int position)
+    private final void loadMore(int position)
     {
         //loadview长度不能为0，position等于最后一个，position不能为loadview的position
         if (getLoadCount()==0||position<getItemCount()-1||getLoadCount()-1==position) {
@@ -320,186 +417,149 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         }
     }
 
+    //赋值数据
+    protected abstract void onData(V holder,int position,T t);
+
+    /************  onBindViewHolder ****************/
 
 
-    /************  点击事件和设置   ****************/
-    protected OnItemDataListener onItemDataListener;
-    //数据点击过事件
-    protected OnItemListener onItemListener;
-    public void setOnItemDataListener(OnItemDataListener onItemDataListener) {
-        this.onItemDataListener = onItemDataListener;
-    }
 
-    private boolean parentClick=true;
-    public void setParentClick(boolean parentClick) {
-        this.parentClick = parentClick;
-    }
 
-    public void setOnItemListener(OnItemListener onItemListener) {
-        this.onItemListener = onItemListener;
-    }
 
-    protected void bindDataListener(final V viewhold)
+
+
+
+
+
+
+
+    /************  添加删除头尾   ****************/
+    //添加头尾
+    public final void addHeadView(View header)
     {
-        if (viewhold == null&&!parentClick&&onItemListener==null) {
-            return;
-        }
-        final View view = viewhold.itemView;
-        //这里给view设置一个id ,这样可以和子类点击一起使用
-        view.setId(Integer.MAX_VALUE);
-        if (view == null) {
-            return;
-        }
-        view.setOnClickListener(new OnSingleListener() {
-            @Override
-            public void onSingleClick(View v) {
-                if (onItemListener!=null&&parentClick)
-                {
-                    int position=viewhold.getLayoutPosition() - getFootCount();
-                    onItemListener.OnClick(BaseAdapter.this,view, position,true);
-                }
+        addHeadView(header,-1);
+    }
+
+    public final void addHeadView(View header,int indext)
+    {
+        addHeadView(header,indext,LinearLayout.VERTICAL);
+    }
+
+    public final void addHeadView(View header, int index, int orientation) {
+        if (header.getParent()==null&&mHeaderLayout==null)
+        {
+            mHeaderLayout=new LinearLayout(header.getContext());
+            if (orientation==LinearLayout.VERTICAL)
+            {
+                mHeaderLayout.setOrientation(LinearLayout.VERTICAL);
+                mHeaderLayout.setLayoutParams(new RecyclerView.LayoutParams(MATCH_PARENT,WRAP_CONTENT));
             }
-        });
-    }
-
-
-
-
-
-    /************  fullview  ****************/
-    //全部布局
-
-    public FullView getFullView() {
-        return fullView;
-    }
-    public void setFullView(FullView fullView) {
-        if (loadView==null) {
-            throw new UnsupportedOperationException("fullview can not null");
+            else
+            {
+                mHeaderLayout.setOrientation(LinearLayout.HORIZONTAL);
+                mHeaderLayout.setLayoutParams(new RecyclerView.LayoutParams(WRAP_CONTENT,MATCH_PARENT));
+            }
         }
-        this.fullView = fullView;
-    }
-    public void setOnFullListener(OnFullListener onFullListener)
-    {
-        fullView.setOnFullListener(onFullListener);
-    }
-
-    public void setFullState(int statue)
-    {
-        fullView.setFullState(statue,true);
-    }
-
-    public void setFullState(int statue,boolean flush)
-    {
-        fullView.setFullState(statue,flush);
-    }
-
-    /************  loadview  ****************/
-
-    public void setLoadView(LoadView loadView) {
-        if (loadView==null) {
-            throw new UnsupportedOperationException("loadview can not null");
-        }
-        this.loadView = loadView;
-    }
-    private void setLoadState(int statue,boolean flush)
-    {
-        loadView.setState(statue);
-        if (flush) {
-            notifyItemChanged(getItemCount()-1);
-        }
-    }
-
-
-
-
-
-    /************  item的长度  ****************/
-    //adapter的item数量
-    @Override
-    public int getItemCount() {
-        return getFullCount()>0?getFullCount():getHeadCount()+getDataCount()+getFootCount()+getLoadCount();
-    }
-
-    private int getFullCount()
-    {
-        if (mData!=null&&mData.size()>0) {
-            return 0;
-        }
-        return fullView.isShow()?1:0;
-    }
-    //head长度
-    public int getHeadCount()
-    {
-        if (mHeaderLayout!=null&&mHeaderLayout.getChildCount()>0) {
-            return 1;
-        }
-        return 0;
-    }
-    //data长度
-    public int getDataCount()
-    {
-        return mData!=null?mData.size():0;
-    }
-    //foot长度
-    private int getFootCount()
-    {
-        if (mFooterLayout!=null&&mFooterLayout.getChildCount()>0) {
-            return 1;
-        }
-        return 0;
-    }
-    //加载长度
-    private int getLoadCount()
-    {
-        if (onLoadListener==null) {
-            return 0;
-        }
-        return 1;
-    }
-
-
-
-    /************  item的类型 ****************/
-    @Override
-    public int getItemViewType(int position) {
-        if (getFullCount()>0) {
-            return FULL_ITEM;
-        }
-        if (position==0&&getHeadCount()!=0)
+        final int childCount = mHeaderLayout.getChildCount();
+        if (index<0||index>childCount)
         {
-            return HEAD_ITEM;
+            index=childCount;
         }
-        else if (position<getHeadCount()+getDataCount())
+        mHeaderLayout.addView(header,index);
+        if (mHeaderLayout.getChildCount()==1)
         {
-            return getDataType(position-getHeadCount());
-        }
-        else if(position<getHeadCount()+getDataCount()+getFootCount())
-        {
-            return FOOT_ITEM;
-        }
-        else
-        {
-            return LOAD_ITEM;
+            notifyItemInserted(0);
         }
     }
 
-    //list的数据item类型
-    protected int getDataType(int position)
+
+    public final void removeHeadView(View head)
     {
-        return super.getItemViewType(position+getHeadCount());
+        if (mHeaderLayout!=null)
+        {
+            mHeaderLayout.removeView(head);
+            notifyItemInserted(0);
+        }
     }
 
-    //判断是不是data数据类型
-    public boolean dataType(RecyclerView.ViewHolder viewhold)
+    public final void removeHeadView(int position)
     {
-        return dataType(viewhold.getItemViewType());
+        if (mHeaderLayout!=null)
+        {
+            int childCount = mHeaderLayout.getChildCount();
+            if (position<childCount)
+            {
+                mHeaderLayout.removeViewAt(position);
+                notifyItemInserted(0);
+            }
+        }
     }
 
-    public boolean dataType(int viewType)
+
+    //添加尾部
+    public final void addFootView(View foot)
     {
-        return viewType!=HEAD_ITEM&&viewType!=FOOT_ITEM
-                &&viewType!=LOAD_ITEM&&viewType!=FULL_ITEM;
+        addFootView(foot,-1);
     }
+
+    public final void addFootView(View foot,int index)
+    {
+        addFootView(foot,index,LinearLayout.VERTICAL);
+    }
+
+    public final void addFootView(View header, int index, int orientation) {
+        if (mFooterLayout==null)
+        {
+            mFooterLayout=new LinearLayout(header.getContext());
+            if (orientation==LinearLayout.VERTICAL)
+            {
+                mFooterLayout.setOrientation(LinearLayout.VERTICAL);
+                mFooterLayout.setLayoutParams(new RecyclerView.LayoutParams(MATCH_PARENT,WRAP_CONTENT));
+            }
+            else
+            {
+                mFooterLayout.setOrientation(LinearLayout.HORIZONTAL);
+                mFooterLayout.setLayoutParams(new RecyclerView.LayoutParams(WRAP_CONTENT,MATCH_PARENT));
+            }
+        }
+        final int childCount = mFooterLayout.getChildCount();
+        if (index<0||index>childCount)
+        {
+            index=childCount;
+        }
+        mFooterLayout.addView(header,index);
+        if (mFooterLayout.getChildCount()==1)
+        {
+            notifyItemInserted(getHeadCount()+obtianDataCount());
+        }
+    }
+
+    public final void removeFootView(View head)
+    {
+        if (mFooterLayout!=null)
+        {
+            mFooterLayout.removeView(head);
+            notifyItemInserted(getHeadCount()+obtianDataCount());
+        }
+    }
+
+    public final void removeFootView(int position)
+    {
+        if (mFooterLayout!=null)
+        {
+            int childCount = mFooterLayout.getChildCount();
+            if (position<childCount)
+            {
+                mFooterLayout.removeViewAt(position);
+                notifyItemInserted(getHeadCount()+obtianDataCount());
+            }
+        }
+    }
+
+    /************  添加删除头尾   ****************/
+
+
+
 
 
 
@@ -546,81 +606,125 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     }
 
 
-    /************  添加头尾   ****************/
-    //添加头尾
-    public void addHeadView(View header)
+
+
+
+
+
+
+
+
+
+    /************  数据处理   ****************/
+    //添加数据
+    public  void  refreshComplete(boolean network,int page,List<T> list)
     {
-        addHeadView(header,-1);
+        refreshComplete(network,page==1,list);
+
     }
 
-    public void addHeadView(View header,int indext)
+    public void  refreshComplete(boolean network,boolean flush,List<T> list)
     {
-        addHeadView(header,indext,LinearLayout.VERTICAL);
-    }
-
-    public void addHeadView(View header, int index, int orientation) {
-        if (header.getParent()==null&&mHeaderLayout==null)
+        if (list!=null&&list.size()>0)
         {
-            mHeaderLayout=new LinearLayout(header.getContext());
-            if (orientation==LinearLayout.VERTICAL)
+            addDataFlush(flush,list);
+        }
+        else
+        {
+            if (flush)
             {
-                mHeaderLayout.setOrientation(LinearLayout.VERTICAL);
-                mHeaderLayout.setLayoutParams(new RecyclerView.LayoutParams(MATCH_PARENT,WRAP_CONTENT));
+                setLoadState(LoadView.REST,false);
+                if (obtianDataCount()==0)
+                {
+                    setFullState(network?FullView.DATA:FullView.NETWORK,true);
+                }
             }
             else
             {
-                mHeaderLayout.setOrientation(LinearLayout.HORIZONTAL);
-                mHeaderLayout.setLayoutParams(new RecyclerView.LayoutParams(WRAP_CONTENT,MATCH_PARENT));
+                setLoadState(network?LoadView.DATA:LoadView.NETWORK,true);
             }
         }
-        final int childCount = mHeaderLayout.getChildCount();
-        if (index<0||index>childCount)
-        {
-            index=childCount;
-        }
-        mHeaderLayout.addView(header,index);
-        if (mHeaderLayout.getChildCount()==1)
-        {
-            notifyItemInserted(0);
-        }
+
     }
 
 
-    //添加尾部
-    public void addFootView(View foot)
+    public void addDataFlush(int page,List<T> list)
     {
-        addFootView(foot,-1);
+        addDataFlush(page==1,list);
     }
 
-    public void addFootView(View foot,int index)
+
+    public void addDataFlush(boolean flush,List<T> list)
     {
-        addFootView(foot,index,LinearLayout.VERTICAL);
+        if (flush)
+        {
+            flush(list);
+        }
+        else
+        {
+            addData(list);
+        }
     }
 
-    public void addFootView(View header, int index, int orientation) {
-        if (mFooterLayout==null)
+
+    //刷新数据
+    public void flush(List<T> list)
+    {
+        if (obtianDataCount()>0)
         {
-            mFooterLayout=new LinearLayout(header.getContext());
-            if (orientation==LinearLayout.VERTICAL)
+            obtainData().clear();
+        }
+        if (list!=null&&list.size()>0)
+        {
+            obtainData().addAll(list);
+            setLoadState(list.size()>=pageSize?LoadView.FINISH:LoadView.REST,false);
+        }
+        else
+        {
+            setLoadState(LoadView.REST,false);
+        }
+        notifyDataSetChanged();
+    }
+
+    //添加数据
+    public  void addData(List<T> list)
+    {
+        if (obtianDataCount()==0)
+        {
+            flush(list);
+        }
+        else
+        {
+            if (list!=null&&list.size()>0)
             {
-                mFooterLayout.setOrientation(LinearLayout.VERTICAL);
-                mFooterLayout.setLayoutParams(new RecyclerView.LayoutParams(MATCH_PARENT,WRAP_CONTENT));
+                if (list.size()>=pageSize)
+                {
+                    setLoadState(LoadView.FINISH,false);
+                }
+                else
+                {
+                    setLoadState(LoadView.DATA,true);
+                }
+                obtainData().addAll(list);
+                notifyItemRangeInserted(obtianDataCount()-list.size() + getHeadCount(), list.size());
             }
             else
             {
-                mFooterLayout.setOrientation(LinearLayout.HORIZONTAL);
-                mFooterLayout.setLayoutParams(new RecyclerView.LayoutParams(WRAP_CONTENT,MATCH_PARENT));
+                setLoadState(LoadView.DATA,true);
             }
         }
-        final int childCount = mFooterLayout.getChildCount();
-        if (index<0||index>childCount)
+    }
+
+
+    //删除数据
+    public void remove(int position)
+    {
+        if (obtianDataCount()>position)
         {
-            index=childCount;
-        }
-        mFooterLayout.addView(header,index);
-        if (mFooterLayout.getChildCount()==1)
-        {
-            notifyItemInserted(getHeadCount()+getDataCount());
+            obtainData().remove(position);
+            notifyItemRemoved(position);
         }
     }
+
+
 }

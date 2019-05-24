@@ -32,7 +32,7 @@ public abstract class BindAdapter<T> extends BaseAdapter<T,BindHolder>{
     }
 
     //添加布局
-    protected void addLayout(int viewType,int layout)
+    protected final void addLayout(int viewType,int layout)
     {
         if (sparseIntArray==null)
         {
@@ -40,15 +40,15 @@ public abstract class BindAdapter<T> extends BaseAdapter<T,BindHolder>{
         }
         sparseIntArray.put(viewType,layout);
     }
-    protected void addLayout(int layout)
+
+    protected final void addLayout(int layout)
     {
         addLayout(0,layout);
     }
 
 
-
     @Override
-    protected BindHolder onCreateData(ViewGroup parent, int viewType) {
+    protected final BindHolder onCreateData(ViewGroup parent, int viewType) {
         if (getLayout(viewType)!=-1)
         {
             ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
