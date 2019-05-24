@@ -61,12 +61,12 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         fullView.setOnFullListener(onFullListener);
     }
     //设置full状态，并且是不刷新
-    public void setFullState(int statue)
+    public final void setFullState(int statue)
     {
         fullView.setFullState(statue,false);
     }
     //设置full状态，并且是否刷新
-    public void setFullState(int statue,boolean flush)
+    public final void setFullState(int statue,boolean flush)
     {
         fullView.setFullState(statue,flush);
     }

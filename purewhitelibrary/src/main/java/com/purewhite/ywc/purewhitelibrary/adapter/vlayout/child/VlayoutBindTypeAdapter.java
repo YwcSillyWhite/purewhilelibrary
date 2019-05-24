@@ -18,7 +18,8 @@ public abstract class VlayoutBindTypeAdapter<T extends BaseTypeBean> extends Vla
     }
 
     @Override
-    protected int getDataType(int position) {
+    protected int obtianDataType(int position) {
         return obtain(position)!=null?obtain(position).getTypeBean():0;
     }
+
 }

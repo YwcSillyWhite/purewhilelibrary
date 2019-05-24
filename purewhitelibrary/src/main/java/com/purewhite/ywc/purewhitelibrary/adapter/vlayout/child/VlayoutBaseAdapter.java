@@ -30,25 +30,31 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
      * @return
      */
 
-    protected List<T> mData;
+    private List<T> mData;
 
     private OnItemListener onItemListener;
-    public void setOnItemListener(OnItemListener onItemListener) {
+    public final void setOnItemListener(OnItemListener onItemListener) {
         this.onItemListener = onItemListener;
     }
     //本身是否可以点击
     private Boolean parentClick=true;
-    public void setParentClick(Boolean parentClick) {
+    public final void setParentClick(Boolean parentClick) {
         this.parentClick = parentClick;
     }
 
     @Override
-    public int getItemViewType(int position) {
-        return getDataType(position);
+    public final int getItemViewType(int position) {
+        return obtianDataType(position);
     }
 
-    protected int getDataType(int position) {
+    protected  int obtianDataType(int position) {
         return super.getItemViewType(position);
+    }
+
+
+    public List<T> obtainData()
+    {
+        return mData;
     }
 
     public T obtain(int position)
@@ -67,29 +73,34 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
 
     @NonNull
     @Override
-    public V onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public final V onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         V viewHolder = onCreateData(viewGroup, viewType);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull V v, int i) {
+    public final void onBindViewHolder(@NonNull V v, int i) {
 
     }
 
     @Override
-    public int getItemCount() {
-        return mData.size();
+    public final int getItemCount() {
+        return obtianDataCount();
+    }
+
+    public int obtianDataCount()
+    {
+        return mData!=null?mData.size():0;
     }
 
     @Override
-    protected void onBindViewHolderWithOffset(V holder, int position, int offsetTotal) {
+    protected  final void onBindViewHolderWithOffset(V holder, int position, int offsetTotal) {
         super.onBindViewHolderWithOffset(holder, position, offsetTotal);
         onData(holder,position,obtain(position));
         bindClick(holder,position);
     }
 
-    private void bindClick(final V holder, final int position) {
+    private final void bindClick(final V holder, final int position) {
         if (holder==null&&!parentClick&&onItemListener==null) {
             return;
         }
@@ -128,7 +139,7 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
     //添加数据
     public void addData(List<T> list)
     {
-        if (mData==null&&mData.size()==0)
+        if (obtianDataCount()==0)
         {
             flush(list);
         }
@@ -137,7 +148,7 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
             if (list!=null&&list.size()>0)
             {
                 mData.addAll(list);
-                notifyItemRangeInserted(mData.size()-list.size() , list.size());
+                notifyItemRangeInserted(obtianDataCount()-list.size() , list.size());
             }
         }
     }
@@ -162,7 +173,12 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
      */
     public void addDataFlush(int page,List<T> list)
     {
-        if (page==1)
+        addDataFlush(page==1,list);
+    }
+
+    public void addDataFlush(boolean flush,List<T> list)
+    {
+        if (flush)
         {
             flush(list);
         }

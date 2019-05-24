@@ -28,12 +28,12 @@ public abstract class VlayoutBindAdapter<T> extends VlayoutBaseAdapter<T,BindHol
         super(list);
     }
 
-    protected void addLayout(int layoutId)
+    protected final void addLayout(int layoutId)
     {
         addLayout(0,layoutId);
     }
 
-    protected void addLayout(int viewType,int layoutId)
+    protected final void addLayout(int viewType,int layoutId)
     {
         if (sparseIntArray==null)
         {
@@ -44,7 +44,7 @@ public abstract class VlayoutBindAdapter<T> extends VlayoutBaseAdapter<T,BindHol
 
 
     @Override
-    protected BindHolder onCreateData(ViewGroup parent, int viewType) {
+    protected final BindHolder onCreateData(ViewGroup parent, int viewType) {
         if (getLayout(viewType)!=-1)
         {
             ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
@@ -53,7 +53,6 @@ public abstract class VlayoutBindAdapter<T> extends VlayoutBaseAdapter<T,BindHol
         }
         return null;
     }
-
 
 
     private int getLayout(int viewType)

@@ -32,40 +32,53 @@ public class VlayoutAdapter extends DelegateAdapter
     private final int FULL_VIEW=Integer.MIN_VALUE+1;
     //加载更多监听
     private OnLoadListener onLoadListener;
-    public void setOnLoadListener(OnLoadListener onLoadListener) {
+    public final void setOnLoadListener(OnLoadListener onLoadListener) {
         this.onLoadListener = onLoadListener;
     }
 
     //数据长度
     private int mPagesize=10;
-    public void setmPagesize(int mPagesize) {
+    public final void setmPagesize(int mPagesize) {
         this.mPagesize = mPagesize;
     }
 
     //全屏布局
     private FullView fullView=new FullViewImp();
-
-    public FullView getFullView() {
-        return fullView;
+    //设置full状态，并且是不刷新
+    public final void setFullSate(int statue)
+    {
+        fullView.setFullState(statue,false);
     }
-
-    public void setFullView(FullView fullView) {
+    //设置full状态，并且是否刷新
+    public final void setFullSate(int statue,boolean flush)
+    {
+        fullView.setFullState(statue,flush);
+    }
+    public final void setFullView(FullView fullView) {
         if (fullView==null) {
             throw new UnsupportedOperationException("fullview can not null");
         }
         this.fullView = fullView;
     }
 
+
+    private final void setLoadState(int statue,boolean flush)
+    {
+        loadView.setState(statue);
+        if (flush) {
+            notifyItemChanged(getItemCount()-1);
+        }
+    }
+
     //加载布局
     private LoadView loadView=new LoadViewImp();
-    public void setLoadView(LoadView loadView) {
+    public  final void setLoadView(LoadView loadView) {
         if (loadView==null) {
             throw new UnsupportedOperationException("loadview can not null");
         }
         this.loadView = loadView;
     }
     private Handler handler=new Handler();
-
 
     public VlayoutAdapter(VirtualLayoutManager layoutManager) {
         super(layoutManager);
@@ -75,32 +88,30 @@ public class VlayoutAdapter extends DelegateAdapter
         super(layoutManager, hasConsistItemType);
     }
 
-
     @Override
-    public int getItemCount() {
-        if (getDataCount()==0) {
+    public final int getItemCount() {
+        if (obtianDataCount()==0) {
             return getFullCount();
         }
-        return getDataCount()+getLoadCount();
+        return obtianDataCount()+getLoadCount();
     }
 
-
     //全局布局长度
-    private int getFullCount()
+    private final int getFullCount()
     {
-        if (getDataCount()>0) {
+        if (obtianDataCount()>0) {
             return 0;
         }
         return fullView.isShow()?1:0;
     }
 
-    public int getDataCount()
+    public int obtianDataCount()
     {
         return super.getItemCount();
     }
 
     //加载更多布局的item
-    private int getLoadCount()
+    private final int getLoadCount()
     {
         if (onLoadListener==null) {
             return 0;
@@ -115,7 +126,7 @@ public class VlayoutAdapter extends DelegateAdapter
         }
         if (position<getItemCount()-getLoadCount())
         {
-            return getDataViewType(position);
+            return obtianDataViewType(position);
         }
         else
         {
@@ -123,7 +134,7 @@ public class VlayoutAdapter extends DelegateAdapter
         }
     }
 
-    protected int getDataViewType(int position)
+    protected int obtianDataViewType(int position)
     {
         return super.getItemViewType(position);
     }
@@ -131,11 +142,23 @@ public class VlayoutAdapter extends DelegateAdapter
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public final RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder=null;
         if (viewType == LOAD_VIEW)
         {
-            viewHolder=getLoadViewHolder(parent);
+            View view = LayoutInflater.from(parent.getContext()).inflate(loadView.getLayoutId(), parent, false);
+            viewHolder = new BaseViewHolder(view);
+            viewHolder.itemView.setOnClickListener(new OnSingleListener() {
+                @Override
+                public void onSingleClick(View v) {
+                    //加载失败，点击重新加载  没有网络不允许加载
+                    if (loadView.getState()==LoadView.NETWORK&&NetWorkUtils.isConnected())
+                    {
+                        setLoadState(LoadView.LOAD,true);
+                        onLoadListener.loadAgain();
+                    }
+                }
+            });
         }
         else if (viewType==FULL_VIEW)
         {
@@ -152,26 +175,10 @@ public class VlayoutAdapter extends DelegateAdapter
         return viewHolder;
     }
 
-    private RecyclerView.ViewHolder getLoadViewHolder(ViewGroup parent) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(loadView.getLayoutId(), parent, false);
-        BaseViewHolder viewHolder = new BaseViewHolder(view);
-        viewHolder.itemView.setOnClickListener(new OnSingleListener() {
-            @Override
-            public void onSingleClick(View v) {
-                //加载失败，点击重新加载  没有网络不允许加载
-                if (loadView.getState()==LoadView.NETWORK&&NetWorkUtils.isConnected())
-                {
-                    setLoadState(LoadView.LOAD,true);
-                    onLoadListener.loadAgain();
-                }
-            }
-        });
-        return viewHolder;
-    }
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public  final void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         judgeLoadMore(position);
         int itemViewType = holder.getItemViewType();
@@ -186,7 +193,7 @@ public class VlayoutAdapter extends DelegateAdapter
 
 
     //判断是否能加载更多
-    private void judgeLoadMore(int position) {
+    private final void judgeLoadMore(int position) {
         if (getLoadCount()==0||position<getItemCount()-1||position==getLoadCount()-1) {
             return;
         }
@@ -219,12 +226,18 @@ public class VlayoutAdapter extends DelegateAdapter
     public void refreshComplete(boolean network,int page,int pagesize)
     {
         //如果item的长度等于fullview的长度，并且返回的数据长度等于的0的时候
-        if (page==1)
+        refreshComplete(network,page==1,pagesize);
+    }
+
+    public void refreshComplete(boolean network,boolean flush,int pagesize)
+    {
+        //如果item的长度等于fullview的长度，并且返回的数据长度等于的0的时候
+        if (flush)
         {
             if (pagesize<mPagesize)
             {
                 setLoadState(LoadView.REST,false);
-                if (getDataCount()==0)
+                if (obtianDataCount()==0)
                 {
                     setFullSate(network?FullView.DATA:FullView.NETWORK,true);
                 }
@@ -246,36 +259,5 @@ public class VlayoutAdapter extends DelegateAdapter
             }
         }
     }
-
-
-    public void setFullSate(int fullSate,boolean flush)
-    {
-        fullView.setFullState(fullSate,flush);
-    }
-
-    private void setLoadState(int statue,boolean flush)
-    {
-        loadView.setState(statue);
-        if (flush) {
-            notifyItemChanged(getItemCount()-1);
-        }
-    }
-
-    //使用类型避免因为过多导致适配器混乱
-    public void setAdapters(SparseArray<Adapter> sparseArray) {
-        List<Adapter> adapters = obtainListAdapter(sparseArray);
-        super.setAdapters(adapters);
-    }
-
-    private List<Adapter> obtainListAdapter(SparseArray<Adapter> sparseArray)
-    {
-        List<Adapter> list=new ArrayList<>();
-        for (int i = 0; i < sparseArray.size(); i++) {
-            list.add(sparseArray.valueAt(i));
-        }
-        return list;
-    }
-
-
 
 }
