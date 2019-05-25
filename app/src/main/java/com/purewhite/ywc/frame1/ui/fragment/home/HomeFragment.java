@@ -2,7 +2,6 @@ package com.purewhite.ywc.frame1.ui.fragment.home;
 
 import android.animation.ValueAnimator;
 import android.support.design.widget.TabLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -90,8 +89,8 @@ public class HomeFragment extends MvpFragment<FragHomeBinding,PresenterImp>{
         String[] home_tag_title = getResources().getStringArray(R.array.home_tab_title);
         HomePagerAdapter homePagerAdapter = new HomePagerAdapter(getChildFragmentManager(), Arrays.asList(home_tag_title));
         mDataBinding.viewPager.setAdapter(homePagerAdapter);
-        mDataBinding.tabLayout.setupWithViewPager(mDataBinding.viewPager);
         mDataBinding.viewPager.setOffscreenPageLimit(home_tag_title.length);
+        mDataBinding.tabLayout.setupWithViewPager(mDataBinding.viewPager);
         mDataBinding.tabLayout.addOnTabSelectedListener(talayout);
         for (int i = 0; i < home_tag_title.length; i++) {
             mDataBinding.tabLayout.getTabAt(i).setCustomView(addTabLayout(i,home_tag_title[i]));

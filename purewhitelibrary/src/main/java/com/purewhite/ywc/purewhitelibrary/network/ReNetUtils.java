@@ -44,8 +44,7 @@ public class ReNetUtils {
     }
 
 
-    public static <T>void get(String url, Map<String, Object> paramsRequest, Class<T> cls
-            , HttpObserver<T> httpObserver)
+    public static <T>void get(String url, Map<String, Object> paramsRequest, Class<T> cls, HttpObserver<T> httpObserver)
     {
         get(url,paramsRequest,cls).compose(RxSchedulers.<T>ioToMain()).subscribe(httpObserver);
     }

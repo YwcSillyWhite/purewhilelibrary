@@ -24,8 +24,6 @@ public class HomeChildPresenter extends PresenterImp<HomeChildContract.UiView>
         map.put("back","10");
         map.put("min_id",page+"");
         OkNetUtils.get(UrlUtils.shop, map, new OkCallBack<BaseBean<List<ShopBean>>>() {
-
-
             @Override
             public void onSuccess(BaseBean<List<ShopBean>> baseBean) {
                 if (baseBean.getCode()==1)

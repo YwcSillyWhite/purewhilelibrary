@@ -28,7 +28,7 @@ public final class LogUtils {
     {
         if (debug)
         {
-            export(1,"Debug "+tag+"：",msg);
+            export(1,"Debug-"+tag+"：",msg);
         }
     }
 
@@ -43,7 +43,7 @@ public final class LogUtils {
     {
         if (error)
         {
-            export(0,"Error "+tag+"：",msg);
+            export(0,"Error-"+tag+"：",msg);
         }
     }
 

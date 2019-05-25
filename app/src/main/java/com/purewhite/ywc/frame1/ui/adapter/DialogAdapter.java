@@ -1,6 +1,7 @@
 package com.purewhite.ywc.frame1.ui.adapter;
 
 import android.databinding.ViewDataBinding;
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.purewhite.ywc.frame1.R;
@@ -30,4 +31,6 @@ public class DialogAdapter extends BindAdapter<String> {
         binding.dialogListText.setText(s);
         binding.viewLine.setVisibility(position==obtianDataCount()-1?View.GONE:View.VISIBLE);
     }
+
+
 }
