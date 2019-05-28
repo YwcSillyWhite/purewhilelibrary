@@ -12,12 +12,10 @@ import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
 import com.purewhite.ywc.purewhitelibrary.app.activity.ActivitySkipUtils;
 import com.purewhite.ywc.purewhitelibrary.config.BundleUtils;
-import com.purewhite.ywc.purewhitelibrary.config.Ints;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class AndroidStudyActivity extends MvpActivity<ActivityAndroidStudyBinding,PresenterImp> {
 
