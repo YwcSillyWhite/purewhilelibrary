@@ -1,6 +1,5 @@
 package com.purewhite.ywc.frame1.config;
 
-import android.annotation.SuppressLint;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
@@ -9,7 +8,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import com.purewhite.ywc.frame1.ui.service.ProtectService;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 
 import static android.content.Context.JOB_SCHEDULER_SERVICE;
 

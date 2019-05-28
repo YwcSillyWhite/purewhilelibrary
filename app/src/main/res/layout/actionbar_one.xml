@@ -11,10 +11,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/left_img"
+                android:padding="10dp"
                 android:visibility="gone"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"/>
+                android:id="@+id/left_img"
+                android:src="@mipmap/icon_arrow_left"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -40,8 +40,7 @@
                 android:layout_alignParentRight="true"
                 android:id="@+id/right_img"
                 android:visibility="gone"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"/>
+                android:padding="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

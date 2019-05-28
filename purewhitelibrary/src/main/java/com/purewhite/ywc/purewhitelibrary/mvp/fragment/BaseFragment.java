@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
 
@@ -33,47 +35,50 @@ public abstract class BaseFragment<DB extends ViewDataBinding> extends Fragment{
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container
+            , @Nullable Bundle savedInstanceState) {
+        beforView();
         if (getLayout()!=0)
         {
             if (mDataBinding==null)
                 mDataBinding=DataBindingUtil.inflate(inflater,getLayout(),container,false);
             return mDataBinding.getRoot();
         }
-        else {
-            return null;
-        }
-
+        return null;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-        initBar();
+        afterView();
         soleLoad=true;
-        if (getUserVisibleHint())
-        {
-            decideSoleLoad();
-        }
-        showLoad();
+        //用户是否可见
+        decideSoleLoad(getUserVisibleHint());
     }
 
-    protected void initBar()
+    //view初始化之前
+    protected void beforView()
+    {
+
+    }
+
+    //view初始化之后
+    protected void afterView()
     {
 
     }
 
 
     //布局
+    @LayoutRes
     protected abstract int getLayout();
     //初始化布局
     protected abstract void initView();
-    //判断是否加载
 
-    private void decideSoleLoad() {
-        if (soleLoad)
+    //判断是否加载
+    private void decideSoleLoad(boolean isShow) {
+        if (isShow&&soleLoad)
         {
             soleLoad=false;
             soleLoad();
@@ -87,42 +92,20 @@ public abstract class BaseFragment<DB extends ViewDataBinding> extends Fragment{
 
     }
 
-    protected void showLoad()
-    {
-
-    }
-
-
-
     //当前fragment是否显示
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser)
-        {
-            decideSoleLoad();
-        }
+        decideSoleLoad(isVisibleToUser);
     }
 
 
-
-    /**
-     * 第一次加入进去是不加载的，只有在隐藏和显示的时候才会调用这个方法
-     * @param hidden
-     */
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden)
-        {
-            showLoad();
-        }
-    }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         RxDisposableManager.getInstance().removeDis(this);
+        OkHttpUtils.newInstance().cancleTag(this);
     }
 }

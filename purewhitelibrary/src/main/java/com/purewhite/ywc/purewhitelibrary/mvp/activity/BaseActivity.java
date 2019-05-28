@@ -3,11 +3,14 @@ package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 import android.content.pm.ActivityInfo;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.AnimRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.WindowManager;
 
+import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
@@ -20,74 +23,78 @@ import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
 public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompatActivity{
 
-    //是否横屏
     protected DB mDataBinding;
-    //确宝同一个物品的页面唯一；
-    private String activityId;
-
-
-    public String getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         beforeView();
         //设置横竖平
-        setOrientation(true);
-        //DataBinding绑定
-        mDataBinding = DataBindingUtil.setContentView(this, getLayout());
-        initView();
-        initBar();
+        setOrientation();
+        //布局id不为null ，那么就进行databinding
+        if (getLayout()!=0)
+        {
+            //DataBinding绑定
+            mDataBinding = DataBindingUtil.setContentView(this, getLayout());
+            initView();
+        }
+        afterView();
+        initRquest();
     }
 
 
     //设置横竖屏幕
-    protected void setOrientation(boolean vertical)
+    private void setOrientation()
     {
-        try
+        //android 8.0之后如果屏幕满屏透明是不能设置屏幕方向
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
         {
-            setRequestedOrientation(vertical? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
-                    ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-        catch (Exception e)
-        {
+            try
+            {
+                setRequestedOrientation(isVertical()? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            }
+            catch (Exception e)
+            {
 
-        }
-    }
-
-    //去除标题栏
-    protected void setFullScreen(boolean full)
-    {
-        //全屏
-        if (full)
-        {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            }
         }
         else
         {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            setRequestedOrientation(isVertical()? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+                    ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
 
-
     }
 
-    protected void initBar()
-    {
 
-    }
-
+    //初始化之前
     protected void beforeView() {
 
     }
 
+
+    //是否竖屏
+    protected boolean isVertical()
+    {
+        return true;
+    }
+
+    //初始化之后
+    protected void afterView()
+    {
+
+    }
+
+    //网络请求
+    protected void initRquest()
+    {
+
+    }
+
+
     //布局id
+    @LayoutRes
     protected abstract int getLayout();
     //初始化布局
     protected abstract void initView();
@@ -98,10 +105,52 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompat
         super.onDestroy();
         RxDisposableManager.getInstance().removeDis(this);
         OkHttpUtils.newInstance().cancleTag(this);
-
     }
 
 
+
+
+
+    //结束动画默认是关闭的
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAnim();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        finishAnim();
+    }
+
+    //是否存在结束动画
+    protected boolean isFinishAnim()
+    {
+        return false;
+    }
+
+    //结束进入动画
+    @AnimRes
+    protected int closeEnterAnim()
+    {
+        return R.anim.activity_close_enter;
+    }
+
+    //结束退出动画
+    @AnimRes
+    protected int cloaseExiteAnim()
+    {
+        return R.anim.activity_close_exit;
+    }
+
+    private void finishAnim()
+    {
+        if (isFinishAnim())
+        {
+            overridePendingTransition(closeEnterAnim(),cloaseExiteAnim());
+        }
+    }
 
 
 }

@@ -100,22 +100,7 @@ public final class  AppUtils {
         return null;
     }
 
-    //判断activity是否存在这个activity
-    public static void removeActivity(String id)
-    {
-        if (id==null||id.isEmpty())
-            return;
-        for(BaseActivity baseActivity:stack)
-        {
-            if (baseActivity.getActivityId()!=null&&!baseActivity.getActivityId().isEmpty()
-                    &&baseActivity.getActivityId().equals(id))
-            {
-                //在activity的生命周期监听谢了删除stack里面的activity，所以这边不用处理
-                baseActivity.finish();
-                break;
-            }
-        }
-    }
+
 
     public static Context getContext()
     {

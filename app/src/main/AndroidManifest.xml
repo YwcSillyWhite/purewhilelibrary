@@ -8,13 +8,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_logo"
+        android:icon="@mipmap/icon_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:name=".app.BaseApp"
         android:theme="@style/AppTheme">
         <!-- 启动页 -->
-        <activity android:name=".ui.activity.StartActivity"
+        <activity android:name=".ui.activity.start.StartActivity"
             android:theme="@style/StartTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +23,17 @@
             </intent-filter>
         </activity>
         <!-- 首页 -->
-        <activity android:name=".ui.activity.MainActivity"></activity>
+        <activity android:name=".ui.activity.MainActivity"/>
         <!-- 自定义首页 -->
         <activity android:name=".ui.activity.mine.CustomMainActivity"/>
         <!-- dialog页面 -->
         <activity android:name=".ui.activity.mine.DialogActivity"/>
+        <!-- 获取图片 -->
+        <activity android:name=".ui.activity.mine.CameraActivity"/>
+        <!-- android学习页面 -->
+        <activity android:name=".ui.activity.mine.AndroidStudyActivity"/>
+        <!-- web -->
+        <activity android:name=".ui.activity.mine.WebActivity"/>
 
 
         <!--  android:permission=""  -->

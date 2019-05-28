@@ -3,12 +3,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/bg_launcher"
+        android:background="@mipmap/icon_bg_launcher"
         android:id="@+id/relative_layout">
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@mipmap/ic_logo"
+            android:src="@mipmap/icon_logo"
             android:id="@+id/image_view"
             android:layout_centerInParent="true"/>
         <TextView

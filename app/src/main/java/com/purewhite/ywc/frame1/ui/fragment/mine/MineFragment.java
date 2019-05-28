@@ -4,6 +4,8 @@ import android.view.View;
 
 import com.purewhite.ywc.frame1.R;
 import com.purewhite.ywc.frame1.databinding.FragMineBinding;
+import com.purewhite.ywc.frame1.ui.activity.mine.AndroidStudyActivity;
+import com.purewhite.ywc.frame1.ui.activity.mine.CameraActivity;
 import com.purewhite.ywc.frame1.ui.activity.mine.CustomMainActivity;
 import com.purewhite.ywc.frame1.ui.activity.mine.DialogActivity;
 import com.purewhite.ywc.frame1.ui.mvp.MvpFragment;
@@ -23,15 +25,22 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
         public void onSingleClick(View v) {
             switch (v.getId())
             {
+                case R.id.android_study:
+                    ActivitySkipUtils.startActivityAnim(AndroidStudyActivity.class);
+                    break;
                 case R.id.bottom_navigation:
                     ActivitySkipUtils.startActivityAnim(CustomMainActivity.class);
                     break;
                 case R.id.dialog:
                     ActivitySkipUtils.startActivityAnim(DialogActivity.class);
                     break;
+                case R.id.camera:
+                    ActivitySkipUtils.startActivityAnim(CameraActivity.class);
+                    break;
             }
         }
     };
+
     @Override
     protected MinePresenter creartPresenter() {
         return new MinePresenter();
@@ -46,8 +55,10 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
     protected void initView() {
         mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
         mDataBinding.actionBar.centerText.setText("个人中心");
+        mDataBinding.androidStudy.setOnClickListener(onSingleListener);
         mDataBinding.bottomNavigation.setOnClickListener(onSingleListener);
         mDataBinding.dialog.setOnClickListener(onSingleListener);
-        ImageLoader.newInstance().initCircle(mDataBinding.headImg,R.mipmap.ic_logo);
+        mDataBinding.camera.setOnClickListener(onSingleListener);
+        ImageLoader.newInstance().initCircle(mDataBinding.headImg,R.mipmap.icon_logo);
     }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="android_study_text">
+        <item>改变图片颜色</item>
+    </string-array>
+
+
+    <string-array name="android_study_uri">
+        <item>https://www.jianshu.com/p/e620c7eac08a?utm_campaign=maleskine</item>
+    </string-array>
+
+    <integer-array name="android_study_type">
+        <item>1</item>
+        <item>0</item>
+    </integer-array>
+
+</resources>

@@ -7,10 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.util.SparseArray;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.purewhite.ywc.frame1.R;
 import com.purewhite.ywc.frame1.databinding.ActivityMainBinding;

@@ -1,7 +1,6 @@
 package com.purewhite.ywc.frame1.ui.adapter;
 
 import android.databinding.ViewDataBinding;
-import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.purewhite.ywc.frame1.R;
