@@ -160,13 +160,13 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompat
      * 权限使用
      */
     private PermissonUtils permissonUtils;
-    protected void startPermisson(PermissonCallBack permissonCallBack, String ...permisson)
+    protected void startPermisson(int requestCode,PermissonCallBack permissonCallBack, String ...permisson)
     {
         if (permissonUtils==null)
         {
             permissonUtils = PermissonUtils.with(this, permissonCallBack);
         }
-        permissonUtils.startPermisson(1,permisson);
+        permissonUtils.startPermisson(requestCode,permisson);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

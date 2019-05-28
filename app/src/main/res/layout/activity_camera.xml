@@ -5,7 +5,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include layout="@layout/actionbar_one"
-            android:id="@+id/action_bar"
-            />
+            android:id="@+id/action_bar" />
+        <include layout="@layout/view_line"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/write"
+            android:text="获取图片"
+            android:id="@+id/text_view"
+            android:textSize="16sp"
+            android:gravity="center"/>
     </LinearLayout>
 </layout>

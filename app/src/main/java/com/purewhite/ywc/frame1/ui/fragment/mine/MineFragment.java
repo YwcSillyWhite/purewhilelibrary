@@ -1,6 +1,5 @@
 package com.purewhite.ywc.frame1.ui.fragment.mine;
 
-import android.Manifest;
 import android.view.View;
 
 import com.purewhite.ywc.frame1.R;
@@ -11,9 +10,7 @@ import com.purewhite.ywc.frame1.ui.activity.mine.CustomMainActivity;
 import com.purewhite.ywc.frame1.ui.activity.mine.DialogActivity;
 import com.purewhite.ywc.frame1.ui.mvp.MvpFragment;
 import com.purewhite.ywc.purewhitelibrary.app.activity.ActivitySkipUtils;
-import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
-import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 
 public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> implements MineContract.UiView {
@@ -24,17 +21,6 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
         return mDataBinding.actionBar.barLayout;
     }
 
-    private PermissonCallBack permissonCallBack=new PermissonCallBack() {
-        @Override
-        public void onPermissonSuccess(int requestCode) {
-            ActivitySkipUtils.startActivityAnim(CameraActivity.class);
-        }
-
-        @Override
-        public void onPermissonRepulse(int requestCode, String... permisssons) {
-            ToastUtils.show(permisssons.toString());
-        }
-    };
 
     private OnSingleListener onSingleListener=new OnSingleListener() {
         @Override
@@ -51,8 +37,7 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
                     ActivitySkipUtils.startActivityAnim(DialogActivity.class);
                     break;
                 case R.id.camera:
-                    startPermisson(permissonCallBack,Manifest.permission.CAMERA
-                            ,Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    ActivitySkipUtils.startActivityAnim(CameraActivity.class);
                     break;
             }
         }

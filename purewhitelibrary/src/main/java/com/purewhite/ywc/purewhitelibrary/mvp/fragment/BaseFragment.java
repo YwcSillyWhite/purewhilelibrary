@@ -122,13 +122,13 @@ public abstract class BaseFragment<DB extends ViewDataBinding> extends Fragment{
      * 权限使用
      */
     private PermissonUtils permissonUtils;
-    protected final void startPermisson(PermissonCallBack permissonCallBack, String ...permisson)
+    protected final void startPermisson(int requestCode,PermissonCallBack permissonCallBack, String ...permisson)
     {
         if (permissonUtils==null)
         {
             permissonUtils = PermissonUtils.with(this, permissonCallBack);
         }
-        permissonUtils.startPermisson(1,permisson);
+        permissonUtils.startPermisson(requestCode,permisson);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
