@@ -15,6 +15,13 @@
                 android:layout_height="match_parent"
                 android:id="@+id/web_layout">
             </com.purewhite.ywc.purewhitelibrary.view.webview.WebLayout>
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                android:id="@+id/progress_bar"
+                android:progressDrawable="@drawable/progress_web"
+                android:visibility="gone"/>
         </RelativeLayout>
     </LinearLayout>
 </layout>

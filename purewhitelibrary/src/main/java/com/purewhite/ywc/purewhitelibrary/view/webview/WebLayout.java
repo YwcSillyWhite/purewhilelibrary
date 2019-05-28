@@ -56,8 +56,8 @@ public class WebLayout extends RelativeLayout {
         // 开启 DOM storage API 功能
         settings.setDomStorageEnabled(true);
         //开启 database storage API 功能
-        settings.setDatabaseEnabled(true);//开启 Application Caches 功能
-
+        settings.setDatabaseEnabled(true);
+        //开启 Application Caches 功能
         settings.setAppCacheEnabled(true);
         //设置自适应屏幕，两者合用
         settings.setUseWideViewPort(true); //将图片调整到适合webview的大小
@@ -72,8 +72,6 @@ public class WebLayout extends RelativeLayout {
         settings.setLoadsImagesAutomatically(true);
         //设置编码格式
         settings.setDefaultTextEncodingName("utf-8");
-
-
     }
 
 
@@ -83,6 +81,22 @@ public class WebLayout extends RelativeLayout {
         //释放资源
         webView.destroy();
         webView = null;
+    }
+
+
+    //是否能回退
+    public boolean isRollback()
+    {
+        if (webView!=null)
+        {
+            //是否能回退
+            if (webView.canGoBack())
+            {
+                webView.goBack();
+                return true;
+            }
+        }
+        return false;
     }
 
 }

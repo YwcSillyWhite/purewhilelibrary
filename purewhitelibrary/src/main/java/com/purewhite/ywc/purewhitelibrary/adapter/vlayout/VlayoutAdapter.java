@@ -3,7 +3,6 @@ package com.purewhite.ywc.purewhitelibrary.adapter.vlayout;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +17,6 @@ import com.purewhite.ywc.purewhitelibrary.adapter.loadview.LoadViewImp;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BaseViewHolder;
 import com.purewhite.ywc.purewhitelibrary.config.NetWorkUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author yuwenchao

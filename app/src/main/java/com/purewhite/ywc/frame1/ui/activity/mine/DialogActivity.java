@@ -64,7 +64,6 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
 
     private DialogUtils dialogList()
     {
-
         DialogAdapter dialogAdapter = new DialogAdapter(Arrays.asList(getResources().getStringArray(R.array.dialog_list)));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         return new DialogUtils(this).setDialogView(R.layout.dialog_two)
