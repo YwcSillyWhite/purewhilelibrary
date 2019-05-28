@@ -235,19 +235,14 @@ public class ActivitySkipUtils {
                 {
                     Fragment fragment = (Fragment) object;
                     fragment.startActivityForResult(intent,requestCode);
-                    Context context = AppUtils.getContext();
-                    if (context instanceof Activity)
-                    {
-                        ((Activity) context).overridePendingTransition(openEnter,openEitx);
-                    }
+                    startAnim(fragment.getActivity(),openEnter,openEitx);
                 }
                 else
                 {
                     Activity activity = (Activity) object;
                     activity.startActivityForResult(intent,requestCode);
-                    activity.overridePendingTransition(openEnter,openEitx);
+                    startAnim(activity,openEnter,openEitx);
                 }
-
             }
             else
             {
@@ -255,10 +250,24 @@ public class ActivitySkipUtils {
                 context.startActivity(intent);
                 if (context instanceof Activity)
                 {
-                    ((Activity) context).overridePendingTransition(openEnter,openEitx);
+                    startAnim(((Activity) context),openEnter,openEitx);
+
                 }
             }
         }
+    }
+
+
+    //开启默认动画
+    public static void startDefalutAnim(Activity activity)
+    {
+        activity.overridePendingTransition(R.anim.activity_open_enter,R.anim.activity_open_exit);
+    }
+
+    //开启动漫
+    public static void startAnim(Activity activity,int openEnter,int openEitx)
+    {
+        activity.overridePendingTransition(openEnter,openEitx);
     }
 
 

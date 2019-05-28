@@ -47,5 +47,4 @@ public abstract class MvpActivity<DB extends ViewDataBinding,P extends Presenter
     }
 
 
-
 }

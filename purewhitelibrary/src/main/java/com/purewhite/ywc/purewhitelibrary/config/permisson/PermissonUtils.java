@@ -6,6 +6,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,10 +131,13 @@ public class PermissonUtils {
     }
 
 
-
-
-
-    public void disposePermissions(int[] grantResults,String[] permissions,int requestCode)
+    /**
+     * 处理权限
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    public void disposePermissions(int requestCode,String[] permissions,int[] grantResults)
     {
         if (this.requestCode==requestCode)
         {
@@ -142,20 +147,21 @@ public class PermissonUtils {
                 for (int i = 0; i < grantResults.length; i++) {
                     if (grantResults[i]!=PackageManager.PERMISSION_GRANTED)
                     {
-                      permissonList.add(permissions[i]);
+                        LogUtils.debug("per",permissions[i]);
+                        permissonList.add(permissions[i]);
                     }
                 }
             }
             if (permissonList.size()>0)
             {
-                permissonCallBack.onPermissonSuccess(requestCode);
+                permissonCallBack.onPermissonRepulse(requestCode,permissonList.toArray(new String[permissonList.size()]));
+
             }
             else
             {
-                permissonCallBack.onPermissonRepulse(requestCode,permissonList.toArray(new String[permissonList.size()]));
+                permissonCallBack.onPermissonSuccess(requestCode);
             }
         }
     }
-
 
 }

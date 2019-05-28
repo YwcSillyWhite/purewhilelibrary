@@ -10,6 +10,7 @@ import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 public abstract class MvpFragment<DB extends ViewDataBinding,P extends PresenterImp>
         extends MvpPureFragment<DB,P>{
 
+
     protected View onBarTitleView()
     {
         return null;
@@ -22,4 +23,5 @@ public abstract class MvpFragment<DB extends ViewDataBinding,P extends Presenter
         BarUtils.obtianTitleConfig().setTitleBarPadding(onBarTitleView());
 
     }
+
 }

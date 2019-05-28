@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
+import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
+import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
@@ -22,6 +25,7 @@ import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
  * @date 2018/11/14
  */
 public abstract class BaseFragment<DB extends ViewDataBinding> extends Fragment{
+
 
     protected DB mDataBinding;
     //唯一加载
@@ -102,10 +106,36 @@ public abstract class BaseFragment<DB extends ViewDataBinding> extends Fragment{
 
 
 
+
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         RxDisposableManager.getInstance().removeDis(this);
         OkHttpUtils.newInstance().cancleTag(this);
+    }
+
+
+
+    /**
+     * 权限使用
+     */
+    private PermissonUtils permissonUtils;
+    protected final void startPermisson(PermissonCallBack permissonCallBack, String ...permisson)
+    {
+        if (permissonUtils==null)
+        {
+            permissonUtils = PermissonUtils.with(this, permissonCallBack);
+        }
+        permissonUtils.startPermisson(1,permisson);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (permissonUtils!=null)
+        {
+            permissonUtils.disposePermissions(requestCode,permissions,grantResults);
+        }
     }
 }

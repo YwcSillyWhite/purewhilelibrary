@@ -11,7 +11,7 @@ import com.purewhite.ywc.frame1.ui.adapter.AndroidStudyAdapter;
 import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
 import com.purewhite.ywc.purewhitelibrary.app.activity.ActivitySkipUtils;
-import com.purewhite.ywc.purewhitelibrary.config.BundleUtils;
+import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 

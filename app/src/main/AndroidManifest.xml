@@ -3,8 +3,14 @@
     package="com.purewhite.ywc.frame1">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    //相机权限
+    <uses-permission android:name="android.permission.CAMERA"/>
+    //写入权限
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    //读写权限
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 
     <application
         android:allowBackup="true"

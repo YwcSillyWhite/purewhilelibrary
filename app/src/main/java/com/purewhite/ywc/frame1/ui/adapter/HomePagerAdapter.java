@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentManager;
 import com.purewhite.ywc.frame1.config.TagUtils;
 import com.purewhite.ywc.frame1.ui.fragment.home.child.HomeChildFragment;
 import com.purewhite.ywc.purewhitelibrary.adapter.pagerview.BaseFragmentAdapter;
-import com.purewhite.ywc.purewhitelibrary.config.BundleUtils;
+import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 
 import java.util.List;
 

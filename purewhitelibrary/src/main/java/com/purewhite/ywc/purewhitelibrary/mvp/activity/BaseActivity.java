@@ -7,10 +7,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.AnimRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.purewhite.ywc.purewhitelibrary.R;
+import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
+import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
@@ -149,6 +152,28 @@ public abstract class BaseActivity<DB extends ViewDataBinding> extends AppCompat
         if (isFinishAnim())
         {
             overridePendingTransition(closeEnterAnim(),cloaseExiteAnim());
+        }
+    }
+
+
+    /**
+     * 权限使用
+     */
+    private PermissonUtils permissonUtils;
+    protected void startPermisson(PermissonCallBack permissonCallBack, String ...permisson)
+    {
+        if (permissonUtils==null)
+        {
+            permissonUtils = PermissonUtils.with(this, permissonCallBack);
+        }
+        permissonUtils.startPermisson(1,permisson);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (permissonUtils!=null)
+        {
+            permissonUtils.disposePermissions(requestCode,permissions,grantResults);
         }
     }
 

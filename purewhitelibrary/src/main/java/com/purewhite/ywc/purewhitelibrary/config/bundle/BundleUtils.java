@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.config;
+package com.purewhite.ywc.purewhitelibrary.config.bundle;
 
 import android.os.Bundle;
 import android.os.Parcelable;

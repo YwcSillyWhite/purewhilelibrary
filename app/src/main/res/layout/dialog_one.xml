@@ -2,60 +2,58 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <ImageView
-        android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/shape_write_5">
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:src="@mipmap/dialog_icon_top_bg"/>
+        android:id="@+id/dialog_content"
+        android:textSize="16sp"
+        android:text="内容"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:background="@drawable/shape_write_10_bottom">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/dialog_content"
-            android:textSize="17sp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="确定"
-                android:textSize="15sp"
-                android:gravity="center"
-                android:id="@+id/dialog_sure"/>
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="取消"
-                android:textSize="15sp"
-                android:gravity="center"
-                android:id="@+id/dialog_clear"/>
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="35dp"
+            android:background="@drawable/shape_peach_5"
+            android:text="确定"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="#333"
+            android:id="@+id/dialog_sure"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="35dp"
+            android:background="@drawable/shape_peach_5"
+            android:textColor="#666"
+            android:text="取消"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:id="@+id/dialog_clear"/>
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
     </LinearLayout>
+
+
+
 
 
 </LinearLayout>

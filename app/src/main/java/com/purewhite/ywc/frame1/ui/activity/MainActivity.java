@@ -99,6 +99,12 @@ public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> 
         return super.onKeyDown(keyCode, event);
     }
 
+
+    @Override
+    protected boolean isFinishAnim() {
+        return false;
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
