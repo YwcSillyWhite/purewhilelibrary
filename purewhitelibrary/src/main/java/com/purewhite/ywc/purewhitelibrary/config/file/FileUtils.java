@@ -3,9 +3,10 @@ package com.purewhite.ywc.purewhitelibrary.config.file;
 import android.os.Environment;
 import android.text.TextUtils;
 
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
+
 import java.io.File;
 import java.io.IOException;
-
 
 /**
  * @author yuwenchao
@@ -66,39 +67,71 @@ public final class FileUtils {
         return size;
     }
 
+
     /**
-     * 删除文件或者目录下所有数据
-     * @param dir
+     * 删除所有数据
+     * @param file
      * @return
      */
-    private static boolean deleteDir(File dir) {
+    private static void deleteDir(File file) {
         /**
          * 判断是否不是目录，如果是目录就寻找目录下的文件删除，如果不是就删除
          */
-        if (dir != null && dir.isDirectory()) {
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-                    return false;
+        if (file!=null)
+        {
+            if (file.isDirectory())
+            {
+                File[] files = file.listFiles();
+                for (int i = 0; i < files.length; i++) {
+                    deleteFile(files[i]);
                 }
             }
+            else if (file.isFile())
+            {
+                LogUtils.debug("file",file.getAbsolutePath());
+                file.delete();
+            }
         }
-        return dir.delete();
     }
-
-
 
 
     /**
-     * 根据文件路径获取文件
-     *
-     * @param filePath 文件路径
-     * @return 文件
+     * 开启异步删除文件路径下所有file
+     * @param file
      */
-    public static File getFilePath(String filePath) {
-        return TextUtils.isEmpty(filePath) ? null : new File(filePath);
+    public static void deleteDirOrFile(final File file)
+    {
+        if (file!=null)
+        {
+            if (file.isDirectory())
+            {
+                new Thread(){
+                    @Override
+                    public void run() {
+                        deleteDir(file);
+                    }
+                }.start();
+            }
+            else if (file.isFile())
+            {
+                file.delete();
+            }
+        }
     }
+
+
+    /**
+     * 删除文件
+     */
+    public static void deleteFile(File file)
+    {
+        if (file!=null&&file.isFile())
+        {
+            file.delete();
+        }
+    }
+
+
 
 
 
@@ -121,6 +154,16 @@ public final class FileUtils {
     }
 
 
+
+    /**
+     * 根据文件路径获取文件
+     *
+     * @param filePath 文件路径
+     * @return 文件
+     */
+    public static File getFilePath(String filePath) {
+        return TextUtils.isEmpty(filePath) ? null : new File(filePath);
+    }
 
     /**
      * 判断目录是否存在，不存在则判断是否创建成功

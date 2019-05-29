@@ -12,7 +12,18 @@
             android:layout_height="45dp"
             android:background="@color/write"
             android:text="获取图片"
-            android:id="@+id/text_view"
+            android:id="@+id/img_obtain"
+            android:textSize="16sp"
+            android:gravity="center"/>
+
+        <include layout="@layout/view_line"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/write"
+            android:text="清空图片"
+            android:id="@+id/img_clear"
             android:textSize="16sp"
             android:gravity="center"/>
 
@@ -22,5 +33,6 @@
             android:id="@+id/image_view"
             android:adjustViewBounds="true"
             android:layout_marginTop="30dp"/>
+
     </LinearLayout>
 </layout>

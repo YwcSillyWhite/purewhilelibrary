@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.purewhite.ywc.frame1.BuildConfig;
 import com.purewhite.ywc.frame1.R;
 import com.purewhite.ywc.frame1.config.TagUtils;
 import com.purewhite.ywc.frame1.databinding.ActivityCameraBinding;
@@ -15,7 +14,7 @@ import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.PhotoUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
-import com.purewhite.ywc.purewhitelibrary.config.file.FileManagerUtils;
+import com.purewhite.ywc.frame1.config.FileManagerUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
@@ -30,7 +29,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
         public void onPermissonSuccess(int requestCode) {
             if (requestCode==1)
             {
-                picFile = FileManagerUtils.createPicFile(CameraActivity.this);
+                picFile = FileManagerUtils.createTimeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
                 PhotoUtils.intentCamera(CameraActivity.this
                         ,"com.purewhite.ywc.frame1.provider"
                         ,picFile,TagUtils.request_camera);
@@ -51,9 +50,12 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                 case R.id.left_img:
                     finish();
                     break;
-                case R.id.text_view:
+                case R.id.img_obtain:
                     startPermisson(1,permissonCallBack,Manifest.permission.CAMERA,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    break;
+                case R.id.img_clear:
+                    FileManagerUtils.removeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
                     break;
             }
         }
@@ -81,7 +83,8 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
         mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
         mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
         mDataBinding.actionBar.centerText.setText("图片");
-        mDataBinding.textView.setOnClickListener(onSingleListener);
+        mDataBinding.imgObtain.setOnClickListener(onSingleListener);
+        mDataBinding.imgClear.setOnClickListener(onSingleListener);
     }
 
 
