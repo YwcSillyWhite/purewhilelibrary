@@ -15,5 +15,12 @@
             android:id="@+id/text_view"
             android:textSize="16sp"
             android:gravity="center"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/image_view"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="30dp"/>
     </LinearLayout>
 </layout>

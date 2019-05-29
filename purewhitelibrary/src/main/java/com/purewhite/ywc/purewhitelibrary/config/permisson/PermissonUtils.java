@@ -2,6 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.config.permisson;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -49,19 +50,26 @@ public class PermissonUtils {
 
 
 
-    public PermissonUtils startPermisson(int requestCode,String... permissons)
+    public void startPermisson(int requestCode,String... permissons)
     {
-        List<String> permissonList = judgeStartPermissons(permissons);
-        if (permissonList!=null&&permissonList.size()>0)
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M)
         {
-            this.requestCode=requestCode;
-            requestPermissions(permissonList);
+            List<String> permissonList = judgeStartPermissons(permissons);
+            if (permissonList!=null&&permissonList.size()>0)
+            {
+                this.requestCode=requestCode;
+                requestPermissions(permissonList);
+            }
+            else
+            {
+                permissonCallBack.onPermissonSuccess(requestCode);
+            }
         }
         else
         {
             permissonCallBack.onPermissonSuccess(requestCode);
         }
-        return this;
+
     }
 
 

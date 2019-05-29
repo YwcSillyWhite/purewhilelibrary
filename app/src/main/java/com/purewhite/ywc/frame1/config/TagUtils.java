@@ -9,4 +9,7 @@ public class TagUtils {
 
 
     public static final String web_uri="web_uri";
+
+
+    public static final int request_camera=0x1001;
 }
