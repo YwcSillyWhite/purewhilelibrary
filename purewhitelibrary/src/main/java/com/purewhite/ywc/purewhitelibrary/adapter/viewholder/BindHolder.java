@@ -14,10 +14,6 @@ public class BindHolder extends BaseViewHolder{
         return binding;
     }
 
-    public ViewDataBinding getViewDataBinding() {
-        return binding;
-    }
-
     public BindHolder(ViewDataBinding binding) {
         super(binding.getRoot());
         this.binding=binding;

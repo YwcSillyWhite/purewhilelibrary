@@ -55,6 +55,9 @@
         <activity android:name=".ui.activity.mine.WebActivity"/>
 
 
+        <activity android:name="com.purewhite.ywc.purewhitelibrary.ui.picture.PictureActivity"/>
+
+
         <!--  android:permission=""  -->
         <service android:name=".ui.service.ProtectService"
             android:permission="android.permission.BIND_JOB_SERVICE">
