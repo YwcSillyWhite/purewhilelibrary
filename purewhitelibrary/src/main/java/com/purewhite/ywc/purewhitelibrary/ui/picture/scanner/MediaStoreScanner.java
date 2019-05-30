@@ -52,19 +52,14 @@ public abstract class MediaStoreScanner<T> {
     protected abstract String getOrder();
 
 
-    /**
-     * 对外暴露游标，让开发者灵活构建对象
-     *
-     * @param cursor
-     * @return
-     */
-    protected abstract T parse(Cursor cursor);
 
-    private Context mContext;
 
+    private Context context;
     public MediaStoreScanner(Context context) {
-        this.mContext = context;
+        this.context = context;
     }
+
+
     /**
      * 根据查询条件进行媒体库查询，隐藏查询细节，让开发者更专注业务
      *
@@ -72,10 +67,9 @@ public abstract class MediaStoreScanner<T> {
      */
     public List<T> queryMedia() {
         List<T> list = new ArrayList<>();
-        ContentResolver contentResolver = mContext.getContentResolver();
+        ContentResolver contentResolver = context.getContentResolver();
         Cursor cursor = contentResolver.query(getScanUri(), getProjection(),
                 getSelection(), getSelectionArgs(), getOrder());
-        LogUtils.debug("scanner",cursor.getCount()+"长度");
         if (cursor != null&&cursor.getCount()>0)
         {
             while (cursor.moveToNext())
@@ -87,4 +81,15 @@ public abstract class MediaStoreScanner<T> {
         }
         return list;
     }
+
+
+
+
+    /**
+     * 对外暴露游标，让开发者灵活构建对象
+     *
+     * @param cursor
+     * @return
+     */
+    protected abstract T parse(Cursor cursor);
 }

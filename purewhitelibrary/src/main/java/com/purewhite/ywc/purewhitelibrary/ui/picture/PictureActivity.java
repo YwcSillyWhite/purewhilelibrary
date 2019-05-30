@@ -59,12 +59,12 @@ public class PictureActivity extends MvpPureActivity<PureActivityPictureBinding,
         mPresenter.gainImg();
     }
 
-
     @Override
-    public void editImg(List<Folder> folders) {
-       if (folders!=null&&folders.size()>0)
-       {
-           pictureAdapter.flush(folders.get(0).getImageBeanList());
-       }
+    public void obtianListFolder(List<Folder> folders) {
+        if (folders!=null&&folders.size()>0)
+        {
+            pictureAdapter.flush(folders.get(0).getImageBeanList());
+
+        }
     }
 }

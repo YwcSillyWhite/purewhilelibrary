@@ -10,7 +10,8 @@ import com.purewhite.ywc.frame1.ui.adapter.DialogAdapter;
 import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
-import com.purewhite.ywc.purewhitelibrary.view.dialog.DialogUtils;
+import com.purewhite.ywc.purewhitelibrary.view.dialog.dialog.DialogStyle;
+import com.purewhite.ywc.purewhitelibrary.view.dialog.dialog.DialogUtils;
 
 import java.util.Arrays;
 
@@ -51,13 +52,13 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
 
     private DialogUtils dialog()
     {
-        return new DialogUtils(this).setDialogView(R.layout.dialog_one)
-                .setOnClick(onSingleListener)
-                .setChildText(R.id.dialog_content,"纯白框架必然是精品",false)
-                .setChildText(R.id.dialog_sure,true)
-                .setChildText(R.id.dialog_clear,true)
+        return new DialogUtils(this,R.layout.dialog_one)
+                .setOnClickListener(onSingleListener)
+                .setTextView(R.id.dialog_content,"纯白框架必然是精品",false)
+                .setTextView(R.id.dialog_sure,"",true)
+                .setTextView(R.id.dialog_clear,"",true)
                 .setScreenWidth(0.8f)
-                .setAnim(DialogUtils.DialogStyle.left_anim)
+                .setAnim(DialogStyle.left_anim)
                 .setCancelable(false);
     }
 
@@ -66,12 +67,12 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
     {
         DialogAdapter dialogAdapter = new DialogAdapter(Arrays.asList(getResources().getStringArray(R.array.dialog_list)));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        return new DialogUtils(this).setDialogView(R.layout.dialog_two)
-                .setOnClick(onSingleListener)
-                .setChildText(R.id.list_clear,true)
-                .setChildRecycler(R.id.recycler_view,dialogAdapter,linearLayoutManager)
+        return new DialogUtils(this,R.layout.dialog_two)
+                .setOnClickListener(onSingleListener)
+                .setTextView(R.id.list_clear,"",true)
+                .setRecycler(R.id.recycler_view,dialogAdapter,linearLayoutManager)
                 .setScreenWidth(1f)
-                .setAnim(DialogUtils.DialogStyle.bottom_anim)
+                .setAnim(DialogStyle.bottom_anim)
                 .setGravity(Gravity.BOTTOM)
                 .setAllFinish(this);
     }

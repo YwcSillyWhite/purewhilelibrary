@@ -13,7 +13,7 @@ public class PictureContract {
 
     interface ViewUi extends BaseUiView
     {
-        void editImg(List<Folder> folders);
+        void obtianListFolder(List<Folder> folders);
     }
 
     interface Presenter extends BasePresenter<ViewUi>

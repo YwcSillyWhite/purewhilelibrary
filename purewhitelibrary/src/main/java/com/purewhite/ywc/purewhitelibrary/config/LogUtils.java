@@ -1,5 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.config;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.purewhite.ywc.purewhitelibrary.BuildConfig;
@@ -49,6 +50,8 @@ public final class LogUtils {
 
     private static void export(int type,String tag,String content)
     {
+        if (TextUtils.isEmpty(content))
+            return;
         if (BuildConfig.LOG)
         {
             switch (type)

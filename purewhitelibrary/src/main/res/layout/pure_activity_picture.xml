@@ -8,7 +8,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/action_layout"
-            android:background="@color/write">
+            android:background="@color/pure_write">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -45,15 +45,28 @@
             android:gravity="center"
             android:background="#666"
             android:orientation="horizontal">
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:gravity="center"
-                android:textSize="15sp"
-                android:text="全部图片"
-                android:textColor="@color/write"/>
+                android:gravity="bottom">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="全部图片"
+                    android:textColor="@color/pure_write"/>
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:tint="@color/pure_write"
+                    android:layout_marginLeft="10dp"
+                    android:src="@mipmap/pure_picture_tag"/>
+            </LinearLayout>
+
+
             <Space
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -64,9 +77,9 @@
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:text="预览"
-                android:textColor="@color/write"/>
+                android:textColor="@color/pure_write"/>
         </LinearLayout>
     </LinearLayout>
 </layout>

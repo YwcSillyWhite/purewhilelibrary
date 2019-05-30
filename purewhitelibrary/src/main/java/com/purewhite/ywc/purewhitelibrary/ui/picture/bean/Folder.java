@@ -1,5 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class Folder {
 
 
     public List<ImageBean> getImageBeanList() {
-        return imageBeanList;
+        return imageBeanList!=null?imageBeanList:new ArrayList<ImageBean>();
     }
 
 }

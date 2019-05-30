@@ -5,10 +5,10 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture.bean;
  */
 public class ImageBean {
 
-    public ImageBean(String path, String name, Long time) {
+    public ImageBean(String path, String name, Long time_token) {
         this.path = path;
         this.name = name;
-        this.time = time;
+        this.time_token = time_token;
     }
 
     //地址
@@ -16,7 +16,7 @@ public class ImageBean {
     //名字
     private String name;
     //时间
-    private Long time;
+    private Long time_token;
 
     public String getPath() {
         return path;
@@ -27,6 +27,6 @@ public class ImageBean {
     }
 
     public Long getTime() {
-        return time;
+        return time_token;
     }
 }

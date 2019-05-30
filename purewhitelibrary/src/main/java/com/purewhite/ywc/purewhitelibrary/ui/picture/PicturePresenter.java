@@ -1,10 +1,12 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture;
 
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.HttpObserver;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxSchedulers;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureUtils;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.scanner.ImageScanner;
 
 import java.util.ArrayList;
@@ -37,16 +39,13 @@ public class PicturePresenter extends PresenterImp<PictureContract.ViewUi>
         }).map(new Function<List<ImageBean>, List<Folder>>() {
             @Override
             public List<Folder> apply(List<ImageBean> imageBeans) throws Exception {
-                List<Folder> folderList=new ArrayList<>();
-                folderList.add(new Folder("全部图片",imageBeans));
-
-                return folderList;
+                return PictureUtils.getFolderList(imageBeans);
             }
         }).compose(RxSchedulers.<List<Folder>>ioToMain())
                 .subscribe(new HttpObserver<List<Folder>>() {
                     @Override
                     protected void onSuccess(List<Folder> folders) {
-                        mView.editImg(folders);
+                        mView.obtianListFolder(folders);
                     }
                 });
     }
