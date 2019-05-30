@@ -55,7 +55,6 @@
         <activity android:name=".ui.activity.mine.WebActivity"/>
 
 
-        <activity android:name="com.purewhite.ywc.purewhitelibrary.ui.picture.PictureActivity"/>
 
 
         <!--  android:permission=""  -->

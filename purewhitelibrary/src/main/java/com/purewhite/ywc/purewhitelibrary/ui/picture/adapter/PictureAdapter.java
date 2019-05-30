@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.ui.picture;
+package com.purewhite.ywc.purewhitelibrary.ui.picture.adapter;
 
 import android.databinding.ViewDataBinding;
 
@@ -7,6 +7,7 @@ import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.BindAdapter;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BindHolder;
 import com.purewhite.ywc.purewhitelibrary.databinding.AdapterPictureBinding;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 
 /**
  * @author yuwenchao

@@ -1,12 +1,16 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
 import com.purewhite.ywc.purewhitelibrary.databinding.ActivityPictureBinding;
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.MvpPureActivity;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureAdapter;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
+import com.purewhite.ywc.purewhitelibrary.view.recyclerview.AroundItemDecoration;
+
+import java.util.List;
 
 /**
  * @author yuwenchao
@@ -44,7 +48,9 @@ public class PictureActivity extends MvpPureActivity<ActivityPictureBinding,Pict
     protected void initView() {
         pictureAdapter = new PictureAdapter();
         mDataBinding.recyclerView.setAdapter(pictureAdapter);
-        mDataBinding.recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        mDataBinding.recyclerView.setLayoutManager(new GridLayoutManager(this,4));
+        mDataBinding.recyclerView.addItemDecoration(new AroundItemDecoration(getResources()
+                .getDimensionPixelOffset(R.dimen.dp_1)));
     }
 
     @Override
@@ -53,8 +59,12 @@ public class PictureActivity extends MvpPureActivity<ActivityPictureBinding,Pict
         mPresenter.gainImg();
     }
 
+
     @Override
-    public PictureAdapter getAdapter() {
-        return pictureAdapter;
+    public void editImg(List<Folder> folders) {
+       if (folders!=null&&folders.size()>0)
+       {
+           pictureAdapter.flush(folders.get(0).getImageBeanList());
+       }
     }
 }

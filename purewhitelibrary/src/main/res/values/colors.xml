@@ -3,7 +3,9 @@
     <color name="red">#f00</color>
     <color name="write">#fff</color>
     <color name="peach">#ffdab9</color>
-    <color name="text_deep">#333</color>
     <color name="back">#f6f6f6</color>
-    <color name="black_2">#222</color>
+    //文字颜色
+    <color name="text_default">#333</color>
+    //文字提示颜色
+    <color name="text_hint_default">#999</color>
 </resources>

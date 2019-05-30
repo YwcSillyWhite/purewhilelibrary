@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.ui.picture;
+package com.purewhite.ywc.purewhitelibrary.ui.picture.bean;
 
 /**
  * @author yuwenchao
