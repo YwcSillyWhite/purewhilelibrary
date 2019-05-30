@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red">#f00</color>
-    <color name="write">#fff</color>
-    <color name="peach">#ffdab9</color>
-    <color name="back">#f6f6f6</color>
+    <color name="pure_red">#f00</color>
+    <color name="pure_write">#fff</color>
+    <color name="pure_peach">#ffdab9</color>
+    <color name="pure_back">#f6f6f6</color>
     //文字颜色
-    <color name="text_default">#333</color>
+    <color name="pure_text_default">#333</color>
     //文字提示颜色
-    <color name="text_hint_default">#999</color>
+    <color name="pure_text_hint_default">#999</color>
 </resources>

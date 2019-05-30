@@ -7,6 +7,6 @@
         android:layout_width="133dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
-        android:background="@drawable/ptr_head_anim"
+        android:background="@drawable/pure_ptr_head_anim"
         android:layout_centerInParent="true"/>
 </FrameLayout>

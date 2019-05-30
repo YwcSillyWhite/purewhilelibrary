@@ -41,8 +41,8 @@
             android:text="99+"
             android:maxLength="3"
             android:textSize="9sp"
-            android:textColor="@color/write"
-            android:background="@drawable/shape_red_oval"
+            android:textColor="@color/pure_write"
+            android:background="@drawable/pure_shape_red_oval"
             android:id="@+id/bottomNum"/>
     </RelativeLayout>
 </FrameLayout>

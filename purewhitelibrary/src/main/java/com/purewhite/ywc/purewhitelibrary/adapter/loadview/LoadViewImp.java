@@ -13,7 +13,7 @@ public class LoadViewImp extends LoadView{
 
     @Override
     public int getLayoutId() {
-        return R.layout.loadview;
+        return R.layout.pure_loadview;
     }
 
     @Override

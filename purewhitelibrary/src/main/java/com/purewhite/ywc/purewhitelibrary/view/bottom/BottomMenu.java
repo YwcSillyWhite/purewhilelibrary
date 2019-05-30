@@ -49,7 +49,7 @@ public class BottomMenu extends FrameLayout {
     }
 
     private void initView(Context context, AttributeSet attrs) {
-        View view = View.inflate(context,R.layout.view_bottom_menu , this);
+        View view = View.inflate(context,R.layout.pure_view_bottom_menu, this);
         bottomImg = ((ImageView) view.findViewById(R.id.bottomImg));
         bottomTv = ((TextView) view.findViewById(R.id.bottomTv));
         bottomNum = ((TextView) view.findViewById(R.id.bottomNum));
@@ -61,8 +61,8 @@ public class BottomMenu extends FrameLayout {
         text_content = typedArray.getString(R.styleable.BottomMenu_text_content);
         text_size = typedArray.getDimensionPixelSize(R.styleable.BottomMenu_text_size, -1);
 
-        img_check_true = typedArray.getResourceId(R.styleable.BottomMenu_img_check_true, R.mipmap.icon_load_error);
-        img_check_false = typedArray.getResourceId(R.styleable.BottomMenu_img_check_false, R.mipmap.icon_load_error);
+        img_check_true = typedArray.getResourceId(R.styleable.BottomMenu_img_check_true, R.mipmap.pure_load_error);
+        img_check_false = typedArray.getResourceId(R.styleable.BottomMenu_img_check_false, R.mipmap.pure_load_error);
         img_size = typedArray.getDimension(R.styleable.BottomMenu_img_size, -1);
         animPosition = typedArray.getInt(R.styleable.BottomMenu_anim_position, 0);
 

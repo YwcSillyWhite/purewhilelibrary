@@ -11,7 +11,7 @@ public class FullViewImp extends FullView{
 
     @Override
     public int getLayoutId() {
-        return R.layout.fullview;
+        return R.layout.pure_fullview;
     }
 
     @Override

@@ -40,7 +40,7 @@ public class PtrFrameHead extends FrameLayout implements PtrUIHandler {
 
     //初始化
     private void init() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.ptr_head, this, true);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.pure_ptr_head, this, true);
         ImageView ivRefreshView = view.findViewById(R.id.ptr_Img);
         refreshAnim = (AnimationDrawable) ivRefreshView.getBackground();
 

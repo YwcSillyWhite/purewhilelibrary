@@ -4,13 +4,13 @@
 
     <item android:id="@android:id/background">
         <shape>
-            <solid android:color="@color/write"></solid>
+            <solid android:color="@color/pure_write"></solid>
         </shape>
     </item>
     <item android:id="@android:id/progress">
         <clip>
             <shape>
-                <solid android:color="@color/red"></solid>
+                <solid android:color="@color/pure_red"></solid>
             </shape>
         </clip>
     </item>

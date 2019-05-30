@@ -4,7 +4,7 @@ import android.support.v7.widget.GridLayoutManager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
-import com.purewhite.ywc.purewhitelibrary.databinding.ActivityPictureBinding;
+import com.purewhite.ywc.purewhitelibrary.databinding.PureActivityPictureBinding;
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.MvpPureActivity;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author yuwenchao
  */
-public class PictureActivity extends MvpPureActivity<ActivityPictureBinding,PicturePresenter>
+public class PictureActivity extends MvpPureActivity<PureActivityPictureBinding,PicturePresenter>
         implements PictureContract.ViewUi {
 
     private PictureAdapter pictureAdapter;
@@ -41,7 +41,7 @@ public class PictureActivity extends MvpPureActivity<ActivityPictureBinding,Pict
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_picture;
+        return R.layout.pure_activity_picture;
     }
 
     @Override

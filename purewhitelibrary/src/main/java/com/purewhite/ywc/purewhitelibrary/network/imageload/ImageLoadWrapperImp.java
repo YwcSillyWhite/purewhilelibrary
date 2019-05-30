@@ -65,9 +65,9 @@ public class ImageLoadWrapperImp implements ImageLoadWrapper{
                 //不加载动画
                 options.dontTransform()
                         //占位图片
-                        .placeholder(R.mipmap.icon_load_error)
+                        .placeholder(R.mipmap.pure_load_error)
                         //加载失败的图片
-                        .error(R.mipmap.icon_load_error);
+                        .error(R.mipmap.pure_load_error);
             }
             requestOptions=options;
 
