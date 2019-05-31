@@ -31,11 +31,17 @@ public abstract class BaseDialogFragment extends DialogFragment {
     private SparseArray<View> sparseArray;
     private View.OnClickListener onClickListener;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        beforView();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        beforView();
         if (viewParent==null)
         {
             inflater.inflate(getLayoutId(),container,false);
@@ -84,7 +90,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
         if(view==null)
         {
             view = viewParent.findViewById(id);
-            sparseArray.put(id,viewParent);
+            sparseArray.put(id,view);
         }
         return (T)view;
     }
