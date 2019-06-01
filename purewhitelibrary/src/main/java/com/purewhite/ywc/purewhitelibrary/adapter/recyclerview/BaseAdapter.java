@@ -60,6 +60,11 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         this.fullView = fullView;
     }
 
+    public final void setFullState(int state)
+    {
+        setFullState(state,false);
+    }
+
     //设置full状态，并且是否刷新
     public final void setFullState(int statue,boolean flush)
     {
