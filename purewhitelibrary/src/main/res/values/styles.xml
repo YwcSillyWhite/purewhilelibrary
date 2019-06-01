@@ -22,7 +22,7 @@
 
 
 
-    <style name="DialogFragment">
+    <style name="DialogFragment" parent="Theme.AppCompat.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         //透明
         <item name="android:windowIsTranslucent">false</item>

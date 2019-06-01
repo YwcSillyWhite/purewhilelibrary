@@ -2,7 +2,7 @@
 <resources>
 
 
-    <style name="BaseDialog" parent="@android:style/Theme.Dialog">
+    <style name="BaseDialog" parent="Theme.AppCompat.Dialog">
         <item name="android:windowFrame">@null</item>
         <!-- 边框 -->
         <item name="android:windowIsFloating">true</item>
