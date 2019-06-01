@@ -27,7 +27,9 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 /**
- * Created by yuwenchao on 2018/11/15.
+ *
+ * @author yuwenchao
+ * @date 2018/11/15
  */
 
 public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerView.Adapter<V>{
@@ -50,12 +52,14 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     private LinearLayout mFooterLayout;
     //全局布局
     private FullView fullView=new FullViewImp();
+    //设置全局布局
     public final void setFullView(FullView fullView) {
         if (loadView==null) {
             throw new UnsupportedOperationException("fullview can not null");
         }
         this.fullView = fullView;
     }
+    //设置全局布局的监听
     public final void setOnFullListener(OnFullListener onFullListener)
     {
         fullView.setOnFullListener(onFullListener);
@@ -72,6 +76,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     }
     //加载布局
     private LoadView loadView=new LoadViewImp();
+    //设置加载布局
     public final void setLoadView(LoadView loadView) {
         if (loadView==null) {
             throw new UnsupportedOperationException("loadview can not null");
@@ -88,6 +93,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     }
     //滑动监听
     protected OnLoadListener onLoadListener;
+    //设置滑动监听
     public final void setOnLoadListener(OnLoadListener onLoadListener) {
         this.onLoadListener = onLoadListener;
     }
@@ -160,7 +166,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
      * 没有数据的长度
      * @return
      */
-    private final int getFullCount()
+    private int getFullCount()
     {
         if (obtianDataCount()>0) {
             return 0;
@@ -172,7 +178,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
      * 头部数据的长度
      * @return
      */
-    private final int getHeadCount()
+    private int getHeadCount()
     {
         if (mHeaderLayout!=null&&mHeaderLayout.getChildCount()>0) {
             return 1;
@@ -184,7 +190,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
      * 尾部长度
      * @return
      */
-    private final int getFootCount()
+    private int getFootCount()
     {
         if (mFooterLayout!=null&&mFooterLayout.getChildCount()>0) {
             return 1;
@@ -196,7 +202,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
      * 加载更多的长度
      * @return
      */
-    private final int getLoadCount()
+    private int getLoadCount()
     {
         if (onLoadListener==null) {
             return 0;
@@ -343,8 +349,6 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
             return;
         }
         final View view = viewhold.itemView;
-        //这里给view设置一个id ,这样可以和子类点击一起使用
-        view.setId(Integer.MAX_VALUE);
         if (view == null) {
             return;
         }
@@ -390,7 +394,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     }
 
     //判断是不是加载更多
-    private final void loadMore(int position)
+    private void loadMore(int position)
     {
         //loadview长度不能为0，position等于最后一个，position不能为loadview的position
         if (getLoadCount()==0||position<getItemCount()-1||getLoadCount()-1==position) {

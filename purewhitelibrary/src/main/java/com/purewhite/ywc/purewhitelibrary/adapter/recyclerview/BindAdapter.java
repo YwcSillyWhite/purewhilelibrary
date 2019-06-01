@@ -2,6 +2,8 @@ package com.purewhite.ywc.purewhitelibrary.adapter.recyclerview;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -31,14 +33,15 @@ public abstract class BindAdapter<T> extends BaseAdapter<T,BindHolder>{
         sparseIntArray=new SparseIntArray();
     }
 
+
     //添加布局
-    protected final void addLayout(int viewType,int layout)
+    protected final void addLayout(int viewType,@NonNull@LayoutRes int layoutId)
     {
         if (sparseIntArray==null)
         {
             sparseIntArray=new SparseIntArray();
         }
-        sparseIntArray.put(viewType,layout);
+        sparseIntArray.put(viewType,layoutId);
     }
 
     protected final void addLayout(int layout)
@@ -49,10 +52,11 @@ public abstract class BindAdapter<T> extends BaseAdapter<T,BindHolder>{
 
     @Override
     protected final BindHolder onCreateData(ViewGroup parent, int viewType) {
-        if (getLayout(viewType)!=-1)
+        int layoutId = getLayout(viewType);
+        if (layoutId!=0)
         {
-            ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                    getLayout(viewType), parent, false);
+            ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
+                    , layoutId, parent, false);
             return new BindHolder(binding);
         }
         return null;
@@ -62,9 +66,7 @@ public abstract class BindAdapter<T> extends BaseAdapter<T,BindHolder>{
 
     protected int getLayout(int viewType)
     {
-        if (sparseIntArray!=null)
-            return sparseIntArray.get(viewType);
-        return -1;
+        return sparseIntArray.get(viewType,0);
     }
 
 }

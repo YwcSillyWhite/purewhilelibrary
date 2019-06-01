@@ -1,7 +1,5 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.recyclerview;
 
-
-
 import com.purewhite.ywc.purewhitelibrary.adapter.bean.BaseTypeBean;
 
 import java.util.List;
