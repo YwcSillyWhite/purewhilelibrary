@@ -10,7 +10,8 @@ import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BaseViewHolder;
  */
 
 public abstract class LoadView {
-    private int state;
+    private int loadStatue;
+
     //加载  （加载中）
     public static final int LOAD=1;
     //网络  （网络不好，加载失败）
@@ -34,7 +35,7 @@ public abstract class LoadView {
 
     public void onBindView(BaseViewHolder holder)
     {
-        switch (state)
+        switch (loadStatue)
         {
             case LOAD:
                 holder.setVisibility(getLoadId(),true);
@@ -60,11 +61,12 @@ public abstract class LoadView {
     }
 
 
-    public int getState() {
-        return state;
+    public int getLoadStatue() {
+        return loadStatue;
     }
-    public void setState(int state) {
-        this.state = state;
+
+    public void setLoadStatue(int loadStatue) {
+        this.loadStatue = loadStatue;
     }
 
 

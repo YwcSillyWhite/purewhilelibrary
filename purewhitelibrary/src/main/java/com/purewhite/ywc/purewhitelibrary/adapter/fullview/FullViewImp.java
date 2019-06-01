@@ -3,8 +3,6 @@ package com.purewhite.ywc.purewhitelibrary.adapter.fullview;
 import android.view.View;
 
 import com.purewhite.ywc.purewhitelibrary.R;
-import com.purewhite.ywc.purewhitelibrary.config.NetWorkUtils;
-import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 
 
 public class FullViewImp extends FullView{
@@ -29,23 +27,15 @@ public class FullViewImp extends FullView{
         return R.id.data;
     }
 
+    @Override
+    public int getClickLoadId() {
+        return R.id.network_again;
+    }
 
     @Override
     public void setItemView(View itemView) {
-        super.setItemView(itemView);
-        if (onFullListener!=null)
-        {
-            itemView.findViewById(R.id.network_again).setOnClickListener(new OnSingleListener() {
-                @Override
-                public void onSingleClick(View v) {
-                    if (onFullListener!=null&&NetWorkUtils.isConnected())
-                    {
-                        setFullState(LODA,true);
-                        onFullListener.again();
-                    }
-                }
-            });
-        }
 
     }
+
+
 }

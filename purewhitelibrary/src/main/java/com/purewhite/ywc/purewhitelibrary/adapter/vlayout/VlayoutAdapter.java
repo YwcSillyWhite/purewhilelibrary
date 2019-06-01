@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnFullListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnLoadListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.fullview.FullView;
 import com.purewhite.ywc.purewhitelibrary.adapter.fullview.FullViewImp;
@@ -26,29 +27,26 @@ public class VlayoutAdapter extends DelegateAdapter
     //加载更多load itemtype
     private final int LOAD_VIEW=Integer.MIN_VALUE;
     private final int FULL_VIEW=Integer.MIN_VALUE+1;
-    //加载更多监听
-    private OnLoadListener onLoadListener;
-    public final void setOnLoadListener(OnLoadListener onLoadListener) {
-        this.onLoadListener = onLoadListener;
-    }
+
 
     //数据长度
-    private int mPagesize=10;
-    public final void setmPagesize(int mPagesize) {
-        this.mPagesize = mPagesize;
+    private int pageSize=10;
+    public final void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     //全屏布局
     private FullView fullView=new FullViewImp();
     //设置full状态，并且是不刷新
-    public final void setFullSate(int statue)
-    {
-        fullView.setFullState(statue,false);
-    }
+
     //设置full状态，并且是否刷新
     public final void setFullSate(int statue,boolean flush)
     {
-        fullView.setFullState(statue,flush);
+        fullView.setFullState(statue);
+        if (flush)
+        {
+            notifyDataSetChanged();
+        }
     }
     public final void setFullView(FullView fullView) {
         if (fullView==null) {
@@ -56,24 +54,32 @@ public class VlayoutAdapter extends DelegateAdapter
         }
         this.fullView = fullView;
     }
-
-
-    private final void setLoadState(int statue,boolean flush)
-    {
-        loadView.setState(statue);
-        if (flush) {
-            notifyItemChanged(getItemCount()-1);
-        }
+    private OnFullListener onFullListener;
+    public void setOnFullListener(OnFullListener onFullListener) {
+        this.onFullListener = onFullListener;
     }
 
     //加载布局
     private LoadView loadView=new LoadViewImp();
+    private void setLoadState(int statue,boolean flush)
+    {
+        loadView.setLoadStatue(statue);
+        if (flush) {
+            notifyItemChanged(getItemCount()-1);
+        }
+    }
     public  final void setLoadView(LoadView loadView) {
         if (loadView==null) {
             throw new UnsupportedOperationException("loadview can not null");
         }
         this.loadView = loadView;
     }
+    //加载更多监听
+    private OnLoadListener onLoadListener;
+    public final void setOnLoadListener(OnLoadListener onLoadListener) {
+        this.onLoadListener = onLoadListener;
+    }
+
     private Handler handler=new Handler();
 
     public VlayoutAdapter(VirtualLayoutManager layoutManager) {
@@ -93,7 +99,7 @@ public class VlayoutAdapter extends DelegateAdapter
     }
 
     //全局布局长度
-    private final int getFullCount()
+    private  int getFullCount()
     {
         if (obtianDataCount()>0) {
             return 0;
@@ -148,7 +154,7 @@ public class VlayoutAdapter extends DelegateAdapter
                 @Override
                 public void onSingleClick(View v) {
                     //加载失败，点击重新加载  没有网络不允许加载
-                    if (loadView.getState()==LoadView.NETWORK&&NetWorkUtils.isConnected())
+                    if (loadView.getLoadStatue()==LoadView.NETWORK&&NetWorkUtils.isConnected())
                     {
                         setLoadState(LoadView.LOAD,true);
                         onLoadListener.loadAgain();
@@ -163,6 +169,20 @@ public class VlayoutAdapter extends DelegateAdapter
             ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
             layoutParams.height=parent.getHeight();
             viewHolder = new BaseViewHolder(view);
+            if (fullView.getClickLoadId()!=0)
+            {
+                ((BaseViewHolder) viewHolder).findViewId(fullView.getClickLoadId())
+                        .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (onFullListener!=null&&NetWorkUtils.isConnected())
+                        {
+                            setFullSate(FullView.LODA,true);
+                            onFullListener.again();
+                        }
+                    }
+                });
+            }
         }
         else
         {
@@ -193,7 +213,7 @@ public class VlayoutAdapter extends DelegateAdapter
         if (getLoadCount()==0||position<getItemCount()-1||position==getLoadCount()-1) {
             return;
         }
-        if (loadView.getState()==LoadView.FINISH)
+        if (loadView.getLoadStatue()==LoadView.FINISH)
         {
             //如果网络不可用，就直接显示加载失败
             if (NetWorkUtils.isConnected())
@@ -230,7 +250,7 @@ public class VlayoutAdapter extends DelegateAdapter
         //如果item的长度等于fullview的长度，并且返回的数据长度等于的0的时候
         if (flush)
         {
-            if (pagesize<mPagesize)
+            if (pagesize<this.pageSize)
             {
                 setLoadState(LoadView.REST,false);
                 if (obtianDataCount()==0)
@@ -245,7 +265,7 @@ public class VlayoutAdapter extends DelegateAdapter
         }
         else
         {
-            if (pagesize<mPagesize)
+            if (pagesize<this.pageSize)
             {
                 setLoadState(network||pagesize>0?LoadView.DATA:LoadView.NETWORK,true);
             }

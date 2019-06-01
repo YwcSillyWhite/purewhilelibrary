@@ -59,21 +59,22 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         }
         this.fullView = fullView;
     }
-    //设置全局布局的监听
-    public final void setOnFullListener(OnFullListener onFullListener)
-    {
-        fullView.setOnFullListener(onFullListener);
-    }
-    //设置full状态，并且是不刷新
-    public final void setFullState(int statue)
-    {
-        fullView.setFullState(statue,false);
-    }
+
     //设置full状态，并且是否刷新
     public final void setFullState(int statue,boolean flush)
     {
-        fullView.setFullState(statue,flush);
+        fullView.setFullState(statue);
+        if (flush) {
+            notifyDataSetChanged();
+        }
     }
+    private OnFullListener onFullListener;
+    //设置全局布局的监听
+    public final void setOnFullListener(OnFullListener onFullListener)
+    {
+        this.onFullListener=onFullListener;
+    }
+
     //加载布局
     private LoadView loadView=new LoadViewImp();
     //设置加载布局
@@ -86,7 +87,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     //设置加载布局状态，加载布局是否刷新
     private final void setLoadState(int statue,boolean flush)
     {
-        loadView.setState(statue);
+        loadView.setLoadStatue(statue);
         if (flush) {
             notifyItemChanged(getItemCount()-1);
         }
@@ -97,6 +98,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     public final void setOnLoadListener(OnLoadListener onLoadListener) {
         this.onLoadListener = onLoadListener;
     }
+
     //父View是否可以点击
     private boolean parentClick=true;
     public final void setParentClick(boolean parentClick) {
@@ -116,9 +118,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
 
     public BaseAdapter(List<T> list) {
         this.mData = list!=null?list:new ArrayList<T>();
-        fullView.setAdapter(this);
     }
-
     /**
      * 获取数据
      * @return
@@ -299,6 +299,20 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
                     .inflate(fullView.getLayoutId(), parent, false);
             fullView.setItemView(view);
             viewhold=createV(view);
+            if (fullView.getClickLoadId()!=0)
+            {
+                viewhold.findViewId(fullView.getClickLoadId())
+                        .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (NetWorkUtils.isConnected()&&onFullListener!=null)
+                        {
+                            setFullState(FullView.LODA,true);
+                            onFullListener.again();
+                        }
+                    }
+                });
+            }
         }
         else if (viewType==HEAD_ITEM)
         {
@@ -317,7 +331,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
                 @Override
                 public void onSingleClick(View v) {
                     //加载失败，点击重新加载  没有网络不允许加载
-                    if (loadView.getState()==LoadView.NETWORK&&NetWorkUtils.isConnected())
+                    if (loadView.getLoadStatue()==LoadView.NETWORK &&NetWorkUtils.isConnected())
                     {
                         setLoadState(LoadView.LOAD,true);
                         onLoadListener.loadAgain();
@@ -401,7 +415,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
             return;
         }
         //加载结束
-        if (loadView.getState()==LoadView.FINISH) {
+        if (loadView.getLoadStatue()==LoadView.FINISH) {
             //网络判断
             if (NetWorkUtils.isConnected())
             {

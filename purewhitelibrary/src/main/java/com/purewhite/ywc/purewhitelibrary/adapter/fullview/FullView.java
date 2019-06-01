@@ -1,5 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.fullview;
 
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -12,11 +14,6 @@ import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BaseViewHolder;
  */
 public abstract class FullView {
 
-    protected OnFullListener onFullListener;
-    public void setOnFullListener(OnFullListener onFullListener) {
-        this.onFullListener = onFullListener;
-    }
-
     private int fullState;
     //加载
     public static final int LODA=1;
@@ -27,24 +24,23 @@ public abstract class FullView {
     //
     public static final int REST=0;
 
+    @LayoutRes
     public abstract  int getLayoutId();
 
+    @IdRes
     abstract int getLoadId();
 
+    @IdRes
     abstract int getNetworkId();
 
+    @IdRes
     abstract int getDataId();
 
-    private RecyclerView.Adapter adapter;
-    private View itemView;
+    @IdRes
+    public abstract int getClickLoadId();
 
-    public void setAdapter(RecyclerView.Adapter adapter) {
-        this.adapter = adapter;
-    }
 
-    public void setItemView(View itemView) {
-        this.itemView = itemView;
-    }
+
 
     public void onBindView(BaseViewHolder holder)
     {
@@ -73,7 +69,10 @@ public abstract class FullView {
         }
     }
 
-    public boolean isShow()
+
+    public abstract void setItemView(View itemView);
+
+    public final  boolean isShow()
     {
         if (fullState==DATA||fullState==NETWORK||fullState==LODA) {
             return true;
@@ -81,16 +80,13 @@ public abstract class FullView {
         return false;
     }
 
-    /**
-     *
-     * @param fullState  状态
-     * @param flush    是否刷新
-     */
-    public void setFullState(int fullState,boolean flush) {
+
+
+    public int getFullState() {
+        return fullState;
+    }
+
+    public void setFullState(int fullState) {
         this.fullState = fullState;
-        if (flush&&adapter!=null)
-        {
-            adapter.notifyDataSetChanged();
-        }
     }
 }
