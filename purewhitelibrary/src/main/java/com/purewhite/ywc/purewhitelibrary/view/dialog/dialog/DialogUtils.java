@@ -125,6 +125,12 @@ public class DialogUtils extends WindowUtils<DialogUtils> {
         return this;
     }
 
+    public DialogUtils setLayout(int width, int height)
+    {
+        window.setLayout(width,height);
+        return this;
+    }
+
     @Override
     public DialogUtils addAnim(int resId) {
         window.setWindowAnimations(resId);

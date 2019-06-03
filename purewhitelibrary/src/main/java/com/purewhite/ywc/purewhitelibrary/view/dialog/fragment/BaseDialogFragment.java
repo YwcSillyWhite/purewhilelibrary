@@ -1,6 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.view.dialog.fragment;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 
 
@@ -31,9 +33,13 @@ import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 public abstract class BaseDialogFragment<T> extends DialogFragment {
 
     private View viewParent;
-    private SparseArray<View> sparseArray;
-    private View.OnClickListener onClickListener;
     private Window window;
+    private Dialog dialog;
+    private int gravity,wight,height;
+    private float scaleWight,scaleHeight;
+    @StyleRes
+    private int dialogAnim;
+
 
 
     @Override
@@ -50,7 +56,6 @@ public abstract class BaseDialogFragment<T> extends DialogFragment {
         {
             inflater.inflate(getLayoutId(),container,false);
         }
-        sparseArray=new SparseArray<>();
         return viewParent;
     }
 
@@ -66,8 +71,15 @@ public abstract class BaseDialogFragment<T> extends DialogFragment {
         afterView();
     }
 
+
     @LayoutRes
     protected abstract int getLayoutId();
+
+
+    protected abstract int style();
+
+    @StyleRes
+    protected abstract int theme();
 
 
     protected void beforView()
@@ -75,33 +87,148 @@ public abstract class BaseDialogFragment<T> extends DialogFragment {
         setStyle(style(),theme());
     }
 
-    protected abstract int style();
 
-    @StyleRes
-    protected abstract int theme();
 
     protected abstract void initView();
 
-    protected abstract int obtainGravity();
 
-    protected abstract int screenWidth();
+
+    /**
+     * 设置位置
+     * @param gravity
+     * @return
+     */
+    public T setGravity(int gravity)
+    {
+        if (window==null)
+        {
+            this.gravity=gravity;
+        }
+        else
+        {
+            window.setGravity(gravity);
+        }
+        return ((T) this);
+    }
+
+    /**
+     * 设置宽高
+     * @param wight
+     * @param height
+     * @return
+     */
+    public T setLayout(int wight,int height)
+    {
+        if (window==null)
+        {
+            this.wight=wight;
+            this.height=height;
+        }
+        else
+        {
+            window.setLayout(wight,height);
+        }
+        return ((T) this);
+    }
+
+    /**
+     * 设置宽，占全局布局的比例
+     * @param scaleWight
+     * @return
+     */
+    public T setScreenWight(float scaleWight)
+    {
+        if (window==null)
+        {
+            this.scaleWight=scaleWight;
+        }
+        else
+        {
+            if (scaleWight>0&&scaleWight<=1)
+            {
+                WindowManager.LayoutParams lp = window.getAttributes();
+                lp.width = ((int) (SizeUtils.getScreenWidth() * scaleWight));
+                window.setAttributes(lp);
+            }
+        }
+        return ((T) this);
+    }
+
+
+    /**
+     * 设置高，占全局布局的比例
+     * @param scaleHeight
+     * @return
+     */
+    public T setScreenHight(float scaleHeight)
+    {
+        if (window==null)
+        {
+            this.scaleHeight=scaleHeight;
+        }
+        else
+        {
+            if (scaleHeight>0&&scaleHeight<=1)
+            {
+                WindowManager.LayoutParams lp = window.getAttributes();
+                lp.height = ((int) (SizeUtils.getScreenWidth() *scaleHeight));
+                window.setAttributes(lp);
+            }
+        }
+        return ((T) this);
+    }
+
+
+    public T addAnim(@StyleRes int dialogAnim)
+    {
+        if (window==null)
+        {
+            this.dialogAnim=dialogAnim;
+        }
+        else
+        {
+            window.setWindowAnimations(dialogAnim);
+        }
+        return ((T) this);
+    }
+
 
     protected  void afterView()
     {
-        window = getDialog().getWindow();
-        final int gravity = obtainGravity();
-        if (gravity!=0) {
+        dialog=getDialog();
+        window =dialog.getWindow();
+        if (gravity!=0)
+        {
             window.setGravity(gravity);
         }
-        final int screenWidth = screenWidth();
-        if (screenWidth>0)
+        if (wight!=0&&height!=0)
+        {
+            window.setLayout(wight,height);
+        }
+        if (scaleWight>0&&scaleWight<=1)
         {
             WindowManager.LayoutParams lp = window.getAttributes();
-            lp.width =screenWidth;
+            lp.width = ((int) (SizeUtils.getScreenWidth() * scaleWight));
             window.setAttributes(lp);
         }
-
+        if (scaleHeight>0&&scaleHeight<=1)
+        {
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.height = ((int) (SizeUtils.getScreenHeight() * scaleHeight));
+            window.setAttributes(lp);
+        }
+        if (dialogAnim!=0)
+        {
+            window.setWindowAnimations(dialogAnim);
+        }
     }
+
+
+
+
+
+
+
 
 
 
@@ -122,101 +249,5 @@ public abstract class BaseDialogFragment<T> extends DialogFragment {
 
 
 
-    /**  viewIo **/
-    public <T extends View> T fdId(@IdRes int id)
-    {
-        View view = sparseArray.get(id);
-        if(view==null)
-        {
-            view = viewParent.findViewById(id);
-            sparseArray.put(id,view);
-        }
-        return (T)view;
-    }
-
-    public boolean viewSelected(@IdRes int id) {
-        return fdId(id).isSelected();
-    }
-
-
-
-
-
-    public T setView(@IdRes int id, boolean click) {
-        View view = fdId(id);
-        if (click&&onClickListener!=null)
-        {
-            view.setOnClickListener(onClickListener);
-        }
-        return ((T) this);
-    }
-
-
-    public T setSelecte(@IdRes int id,boolean selecte) {
-        fdId(id).setSelected(selecte);
-        return ((T) this);
-    }
-
-
-    public T setTextView(@IdRes int id, String context, boolean click) {
-        View view = fdId(id);
-        if (view instanceof TextView)
-        {
-            TextView textView = (TextView) view;
-            if(!TextUtils.isEmpty(context)) {
-                textView.setText(context);
-            }
-            if (click&&onClickListener!=null) {
-                textView.setOnClickListener(onClickListener);
-            }
-        }
-        return ((T) this);
-    }
-
-
-    public T setButton(@IdRes int id, String context, boolean click) {
-        View view = fdId(id);
-        if (view instanceof Button)
-        {
-            Button button = (Button) view;
-            if(!TextUtils.isEmpty(context)) {
-                button.setText(context);
-            }
-            if (click&&onClickListener!=null) {
-                button.setOnClickListener(onClickListener);
-            }
-        }
-        return ((T) this);
-    }
-
-
-
-    public T setImageView(@IdRes int id, Object object, boolean click) {
-        View view = fdId(id);
-        if (view instanceof ImageView)
-        {
-            ImageView imageView = (ImageView) view;
-            if (object!=null) {
-                ImageLoader.newInstance().init(imageView,object);
-            }
-            if (click&&onClickListener!=null) {
-                imageView.setOnClickListener(onClickListener);
-            }
-        }
-        return ((T) this);
-    }
-
-
-    public T setRecycler(@IdRes int id, RecyclerView.Adapter adapter
-            , RecyclerView.LayoutManager layoutManager) {
-        View view = fdId(id);
-        if (view instanceof RecyclerView)
-        {
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(layoutManager);
-        }
-        return ((T) this);
-    }
 
 }
