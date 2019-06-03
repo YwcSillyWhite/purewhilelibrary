@@ -6,6 +6,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +16,8 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,11 +28,12 @@ import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 /**
  * @author yuwenchao
  */
-public abstract class BaseDialogFragment extends DialogFragment {
+public abstract class BaseDialogFragment<T> extends DialogFragment {
 
     private View viewParent;
     private SparseArray<View> sparseArray;
     private View.OnClickListener onClickListener;
+    private Window window;
 
 
     @Override
@@ -54,6 +58,11 @@ public abstract class BaseDialogFragment extends DialogFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         afterView();
     }
 
@@ -61,11 +70,41 @@ public abstract class BaseDialogFragment extends DialogFragment {
     protected abstract int getLayoutId();
 
 
-    protected abstract void beforView();
+    protected void beforView()
+    {
+        setStyle(style(),theme());
+    }
+
+    protected abstract int style();
+
+    @StyleRes
+    protected abstract int theme();
 
     protected abstract void initView();
 
-    protected abstract void afterView();
+    protected abstract int obtainGravity();
+
+    protected abstract int screenWidth();
+
+    protected  void afterView()
+    {
+        window = getDialog().getWindow();
+        final int gravity = obtainGravity();
+        if (gravity!=0) {
+            window.setGravity(gravity);
+        }
+        final int screenWidth = screenWidth();
+        if (screenWidth>0)
+        {
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.width =screenWidth;
+            window.setAttributes(lp);
+        }
+
+    }
+
+
+
 
 
 
@@ -95,28 +134,31 @@ public abstract class BaseDialogFragment extends DialogFragment {
         return (T)view;
     }
 
-
-
-    public void setView(@IdRes int id, boolean click) {
-        View view = fdId(id);
-        if (click&&onClickListener!=null)
-        {
-            view.setOnClickListener(onClickListener);
-        }
-    }
-
-
     public boolean viewSelected(@IdRes int id) {
         return fdId(id).isSelected();
     }
 
 
-    public void setSelecte(@IdRes int id,boolean selecte) {
-        fdId(id).setSelected(selecte);
+
+
+
+    public T setView(@IdRes int id, boolean click) {
+        View view = fdId(id);
+        if (click&&onClickListener!=null)
+        {
+            view.setOnClickListener(onClickListener);
+        }
+        return ((T) this);
     }
 
 
-    public void setTextView(@IdRes int id, String context, boolean click) {
+    public T setSelecte(@IdRes int id,boolean selecte) {
+        fdId(id).setSelected(selecte);
+        return ((T) this);
+    }
+
+
+    public T setTextView(@IdRes int id, String context, boolean click) {
         View view = fdId(id);
         if (view instanceof TextView)
         {
@@ -128,10 +170,11 @@ public abstract class BaseDialogFragment extends DialogFragment {
                 textView.setOnClickListener(onClickListener);
             }
         }
+        return ((T) this);
     }
 
 
-    public void setButton(@IdRes int id, String context, boolean click) {
+    public T setButton(@IdRes int id, String context, boolean click) {
         View view = fdId(id);
         if (view instanceof Button)
         {
@@ -143,11 +186,12 @@ public abstract class BaseDialogFragment extends DialogFragment {
                 button.setOnClickListener(onClickListener);
             }
         }
+        return ((T) this);
     }
 
 
 
-    public void setImageView(@IdRes int id, Object object, boolean click) {
+    public T setImageView(@IdRes int id, Object object, boolean click) {
         View view = fdId(id);
         if (view instanceof ImageView)
         {
@@ -159,10 +203,12 @@ public abstract class BaseDialogFragment extends DialogFragment {
                 imageView.setOnClickListener(onClickListener);
             }
         }
+        return ((T) this);
     }
 
 
-    public void setRecycler(@IdRes int id, RecyclerView.Adapter adapter, RecyclerView.LayoutManager layoutManager) {
+    public T setRecycler(@IdRes int id, RecyclerView.Adapter adapter
+            , RecyclerView.LayoutManager layoutManager) {
         View view = fdId(id);
         if (view instanceof RecyclerView)
         {
@@ -170,6 +216,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(layoutManager);
         }
+        return ((T) this);
     }
 
 }

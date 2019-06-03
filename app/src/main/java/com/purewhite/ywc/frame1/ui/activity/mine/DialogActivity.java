@@ -10,6 +10,7 @@ import com.purewhite.ywc.frame1.ui.adapter.DialogAdapter;
 import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
+import com.purewhite.ywc.purewhitelibrary.view.dialog.bottomsheet.BottomSheetUtils;
 import com.purewhite.ywc.purewhitelibrary.view.dialog.dialog.DialogStyle;
 import com.purewhite.ywc.purewhitelibrary.view.dialog.dialog.DialogUtils;
 
@@ -17,7 +18,7 @@ import java.util.Arrays;
 
 public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterImp> {
 
-    private DialogUtils dialog,dialogList;
+    private BottomSheetUtils dialog,bottomSheetUtils;
     private OnSingleListener onSingleListener=new OnSingleListener() {
         @Override
         public void onSingleClick(View v) {
@@ -31,11 +32,11 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                     dialog.show();
                     break;
                 case R.id.dialog_two:
-                    if (dialogList==null)
+                    if (bottomSheetUtils==null)
                     {
-                        dialogList=dialogList();
+                        bottomSheetUtils=dialogList();
                     }
-                    dialogList.show();
+                    bottomSheetUtils.show();
                     break;
                 case R.id.dialog_sure:
                     dialog.dismiss();
@@ -44,37 +45,37 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                     dialog.dismiss();
                     break;
                 case R.id.list_clear:
-                    dialogList.dismiss();
+                    bottomSheetUtils.dismiss();
                     break;
             }
         }
     };
 
-    private DialogUtils dialog()
+    private BottomSheetUtils dialog()
     {
-        return new DialogUtils(this,R.layout.dialog_one)
+        return BottomSheetUtils.with(this)
+                .addLayout(R.layout.dialog_one)
                 .setOnClickListener(onSingleListener)
                 .setTextView(R.id.dialog_content,"纯白框架必然是精品",false)
-                .setTextView(R.id.dialog_sure,"",true)
-                .setTextView(R.id.dialog_clear,"",true)
+                .setTextView(R.id.dialog_sure,"确定",true)
+                .setTextView(R.id.dialog_clear,"取消",true)
                 .setScreenWidth(0.8f)
-                .setAnim(DialogStyle.left_anim)
-                .setCancelable(false);
+                .addAnim(DialogStyle.left_anim);
     }
 
 
-    private DialogUtils dialogList()
+    private BottomSheetUtils dialogList()
     {
         DialogAdapter dialogAdapter = new DialogAdapter(Arrays.asList(getResources().getStringArray(R.array.dialog_list)));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        return new DialogUtils(this,R.layout.dialog_two)
+        return BottomSheetUtils.with(this)
+                .addLayout(R.layout.dialog_two)
                 .setOnClickListener(onSingleListener)
-                .setTextView(R.id.list_clear,"",true)
+                .setTextView(R.id.list_clear,"确定",true)
                 .setRecycler(R.id.recycler_view,dialogAdapter,linearLayoutManager)
                 .setScreenWidth(1f)
-                .setAnim(DialogStyle.bottom_anim)
-                .setGravity(Gravity.BOTTOM)
-                .setAllFinish(this);
+                .addAnim(DialogStyle.bottom_anim)
+                .setGravity(Gravity.BOTTOM);
     }
 
 
@@ -106,7 +107,7 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
         super.onDestroy();
         if (dialog!=null)
             dialog.onDestroy();
-        if (dialogList!=null)
-            dialogList.onDestroy();
+        if (bottomSheetUtils!=null)
+            bottomSheetUtils.onDestroy();
     }
 }

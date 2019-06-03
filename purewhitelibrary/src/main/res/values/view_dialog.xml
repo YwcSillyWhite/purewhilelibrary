@@ -2,18 +2,25 @@
 <resources>
 
 
+
+    //透明
     <style name="BaseDialog" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <!-- 边框 -->
-        <item name="android:windowIsFloating">true</item>
-        <!-- 是否浮现在activity之上 -->
+        <!-- window半透明 -->
         <item name="android:windowIsTranslucent">false</item>
-        <!-- 半透明 -->
+        <!-- 显示在activity上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 没有边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- window无标题 -->
         <item name="android:windowNoTitle">true</item>
-        <!-- 无标题 -->
+        <!--  布局透明  -->
+        <item name="android:background">@android:color/transparent</item>
+        <!--  window透明  -->
         <item name="android:windowBackground">@android:color/transparent</item>
-        <!-- 模糊 -->
     </style>
+
+
+
 
     <style name="LeftAnimStyle" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/dialog_left_in</item>
