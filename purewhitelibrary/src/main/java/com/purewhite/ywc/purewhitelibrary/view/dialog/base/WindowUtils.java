@@ -13,7 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
+import com.purewhite.ywc.purewhitelibrary.view.dialog.dialog.DialogUtils;
 
 /**
  * @author yuwenchao
@@ -48,12 +50,16 @@ public abstract class WindowUtils<T extends WindowUtils>{
         return ((T) this);
     }
 
-    public T setView(int id, boolean click) {
-        if (click&&onClickListener!=null)
-        {
-            fdId(id).setOnClickListener(onClickListener);
-        }
-        return ((T) this);
+    public T setClick(@IdRes int ...ids)
+    {
+       if (onClickListener!=null)
+       {
+           for(int id:ids)
+           {
+               fdId(id).setOnClickListener(onClickListener);
+           }
+       }
+       return ((T) this);
     }
 
     public T setTextView(int id, String context, boolean click) {
