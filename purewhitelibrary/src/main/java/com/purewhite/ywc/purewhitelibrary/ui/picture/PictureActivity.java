@@ -5,7 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureActivityPictureBinding;
-import com.purewhite.ywc.purewhitelibrary.mvp.activity.MvpPureActivity;
+import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
 import com.purewhite.ywc.purewhitelibrary.view.recyclerview.AroundItemDecoration;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * @author yuwenchao
  */
-public class PictureActivity extends MvpPureActivity<PureActivityPictureBinding,PicturePresenter>
+public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,PicturePresenter>
         implements PictureContract.ViewUi {
 
     private PictureAdapter pictureAdapter;

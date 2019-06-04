@@ -14,7 +14,7 @@ public class NetWorkUtils {
 
     //获取网络信息对象
     private static NetworkInfo getActiveNetworkInfo() {
-        return ((ConnectivityManager) AppUtils.getApplication()
+        return ((ConnectivityManager) AppUtils.getContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE))
                 .getActiveNetworkInfo();
     }

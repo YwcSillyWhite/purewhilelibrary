@@ -18,7 +18,7 @@ public final class SizeUtils {
      * 获取屏幕的宽度
      */
     public static int getScreenWidth() {
-        return AppUtils.getApplication().getResources().getDisplayMetrics().widthPixels;
+        return AppUtils.getContext().getResources().getDisplayMetrics().widthPixels;
     }
 
     /**
@@ -26,7 +26,7 @@ public final class SizeUtils {
      * @return
      */
     public static int getScreenHeight() {
-        return AppUtils.getApplication().getResources().getDisplayMetrics().heightPixels;
+        return AppUtils.getContext().getResources().getDisplayMetrics().heightPixels;
     }
 }
 

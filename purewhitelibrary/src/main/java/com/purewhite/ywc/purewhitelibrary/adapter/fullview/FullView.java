@@ -2,10 +2,8 @@ package com.purewhite.ywc.purewhitelibrary.adapter.fullview;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnFullListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BaseViewHolder;
 
 /**

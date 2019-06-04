@@ -1,7 +1,6 @@
 package com.purewhite.ywc.frame1.ui.activity.mine;
 
 import android.support.v7.widget.LinearLayoutManager;
-import android.view.Gravity;
 import android.view.View;
 
 import com.purewhite.ywc.frame1.R;
@@ -12,7 +11,6 @@ import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.view.dialog.bottomsheet.BottomSheetUtils;
 import com.purewhite.ywc.purewhitelibrary.view.dialog.dialog.DialogStyle;
-import com.purewhite.ywc.purewhitelibrary.view.dialog.dialog.DialogUtils;
 
 import java.util.Arrays;
 

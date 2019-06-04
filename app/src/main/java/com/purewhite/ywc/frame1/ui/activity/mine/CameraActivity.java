@@ -8,14 +8,13 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.purewhite.ywc.frame1.R;
+import com.purewhite.ywc.frame1.config.FileManagerUtils;
 import com.purewhite.ywc.frame1.config.TagUtils;
 import com.purewhite.ywc.frame1.databinding.ActivityCameraBinding;
 import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
-import com.purewhite.ywc.purewhitelibrary.app.activity.ActivitySkipUtils;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.PhotoUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
-import com.purewhite.ywc.frame1.config.FileManagerUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
@@ -60,7 +59,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                     FileManagerUtils.removeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
                     break;
                 case R.id.open_img:
-                    ActivitySkipUtils.startActivityAnim(PictureActivity.class);
+                    skipActivityAnim(PictureActivity.class);
                     break;
             }
         }

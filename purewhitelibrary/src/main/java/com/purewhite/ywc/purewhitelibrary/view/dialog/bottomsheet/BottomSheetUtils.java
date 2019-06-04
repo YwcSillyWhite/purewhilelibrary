@@ -3,18 +3,14 @@ package com.purewhite.ywc.purewhitelibrary.view.dialog.bottomsheet;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.LayoutRes;
 import android.support.design.widget.BottomSheetDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
-import com.purewhite.ywc.purewhitelibrary.app.activity.ActivityRollbackUtils;
-import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
 import com.purewhite.ywc.purewhitelibrary.view.dialog.base.WindowUtils;
 
 /**
@@ -99,7 +95,7 @@ public class BottomSheetUtils extends WindowUtils<BottomSheetUtils> {
                     // 关闭 Dialog
                     dialog.dismiss();
                     // 关闭当前 Activity
-                    ActivityRollbackUtils.finish(activity);
+                    activity.finish();
                     // 返回 true，表示返回事件已被处理，不再向下传递
                     return true;
                 } else {

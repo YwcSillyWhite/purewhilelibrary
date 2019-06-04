@@ -9,7 +9,6 @@ import com.purewhite.ywc.frame1.ui.activity.mine.CameraActivity;
 import com.purewhite.ywc.frame1.ui.activity.mine.CustomMainActivity;
 import com.purewhite.ywc.frame1.ui.activity.mine.DialogActivity;
 import com.purewhite.ywc.frame1.ui.mvp.MvpFragment;
-import com.purewhite.ywc.purewhitelibrary.app.activity.ActivitySkipUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 
@@ -28,16 +27,16 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
             switch (v.getId())
             {
                 case R.id.android_study:
-                    ActivitySkipUtils.startActivityAnim(AndroidStudyActivity.class);
+                    skipActivityAnim(AndroidStudyActivity.class);
                     break;
                 case R.id.bottom_navigation:
-                    ActivitySkipUtils.startActivityAnim(CustomMainActivity.class);
+                    skipActivityAnim(CustomMainActivity.class);
                     break;
                 case R.id.dialog:
-                    ActivitySkipUtils.startActivityAnim(DialogActivity.class);
+                    skipActivityAnim(DialogActivity.class);
                     break;
                 case R.id.camera:
-                    ActivitySkipUtils.startActivityAnim(CameraActivity.class);
+                    skipActivityAnim(CameraActivity.class);
                     break;
             }
         }

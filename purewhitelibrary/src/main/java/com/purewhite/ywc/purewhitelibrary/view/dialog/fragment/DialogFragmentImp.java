@@ -5,7 +5,6 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.DialogFragment;
 
 import com.purewhite.ywc.purewhitelibrary.R;
-import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
 
 public class DialogFragmentImp extends BaseDialogFragment{
 
@@ -43,15 +42,6 @@ public class DialogFragmentImp extends BaseDialogFragment{
     }
 
 
-    @Override
-    protected int obtainGravity() {
-        return gravity;
-    }
-
-    @Override
-    protected int screenWidth() {
-        return ((int) (SizeUtils.getScreenWidth() * scale));
-    }
 
     @Override
     protected void initView() {

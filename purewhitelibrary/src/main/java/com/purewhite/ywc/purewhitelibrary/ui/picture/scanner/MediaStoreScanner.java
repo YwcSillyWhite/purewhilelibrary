@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 

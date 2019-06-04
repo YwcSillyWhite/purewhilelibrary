@@ -8,8 +8,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
 
-import com.purewhite.ywc.purewhitelibrary.app.activity.ActivitySkipUtils;
-
 import java.io.File;
 
 /**
@@ -19,7 +17,6 @@ import java.io.File;
  */
 public class PhotoUtils {
 
-
     /**
      *
      * @param activity
@@ -27,8 +24,8 @@ public class PhotoUtils {
      * @param file
      * @param requestCode
      */
-    public  static void intentCamera(Activity activity,String providerFileContent
-            ,File file,int requestCode)
+    public  static void intentCamera(Activity activity, String providerFileContent
+            , File file, int requestCode)
     {
         if (file!=null&&activity!=null)
         {
@@ -50,7 +47,7 @@ public class PhotoUtils {
             }
             //Intent-extra的名称，用于指示用于存储所请求的图像或视频的内容解析器Uri。
             intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
-            ActivitySkipUtils.startActivityAnim(intent,activity,requestCode);
+            activity.startActivityForResult(intent,requestCode);
         }
     }
 
@@ -85,7 +82,7 @@ public class PhotoUtils {
             }
             //Intent-extra的名称，用于指示用于存储所请求的图像或视频的内容解析器Uri。
             intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
-            ActivitySkipUtils.startActivityAnim(intent,fragment,requestCode);
+            fragment.startActivityForResult(intent,requestCode);
         }
     }
 }

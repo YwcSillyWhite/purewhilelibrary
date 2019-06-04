@@ -14,8 +14,8 @@ import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
  * @date 2018/11/14
  */
 
-public abstract class MvpPureFragment<DB extends ViewDataBinding,P extends PresenterImp>
-        extends BaseFragment<DB> implements BaseUiView {
+public abstract class BaseMvpFragment<D extends ViewDataBinding,P extends PresenterImp>
+        extends BaseBindFragment<D> implements BaseUiView {
 
     protected P mPresenter;
 
@@ -24,15 +24,17 @@ public abstract class MvpPureFragment<DB extends ViewDataBinding,P extends Prese
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter=creartPresenter();
-        if (mPresenter!=null)
+        if (mPresenter!=null) {
             mPresenter.addView(this);
+        }
     }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mPresenter!=null)
+        if (mPresenter!=null) {
             mPresenter.deleteView();
+        }
     }
 }

@@ -13,8 +13,8 @@ import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
  * @date 2018/11/5
  */
 
-public abstract class MvpPureActivity<DB extends ViewDataBinding,P extends PresenterImp>
-        extends BaseActivity<DB> implements BaseUiView {
+public abstract class BaseMvpActivity<D extends ViewDataBinding,P extends PresenterImp>
+        extends BaseBindActivity<D> implements BaseUiView {
 
     protected P mPresenter;
     @Override

@@ -4,11 +4,11 @@ import android.databinding.ViewDataBinding;
 import android.view.View;
 
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.activity.MvpPureActivity;
+import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
 public abstract class MvpActivity<DB extends ViewDataBinding,P extends PresenterImp>
-        extends MvpPureActivity<DB,P>{
+        extends BaseMvpActivity<DB,P> {
 
 
     @Override

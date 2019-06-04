@@ -3,7 +3,6 @@ package com.purewhite.ywc.purewhitelibrary.view.dialog.fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,20 +10,13 @@ import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
-import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 
 
 /**

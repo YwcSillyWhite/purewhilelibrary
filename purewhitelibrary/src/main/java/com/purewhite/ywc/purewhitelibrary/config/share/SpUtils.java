@@ -32,7 +32,7 @@ public class SpUtils {
         private SharedPreferences sharedPreferences;
         private SharedPreferences.Editor editor;
         public SBuilder(boolean gain,String content) {
-            sharedPreferences=AppUtils.getApplication().getSharedPreferences(content, Context.MODE_PRIVATE);
+            sharedPreferences=AppUtils.getContext().getSharedPreferences(content, Context.MODE_PRIVATE);
             if (gain)
             {
                 editor=sharedPreferences.edit();

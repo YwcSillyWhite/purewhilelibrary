@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseActivity;
 import com.purewhite.ywc.purewhitelibrary.network.retrofit.RetrofitUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
@@ -19,23 +18,16 @@ import java.util.Stack;
  */
 
 public final class  AppUtils {
-
-    public AppUtils() {
-        throw new UnsupportedOperationException("you can not create object");
-    }
-
     private static Application application;
-    public static Application getApplication() {
-        return application;
+    private static Stack<Activity> stack=new Stack<>();
+    private AppUtils() {
+
     }
 
-    private static Stack<BaseActivity> stack=new Stack<>();
     static Application.ActivityLifecycleCallbacks activityLifecycleCallbacks=new Application.ActivityLifecycleCallbacks() {
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-            if (activity instanceof BaseActivity) {
-                stack.add(((BaseActivity) activity));
-            }
+            stack.add(activity);
         }
 
         @Override
@@ -79,7 +71,6 @@ public final class  AppUtils {
     public static void init(Application application) {
         init(application,null);
     }
-
     public static void init(Application application,String uri)
     {
         AppUtils.application =application;
@@ -90,24 +81,23 @@ public final class  AppUtils {
         }
     }
 
-
-    public static Activity obtainTopActivity()
+    public static Context getContext()
     {
-        if (!stack.isEmpty())
-        {
-            return stack.lastElement();
-        }
-        return null;
+        return application;
     }
 
 
-
-    public static Context getContext()
+    /**
+     * 关闭所有的activity
+     */
+    public static void closeApp()
     {
-        if (AppUtils.obtainTopActivity()!=null) {
-            return AppUtils.obtainTopActivity();
+        if (stack.isEmpty())
+        {
+            for (Activity activity:stack) {
+                activity.finish();
+            }
         }
-        return application;
     }
 
 }

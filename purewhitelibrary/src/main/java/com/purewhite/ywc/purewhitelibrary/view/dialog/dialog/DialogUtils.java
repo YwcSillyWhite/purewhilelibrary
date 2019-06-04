@@ -14,7 +14,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
-import com.purewhite.ywc.purewhitelibrary.app.activity.ActivityRollbackUtils;
 import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
 import com.purewhite.ywc.purewhitelibrary.view.dialog.base.WindowUtils;
 
@@ -152,7 +151,7 @@ public class DialogUtils extends WindowUtils<DialogUtils> {
                     // 关闭 Dialog
                     dialog.dismiss();
                     // 关闭当前 Activity
-                    ActivityRollbackUtils.finish(activity);
+                    activity.finish();
                     // 返回 true，表示返回事件已被处理，不再向下传递
                     return true;
                 } else {

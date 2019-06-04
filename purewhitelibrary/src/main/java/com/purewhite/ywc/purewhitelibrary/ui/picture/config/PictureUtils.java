@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture.config;
 
 import android.text.TextUtils;
 
-import com.purewhite.ywc.purewhitelibrary.config.StringUtils;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 

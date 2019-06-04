@@ -4,11 +4,11 @@ import android.databinding.ViewDataBinding;
 import android.view.View;
 
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.fragment.MvpPureFragment;
+import com.purewhite.ywc.purewhitelibrary.mvp.fragment.BaseMvpFragment;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
 public abstract class MvpFragment<DB extends ViewDataBinding,P extends PresenterImp>
-        extends MvpPureFragment<DB,P>{
+        extends BaseMvpFragment<DB,P> {
 
 
     protected View onBarTitleView()
