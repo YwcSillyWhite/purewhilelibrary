@@ -740,13 +740,21 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
 
 
     //删除数据
-    public void remove(int position)
+    public void removePosition(int position)
     {
         if (obtianDataCount()>position)
         {
             obtainData().remove(position);
             notifyItemRemoved(position);
         }
+    }
+
+
+    //刷新
+    public void flushPosition(int position)
+    {
+        //刷新
+        notifyItemChanged(getHeadCount()+position);
     }
 
 

@@ -1,5 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.config;
 
+import android.support.annotation.StringRes;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
@@ -12,22 +14,34 @@ public class ToastUtils {
     private static Toast toast;
     public static void show(String content)
     {
-        if (toast==null)
+        if (!TextUtils.isEmpty(content))
         {
-            toast=Toast.makeText(AppUtils.getContext(),null,Toast.LENGTH_SHORT);
+            if (toast==null)
+            {
+                toast=Toast.makeText(AppUtils.getContext(),content,Toast.LENGTH_SHORT);
+            }
+            else
+            {
+                toast.setText(content);
+            }
+            toast.show();
         }
-        toast.setText(content);
-        toast.show();
     }
 
 
-    public static void show(int res)
+    public static void show(@StringRes int res)
     {
-        if (toast==null)
+        if (res!=0)
         {
-            toast=Toast.makeText(AppUtils.getContext(),null,Toast.LENGTH_SHORT);
+            if (toast==null)
+            {
+                toast=Toast.makeText(AppUtils.getContext(),res,Toast.LENGTH_SHORT);
+            }
+            else
+            {
+                toast.setText(res);
+            }
+            toast.show();
         }
-        toast.setText(res);
-        toast.show();
     }
 }

@@ -8,7 +8,6 @@ import java.util.List;
  * @author yuwenchao
  */
 public class Ints {
-
     public static  List<Integer> asList(int ...a) {
         List<Integer> list = null;
         if (a!=null&&a.length>0)
