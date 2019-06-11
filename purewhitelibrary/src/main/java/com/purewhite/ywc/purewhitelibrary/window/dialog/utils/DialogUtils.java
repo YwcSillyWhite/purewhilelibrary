@@ -4,48 +4,44 @@ import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.StyleRes;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
-import com.purewhite.ywc.purewhitelibrary.window.dialog.base.WindowDialogUtils;
-
+import com.purewhite.ywc.purewhitelibrary.window.base.WindowDialogUtils;
 
 /**
  * dialogutils
  * @author yuwenchao
+ * R.style.BaseDialog
  */
 public class DialogUtils extends WindowDialogUtils<DialogUtils> {
 
 
-    public static DialogUtils with(Context context,@LayoutRes int id) {
-        return with(context,R.style.BaseDialog,id);
-    }
-
-    public static DialogUtils with(Context context,@LayoutRes int id,ViewGroup.LayoutParams layoutParams) {
-        return with(context,R.style.BaseDialog,id,layoutParams);
-    }
-
-    public static DialogUtils with(Context context,@StyleRes int theme,@LayoutRes int id) {
-        return with(context,theme,id,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
-    }
-
-    public static DialogUtils with(Context context,@StyleRes int theme
-            ,@LayoutRes int id, ViewGroup.LayoutParams layoutParams) {
-        return new DialogUtils(context,R.style.BaseDialog,id,layoutParams);
-    }
-
-    private DialogUtils(Context context, @StyleRes int theme,
-                        @LayoutRes int id, ViewGroup.LayoutParams layoutParams)
+    public static DialogUtils with(Context context,@LayoutRes int layoutId)
     {
-        this.context=context;
-        this.dialog=new Dialog(context,theme);
-        this.window=dialog.getWindow();
-        this.viewParent = LayoutInflater.from(context).inflate(id, null);
-        dialog.setContentView(viewParent,layoutParams);
+        return with(context,layoutId,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
     }
+
+    public static DialogUtils with(Context context,@LayoutRes int layoutId,int width,int height)
+    {
+        return with(context,layoutId,R.style.BaseDialog,width,height);
+    }
+
+    public static DialogUtils with(Context context,@LayoutRes int layoutId,@StyleRes int theme
+            ,int width,int height)
+    {
+        return new DialogUtils(context,layoutId,theme,width,height);
+    }
+
+    public DialogUtils(Context context,@LayoutRes int layoutId,@StyleRes int theme,int width,int height) {
+        super(context, layoutId, new Dialog(context,theme));
+        dialog.setContentView(viewParent,new ViewGroup.LayoutParams(width,height));
+    }
+
+
+
 
 
     public DialogUtils setScreenWidth(float scale) {
@@ -57,6 +53,8 @@ public class DialogUtils extends WindowDialogUtils<DialogUtils> {
         }
         return this;
     }
+
+
 
 
     public DialogUtils setScreenHight(float scale) {
