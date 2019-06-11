@@ -3,6 +3,7 @@ package com.purewhite.ywc.frame1.ui.activity.mine;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,13 +13,16 @@ import com.purewhite.ywc.frame1.config.FileManagerUtils;
 import com.purewhite.ywc.frame1.config.TagUtils;
 import com.purewhite.ywc.frame1.databinding.ActivityCameraBinding;
 import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
+import com.purewhite.ywc.purewhitelibrary.config.ConfigUtils;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.PhotoUtils;
+import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureActivity;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
 
 import java.io.File;
 
@@ -59,7 +63,10 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                     FileManagerUtils.removeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
                     break;
                 case R.id.open_img:
-                    skipActivityAnim(PictureActivity.class);
+                    Bundle build = BundleUtils.buidler()
+                            .put(PictureStype.STYPE_PIC_NUM, 4)
+                            .build();
+                    skipActivityAnim(PictureActivity.class,build,ConfigUtils.INTENT_REQUEST_PIC);
                     break;
             }
         }

@@ -60,7 +60,7 @@
                     android:gravity="center_vertical"
                     android:background="@color/write"
                     android:id="@+id/dialog"
-                    android:text="自定义dialog"
+                    android:text="dialog"
                     android:textColor="#333"/>
                 <include layout="@layout/view_line"/>
                 <TextView

@@ -1,0 +1,110 @@
+package com.purewhite.ywc.frame1.ui.activity.mine.dialog;
+
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+
+import com.purewhite.ywc.frame1.R;
+import com.purewhite.ywc.frame1.databinding.ActivityDialogBinding;
+import com.purewhite.ywc.frame1.ui.adapter.DialogAdapter;
+import com.purewhite.ywc.frame1.ui.mvp.MvpActivity;
+import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
+import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
+import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
+
+import java.util.Arrays;
+
+public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterImp> {
+
+    private DialogUtils dialogOne,dialogTwo;
+    private OnSingleListener onSingleListener=new OnSingleListener() {
+        @Override
+        public void onSingleClick(View v) {
+            switch (v.getId())
+            {
+                case R.id.dialog:
+                    createDialog(1);
+                    break;
+                case R.id.dialog_two:
+                    createDialog(2);
+                    break;
+                case R.id.dialog_sure:
+                    dialogOne.dismiss();
+                    break;
+                case R.id.dialog_clear:
+                    dialogOne.dismiss();
+                    break;
+                case R.id.list_clear:
+                    dialogTwo.dismiss();
+                    break;
+            }
+        }
+    };
+
+    private void createDialog(int dialogType)
+    {
+        switch (dialogType)
+        {
+            case 1:
+                if (dialogOne==null)
+                {
+                    dialogOne=DialogUtils.with(this,R.layout.dialog_one)
+                            .setOnClickListener(onSingleListener)
+                            .setTextView(R.id.dialog_content,"纯白框架必然是精品",false)
+                            .setTextView(R.id.dialog_sure,"确定",true)
+                            .setTextView(R.id.dialog_clear,"取消",true)
+                            .addAnim(WindowAnimStyle.left_anim)
+                            .bindActivity(this)
+                            .setScreenWidth(0.8f);
+                }
+                dialogOne.show();
+                break;
+            case 2:
+                if (dialogTwo==null)
+                {
+                    DialogAdapter dialogAdapter = new DialogAdapter(Arrays.asList(getResources().getStringArray(R.array.dialog_list)));
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+                    dialogTwo=DialogUtils.with(this,R.layout.dialog_two)
+                            .setOnClickListener(onSingleListener)
+                            .setTextView(R.id.list_clear,"确定",true)
+                            .setRecycler(R.id.recycler_view,dialogAdapter,linearLayoutManager)
+                            .addAnim(WindowAnimStyle.bottom_anim)
+                            .bindActivity(this)
+                            .setScreenWidth(1f);
+                }
+                dialogTwo.show();
+                break;
+                }
+
+    }
+
+    @Override
+    protected View onBarTitleView() {
+        return mDataBinding.actionBar.barLayout;
+    }
+
+    @Override
+    protected PresenterImp creartPresenter() {
+        return null;
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_dialog;
+    }
+
+    @Override
+    protected void initView() {
+        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.actionBar.centerText.setText("dialog");
+        mDataBinding.dialogTwo.setOnClickListener(onSingleListener);
+        mDataBinding.dialog.setOnClickListener(onSingleListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        WindowPureUtils.onDialogDestory(dialogOne,dialogTwo);
+    }
+}

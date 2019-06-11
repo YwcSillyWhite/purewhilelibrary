@@ -45,8 +45,7 @@
         <activity android:name=".ui.activity.MainActivity"/>
         <!-- 自定义首页 -->
         <activity android:name=".ui.activity.mine.CustomMainActivity"/>
-        <!-- dialog页面 -->
-        <activity android:name=".ui.activity.mine.DialogActivity"/>
+
         <!-- 获取图片 -->
         <activity android:name=".ui.activity.mine.CameraActivity"/>
         <!-- android学习页面 -->
@@ -54,6 +53,11 @@
         <!-- web -->
         <activity android:name=".ui.activity.mine.WebActivity"/>
 
+
+        <!-- dialogHome -->
+        <activity android:name=".ui.activity.mine.dialog.DialogHomeActiivty"/>
+        <!-- dialog页面 -->
+        <activity android:name=".ui.activity.mine.dialog.DialogActivity"/>
 
 
 

@@ -1,5 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
@@ -8,6 +9,8 @@ import com.purewhite.ywc.purewhitelibrary.databinding.PureActivityPictureBinding
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.manager.PicSeletorManager;
 import com.purewhite.ywc.purewhitelibrary.view.recyclerview.AroundItemDecoration;
 
 import java.util.List;
@@ -19,6 +22,11 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         implements PictureContract.ViewUi {
 
     private PictureAdapter pictureAdapter;
+    //获取类型
+    private int style_request;
+    //选择最大图片
+    private int stype_pic_num;
+
     @Override
     protected void beforeView() {
         super.beforeView();
@@ -44,8 +52,21 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         return R.layout.pure_activity_picture;
     }
 
+
     @Override
     protected void initView() {
+        Intent intent = getIntent();
+        style_request = intent.getIntExtra(PictureStype.STYPE_REQUEST, PictureStype.STYPE_PIC_REQUEST);
+        if (style_request==PictureStype.STYPE_PIC_REQUEST)
+        {
+            stype_pic_num = intent.getIntExtra(PictureStype.STYPE_PIC_NUM, 0);
+            if (stype_pic_num>0)
+            {
+                PicSeletorManager.newInstance().setPicSize(stype_pic_num);
+            }
+        }
+
+
         pictureAdapter = new PictureAdapter();
         mDataBinding.recyclerView.setAdapter(pictureAdapter);
         mDataBinding.recyclerView.setLayoutManager(new GridLayoutManager(this,4));

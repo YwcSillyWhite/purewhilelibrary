@@ -42,6 +42,21 @@ public class PureScrollView extends ClashScrollView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        try
+        {
+            return touchEvent(ev);
+        }
+        catch (Exception e)
+        {
+
+        }
+        return false;
+    }
+
+
+
+    private boolean touchEvent(MotionEvent ev) throws Exception
+    {
         if (childView!=null&&!isAnim)
         {
             int newY = (int) ev.getY();
@@ -73,6 +88,10 @@ public class PureScrollView extends ClashScrollView {
     }
 
 
+    /**
+     * 是否可以移动
+     * @return
+     */
     private boolean isMove()
     {
         int child_MeasureHeight = childView.getMeasuredHeight();
@@ -88,7 +107,7 @@ public class PureScrollView extends ClashScrollView {
 
 
     /**
-     * 结束返回
+     * 结束返回动画
      */
     private void anim()
     {

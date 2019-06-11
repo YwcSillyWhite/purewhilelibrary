@@ -52,22 +52,14 @@ public abstract class BaseActivity extends AppCompatActivity{
     private void setOrientation()
     {
         //android 8.0之后如果屏幕满屏透明是不能设置屏幕方向
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
-        {
-            try
-            {
-                setRequestedOrientation(isVertical()? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
-                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            }
-            catch (Exception e)
-            {
-
-            }
-        }
-        else
+        try
         {
             setRequestedOrientation(isVertical()? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
                     ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+        catch (Exception e)
+        {
+
         }
     }
 

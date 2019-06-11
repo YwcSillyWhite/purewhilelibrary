@@ -86,6 +86,7 @@ public class PicSeletorManager {
      */
     public void onDestory()
     {
+        picSize=9;
         listPath.clear();
     }
 }
