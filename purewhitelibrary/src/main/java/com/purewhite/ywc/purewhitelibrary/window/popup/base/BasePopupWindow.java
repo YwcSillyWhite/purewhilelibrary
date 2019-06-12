@@ -10,7 +10,6 @@ import android.widget.PopupWindow;
  * @author yuwenchao
  */
 public class BasePopupWindow extends PopupWindow {
-
     public BasePopupWindow(Context context) {
         super(context);
     }
@@ -28,6 +27,7 @@ public class BasePopupWindow extends PopupWindow {
     }
 
     public BasePopupWindow() {
+        super();
     }
 
     public BasePopupWindow(View contentView) {
@@ -45,5 +45,4 @@ public class BasePopupWindow extends PopupWindow {
     public BasePopupWindow(View contentView, int width, int height, boolean focusable) {
         super(contentView, width, height, focusable);
     }
-
 }

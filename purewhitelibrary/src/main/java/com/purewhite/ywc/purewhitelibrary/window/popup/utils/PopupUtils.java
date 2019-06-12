@@ -7,16 +7,16 @@ import android.os.Build;
 import android.support.annotation.LayoutRes;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupWindow;
 
 import com.purewhite.ywc.purewhitelibrary.window.base.WindowViewUtils;
+import com.purewhite.ywc.purewhitelibrary.window.popup.base.BasePopupWindow;
 
 /**
  * @author yuwenchao
  */
 public class PopupUtils extends WindowViewUtils<PopupUtils> {
 
-    private PopupWindow popupWindow;
+    private BasePopupWindow popupWindow;
 
     public static PopupUtils with(Context context,@LayoutRes int id)
     {
@@ -25,11 +25,9 @@ public class PopupUtils extends WindowViewUtils<PopupUtils> {
 
     public PopupUtils(Context context, int layoutId) {
         super(context, layoutId);
-        this.popupWindow = new PopupWindow();
+        this.popupWindow = new BasePopupWindow();
         this.popupWindow.setContentView(viewParent);
     }
-
-
 
 
     /**
@@ -45,6 +43,9 @@ public class PopupUtils extends WindowViewUtils<PopupUtils> {
         return this;
     }
 
+
+
+
     /**
      * 背景透明
      * @return
@@ -53,6 +54,9 @@ public class PopupUtils extends WindowViewUtils<PopupUtils> {
     {
         return setBackground(Color.TRANSPARENT);
     }
+
+
+
 
     /**
      * 设置背景
@@ -63,6 +67,9 @@ public class PopupUtils extends WindowViewUtils<PopupUtils> {
         popupWindow.setBackgroundDrawable(new ColorDrawable(backColor));
         return this;
     }
+
+
+
 
     /**
      * 设置PopupWindow是否能响应外部点击事件
@@ -75,6 +82,8 @@ public class PopupUtils extends WindowViewUtils<PopupUtils> {
         return this;
     }
 
+
+
     /**
      * 设置PopupWindow是否能响应点击事件
      * @param touchable
@@ -85,6 +94,11 @@ public class PopupUtils extends WindowViewUtils<PopupUtils> {
         popupWindow.setTouchable(touchable);
         return this;
     }
+
+
+
+
+
 
 
     public void show(View view)
