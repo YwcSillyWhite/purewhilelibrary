@@ -1,6 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.window.utils;
 
-import com.purewhite.ywc.purewhitelibrary.window.dialog.base.WindowDialogUtils;
+import com.purewhite.ywc.purewhitelibrary.window.base.WindowDialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.popup.utils.PopupUtils;
 
 /**
