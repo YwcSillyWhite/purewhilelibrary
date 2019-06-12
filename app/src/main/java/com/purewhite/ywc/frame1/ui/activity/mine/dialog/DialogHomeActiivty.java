@@ -26,6 +26,10 @@ public class DialogHomeActiivty extends MvpActivity<ActivityDialogHomeBinding,Pr
                     break;
                 case R.id.popupwindowUtils:
                     break;
+                case R.id.left_img:
+                    finish();
+                    break;
+
             }
         }
     };
@@ -42,8 +46,14 @@ public class DialogHomeActiivty extends MvpActivity<ActivityDialogHomeBinding,Pr
 
     @Override
     protected void initView() {
+        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.actionBar.centerText.setText("window框架");
+        mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
+        mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
         mDataBinding.bottomsheetUtils.setOnClickListener(onSingleListener);
         mDataBinding.dialogUtils.setOnClickListener(onSingleListener);
         mDataBinding.popupwindowUtils.setOnClickListener(onSingleListener);
+
+
     }
 }

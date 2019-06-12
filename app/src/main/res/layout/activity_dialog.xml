@@ -10,7 +10,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:background="@color/write"
-            android:text="SheetUtils左进dialog"
+            android:text="dialogUtils中间"
             android:gravity="center"
             android:id="@+id/dialog"/>
         <include layout="@layout/view_line"/>
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/write"
-            android:text="SheetUtils下进列表dialog"
+            android:text="dialogUtils下面"
             android:gravity="center"
             android:id="@+id/dialog_two"/>
     </LinearLayout>

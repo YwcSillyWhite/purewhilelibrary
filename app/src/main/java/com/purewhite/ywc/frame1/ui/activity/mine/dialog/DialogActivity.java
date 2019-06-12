@@ -1,6 +1,7 @@
 package com.purewhite.ywc.frame1.ui.activity.mine.dialog;
 
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Gravity;
 import android.view.View;
 
 import com.purewhite.ywc.frame1.R;
@@ -38,6 +39,9 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                 case R.id.list_clear:
                     dialogTwo.dismiss();
                     break;
+                case R.id.left_img:
+                    finish();
+                    break;
             }
         }
     };
@@ -68,8 +72,9 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                     dialogTwo=DialogUtils.with(this,R.layout.dialog_two)
                             .setOnClickListener(onSingleListener)
                             .setTextView(R.id.list_clear,"确定",true)
-                            .setRecycler(R.id.recycler_view,dialogAdapter,linearLayoutManager)
+                            .setRecyclerView(R.id.recycler_view,dialogAdapter,linearLayoutManager)
                             .addAnim(WindowAnimStyle.bottom_anim)
+                            .setGravity(Gravity.BOTTOM)
                             .bindActivity(this)
                             .setScreenWidth(1f);
                 }
@@ -98,6 +103,8 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
     protected void initView() {
         mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
         mDataBinding.actionBar.centerText.setText("dialog");
+        mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
+        mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
         mDataBinding.dialogTwo.setOnClickListener(onSingleListener);
         mDataBinding.dialog.setOnClickListener(onSingleListener);
     }
