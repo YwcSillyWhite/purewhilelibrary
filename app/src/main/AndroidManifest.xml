@@ -59,6 +59,8 @@
         <!-- dialog页面 -->
         <activity android:name=".ui.activity.mine.dialog.DialogActivity"/>
 
+        <activity android:name=".ui.activity.mine.dialog.BottomsheetActivity"/>
+
 
 
         <!--  android:permission=""  -->
