@@ -3,7 +3,6 @@ package com.purewhite.ywc.frame.ui.adapter;
 import android.databinding.ViewDataBinding;
 import android.view.View;
 
-
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.AdapterDialogTwoBinding;
 import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.BindAdapter;

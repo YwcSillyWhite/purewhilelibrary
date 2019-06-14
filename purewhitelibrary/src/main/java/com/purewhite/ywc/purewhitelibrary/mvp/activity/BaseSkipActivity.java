@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.AnimRes;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 
@@ -73,79 +72,37 @@ public abstract class BaseSkipActivity extends BaseActivity{
         {
             super.startActivity(intent);
         }
+        skipAnim();
     }
 
 
-    /**
-     * 动画跳转
-     * @param cla
-     */
-    public void skipActivityAnim(Class<?> cla)
+
+    protected int skipAnimEnter()
     {
-        skipActivityAnim(cla,null,null);
+        return R.anim.pure_activity_enter_left;
     }
 
-    public void skipActivityAnim(Class<?> cla,Bundle bundle)
+    protected int skipAnimExit()
     {
-        skipActivityAnim(cla,bundle,null);
-    }
-
-    public void skipActivityAnim(Class<?> cla,int requestCode)
-    {
-        skipActivityAnim(cla,null,null);
-    }
-
-    public void skipActivityAnim(Class<?> cla,Bundle bundle,Integer requestCode)
-    {
-        skipActivityAnim(new Intent(this,cla),bundle,requestCode);
+        return R.anim.pure_activity_exit_right;
     }
 
 
-    public void skipActivityAnim(Intent intent)
+    private void skipAnim()
     {
-        skipActivityAnim(intent,null,null);
-    }
-
-    public void skipActivityAnim(Intent intent,Integer requestCode)
-    {
-        skipActivityAnim(intent,null,requestCode);
-    }
-
-    public void skipActivityAnim(Intent intent,Bundle bundle)
-    {
-        skipActivityAnim(intent,bundle,null);
-    }
-
-
-    /**
-     * request必须大于0才调用
-     * @param intent
-     * @param bundle
-     * @param requestCode
-     */
-    public void skipActivityAnim(Intent intent,Bundle bundle,Integer requestCode)
-    {
-        if (bundle!=null)
+        int skipAnimEnter = skipAnimEnter();
+        int skipAnimExit = skipAnimExit();
+        if (skipAnimEnter!=0||skipAnimExit!=0)
         {
-            intent.putExtras(bundle);
+            overridePendingTransition(skipAnimEnter,skipAnimExit);
         }
-        if (requestCode!=null)
-        {
-            super.startActivityForResult(intent,requestCode);
-        }
-        else
-        {
-            super.startActivity(intent);
-        }
-        skipOrBackAnim(R.anim.activity_open_enter,R.anim.activity_open_exit);
     }
 
 
-    public void skipOrBackAnim(@AnimRes int enter,@AnimRes int exit)
-    {
-        overridePendingTransition(enter,exit);
 
-    }
+
+
+
 
 
 
@@ -179,6 +136,8 @@ public abstract class BaseSkipActivity extends BaseActivity{
     }
 
 
+
+
     //结束动画默认是关闭的
     @Override
     public void onBackPressed() {
@@ -199,11 +158,24 @@ public abstract class BaseSkipActivity extends BaseActivity{
     }
 
 
+    protected int finishAnimEnter()
+    {
+        return 0;
+    }
+
+    protected int finishAnimExit()
+    {
+        return R.anim.pure_activity_exit_right;
+    }
+
+
     private void finishAnim()
     {
-        if (isFinishAnim())
+        int finishAnimEnter = finishAnimEnter();
+        int finishAnimExit = finishAnimExit();
+        if (finishAnimEnter!=0||finishAnimExit!=0)
         {
-            skipOrBackAnim(R.anim.activity_close_enter,R.anim.activity_close_exit);
+            overridePendingTransition(finishAnimEnter,finishAnimExit);
         }
     }
 

@@ -27,16 +27,16 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
             switch (v.getId())
             {
                 case R.id.android_study:
-                    skipActivityAnim(AndroidStudyActivity.class);
+                    skipActivity(AndroidStudyActivity.class);
                     break;
                 case R.id.bottom_navigation:
-                    skipActivityAnim(CustomMainActivity.class);
+                    skipActivity(CustomMainActivity.class);
                     break;
                 case R.id.dialog:
-                    skipActivityAnim(DialogHomeActiivty.class);
+                    skipActivity(DialogHomeActiivty.class);
                     break;
                 case R.id.camera:
-                    skipActivityAnim(CameraActivity.class);
+                    skipActivity(CameraActivity.class);
                     break;
             }
         }

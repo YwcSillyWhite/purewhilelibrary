@@ -22,7 +22,7 @@ public class DialogHomeActiivty extends MvpActivity<ActivityDialogHomeBinding,Pr
                 case R.id.bottomsheetUtils:
                     break;
                 case R.id.dialogUtils:
-                    skipActivityAnim(DialogActivity.class);
+                    skipActivity(DialogActivity.class);
                     break;
                 case R.id.popupwindowUtils:
                     break;

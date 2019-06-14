@@ -1,8 +1,8 @@
 package com.purewhite.ywc.purewhitelibrary.network.rxjava;
 
+import android.content.Context;
 import android.text.TextUtils;
 
-import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 
 import java.net.ConnectException;
@@ -17,19 +17,15 @@ import retrofit2.HttpException;
  */
 public abstract class HttpObserver<T> implements Observer<T> {
 
-    private Object object;
+    private Context context;
 
-    public HttpObserver() {
-        this(AppUtils.getContext());
-    }
-
-    public HttpObserver(Object object) {
-        this.object = object;
+    public HttpObserver(Context context) {
+        this.context = context;
     }
 
     @Override
     public void onSubscribe(Disposable d) {
-        RxDisposableManager.getInstance().addDis(object,d);
+        RxDisposableManager.getInstance().addDis(context,d);
     }
 
     @Override

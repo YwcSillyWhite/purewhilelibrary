@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.mvp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.AnimRes;
 import android.support.v4.app.FragmentActivity;
 
 import com.purewhite.ywc.purewhitelibrary.R;
@@ -13,179 +12,94 @@ import com.purewhite.ywc.purewhitelibrary.R;
 public abstract class BaseSkipFragment extends BaseFragment {
 
 
-    public void skipOrBackAnim(@AnimRes int enter, @AnimRes int exit)
-    {
-        getActivity().overridePendingTransition(enter,exit);
-    }
-
-    public void skipFragmentAnim(Class<?> cla)
-    {
-        skipFragmentAnim(cla,null,null);
-    }
-
-    public void skipFragmentAnim(Class<?> cla, Bundle bundle)
-    {
-        skipFragmentAnim(cla,bundle,null);
-    }
-
-    public void skipFragmentAnim(Class<?> cla,Integer requestCode)
-    {
-        skipFragmentAnim(cla,null,requestCode);
-    }
-
-    public void skipFragmentAnim(Class<?> cla,Bundle bundle,Integer requestCode)
-    {
-        skipFragmentAnim(new Intent(getContext(),cla),bundle,requestCode);
-    }
-
-    public void skipFragmentAnim(Intent intent)
-    {
-        skipFragmentAnim(intent,null,null);
-    }
-
-    public void skipFragmentAnim(Intent intent,Bundle bundle)
-    {
-        skipFragmentAnim(intent,bundle,null);
-    }
-
-    public void skipFragmentAnim(Intent intent, Bundle bundle, Integer requestCode)
-    {
-
-        skipFragment(intent,bundle,requestCode);
-        skipOrBackAnim(R.anim.activity_open_enter,R.anim.activity_open_exit);
-    }
-
-
-    public void skipFragment(Class<?> cla)
-    {
-        skipFragment(cla,null,null);
-    }
-
-    public void skipFragment(Class<?> cla, Bundle bundle)
-    {
-        skipFragment(cla,bundle,null);
-    }
-
-    public void skipFragment(Class<?> cla,Integer requestCode)
-    {
-        skipFragment(cla,null,requestCode);
-    }
-
-    public void skipFragment(Class<?> cla,Bundle bundle,Integer requestCode)
-    {
-        skipFragment(new Intent(getContext(),cla),bundle,requestCode);
-    }
-
-    public void skipFragment(Intent intent)
-    {
-        skipFragment(intent,null,null);
-    }
-
-    public void skipFragment(Intent intent,Bundle bundle)
-    {
-        skipFragment(intent,bundle,null);
-    }
-
-    public void skipFragment(Intent intent, Bundle bundle, Integer requestCode)
-    {
-
-        if (bundle!=null)
-        {
-            intent.putExtras(bundle);
-        }
-        if (requestCode!=null)
-        {
-            startActivityForResult(intent,requestCode);
-        }
-        else
-        {
-            startActivity(intent);
-        }
-    }
-
-
-
-
-
-    public void skipActivityAnim(Class<?> cla)
-    {
-        skipActivityAnim(cla,null,null);
-    }
-
-    public void skipActivityAnim(Class<?> cla,Bundle bundle)
-    {
-        skipActivityAnim(cla,bundle,null);
-    }
-
-    public void skipActivityAnim(Class<?> cla,Integer integer)
-    {
-        skipActivityAnim(cla,null,integer);
-    }
-
-    public void skipActivityAnim(Class<?> cla,Bundle bundle,Integer integer)
-    {
-        skipActivityAnim(new Intent(getContext(),cla),bundle,integer);
-    }
-
-    public void skipActivityAnim(Intent intent)
-    {
-        skipActivityAnim(intent,null,null);
-    }
-
-    public void skipActivityAnim(Intent intent,Bundle bundle)
-    {
-        skipActivityAnim(intent,bundle,null);
-    }
-
-    public void skipActivityAnim(Intent intent,Integer integer)
-    {
-        skipActivityAnim(intent,null,integer);
-    }
-
-    public void skipActivityAnim(Intent intent,Bundle bundle,Integer requestCode)
-    {
-        skipActivity(intent,bundle,requestCode);
-        skipOrBackAnim(R.anim.activity_open_enter,R.anim.activity_open_exit);
-    }
-
-
-
     public void skipActivity(Class<?> cla)
     {
-        skipActivity(cla,null,null);
+        skipActivity(cla,false);
     }
 
-    public void skipActiivty(Class<?> cla,Bundle bundle)
+    public void skipActivity(Class<?> cla,boolean isActivity)
     {
-        skipActivity(cla,bundle,null);
+        skipActivity(cla,null,null,isActivity);
+    }
+
+    public void skipActivity(Class<?> cla,Bundle bundle)
+    {
+        skipActivity(cla,bundle,false);
+    }
+
+    public void skipActivity(Class<?> cla,Bundle bundle,boolean isActivity)
+    {
+        skipActivity(cla,bundle,null,isActivity);
     }
 
     public void skipActivity(Class<?> cla,Integer integer)
     {
-        skipActivity(cla,null,integer);
+        skipActivity(cla,integer,false);
+    }
+
+    public void skipActivity(Class<?> cla,Integer integer,boolean isActivity)
+    {
+        skipActivity(cla,null,integer,isActivity);
     }
 
     public void skipActivity(Class<?> cla,Bundle bundle,Integer integer)
     {
-        skipActivity(new Intent(getContext(),cla),bundle,integer);
+        skipActivity(cla,bundle,integer,false);
     }
+
+
+    public void skipActivity(Class<?> cla,Bundle bundle,Integer integer,boolean isActivity)
+    {
+        skipActivity(new Intent(getContext(),cla),bundle,integer,isActivity);
+    }
+
+
+
+
 
     public void skipActivity(Intent intent)
     {
-        skipActivity(intent,null,null);
+        skipActivity(intent,false);
     }
+
+    public void skipActivity(Intent intent,boolean isActivity)
+    {
+        skipActivity(intent,null,null,isActivity);
+    }
+
+
 
     public void skipActivity(Intent intent,Bundle bundle)
     {
-        skipActivity(intent,bundle,null);
+        skipActivity(intent,bundle,false);
     }
+
+    public void skipActivity(Intent intent,Bundle bundle,boolean isActivity)
+    {
+        skipActivity(intent,bundle,null,isActivity);
+    }
+
+
 
     public void skipActivity(Intent intent,Integer integer)
     {
-        skipActivity(intent,null,integer);
+        skipActivity(intent,integer,false);
     }
 
+    public void skipActivity(Intent intent,Integer integer,boolean isActivity)
+    {
+        skipActivity(intent,null,integer,false);
+    }
+
+
+
     public void skipActivity(Intent intent,Bundle bundle,Integer requestCode)
+    {
+        skipActivity(intent,bundle,requestCode,false);
+    }
+
+
+    public void skipActivity(Intent intent,Bundle bundle,Integer requestCode,boolean isActivity)
     {
         if (bundle!=null)
         {
@@ -193,17 +107,46 @@ public abstract class BaseSkipFragment extends BaseFragment {
         }
         if (requestCode!=null)
         {
-            getActivity().startActivityForResult(intent,requestCode);
+            if (isActivity)
+            {
+                getActivity().startActivityForResult(intent,requestCode);
+            }
+            else
+            {
+                startActivityForResult(intent,requestCode);
+            }
+
         }
         else
         {
             startActivity(intent);
         }
-        skipOrBackAnim(R.anim.activity_open_enter,R.anim.activity_open_exit);
+        skipAnim();
     }
 
 
 
+
+    protected int skipAnimEnter()
+    {
+        return R.anim.pure_activity_enter_left;
+    }
+
+    protected int skipAnimExit()
+    {
+        return R.anim.pure_activity_exit_right;
+    }
+
+
+    private void skipAnim()
+    {
+        int skipAnimEnter = skipAnimEnter();
+        int skipAnimExit = skipAnimExit();
+        if (skipAnimEnter!=0||skipAnimExit!=0)
+        {
+            getActivity().overridePendingTransition(skipAnimEnter,skipAnimExit);
+        }
+    }
 
 
 

@@ -41,7 +41,7 @@ public class PicturePresenter extends PresenterImp<PictureContract.ViewUi>
                 return PictureUtils.getFolderList(imageBeans);
             }
         }).compose(RxSchedulers.<List<Folder>>ioToMain())
-                .subscribe(new HttpObserver<List<Folder>>() {
+                .subscribe(new HttpObserver<List<Folder>>(mView.getContext()) {
                     @Override
                     protected void onSuccess(List<Folder> folders) {
                         mView.obtianListFolder(folders);

@@ -25,7 +25,7 @@ public class AndroidStudyActivity extends MvpActivity<ActivityAndroidStudyBindin
             if (adapter instanceof AndroidStudyAdapter)
             {
                 String uri = ((AndroidStudyAdapter) adapter).obtainUri(position);
-                skipActivityAnim(WebActivity.class, BundleUtils.buidler().put(TagUtils.web_uri,uri).build());
+                skipActivity(WebActivity.class, BundleUtils.buidler().put(TagUtils.web_uri,uri).build());
             }
         }
     };

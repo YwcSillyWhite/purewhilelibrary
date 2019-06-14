@@ -3,10 +3,8 @@
     <style name="AppTheme" parent="PureBaseTheme"></style>
 
     <style name="StartTheme" parent="AppTheme">
-        <!--&lt;!&ndash; windown是否透明 &ndash;&gt;-->
-        <item name="android:windowIsTranslucent">true</item>
-        <!-- windown布局页面背景颜色 -->
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--&lt;!&ndash; windown布局页面背景颜色 &ndash;&gt;-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
     </style>
 
 </resources>

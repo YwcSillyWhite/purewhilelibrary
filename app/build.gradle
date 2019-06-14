@@ -10,6 +10,7 @@ android {
         versionCode      rootProject.ext.android.versionCode
         versionName      rootProject.ext.android.versionName
 
+
         multiDexEnabled true
     }
 
@@ -30,11 +31,4 @@ dependencies {
     implementation rootProject.ext.dependencies["constraint"]
     testImplementation rootProject.ext.dependencies["junit"]
     implementation project(':purewhitelibrary')
-
-
-
-
-
-
-
 }

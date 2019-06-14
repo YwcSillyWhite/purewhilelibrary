@@ -66,7 +66,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                     Bundle build = BundleUtils.buidler()
                             .put(PictureStype.STYPE_PIC_NUM, 4)
                             .build();
-                    skipActivityAnim(PictureActivity.class,build,ConfigUtils.INTENT_REQUEST_PIC);
+                    skipActivity(PictureActivity.class,build,ConfigUtils.INTENT_REQUEST_PIC);
                     break;
             }
         }
