@@ -79,12 +79,12 @@ public abstract class BaseSkipActivity extends BaseActivity{
 
     protected int skipAnimEnter()
     {
-        return R.anim.pure_activity_enter_left;
+        return R.anim.pure_activity_enter_right;
     }
 
     protected int skipAnimExit()
     {
-        return R.anim.pure_activity_exit_right;
+        return R.anim.pure_activity_exit_left;
     }
 
 

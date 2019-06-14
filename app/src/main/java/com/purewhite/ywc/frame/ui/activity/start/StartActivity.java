@@ -24,8 +24,8 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            backActivity();
             skipActivity(MainActivity.class);
+            backActivity();
         }
 
         @Override
@@ -88,5 +88,26 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
                 Animation.RELATIVE_TO_SELF, 0.5f);
         ra.setDuration(1000);
         mDataBinding.textView.startAnimation(ra);
+    }
+
+
+    @Override
+    protected int skipAnimEnter() {
+        return R.anim.pure_actiivty_enter_alpha;
+    }
+
+    @Override
+    protected int skipAnimExit() {
+        return 0;
+    }
+
+    @Override
+    protected int finishAnimEnter() {
+        return 0;
+    }
+
+    @Override
+    protected int finishAnimExit() {
+        return R.anim.pure_activity_exit_alpha;
     }
 }
