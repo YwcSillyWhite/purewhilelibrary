@@ -1,6 +1,6 @@
 ext{
     android = [
-            applicationId       : 'com.purewhite.ywc.frame1',
+            applicationId       : 'com.purewhite.ywc.frame',
             minSdkVersion       : 15,
             targetSdkVersion    : 28,
             compileSdkVersion   : 28,

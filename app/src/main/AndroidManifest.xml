@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.purewhite.ywc.frame1">
+    package="com.purewhite.ywc.frame">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    //相机权限
+    <!--//相机权限-->
     <uses-permission android:name="android.permission.CAMERA"/>
-    //写入权限
+    <!--//写入权限-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    //读写权限
+    <!--//读写权限-->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
 
@@ -33,7 +33,7 @@
         </provider>
 
         <!-- 启动页 -->
-        <activity android:name=".ui.activity.start.StartActivity"
+        <activity android:name="com.purewhite.ywc.frame.ui.activity.start.StartActivity"
             android:theme="@style/StartTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,16 +61,6 @@
 
         <activity android:name=".ui.activity.mine.dialog.BottomsheetActivity"/>
 
-
-
-        <!--  android:permission=""  -->
-        <service android:name=".ui.service.ProtectService"
-            android:permission="android.permission.BIND_JOB_SERVICE">
-
-        </service>
-
-        <service android:name=".ui.service.RunService"
-            android:process=":run"></service>
     </application>
 
 </manifest>

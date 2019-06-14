@@ -69,8 +69,9 @@ public final class  AppUtils {
 
     //初始化
     public static void init(Application application) {
-        init(application,null);
+        init(application,"http://v2.api.haodanku.com");
     }
+
     public static void init(Application application,String uri)
     {
         AppUtils.application =application;
@@ -81,10 +82,23 @@ public final class  AppUtils {
         }
     }
 
+    public static Activity getTopActivity()
+    {
+        if (stack.isEmpty())
+        {
+            //peek()函数返回栈顶的元素，但不弹出该栈顶元素。
+            //pop()函数返回栈顶的元素，并且将该栈顶元素出栈。
+            return stack.peek();
+        }
+        return null;
+    }
+
     public static Context getContext()
     {
         return application;
     }
+
+
 
 
     /**
