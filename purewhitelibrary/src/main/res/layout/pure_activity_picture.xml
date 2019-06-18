@@ -19,8 +19,9 @@
                     android:src="@mipmap/pure_picture_back"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp"
+                    android:paddingTop="15dp"
+                    android:id="@+id/action_bar_left_img"
+                    android:paddingBottom="15dp"
                     android:adjustViewBounds="true"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -32,41 +33,56 @@
                     android:textColor="#333"/>
             </LinearLayout>
         </FrameLayout>
-        <android.support.v7.widget.RecyclerView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/recycler_view">
-        </android.support.v7.widget.RecyclerView>
-
+            android:layout_weight="1">
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recycler_view">
+            </android.support.v7.widget.RecyclerView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relative_layout"
+                android:visibility="gone"
+                android:background="@color/pure_window_lucency">
+            </RelativeLayout>
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:gravity="center"
+            android:id="@+id/bottom_linear_layout"
             android:background="#666"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:gravity="bottom">
-                <TextView
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:id="@+id/window_layout">
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:text="全部图片"
-                    android:textColor="@color/pure_write"/>
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:tint="@color/pure_write"
-                    android:layout_marginLeft="10dp"
-                    android:src="@mipmap/pure_picture_tag"/>
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:gravity="bottom">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="全部图片"
+                        android:id="@+id/picture_text_tag"
+                        android:textColor="@color/pure_write"/>
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:tint="@color/pure_write"
+                        android:layout_marginLeft="10dp"
+                        android:src="@mipmap/pure_picture_tag"/>
+                </LinearLayout>
             </LinearLayout>
-
-
             <Space
                 android:layout_width="0dp"
                 android:layout_height="0dp"

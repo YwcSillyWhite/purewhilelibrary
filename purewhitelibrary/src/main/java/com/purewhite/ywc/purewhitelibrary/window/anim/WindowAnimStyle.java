@@ -7,8 +7,8 @@ import com.purewhite.ywc.purewhitelibrary.R;
  * @author yuwenchao
  */
 public class WindowAnimStyle {
-    public static final int left_anim=R.style.LeftAnimStyle;
-    public static final int right_anim=R.style.RightAnimStyle;
-    public static final int top_anim=R.style.TopAnimStyle;
-    public static final int bottom_anim=R.style.BottomAnimStyle;
+    public static final int left_anim_window=R.style.LeftWindowAnimStyle;
+    public static final int right_anim_window=R.style.RightWindowAnimStyle;
+    public static final int top_anim_window=R.style.TopWindowAnimStyle;
+    public static final int bottom_anim_window=R.style.BottomWindowAnimStyle;
 }

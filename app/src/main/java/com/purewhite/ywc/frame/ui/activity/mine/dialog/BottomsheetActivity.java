@@ -43,7 +43,7 @@ public class BottomsheetActivity extends MvpActivity<ActivityBottomsheetBinding,
                 if (dialog_one==null)
                 {
                     dialog_one=BottomSheetUtils.with(this,R.layout.dialog_one)
-                            .addAnim(WindowAnimStyle.bottom_anim);
+                            .addAnim(WindowAnimStyle.bottom_anim_window);
                 }
                 dialog_one.show();
                 break;

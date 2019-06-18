@@ -4,8 +4,12 @@
     <color name="pure_write">#fff</color>
     <color name="pure_peach">#ffdab9</color>
     <color name="pure_back">#f6f6f6</color>
+
+    <color name="pure_gray">#e1e1e1</color>
     //文字颜色
     <color name="pure_text_default">#333</color>
     //文字提示颜色
     <color name="pure_text_hint_default">#999</color>
+
+    <color name="pure_window_lucency">#66000000</color>
 </resources>

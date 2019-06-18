@@ -9,10 +9,12 @@ import com.purewhite.ywc.frame.ui.activity.mine.CameraActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CustomMainActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.dialog.DialogHomeActiivty;
 import com.purewhite.ywc.frame.ui.mvp.MvpFragment;
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 
-public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> implements MineContract.UiView {
+public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter>
+        implements MineContract.UiView,View.OnClickListener {
 
 
     @Override
@@ -20,10 +22,10 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
         return mDataBinding.actionBar.barLayout;
     }
 
-
-    private OnSingleListener onSingleListener=new OnSingleListener() {
-        @Override
-        public void onSingleClick(View v) {
+    @Override
+    public void onClick(View v) {
+        if (ClickUtils.clickable(v))
+        {
             switch (v.getId())
             {
                 case R.id.android_study:
@@ -40,7 +42,8 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
                     break;
             }
         }
-    };
+    }
+
 
 
 
@@ -58,12 +61,13 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter> imp
     protected void initView() {
         mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
         mDataBinding.actionBar.centerText.setText("个人中心");
-        mDataBinding.androidStudy.setOnClickListener(onSingleListener);
-        mDataBinding.bottomNavigation.setOnClickListener(onSingleListener);
-        mDataBinding.dialog.setOnClickListener(onSingleListener);
-        mDataBinding.camera.setOnClickListener(onSingleListener);
+        mDataBinding.androidStudy.setOnClickListener(this);
+        mDataBinding.bottomNavigation.setOnClickListener(this);
+        mDataBinding.dialog.setOnClickListener(this);
+        mDataBinding.camera.setOnClickListener(this);
         ImageLoader.newInstance().initCircle(mDataBinding.headImg,R.mipmap.icon_logo);
     }
+
 
 
 }

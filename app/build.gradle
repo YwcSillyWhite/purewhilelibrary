@@ -31,4 +31,5 @@ dependencies {
     implementation rootProject.ext.dependencies["constraint"]
     testImplementation rootProject.ext.dependencies["junit"]
     implementation project(':purewhitelibrary')
+    implementation 'com.android.support.test:runner:1.0.2'
 }

@@ -2,6 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture.config;
 
 import android.text.TextUtils;
 
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 
@@ -27,7 +28,8 @@ public class PictureUtils {
         {
             for (int i = 0; i < imageBeanList.size(); i++) {
                 ImageBean imageBean = imageBeanList.get(i);
-                String folderName = getFolderName(imageBean.getName());
+                String folderName = getFolderName(imageBean.getPath());
+                LogUtils.debug("pic","相册昵称"+folderName);
                 if (!TextUtils.isEmpty(folderName))
                 {
                     Folder folder = getFolder(folderName, folderList);
@@ -54,7 +56,9 @@ public class PictureUtils {
                 return list.get(i);
             }
         }
-        return new Folder(folderName, new ArrayList<ImageBean>());
+        Folder folder = new Folder(folderName, new ArrayList<ImageBean>());
+        list.add(folder);
+        return folder;
     }
 
 
@@ -64,6 +68,7 @@ public class PictureUtils {
      * @return
      */
     private static String getFolderName(String path) {
+        LogUtils.debug("pic","path"+path);
         if (!TextUtils.isEmpty(path)) {
             String[] strings = path.split(File.separator);
             if (strings.length > 1) {

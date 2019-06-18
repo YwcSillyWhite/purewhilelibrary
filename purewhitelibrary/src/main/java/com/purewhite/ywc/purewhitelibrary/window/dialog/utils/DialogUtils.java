@@ -24,6 +24,12 @@ public class DialogUtils extends WindowDialogUtils<DialogUtils> {
         return with(context,layoutId,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
+    public static DialogUtils withNo(Context context,@LayoutRes int layoutId)
+    {
+        return with(context,layoutId,R.style.BaseDialogNo,
+                ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+
     public static DialogUtils with(Context context,@LayoutRes int layoutId,int width,int height)
     {
         return with(context,layoutId,R.style.BaseDialog,width,height);
@@ -37,10 +43,8 @@ public class DialogUtils extends WindowDialogUtils<DialogUtils> {
 
     public DialogUtils(Context context,@LayoutRes int layoutId,@StyleRes int theme,int width,int height) {
         super(context, layoutId, new Dialog(context,theme));
-        dialog.setContentView(viewParent,new ViewGroup.LayoutParams(width,height));
+        dialog.setContentView(viewParent,new ViewGroup.LayoutParams(width, height));
     }
-
-
 
 
 
@@ -55,15 +59,31 @@ public class DialogUtils extends WindowDialogUtils<DialogUtils> {
     }
 
 
-
-
-    public DialogUtils setScreenHight(float scale) {
-        if (scale>0&&scale<=1)
+    public DialogUtils setSplace(float scaleX,float scaleY,int x,int y)
+    {
+        WindowManager.LayoutParams lp = window.getAttributes();
+        if (scaleX>0&&scaleX<=1)
         {
-            WindowManager.LayoutParams lp = window.getAttributes();
-            lp.height =(int)(SizeUtils.getScreenHeight()*scale);
-            window.setAttributes(lp);
+            lp.width=(int)(SizeUtils.getScreenWidth()*scaleX);
         }
+        if (scaleY>0&&scaleY<=1)
+        {
+            lp.height=(int)(SizeUtils.getScreenHeight()*scaleY);
+        }
+        if (x!=0)
+        {
+            lp.x=x;
+        }
+        if (x!=y)
+        {
+            lp.y=y;
+        }
+        return this;
+    }
+
+    public DialogUtils setLayout(int width, int height)
+    {
+        window.setLayout(width,height);
         return this;
     }
 
@@ -74,9 +94,5 @@ public class DialogUtils extends WindowDialogUtils<DialogUtils> {
     }
 
 
-    public DialogUtils setLayout(int width, int height)
-    {
-        window.setLayout(width,height);
-        return this;
-    }
+
 }

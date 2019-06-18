@@ -58,7 +58,7 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                             .setTextView(R.id.dialog_content,"纯白框架必然是精品",false)
                             .setTextView(R.id.dialog_sure,"确定",true)
                             .setTextView(R.id.dialog_clear,"取消",true)
-                            .addAnim(WindowAnimStyle.left_anim)
+                            .addAnim(WindowAnimStyle.left_anim_window)
                             .bindActivity(this)
                             .setScreenWidth(0.8f);
                 }
@@ -73,7 +73,7 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                             .setOnClickListener(onSingleListener)
                             .setTextView(R.id.list_clear,"确定",true)
                             .setRecyclerView(R.id.recycler_view,dialogAdapter,linearLayoutManager)
-                            .addAnim(WindowAnimStyle.bottom_anim)
+                            .addAnim(WindowAnimStyle.bottom_anim_window)
                             .setGravity(Gravity.BOTTOM)
                             .bindActivity(this)
                             .setScreenWidth(1f);

@@ -17,29 +17,38 @@
         <item name="android:background">@android:color/transparent</item>
         <!--  window透明  -->
         <item name="android:windowBackground">@android:color/transparent</item>
+        <!--模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+    <!-- 无色 -->
+    <style name="BaseDialogNo" parent="BaseDialog">
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 
 
 
 
-    <style name="LeftAnimStyle" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/dialog_left_in</item>
-        <item name="android:windowExitAnimation">@anim/dialog_left_out</item>
+    <style name="LeftWindowAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_left_in_window</item>
+        <item name="android:windowExitAnimation">@anim/dialog_left_out_window</item>
     </style>
 
-    <style name="RightAnimStyle" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/dialog_right_in</item>
-        <item name="android:windowExitAnimation">@anim/dialog_right_out</item>
+    <style name="RightWindowAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_right_in_window</item>
+        <item name="android:windowExitAnimation">@anim/dialog_right_out_window</item>
     </style>
 
-    <style name="TopAnimStyle" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/dialog_top_in</item>
-        <item name="android:windowExitAnimation">@anim/dialog_top_out</item>
+    <style name="TopWindowAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_top_in_window</item>
+        <item name="android:windowExitAnimation">@anim/dialog_top_out_window</item>
     </style>
 
-    <style name="BottomAnimStyle" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/dialog_bottom_in</item>
-        <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
+    <style name="BottomWindowAnimStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_in_windown</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_out_windown</item>
     </style>
+
 
 </resources>

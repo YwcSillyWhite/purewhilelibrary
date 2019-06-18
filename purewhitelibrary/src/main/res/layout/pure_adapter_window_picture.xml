@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/pure_write"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:gravity="center">
+            <com.purewhite.ywc.purewhitelibrary.view.imageview.RatioImageView
+                android:layout_width="65dp"
+                android:scaleType="centerCrop"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratio_image_view"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/pure_text_default"
+                android:layout_marginLeft="15dp"
+                android:textSize="16sp"
+                android:textStyle="italic"
+                android:id="@+id/text_view"/>
+        </LinearLayout>
+        <include layout="@layout/pure_view_line_gray" android:id="@+id/view_line"/>
+    </LinearLayout>
+
+</layout>

@@ -8,6 +8,8 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 
 /**
@@ -71,6 +73,12 @@ public class WindowDialogUtils<T extends WindowViewUtils> extends WindowViewUtil
     }
 
 
+    public T setOnDismissListener(DialogInterface.OnDismissListener onDismissListener)
+    {
+        dialog.setOnDismissListener(onDismissListener);
+        return ((T) this);
+    }
+
 
 
 
@@ -83,6 +91,13 @@ public class WindowDialogUtils<T extends WindowViewUtils> extends WindowViewUtil
         {
             dialog.show();
         }
+    }
+
+
+    public void show(View view)
+    {
+        view.setVisibility(View.VISIBLE);
+        show();
     }
 
 
