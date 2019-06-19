@@ -37,10 +37,11 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
     private PictureAdapter pictureAdapter;
 
     private PictureWindowAdapter pictureWindowAdapter;
-    //获取类型
-    private int style_request;
+
     //选择最大图片
     private int stype_pic_num;
+
+
 
     //recycler点击
     @Override
@@ -54,6 +55,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
             {
                 Folder folder = pictureWindowAdapter.obtainT(position);
                 pictureWindowAdapter.setSeleterPosition(position);
+                mDataBinding.recyclerView.scrollToPosition(0);
                 pictureAdapter.flush(folder.getImageBeanList());
                 mDataBinding.pictureTextTag.setText(folder.getName());
             }
@@ -62,7 +64,16 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         {
             if (itemView)
             {
+                PictureAdapter pictureAdapter = (PictureAdapter) adapter;
+                final int skip_stype = pictureAdapter.getSkip_stype();
+                if (skip_stype==PictureStype.SKIP_STYPE_PIC_ONLY)
+                {
 
+                }
+                else
+                {
+
+                }
             }
             else
             {
@@ -144,19 +155,27 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
     }
 
 
+
+
     @Override
     protected void initView() {
         Intent intent = getIntent();
-        style_request = intent.getIntExtra(PictureStype.STYPE_REQUEST, PictureStype.STYPE_PIC_REQUEST);
-        if (style_request==PictureStype.STYPE_PIC_REQUEST)
+        int skip_stype = intent.getIntExtra(PictureStype.SKIP_STYPE, PictureStype.SKIP_STYPE_PIC_ONLY);
+        int selector = intent.getIntExtra(PictureStype.SELECTOR_PIC_MAX_NUM, 0);
+        if (skip_stype==PictureStype.SKIP_STYPE_PIC_ONLY)
         {
-            stype_pic_num = intent.getIntExtra(PictureStype.STYPE_PIC_NUM, 0);
-            if (stype_pic_num>0)
-            {
-                PicSeletorManager.newInstance().setPicSize(stype_pic_num);
-            }
+            PicSeletorManager.newInstance().setPicSize(0);
+            mDataBinding.textViewButton.setVisibility(View.GONE);
+            mDataBinding.textViewLook.setVisibility(View.GONE);
         }
-        pictureAdapter = new PictureAdapter();
+        else
+        {
+            PicSeletorManager.newInstance().setPicSize(selector);
+            mDataBinding.textViewButton.setVisibility(View.VISIBLE);
+            mDataBinding.textViewLook.setVisibility(View.VISIBLE);
+        }
+
+        pictureAdapter = new PictureAdapter(skip_stype);
         pictureAdapter.setOnItemListener(this);
         mDataBinding.recyclerView.setAdapter(pictureAdapter);
         mDataBinding.recyclerView.setLayoutManager(new GridLayoutManager(this,4));

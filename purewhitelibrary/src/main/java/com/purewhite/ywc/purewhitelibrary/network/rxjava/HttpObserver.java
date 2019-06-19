@@ -3,6 +3,7 @@ package com.purewhite.ywc.purewhitelibrary.network.rxjava;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 
 import java.net.ConnectException;
@@ -18,6 +19,15 @@ import retrofit2.HttpException;
 public abstract class HttpObserver<T> implements Observer<T> {
 
     private Context context;
+
+
+    /**
+     * 这个生命周期app绑定的，使用的时候要注意
+     */
+    public HttpObserver()
+    {
+        this(AppUtils.getContext());
+    }
 
     public HttpObserver(Context context) {
         this.context = context;
