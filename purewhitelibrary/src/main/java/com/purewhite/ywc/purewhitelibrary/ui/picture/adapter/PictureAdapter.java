@@ -37,6 +37,8 @@ public class PictureAdapter extends BindAdapter<ImageBean> {
                 if (PicSeletorManager.newInstance().solvePic(imageBean.getPath()))
                 {
                     flushPosition(position);
+                    if (onItemListener!=null)
+                        onItemListener.OnClick(PictureAdapter.this,v,position,false);
                 }
             }
         });

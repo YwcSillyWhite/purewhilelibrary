@@ -28,4 +28,9 @@ public class PictureStype {
 
     //获取图片成功
     public final static int STYPE_PIC_OK=0x001;
+
+
+
+    //返回图片
+    public final static String REQUEST_PIC="request_pic";
 }

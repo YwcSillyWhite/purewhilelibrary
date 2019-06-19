@@ -5,6 +5,12 @@
     <color name="pure_peach">#ffdab9</color>
     <color name="pure_back">#f6f6f6</color>
 
+
+
+    <color name="pure_button">#76EEC6</color>
+
+    <color name="pure_button_l44">#4476EEC6</color>
+    <!-- 灰色 -->
     <color name="pure_gray">#e1e1e1</color>
     //文字颜色
     <color name="pure_text_default">#333</color>

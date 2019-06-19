@@ -32,6 +32,21 @@
                     android:layout_marginLeft="10dp"
                     android:textColor="#333"/>
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:text="完成"
+                android:textSize="14sp"
+                android:layout_marginRight="10dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:id="@+id/text_view_button"
+                android:textColor="@color/pure_write"
+                android:background="@drawable/pure_selector_button"
+                android:enabled="false"/>
         </FrameLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -54,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:id="@+id/bottom_linear_layout"
-            android:background="#666"
+            android:background="#444"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -95,6 +110,7 @@
                 android:paddingRight="10dp"
                 android:textSize="16sp"
                 android:text="预览"
+                android:id="@+id/text_view_look"
                 android:textColor="@color/pure_write"/>
         </LinearLayout>
     </LinearLayout>

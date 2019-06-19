@@ -2,6 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.View;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
+import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureActivityPictureBinding;
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
@@ -22,6 +24,7 @@ import com.purewhite.ywc.purewhitelibrary.ui.picture.manager.PicSeletorManager;
 import com.purewhite.ywc.purewhitelibrary.view.recyclerview.AroundItemDecoration;
 import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
+import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
 
 import java.util.List;
 
@@ -55,6 +58,30 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                 mDataBinding.pictureTextTag.setText(folder.getName());
             }
         }
+        else if (adapter instanceof PictureAdapter)
+        {
+            if (itemView)
+            {
+
+            }
+            else
+            {
+                final int id = view.getId();
+                if (id==R.id.pic_click)
+                {
+                    if (PicSeletorManager.newInstance().obtainPicCount()>0)
+                    {
+                        mDataBinding.textViewButton.setEnabled(true);
+                        mDataBinding.textViewButton.setText(PicSeletorManager.newInstance().obtainPicContent()+"完成");
+                    }
+                    else
+                    {
+                        mDataBinding.textViewButton.setEnabled(false);
+                        mDataBinding.textViewButton.setText("完成");
+                    }
+                }
+            }
+        }
     }
 
 
@@ -71,6 +98,20 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
             else if(id==R.id.window_layout)
             {
                 showWindow(1);
+            }
+            else if (id==R.id.text_view_button)
+            {
+                if (PicSeletorManager.newInstance().obtainPicCount()>0)
+                {
+                    Bundle build = BundleUtils.buidler()
+                            .put(PictureStype.REQUEST_PIC, PicSeletorManager.newInstance().getListPath())
+                            .build();
+                    backActivity(build,PictureStype.STYPE_PIC_OK);
+                }
+            }
+            else if (id==R.id.text_view_look)
+            {
+
             }
         }
 
@@ -116,11 +157,15 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
             }
         }
         pictureAdapter = new PictureAdapter();
+        pictureAdapter.setOnItemListener(this);
         mDataBinding.recyclerView.setAdapter(pictureAdapter);
         mDataBinding.recyclerView.setLayoutManager(new GridLayoutManager(this,4));
         mDataBinding.recyclerView.addItemDecoration(new AroundItemDecoration(getResources().getDimensionPixelOffset(R.dimen.dp_1)));
+
         mDataBinding.windowLayout.setOnClickListener(this);
         mDataBinding.actionBarLeftImg.setOnClickListener(this);
+        mDataBinding.textViewButton.setOnClickListener(this);
+        mDataBinding.textViewLook.setOnClickListener(this);
     }
 
 
@@ -170,4 +215,10 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PicSeletorManager.newInstance().onDestory();
+        WindowPureUtils.onDialogDestory(dialogUtils);
+    }
 }

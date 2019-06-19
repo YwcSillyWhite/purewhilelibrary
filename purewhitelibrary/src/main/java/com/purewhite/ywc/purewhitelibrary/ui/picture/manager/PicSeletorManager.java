@@ -44,6 +44,17 @@ public class PicSeletorManager {
     }
 
 
+    public int obtainPicCount()
+    {
+        return listPath.size();
+    }
+
+    public String obtainPicContent()
+    {
+        return obtainPicCount()+"/"+picSize;
+    }
+
+
     /**
      *  //处理数据
      * @param picPath 图片地址
