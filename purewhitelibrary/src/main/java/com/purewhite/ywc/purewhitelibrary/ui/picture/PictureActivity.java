@@ -35,14 +35,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         implements PictureContract.ViewUi,View.OnClickListener, OnItemListener {
 
     private PictureAdapter pictureAdapter;
-
     private PictureWindowAdapter pictureWindowAdapter;
-
-    //选择最大图片
-    private int stype_pic_num;
-
-
-
     //recycler点击
     @Override
     public void OnClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView) {

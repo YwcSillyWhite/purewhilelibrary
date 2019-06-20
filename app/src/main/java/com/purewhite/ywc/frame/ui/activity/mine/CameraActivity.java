@@ -65,6 +65,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                 case R.id.open_img:
                     Bundle build = BundleUtils.buidler()
                             .put(PictureStype.SELECTOR_PIC_MAX_NUM, 9)
+                            .put(PictureStype.SKIP_STYPE,PictureStype.SKIP_STYPE_PIC_LIST)
                             .build();
                     skipActivity(PictureActivity.class,build,ConfigUtils.INTENT_REQUEST_PIC);
                     break;
