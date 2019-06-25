@@ -1,9 +1,11 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture.bean;
 
+import java.io.Serializable;
+
 /**
  * @author yuwenchao
  */
-public class ImageBean {
+public class ImageBean implements Serializable {
 
     public ImageBean(String path, String name, Long time_token) {
         this.path = path;

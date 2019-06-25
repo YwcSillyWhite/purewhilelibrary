@@ -9,37 +9,26 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author yuwenchao
- */
 public abstract class BasePagerAdapter<T> extends PagerAdapter {
 
-    private List<T> data;
+    private List<T> list;
     private SparseArray<View> sparseArray;
 
-    public BasePagerAdapter() {
-        this(null);
-    }
-
-    public BasePagerAdapter(List<T> data) {
-        this.data=data==null?new ArrayList<T>():data;
-        sparseArray=new SparseArray<>();
-    }
-
-    protected int getDataCount()
-    {
-        return data.size();
+    public BasePagerAdapter(List<T> list) {
+        this.list = list==null?new ArrayList<T>():list;
+        this.sparseArray=new SparseArray<>();
     }
 
     @Override
     public int getCount() {
-        return getDataCount();
+        return list.size();
     }
 
     @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view==object;
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
+        return view==o;
     }
+
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
@@ -48,47 +37,40 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
         {
             container.removeView(view);
         }
-
     }
 
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View view = sparseArray.get(position);
+        final T t = obtainT(position);
+        View view=sparseArray.get(position);
         if (view==null)
         {
-            view= obtainView(position);
-            sparseArray.put(position,view);
+            view= obtainView(container,position, t);
         }
+        sparseArray.put(position,view);
         container.addView(view);
         return view;
     }
 
-    protected abstract View obtainView(int position);
 
-    protected T obtainT(int position)
+    private T obtainT(int position)
     {
-        position=getPosition(position);
-        if (getDataCount()>position)
+        if (position<getCount())
         {
-            return data.get(position);
+            return list.get(position);
         }
         return null;
-
     }
 
-
-    //给无限循环写的方法
-    protected int getPosition(int position)
+    private List<T> obtainListT()
     {
-        return position;
+        return list;
     }
 
+    protected abstract View obtainView(ViewGroup container,int position,T t);
 
-    public void flush(List<T> list)
-    {
-        data=list!=null?list:new ArrayList<T>();
-        sparseArray.clear();
-        notifyDataSetChanged();
-    }
+
+
+
 }

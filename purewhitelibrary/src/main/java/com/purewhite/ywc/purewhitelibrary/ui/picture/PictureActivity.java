@@ -3,6 +3,7 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.View;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
+import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
 import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
@@ -19,8 +21,10 @@ import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureWindowAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.manager.PicSeletorManager;
+import com.purewhite.ywc.purewhitelibrary.ui.picview.PicViewActivity;
 import com.purewhite.ywc.purewhitelibrary.view.recyclerview.AroundItemDecoration;
 import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
@@ -65,7 +69,11 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                 }
                 else
                 {
-
+                    final List<ImageBean> imageBeanList = pictureAdapter.obtainListT();
+                    Bundle build = BundleUtils.buidler().put(PictureStype.SKIP_PIC_LIST, imageBeanList)
+                            .put(PictureStype.SKIP_PIC_LIST_POSITION,position)
+                            .build();
+                    skipActivity(PicViewActivity.class,build,PictureStype.SKIP_PICVIEW);
                 }
             }
             else
@@ -75,13 +83,13 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                 {
                     if (PicSeletorManager.newInstance().obtainPicCount()>0)
                     {
-                        mDataBinding.textViewButton.setEnabled(true);
-                        mDataBinding.textViewButton.setText(PicSeletorManager.newInstance().obtainPicContent()+"完成");
+                        mDataBinding.actionBar.actionBarSure.setEnabled(true);
+                        mDataBinding.actionBar.actionBarSure.setText(PicSeletorManager.newInstance().obtainPicContent()+"完成");
                     }
                     else
                     {
-                        mDataBinding.textViewButton.setEnabled(false);
-                        mDataBinding.textViewButton.setText("完成");
+                        mDataBinding.actionBar.actionBarSure.setEnabled(false);
+                        mDataBinding.actionBar.actionBarSure.setText("完成");
                     }
                 }
             }
@@ -103,7 +111,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
             {
                 showWindow(1);
             }
-            else if (id==R.id.text_view_button)
+            else if (id==R.id.action_bar_sure)
             {
                 if (PicSeletorManager.newInstance().obtainPicCount()>0)
                 {
@@ -134,7 +142,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
     @Override
     protected void afterView() {
         super.afterView();
-        BarUtils.obtianTitleConfig().setTitleBarPadding(mDataBinding.actionLayout);
+        BarUtils.obtianTitleConfig().setTitleBarPadding(mDataBinding.actionBar.actionBarLayout);
     }
 
     @Override
@@ -158,13 +166,13 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         if (skip_stype==PictureStype.SKIP_STYPE_PIC_ONLY)
         {
             PicSeletorManager.newInstance().setPicSize(0);
-            mDataBinding.textViewButton.setVisibility(View.GONE);
+            mDataBinding.actionBar.actionBarSure.setVisibility(View.GONE);
             mDataBinding.textViewLook.setVisibility(View.GONE);
         }
         else
         {
             PicSeletorManager.newInstance().setPicSize(selector);
-            mDataBinding.textViewButton.setVisibility(View.VISIBLE);
+            mDataBinding.actionBar.actionBarSure.setVisibility(View.VISIBLE);
             mDataBinding.textViewLook.setVisibility(View.VISIBLE);
         }
 
@@ -174,9 +182,10 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         mDataBinding.recyclerView.setLayoutManager(new GridLayoutManager(this,4));
         mDataBinding.recyclerView.addItemDecoration(new AroundItemDecoration(getResources().getDimensionPixelOffset(R.dimen.dp_1)));
 
+
         mDataBinding.windowLayout.setOnClickListener(this);
-        mDataBinding.actionBarLeftImg.setOnClickListener(this);
-        mDataBinding.textViewButton.setOnClickListener(this);
+        mDataBinding.actionBar.actionBarLeftImg.setOnClickListener(this);
+        mDataBinding.actionBar.actionBarSure.setOnClickListener(this);
         mDataBinding.textViewLook.setOnClickListener(this);
     }
 
@@ -226,6 +235,17 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         }
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data==null)
+            return;
+        switch (requestCode)
+        {
+
+        }
+    }
 
     @Override
     protected void onDestroy() {

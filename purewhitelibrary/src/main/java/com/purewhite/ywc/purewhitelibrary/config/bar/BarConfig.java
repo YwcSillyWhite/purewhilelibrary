@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -112,6 +113,15 @@ public class BarConfig {
         }
         return this;
     }
+
+
+    public BarConfig setBarTextStatue(boolean show)
+    {
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        return this;
+    }
+
+
 
 
     public void build()

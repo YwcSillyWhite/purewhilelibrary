@@ -147,6 +147,11 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         return null;
     }
 
+    public final List<T> obtainListT()
+    {
+        return mData;
+    }
+
 
     /************  item的长度  ****************/
     /**

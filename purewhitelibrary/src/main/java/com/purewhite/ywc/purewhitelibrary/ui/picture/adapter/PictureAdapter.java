@@ -6,7 +6,6 @@ import android.view.View;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.BindAdapter;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BindHolder;
-import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureAdapterPictureBinding;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;

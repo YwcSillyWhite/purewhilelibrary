@@ -16,6 +16,12 @@ public class PictureStype {
 
 
 
+    //跳转picview
+    public final static int SKIP_PICVIEW=0x2001;
+
+
+
+
 
 
 
@@ -30,4 +36,10 @@ public class PictureStype {
     public final static int STYPE_PIC_OK=0x001;
     //返回图片
     public final static String REQUEST_PIC="request_pic";
+
+
+    //跳转列表相册
+    public final static String SKIP_PIC_LIST="skip_pic_list";
+    //跳转点击列表position
+    public final static String SKIP_PIC_LIST_POSITION="skip_pic_list_position";
 }
