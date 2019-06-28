@@ -1,8 +1,10 @@
 package com.purewhite.ywc.frame.ui.fragment.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.acker.simplezxing.activity.CaptureActivity;
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.FragMineBinding;
 import com.purewhite.ywc.frame.ui.activity.mine.AndroidStudyActivity;
@@ -50,10 +52,27 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter>
                         .build();
                 skipActivity(PictureActivity.class,build);
                 break;
+            case R.id.zxing:
+                startCaptureActivityForResult();
+                break;
         }
     }
 
 
+
+    private void startCaptureActivityForResult() {
+        Intent intent = new Intent(getContext(), CaptureActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(CaptureActivity.KEY_NEED_BEEP, CaptureActivity.VALUE_BEEP);
+        bundle.putBoolean(CaptureActivity.KEY_NEED_VIBRATION, CaptureActivity.VALUE_VIBRATION);
+        bundle.putBoolean(CaptureActivity.KEY_NEED_EXPOSURE, CaptureActivity.VALUE_NO_EXPOSURE);
+        bundle.putByte(CaptureActivity.KEY_FLASHLIGHT_MODE, CaptureActivity.VALUE_FLASHLIGHT_OFF);
+        bundle.putByte(CaptureActivity.KEY_ORIENTATION_MODE, CaptureActivity.VALUE_ORIENTATION_AUTO);
+        bundle.putBoolean(CaptureActivity.KEY_SCAN_AREA_FULL_SCREEN, CaptureActivity.VALUE_SCAN_AREA_FULL_SCREEN);
+        bundle.putBoolean(CaptureActivity.KEY_NEED_SCAN_HINT_TEXT, CaptureActivity.VALUE_SCAN_HINT_TEXT);
+        intent.putExtra(CaptureActivity.EXTRA_SETTING_BUNDLE, bundle);
+        startActivityForResult(intent, CaptureActivity.REQ_CODE);
+    }
 
 
     @Override
@@ -75,6 +94,7 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter>
         mDataBinding.dialog.setOnClickListener(this);
         mDataBinding.camera.setOnClickListener(this);
         mDataBinding.headImg.setOnClickListener(this);
+        mDataBinding.zxing.setOnClickListener(this);
         ImageLoader.newInstance().initCircle(mDataBinding.headImg,R.mipmap.icon_logo);
     }
 

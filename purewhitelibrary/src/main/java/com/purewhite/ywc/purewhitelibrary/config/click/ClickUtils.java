@@ -2,6 +2,8 @@ package com.purewhite.ywc.purewhitelibrary.config.click;
 
 import android.view.View;
 
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
+
 /**
  *
  * @author yuwenchao
@@ -19,10 +21,16 @@ public final class ClickUtils {
     public static boolean  clickable(View view,int time)
     {
         Object tag = view.getTag(view.getId());
-        long oldTime=tag!=null? ((long) tag):0;
+        long oldTime=0;
+        if (tag instanceof Long)
+        {
+            oldTime= ((Long) tag);
+        }
         long newTime = System.currentTimeMillis();
+        LogUtils.debug("new_time",oldTime+","+newTime);
         if (newTime-oldTime>=time)
         {
+            LogUtils.debug("new_time","can click");
             view.setTag(view.getId(),newTime);
             return true;
         }

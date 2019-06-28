@@ -32,6 +32,7 @@ public class RatioImageView extends AppCompatImageView {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.RatioImageView);
             high=typedArray.getInt(R.styleable.RatioImageView_high,1);
             wide=typedArray.getInt(R.styleable.RatioImageView_wide,1);
+            typedArray.recycle();
         }
     }
 

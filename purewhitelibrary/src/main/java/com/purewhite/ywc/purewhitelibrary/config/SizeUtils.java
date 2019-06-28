@@ -28,5 +28,21 @@ public final class SizeUtils {
     public static int getScreenHeight() {
         return AppUtils.getContext().getResources().getDisplayMetrics().heightPixels;
     }
+
+
+
+    //代码宽适配
+    public static int widthAdaptive(int sunWidth,int size)
+    {
+        int screenWidth = getScreenWidth();
+        return ((int) (screenWidth * size * 1.0 / sunWidth));
+    }
+
+
+    public static int heightdaptive(int sunHeight,int size)
+    {
+        int screenHeight = getScreenHeight();
+        return ((int) (screenHeight * size * 1.0 / sunHeight));
+    }
 }
 

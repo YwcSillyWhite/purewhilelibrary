@@ -36,6 +36,7 @@ public class NoSlideViewPager extends ViewPager {
         {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.NoSlideViewPager);
             slide=typedArray.getBoolean(R.styleable.NoSlideViewPager_slide,false);
+            typedArray.recycle();
         }
     }
 

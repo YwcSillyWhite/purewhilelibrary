@@ -55,7 +55,6 @@ public class BottomMenu extends FrameLayout {
         bottomNum = ((TextView) view.findViewById(R.id.bottomNum));
         //获取xml属性
         TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.BottomMenu);
-
         text_check_true = typedArray.getColor(R.styleable.BottomMenu_text_check_true, 0Xff333333);
         text_check_false = typedArray.getColor(R.styleable.BottomMenu_text_check_false, 0Xff666666);
         text_content = typedArray.getString(R.styleable.BottomMenu_text_content);
@@ -65,8 +64,13 @@ public class BottomMenu extends FrameLayout {
         img_check_false = typedArray.getResourceId(R.styleable.BottomMenu_img_check_false, R.mipmap.pure_load_error);
         img_size = typedArray.getDimension(R.styleable.BottomMenu_img_size, -1);
         animPosition = typedArray.getInt(R.styleable.BottomMenu_anim_position, 0);
-
         center_distance = typedArray.getDimension(R.styleable.BottomMenu_center_distance, -1);
+        //释放资源
+        typedArray.recycle();
+        initData();
+    }
+
+    private void initData() {
         //设置数值
         setMessageNum(0);
         if (text_size>0)
@@ -93,12 +97,9 @@ public class BottomMenu extends FrameLayout {
             bottomTv.setText(text_content);
         }
 
+
         setData();
-
     }
-
-
-
 
 
     private void anim(boolean seleter,boolean init)
