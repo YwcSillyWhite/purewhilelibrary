@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
+import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,12 +54,6 @@ public abstract class MediaStoreScanner<T> {
 
 
 
-    private Context context;
-    public MediaStoreScanner(Context context) {
-        this.context = context;
-    }
-
-
     /**
      * 根据查询条件进行媒体库查询，隐藏查询细节，让开发者更专注业务
      *
@@ -65,7 +61,7 @@ public abstract class MediaStoreScanner<T> {
      */
     public List<T> queryMedia() {
         List<T> list = new ArrayList<>();
-        ContentResolver contentResolver = context.getContentResolver();
+        ContentResolver contentResolver = AppUtils.getContext().getContentResolver();
         Cursor cursor = contentResolver.query(getScanUri(), getProjection(),
                 getSelection(), getSelectionArgs(), getOrder());
         if (cursor != null&&cursor.getCount()>0)

@@ -7,6 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
+import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
@@ -22,22 +24,18 @@ import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 public abstract class BaseActivity extends AppCompatActivity{
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //设置横竖平
         setOrientation();
+        //设置布局之前
         beforeView();
-        //布局id不为null ，那么就进行databinding
-        final int layout = getLayout();
-        if (layout!=0)
-        {
-            setLayoutView(layout);
-            initView();
-        }
+        //设置布局
+        setView();
+        //设置布局之后
         afterView();
+        //网络请求
         initRquest();
     }
 
@@ -62,19 +60,45 @@ public abstract class BaseActivity extends AppCompatActivity{
         }
     }
 
-
     //初始化之前
     protected void beforeView() {
+        if (isAdaptive())
+        {
+            setAdaptive();
+        }
+    }
 
+    protected boolean isAdaptive()
+    {
+        return true;
+    }
+
+    private void setAdaptive()
+    {
+        AdaptiveUtils.adaptiveWidth(this, AppUtils.getContext(),AppUtils.adaptiveWightDp);
     }
 
 
+    private void setView()
+    {
+        final int layout = getLayout();
+        if (layout!=0)
+        {
+            setLayoutView(layout);
+            initView();
+        }
+    }
 
     protected void setLayoutView(int layoutId)
     {
         setContentView(getLayout());
     }
 
+    //布局id
+    @LayoutRes
+    protected abstract int getLayout();
+    //初始化布局
+    protected abstract void initView();
 
     //初始化之后
     protected void afterView()
@@ -88,16 +112,13 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     }
 
-    //布局id
-    @LayoutRes
-    protected abstract int getLayout();
-    //初始化布局
-    protected abstract void initView();
+
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //取消网络请求
         RxDisposableManager.getInstance().removeDis(this);
         OkHttpUtils.newInstance().cancleTag(this);
     }

@@ -8,13 +8,10 @@ import android.provider.MediaStore;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 
 /**
+ * 图片筛选类
  * @author yuwenchao
  */
 public class ImageScanner extends MediaStoreScanner<ImageBean> {
-
-    public ImageScanner(Context context) {
-        super(context);
-    }
 
 
     @Override

@@ -6,10 +6,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
 import com.purewhite.ywc.purewhitelibrary.network.retrofit.RetrofitUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
 import java.util.Stack;
+
+import io.reactivex.annotations.NonNull;
 
 /**
  *
@@ -18,6 +21,12 @@ import java.util.Stack;
  */
 
 public final class  AppUtils {
+    //默认适配宽度是360dp
+    public static int adaptiveWightDp=360;
+    //retrofit默认请求接口
+    public static String baseUri="http://v2.api.haodanku.com";
+
+
     private static Application application;
     private static Stack<Activity> stack=new Stack<>();
     private AppUtils() {
@@ -67,19 +76,25 @@ public final class  AppUtils {
     };
 
 
-    //初始化
-    public static void init(Application application) {
-        init(application,"http://v2.api.haodanku.com");
-    }
-
-    public static void init(Application application,String uri)
+    /**
+     * 框架初始化
+     * @param application
+     * @param retrofitBaseUri   retrofit默认框架
+     * @param adaptiveWight     屏幕适配的dp
+     */
+    public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight)
     {
+
+        if (!TextUtils.isEmpty(baseUri))
+        {
+            baseUri=retrofitBaseUri;
+        }
+        if (adaptiveWight>0)
+        {
+            adaptiveWightDp=adaptiveWight;
+        }
         AppUtils.application =application;
         application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
-        if (!TextUtils.isEmpty(uri))
-        {
-            RetrofitUtils.baseUri=uri;
-        }
     }
 
     public static Activity getTopActivity()
@@ -93,7 +108,7 @@ public final class  AppUtils {
         return null;
     }
 
-    public static Context getContext()
+    public static Application getContext()
     {
         return application;
     }

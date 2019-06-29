@@ -30,7 +30,7 @@ public class PicturePresenter extends PresenterImp<PictureContract.ViewUi>
                 List<ImageBean> imageBeanList=new ArrayList<>();
                 if (mView!=null)
                 {
-                    ImageScanner imageScanner = new ImageScanner(mView.getContext());
+                    ImageScanner imageScanner = new ImageScanner();
                     imageBeanList.addAll(imageScanner.queryMedia());
                 }
                 return Observable.just(imageBeanList);

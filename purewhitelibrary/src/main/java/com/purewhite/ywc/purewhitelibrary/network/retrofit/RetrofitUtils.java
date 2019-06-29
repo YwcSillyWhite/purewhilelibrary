@@ -1,6 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.network.retrofit;
 
 
+import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkManager;
 
 import java.util.HashMap;
@@ -18,8 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitUtils {
     //好单库api接口
-
-    public static String baseUri="http://v2.api.haodanku.com";
     private static RetrofitUtils basRetrofit;
     private Map<String,Retrofit> map=new HashMap<>();
 
@@ -43,7 +42,7 @@ public class RetrofitUtils {
         Retrofit retrofit = map.get(baseUri);
         if (retrofit==null)
         {
-            if (RetrofitUtils.baseUri.equals(baseUri))
+            if (AppUtils.baseUri.equals(baseUri))
             {
                 retrofit=new Retrofit.Builder()
                         .baseUrl(baseUri)
@@ -70,7 +69,7 @@ public class RetrofitUtils {
 
 
     public <T> T create(Class<T> service) {
-        return create(baseUri,service);
+        return create(AppUtils.baseUri,service);
     }
 
     public <T> T create(String baseUri,Class<T> service)
