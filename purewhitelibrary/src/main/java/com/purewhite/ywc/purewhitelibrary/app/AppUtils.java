@@ -85,9 +85,10 @@ public final class  AppUtils {
     public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight)
     {
 
-        if (!TextUtils.isEmpty(baseUri))
+        if (!TextUtils.isEmpty(retrofitBaseUri))
         {
             baseUri=retrofitBaseUri;
+
         }
         if (adaptiveWight>0)
         {

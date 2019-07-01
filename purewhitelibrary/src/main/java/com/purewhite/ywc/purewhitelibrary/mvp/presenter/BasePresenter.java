@@ -14,4 +14,10 @@ public interface BasePresenter<V extends BaseUiView>  {
     void addView(V view);
 
     void deleteView();
+
+    //显示load
+    void showLoad(String content);
+
+    //隐藏load
+    void hideLoad();
 }

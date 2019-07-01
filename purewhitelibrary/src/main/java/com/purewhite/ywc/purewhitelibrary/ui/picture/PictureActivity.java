@@ -201,7 +201,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         if (folders!=null&&folders.size()>0)
         {
             pictureWindowAdapter=new PictureWindowAdapter();
-            dialogUtils=DialogUtils.withNo(this,R.layout.pure_window_picture)
+            dialogUtils=DialogUtils.withBack(this,R.layout.pure_window_picture)
                     .setGravity(Gravity.BOTTOM)
                     .setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override

@@ -2,6 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.mvp.presenter;
 
 
 
+import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
@@ -28,14 +29,24 @@ public class PresenterImp<V extends BaseUiView> implements BasePresenter<V> {
         initPage();
     }
 
-    public void showDialog()
-    {
-
+    @Override
+    public void showLoad(String content) {
+        if (dialogUtils == null)
+        {
+            dialogUtils=DialogUtils.withBack(mView.getContext(), R.layout.pure_dialog_load)
+                    .setScreenWidth(0.8f)
+                    .setCanceledOnTouchOutside(false);
+        }
+        dialogUtils.setTextView(R.id.dialog_content,content,false);
+        dialogUtils.show();
     }
 
-    public void hideDialog()
-    {
-
+    @Override
+    public void hideLoad() {
+        if (dialogUtils!=null)
+        {
+            dialogUtils.dismiss();
+        }
     }
 
     @Override
@@ -48,6 +59,11 @@ public class PresenterImp<V extends BaseUiView> implements BasePresenter<V> {
             mView=null;
         }
     }
+
+
+
+
+
 
     //当前页数
     protected int page;

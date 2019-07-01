@@ -16,12 +16,12 @@ import java.util.Map;
 public class MinePresenter extends PresenterImp<MineContract.UiView> implements MineContract.Presenter {
     @Override
     public void obtianShop() {
+        showLoad("数据加载中....");
         Map<String,Object> map=new HashMap<>();
         map.put("nav",1);
         map.put("cid",0);
         map.put("back",10);
         map.put("min_id",1);
-
         ReNetUtils.getT(UrlUtils.shop_re, map, new BaseBean<List<ShopBean>>()
                 ,new HttpObserver<BaseBean<List<ShopBean>>>(mView.getContext()) {
             @Override

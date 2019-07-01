@@ -24,7 +24,8 @@ public class DialogUtils extends WindowDialogUtils<DialogUtils> {
         return with(context,layoutId,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
-    public static DialogUtils withNo(Context context,@LayoutRes int layoutId)
+
+    public static DialogUtils withBack(Context context,@LayoutRes int layoutId)
     {
         return with(context,layoutId,R.style.BaseDialogNo,
                 ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);

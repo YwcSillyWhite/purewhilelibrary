@@ -35,28 +35,34 @@ public class WindowDialogUtils<T extends WindowViewUtils> extends WindowViewUtil
     }
 
 
+
+
+    public T setCanceledOnTouchOutside(boolean cancelable)
+    {
+        dialog.setCanceledOnTouchOutside(cancelable);
+        return ((T) this);
+    }
+
+
+
+
+
     /**
      * 绑定activity
-     * @param activity
+     * @param
      * @return
      */
-    public T bindActivity(@NonNull final Activity activity)
+    public T bindActivity(@NonNull final DialogInterface.OnKeyListener onKeyListener)
     {
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    // 关闭 Dialog
-                    dialog.dismiss();
-                    // 关闭当前 Activity
-                    activity.finish();
-                    // 返回 true，表示返回事件已被处理，不再向下传递
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
+        dialog.setOnKeyListener(onKeyListener);
+        return ((T) this);
+    }
+
+
+
+    public T setOnDismissListener(DialogInterface.OnDismissListener onDismissListener)
+    {
+        dialog.setOnDismissListener(onDismissListener);
         return ((T) this);
     }
 
@@ -72,11 +78,7 @@ public class WindowDialogUtils<T extends WindowViewUtils> extends WindowViewUtil
     }
 
 
-    public T setOnDismissListener(DialogInterface.OnDismissListener onDismissListener)
-    {
-        dialog.setOnDismissListener(onDismissListener);
-        return ((T) this);
-    }
+
 
 
 
@@ -118,5 +120,11 @@ public class WindowDialogUtils<T extends WindowViewUtils> extends WindowViewUtil
     public void onDestroy()
     {
         dismiss();
+    }
+
+
+    public boolean isShowing()
+    {
+        return dialog.isShowing();
     }
 }

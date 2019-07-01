@@ -59,7 +59,6 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                             .setTextView(R.id.dialog_sure,"确定",true)
                             .setTextView(R.id.dialog_clear,"取消",true)
                             .addAnim(WindowAnimStyle.left_anim_window)
-                            .bindActivity(this)
                             .setScreenWidth(0.8f);
                 }
                 dialogOne.show();
@@ -75,7 +74,6 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                             .setRecyclerView(R.id.recycler_view,dialogAdapter,linearLayoutManager)
                             .addAnim(WindowAnimStyle.bottom_anim_window)
                             .setGravity(Gravity.BOTTOM)
-                            .bindActivity(this)
                             .setScreenWidth(1f);
                 }
                 dialogTwo.show();
