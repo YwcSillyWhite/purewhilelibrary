@@ -5,6 +5,9 @@ import android.content.Context;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BaseApp extends Application {
 
     @Override
@@ -12,9 +15,17 @@ public class BaseApp extends Application {
         super.attachBaseContext(base);
     }
 
+
     @Override
     public void onCreate() {
         super.onCreate();
-        AppUtils.initLibrary(this,"",0);
+        initPure();
+
+    }
+
+    private void initPure() {
+        Map<String,String> map=new HashMap<>();
+        map.put("apikey","pureWhite");
+        AppUtils.initLibrary(this,"",0,map);
     }
 }

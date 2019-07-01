@@ -10,6 +10,7 @@ import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
 import com.purewhite.ywc.purewhitelibrary.network.retrofit.RetrofitUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
+import java.util.Map;
 import java.util.Stack;
 
 import io.reactivex.annotations.NonNull;
@@ -22,10 +23,11 @@ import io.reactivex.annotations.NonNull;
 
 public final class  AppUtils {
     //默认适配宽度是360dp
-    public static int adaptiveWightDp=360;
+    public static int adaptiveWightDp=375;
     //retrofit默认请求接口
     public static String baseUri="http://v2.api.haodanku.com";
-
+    //oKhttp公共参数
+    public static Map<String,String> mapOkhhtp;
 
     private static Application application;
     private static Stack<Activity> stack=new Stack<>();
@@ -81,8 +83,9 @@ public final class  AppUtils {
      * @param application
      * @param retrofitBaseUri   retrofit默认框架
      * @param adaptiveWight     屏幕适配的dp
+     * @Param map     okHttp公共参数
      */
-    public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight)
+    public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight,Map<String,String> map)
     {
 
         if (!TextUtils.isEmpty(retrofitBaseUri))
@@ -94,6 +97,7 @@ public final class  AppUtils {
         {
             adaptiveWightDp=adaptiveWight;
         }
+        mapOkhhtp=map;
         AppUtils.application =application;
         application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
     }

@@ -6,6 +6,7 @@ import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.GetBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.executor.OkThreadSave;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.interceptor.ParamsInterceptor;
 
 import java.io.IOException;
 import java.util.Map;
@@ -42,7 +43,7 @@ public class OkHttpUtils {
     public OkHttpUtils() {
         if (okHttpClient==null)
         {
-            okHttpClient=OkManager.getOkHttp();
+            okHttpClient=OkManager.obtainBuilder().addInterceptor(new ParamsInterceptor()).build();
         }
     }
 

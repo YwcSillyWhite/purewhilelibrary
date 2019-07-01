@@ -4,10 +4,12 @@ package com.purewhite.ywc.purewhitelibrary.network.retrofit;
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkManager;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.interceptor.ParamsInterceptor;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -43,27 +45,20 @@ public class RetrofitUtils {
         Retrofit retrofit = map.get(baseUri);
         if (retrofit==null)
         {
+            Retrofit.Builder builder = new Retrofit.Builder()
+                    .baseUrl(baseUri)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
             if (AppUtils.baseUri.equals(baseUri))
             {
-                retrofit=new Retrofit.Builder()
-                        .baseUrl(baseUri)
-                        .client(OkManager.getOkHttp())
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .build();
-                map.put(baseUri,retrofit);
+                builder.client(OkManager.obtainBuilder().addInterceptor(new ParamsInterceptor()).build());
             }
             else
             {
-                retrofit=new Retrofit.Builder()
-                        .baseUrl(baseUri)
-                        .client(OkManager.getOkHttp(false))
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .build();
-                map.put(baseUri,retrofit);
+                builder.client(OkManager.obtainBuilder().build());
             }
-
+            retrofit=builder.build();
+            map.put(baseUri,retrofit);
         }
         return retrofit;
     }

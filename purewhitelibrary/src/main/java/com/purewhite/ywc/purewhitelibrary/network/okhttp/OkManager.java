@@ -13,34 +13,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 public class OkManager {
 
-    /**
-     * 设置拦截器
-     * @return okhttpclient
-     */
-    public static OkHttpClient getOkHttp()
-    {
-        return getOkHttp(true);
-    }
 
-    public static OkHttpClient getOkHttp(boolean params)
+    public static OkHttpClient.Builder obtainBuilder()
     {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        //log拦截
-        builder.addInterceptor(obtainLog());
-        if (params)
-        {
-            //公共参数
-            builder.addInterceptor(new ParamsInterceptor());
-        }
-        //时间设置  请求，读取，写入
-        builder.readTimeout(10000,TimeUnit.MILLISECONDS);
-        builder.writeTimeout(10000,TimeUnit.MILLISECONDS);
-        builder.readTimeout(10000,TimeUnit.MILLISECONDS);
-        return builder.build();
-    }
-
-    private static HttpLoggingInterceptor obtainLog()
-    {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
@@ -55,6 +31,12 @@ public class OkManager {
          */
 
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        return httpLoggingInterceptor;
+        //log拦截
+        builder.addInterceptor(httpLoggingInterceptor);
+        //时间设置  请求，读取，写入
+        builder.readTimeout(10000,TimeUnit.MILLISECONDS);
+        builder.writeTimeout(10000,TimeUnit.MILLISECONDS);
+        builder.readTimeout(10000,TimeUnit.MILLISECONDS);
+        return builder;
     }
 }
