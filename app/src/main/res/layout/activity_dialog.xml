@@ -21,5 +21,13 @@
             android:text="dialogUtils下面"
             android:gravity="center"
             android:id="@+id/dialog_two"/>
+        <include layout="@layout/view_line"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/write"
+            android:text="dialogLoad"
+            android:gravity="center"
+            android:id="@+id/dialog_three"/>
     </LinearLayout>
 </layout>

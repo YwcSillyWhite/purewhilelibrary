@@ -96,9 +96,6 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter>
         mDataBinding.headImg.setOnClickListener(this);
         mDataBinding.zxing.setOnClickListener(this);
         ImageLoader.newInstance().initCircle(mDataBinding.headImg,R.mipmap.icon_logo);
-        mPresenter.showLoad("数据加载中...");
-
-//        mPresenter.obtianShop();
     }
 
 

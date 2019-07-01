@@ -16,7 +16,6 @@ import java.util.Map;
 public class MinePresenter extends PresenterImp<MineContract.UiView> implements MineContract.Presenter {
     @Override
     public void obtianShop() {
-        showLoad("数据加载中....");
         Map<String,Object> map=new HashMap<>();
         map.put("nav",1);
         map.put("cid",0);
