@@ -27,10 +27,8 @@ public final class ClickUtils {
             oldTime= ((Long) tag);
         }
         long newTime = System.currentTimeMillis();
-        LogUtils.debug("new_time",oldTime+","+newTime);
         if (newTime-oldTime>=time)
         {
-            LogUtils.debug("new_time","can click");
             view.setTag(view.getId(),newTime);
             return true;
         }

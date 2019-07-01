@@ -155,7 +155,6 @@ public class PermissonUtils {
                 for (int i = 0; i < grantResults.length; i++) {
                     if (grantResults[i]!=PackageManager.PERMISSION_GRANTED)
                     {
-                        LogUtils.debug("per",permissions[i]);
                         permissonList.add(permissions[i]);
                     }
                 }

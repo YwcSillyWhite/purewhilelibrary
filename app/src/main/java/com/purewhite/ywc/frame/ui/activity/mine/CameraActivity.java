@@ -122,7 +122,6 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                     }
                     if (!TextUtils.isEmpty(photoPath))
                     {
-                        LogUtils.debug("file",photoPath);
                         ImageLoader.newInstance().init(mDataBinding.imageView,photoPath);
                     }
                 }
