@@ -41,7 +41,6 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
         mDataBinding.actionBar.actionBarLeftText.setText((i+1)+" / "+imageBeanList.size());
         //刷新
         boolean flush = picViewAdapter.flush(imageBeanList.get(i).getPath());
-
         mDataBinding.picViewSelectorImg.setSelected(flush);
     }
 
@@ -76,6 +75,22 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
         if (id==R.id.action_bar_left_img)
         {
             backActivity();
+        }
+        else if (id==R.id.pic_selector)
+        {
+            final int currentItem = mDataBinding.viewPager.getCurrentItem();
+            if (currentItem<imageBeanList.size())
+            {
+                ImageBean imageBean = imageBeanList.get(currentItem);
+                if (PicSeletorManager.newInstance().solvePic(imageBean.getPath()))
+                {
+                    picViewAdapter.flush(imageBean.getPath());
+                    boolean selected = mDataBinding.picViewSelectorImg.isSelected();
+                    mDataBinding.picViewSelectorImg.setSelected(!selected);
+                    upDataSure();
+                }
+            }
+
         }
     }
 
@@ -137,16 +152,17 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
         }
         else
         {
+            //viewpager
             PicViewPagerAdapter picViewPagerAdapter = new PicViewPagerAdapter(imageBeanList,this);
             mDataBinding.viewPager.setAdapter(picViewPagerAdapter);
             mDataBinding.viewPager.setCurrentItem(position);
             mDataBinding.viewPager.addOnPageChangeListener(this);
             mDataBinding.actionBar.actionBarLeftImg.setOnClickListener(this);
+            mDataBinding.picSelector.setOnClickListener(this);
             mDataBinding.actionBar.actionBarLayout.setBackgroundColor(Color.parseColor("#55444444"));
             mDataBinding.actionBar.actionBarLeftText.setText(position+" / "+imageBeanList.size());
 
-            upDataSure();
-
+            //recyclerview
             picViewAdapter = new PicViewAdapter();
             mDataBinding.recyclerView.setAdapter(picViewAdapter);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -155,11 +171,20 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
             boolean flush = picViewAdapter.flush(imageBeanList.get(position).getPath());
             mDataBinding.picViewSelectorImg.setSelected(flush);
 
+
+
+
         }
 
 
     }
 
+
+    @Override
+    protected void initRquest() {
+        super.initRquest();
+        upDataSure();
+    }
 
     //更新sure空间
     private void upDataSure()
