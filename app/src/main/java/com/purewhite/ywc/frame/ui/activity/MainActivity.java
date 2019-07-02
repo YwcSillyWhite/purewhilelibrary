@@ -100,10 +100,7 @@ public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> 
     }
 
 
-    @Override
-    protected boolean isFinishAnim() {
-        return false;
-    }
+
 
     @Override
     protected void onDestroy() {

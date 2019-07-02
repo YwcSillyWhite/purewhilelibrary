@@ -67,7 +67,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                             .put(PictureStype.SELECTOR_PIC_MAX_NUM, 9)
                             .put(PictureStype.SKIP_STYPE,PictureStype.SKIP_STYPE_PIC_LIST)
                             .build();
-                    skipActivity(PictureActivity.class,build,ConfigUtils.INTENT_REQUEST_PIC);
+                    skipActivity(PictureActivity.class,ConfigUtils.INTENT_REQUEST_PIC,build);
                     break;
             }
         }

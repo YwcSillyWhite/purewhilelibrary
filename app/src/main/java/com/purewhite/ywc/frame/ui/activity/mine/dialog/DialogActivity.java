@@ -1,5 +1,7 @@
 package com.purewhite.ywc.frame.ui.activity.mine.dialog;
 
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.View;
@@ -8,6 +10,7 @@ import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityDialogBinding;
 import com.purewhite.ywc.frame.ui.adapter.DialogAdapter;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
@@ -119,6 +122,7 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
         super.onDestroy();
         WindowPureUtils.onDialogDestory(dialogOne,dialogTwo);
     }
+
 
 
 }

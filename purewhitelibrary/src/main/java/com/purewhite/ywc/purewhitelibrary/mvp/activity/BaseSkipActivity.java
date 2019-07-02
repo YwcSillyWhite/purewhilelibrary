@@ -2,10 +2,13 @@ package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.AnimRes;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 
 /**
+ * 只是作为参考
+ * 跳转动画
  * @author yuwenchao
  */
 public abstract class BaseSkipActivity extends BaseActivity{
@@ -17,22 +20,22 @@ public abstract class BaseSkipActivity extends BaseActivity{
      */
     public void skipActivity(Class<?> cla)
     {
-        skipActivity(cla, null,null);
+        skipActivity(cla, -1,null);
     }
 
     public void skipActivity(Class<?> cla,Bundle bundle)
     {
-        skipActivity(cla,bundle,null);
+        skipActivity(cla,-1,bundle);
     }
 
-    public void skipActivity(Class<?> cla,Integer requestCode)
+    public void skipActivity(Class<?> cla,int requestCode)
     {
-        skipActivity(cla,null,requestCode);
+        skipActivity(cla,requestCode,null);
     }
 
-    public void skipActivity(Class<?> cla,Bundle bundle,Integer requestCode)
+    public void skipActivity(Class<?> cla,int requestCode,Bundle bundle)
     {
-        skipActivity(new Intent(this,cla),bundle,requestCode);
+        skipActivity(new Intent(this,cla),requestCode,bundle);
     }
 
 
@@ -43,12 +46,12 @@ public abstract class BaseSkipActivity extends BaseActivity{
 
     public void skipActivity(Intent intent,Integer requestCode)
     {
-        skipActivity(intent,null,requestCode);
+        skipActivity(intent,-1,null);
     }
 
     public void skipActivity(Intent intent,Bundle bundle)
     {
-        skipActivity(intent,bundle,null);
+        skipActivity(intent,-1,bundle);
     }
 
 
@@ -58,38 +61,14 @@ public abstract class BaseSkipActivity extends BaseActivity{
      * @param bundle
      * @param requestCode
      */
-    public void skipActivity(Intent intent,Bundle bundle,Integer requestCode)
+    public void skipActivity(Intent intent,Integer requestCode,Bundle bundle)
     {
         if (bundle!=null)
         {
             intent.putExtras(bundle);
         }
-        if (requestCode!=null)
-        {
-            super.startActivityForResult(intent,requestCode);
-        }
-        else
-        {
-            super.startActivity(intent);
-        }
-        skipAnim();
-    }
-
-
-
-    protected int skipAnimEnter()
-    {
-        return R.anim.pure_activity_enter_right;
-    }
-
-    protected int skipAnimExit()
-    {
-        return R.anim.pure_activity_exit_left;
-    }
-
-
-    private void skipAnim()
-    {
+        super.startActivityForResult(intent,requestCode);
+        //跳转动画
         int skipAnimEnter = skipAnimEnter();
         int skipAnimExit = skipAnimExit();
         if (skipAnimEnter!=0||skipAnimExit!=0)
@@ -99,10 +78,17 @@ public abstract class BaseSkipActivity extends BaseActivity{
     }
 
 
+    @AnimRes
+    protected int skipAnimEnter()
+    {
+        return R.anim.pure_activity_enter_right;
+    }
 
-
-
-
+    @AnimRes
+    protected int skipAnimExit()
+    {
+        return R.anim.pure_activity_exit_left;
+    }
 
 
 
@@ -112,18 +98,18 @@ public abstract class BaseSkipActivity extends BaseActivity{
      */
     public void backActivity()
     {
-        backActivity(null);
+        backActivity(-1);
     }
 
-    public void backActivity(Integer requestCode)
+    public void backActivity(int requestCode)
     {
-        backActivity(null,requestCode);
+        backActivity(requestCode,null);
     }
 
 
-    public void backActivity(Bundle bundle,Integer requestCode)
+    public void backActivity(int requestCode,Bundle bundle)
     {
-        if (requestCode!=null)
+        if (requestCode>=0)
         {
             Intent intent = new Intent();
             if (bundle!=null)
@@ -134,6 +120,8 @@ public abstract class BaseSkipActivity extends BaseActivity{
         }
         finish();
     }
+
+
 
 
 
@@ -149,12 +137,6 @@ public abstract class BaseSkipActivity extends BaseActivity{
     public void finish() {
         super.finish();
         finishAnim();
-    }
-
-    //是否存在结束动画
-    protected boolean isFinishAnim()
-    {
-        return false;
     }
 
 

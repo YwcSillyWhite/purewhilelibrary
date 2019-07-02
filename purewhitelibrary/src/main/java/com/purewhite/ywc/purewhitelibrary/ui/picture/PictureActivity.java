@@ -73,7 +73,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                     Bundle build = BundleUtils.buidler().put(PictureStype.SKIP_PIC_LIST, imageBeanList)
                             .put(PictureStype.SKIP_PIC_LIST_POSITION,position)
                             .build();
-                    skipActivity(PicViewActivity.class,build,PictureStype.SKIP_PICVIEW);
+                    skipActivity(PicViewActivity.class,PictureStype.SKIP_PICVIEW,build);
                 }
             }
             else
@@ -118,7 +118,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                     Bundle build = BundleUtils.buidler()
                             .put(PictureStype.REQUEST_PIC, PicSeletorManager.newInstance().getListPath())
                             .build();
-                    backActivity(build,PictureStype.STYPE_PIC_OK);
+                    backActivity(PictureStype.STYPE_PIC_OK,build);
                 }
             }
             else if (id==R.id.text_view_look)

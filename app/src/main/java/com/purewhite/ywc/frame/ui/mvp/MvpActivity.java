@@ -40,11 +40,6 @@ public abstract class MvpActivity<DB extends ViewDataBinding,P extends Presenter
 
 
 
-    //开启默认动画
-    @Override
-    protected boolean isFinishAnim() {
-        return true;
-    }
 
 
 }

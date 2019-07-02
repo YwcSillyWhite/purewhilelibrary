@@ -51,11 +51,6 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
 
 
     @Override
-    protected boolean isFinishAnim() {
-        return false;
-    }
-
-    @Override
     protected void initBar() {
         BarUtils.obtianBarConfig()
                 .with(this)

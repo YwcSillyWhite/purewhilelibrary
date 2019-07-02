@@ -1,10 +1,13 @@
 package com.purewhite.ywc.frame.ui.activity.mine.dialog;
 
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityDialogHomeBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
@@ -55,5 +58,12 @@ public class DialogHomeActiivty extends MvpActivity<ActivityDialogHomeBinding,Pr
         mDataBinding.popupwindowUtils.setOnClickListener(onSingleListener);
 
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        LogUtils.debug("back","返回");
     }
 }
