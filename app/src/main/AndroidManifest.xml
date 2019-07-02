@@ -61,6 +61,7 @@
 
         <activity android:name=".ui.activity.mine.dialog.BottomsheetActivity"/>
 
+        <activity android:name=".ui.activity.mine.TransitionActivity"/>
     </application>
 
 </manifest>

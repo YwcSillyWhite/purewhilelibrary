@@ -2,8 +2,11 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -73,7 +76,13 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                     Bundle build = BundleUtils.buidler().put(PictureStype.SKIP_PIC_LIST, imageBeanList)
                             .put(PictureStype.SKIP_PIC_LIST_POSITION,position)
                             .build();
-                    skipActivity(PicViewActivity.class,PictureStype.SKIP_PICVIEW,build);
+                    ActivityOptionsCompat compat = ActivityOptionsCompat.makeScaleUpAnimation(view,
+                            view.getWidth() / 2, view.getHeight() / 2, 0, 0);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        startActivity(new Intent(this, PicViewActivity.class).putExtras(build),compat.toBundle());
+                    }
+
+//                    skipActivity(PicViewActivity.class,PictureStype.SKIP_PICVIEW,build);
                 }
             }
             else
@@ -241,10 +250,6 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         super.onActivityResult(requestCode, resultCode, data);
         if (data==null)
             return;
-        switch (requestCode)
-        {
-
-        }
     }
 
     @Override

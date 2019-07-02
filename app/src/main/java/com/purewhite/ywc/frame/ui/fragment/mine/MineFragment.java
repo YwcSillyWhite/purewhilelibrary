@@ -1,6 +1,8 @@
 package com.purewhite.ywc.frame.ui.fragment.mine;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,6 +12,7 @@ import com.purewhite.ywc.frame.databinding.FragMineBinding;
 import com.purewhite.ywc.frame.ui.activity.mine.AndroidStudyActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CameraActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CustomMainActivity;
+import com.purewhite.ywc.frame.ui.activity.mine.TransitionActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.dialog.DialogHomeActiivty;
 import com.purewhite.ywc.frame.ui.mvp.MvpFragment;
 import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
@@ -55,6 +58,12 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter>
             case R.id.zxing:
                 startCaptureActivityForResult();
                 break;
+            case R.id.transition:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Intent intent = new Intent(getActivity(), TransitionActivity.class);
+                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                }
+                break;
         }
     }
 
@@ -95,6 +104,7 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter>
         mDataBinding.camera.setOnClickListener(this);
         mDataBinding.headImg.setOnClickListener(this);
         mDataBinding.zxing.setOnClickListener(this);
+        mDataBinding.transition.setOnClickListener(this);
         ImageLoader.newInstance().initCircle(mDataBinding.headImg,R.mipmap.icon_logo);
     }
 

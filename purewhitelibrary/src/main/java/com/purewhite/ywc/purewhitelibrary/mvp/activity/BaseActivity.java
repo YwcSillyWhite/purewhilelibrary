@@ -27,16 +27,30 @@ public abstract class BaseActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //设置横竖平
-        setOrientation();
         //设置布局之前
         beforeView();
-        //设置布局
-        setView();
-        //设置布局之后
-        afterView();
+        //初始化设置布局
+        final int layoutId = getLayout();
+        if (layoutId!=0)
+        {
+            initSetView(layoutId);
+            //初始化布局
+            initView();
+            //设置布局之后
+            afterView();
+        }
         //网络请求
         initRquest();
+    }
+
+
+    //初始化之前
+    protected void beforeView() {
+        //设置横竖平
+        initOrientation();
+        //适配
+        initAdaptive();
+
     }
 
     //是否竖屏
@@ -45,9 +59,8 @@ public abstract class BaseActivity extends AppCompatActivity{
         return true;
     }
 
-    //设置横竖屏幕
-    private void setOrientation()
-    {
+    //初始化横竖屏幕
+    private void initOrientation() {
         //android 8.0之后如果屏幕满屏透明是不能设置屏幕方向
         try
         {
@@ -59,39 +72,23 @@ public abstract class BaseActivity extends AppCompatActivity{
 
         }
     }
-
-    //初始化之前
-    protected void beforeView() {
-        if (isAdaptive())
-        {
-            setAdaptive();
-        }
-    }
-
+    //能否适配
     protected boolean isAdaptive()
     {
         return true;
     }
-
-    private void setAdaptive()
-    {
-        AdaptiveUtils.adaptiveWidth(this, AppUtils.getContext(),AppUtils.adaptiveWightDp);
-    }
-
-
-    private void setView()
-    {
-        final int layout = getLayout();
-        if (layout!=0)
+    //初始化适配
+    private void initAdaptive() {
+        if (isAdaptive())
         {
-            setLayoutView(layout);
-            initView();
+            AdaptiveUtils.adaptiveWidth(this, AppUtils.getContext(),AppUtils.adaptiveWightDp);
         }
     }
 
-    protected void setLayoutView(int layoutId)
+    //设置布局
+    protected void initSetView(int layoutId)
     {
-        setContentView(getLayout());
+        setContentView(layoutId);
     }
 
     //布局id
@@ -99,6 +96,8 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected abstract int getLayout();
     //初始化布局
     protected abstract void initView();
+
+
 
     //初始化之后
     protected void afterView()
@@ -115,6 +114,8 @@ public abstract class BaseActivity extends AppCompatActivity{
 
 
 
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -122,6 +123,11 @@ public abstract class BaseActivity extends AppCompatActivity{
         RxDisposableManager.getInstance().removeDis(this);
         OkHttpUtils.newInstance().cancleTag(this);
     }
+
+
+
+
+
 
 
 
@@ -137,6 +143,8 @@ public abstract class BaseActivity extends AppCompatActivity{
         }
         permissonUtils.startPermisson(requestCode,permisson);
     }
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

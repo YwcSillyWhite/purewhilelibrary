@@ -68,13 +68,17 @@ public abstract class BaseSkipActivity extends BaseActivity{
             intent.putExtras(bundle);
         }
         super.startActivityForResult(intent,requestCode);
-        //跳转动画
-        int skipAnimEnter = skipAnimEnter();
-        int skipAnimExit = skipAnimExit();
-        if (skipAnimEnter!=0||skipAnimExit!=0)
+        if (isSkipAnim())
         {
-            overridePendingTransition(skipAnimEnter,skipAnimExit);
+            //跳转动画
+            int skipAnimEnter = skipAnimEnter();
+            int skipAnimExit = skipAnimExit();
+            if (skipAnimEnter!=0||skipAnimExit!=0)
+            {
+                overridePendingTransition(skipAnimEnter,skipAnimExit);
+            }
         }
+
     }
 
 
@@ -91,6 +95,10 @@ public abstract class BaseSkipActivity extends BaseActivity{
     }
 
 
+    protected boolean isSkipAnim()
+    {
+        return true;
+    }
 
 
     /**
@@ -151,14 +159,25 @@ public abstract class BaseSkipActivity extends BaseActivity{
     }
 
 
-    private void finishAnim()
+    protected void finishAnim()
     {
-        int finishAnimEnter = finishAnimEnter();
-        int finishAnimExit = finishAnimExit();
-        if (finishAnimEnter!=0||finishAnimExit!=0)
+        if (isFinishAnim())
         {
-            overridePendingTransition(finishAnimEnter,finishAnimExit);
+            int finishAnimEnter = finishAnimEnter();
+            int finishAnimExit = finishAnimExit();
+            if (finishAnimEnter!=0||finishAnimExit!=0)
+            {
+                overridePendingTransition(finishAnimEnter,finishAnimExit);
+            }
         }
+
     }
+
+
+    protected boolean isFinishAnim()
+    {
+        return true;
+    }
+
 
 }

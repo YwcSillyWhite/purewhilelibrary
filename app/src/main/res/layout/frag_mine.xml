@@ -82,6 +82,16 @@
                     android:id="@+id/zxing"
                     android:text="扫码"
                     android:textColor="#333"/>
+                <include layout="@layout/view_line"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:paddingLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:background="@color/write"
+                    android:id="@+id/transition"
+                    android:text="过度动画"
+                    android:textColor="#333"/>
             </LinearLayout>
         </com.purewhite.ywc.purewhitelibrary.view.scrollview.PureScrollView>
     </LinearLayout>

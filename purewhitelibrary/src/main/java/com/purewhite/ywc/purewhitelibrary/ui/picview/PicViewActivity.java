@@ -2,6 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.ui.picview;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -210,5 +211,7 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
         super.onDestroy();
         mDataBinding.viewPager.removeOnPageChangeListener(this);
     }
+
+
 
 }
