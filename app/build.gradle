@@ -28,9 +28,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation rootProject.ext.dependencies["constraint"]
-    testImplementation rootProject.ext.dependencies["junit"]
     implementation project(':purewhitelibrary')
+    testImplementation rootProject.ext.dependencies["junit"]
+    implementation rootProject.ext.dependencies["constraint"]
     implementation rootProject.ext.dependencies["simplezxing"]
     implementation rootProject.ext.dependencies["runner"]
 

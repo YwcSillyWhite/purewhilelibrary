@@ -2,17 +2,18 @@ ext{
     android = [
             applicationId       : 'com.purewhite.ywc.frame',
             minSdkVersion       : 15,
-            targetSdkVersion    : 28,
-            compileSdkVersion   : 28,
-            versionCode      : 10000,
-            versionName      : '1.1.0',
+            targetSdkVersion    : 29,
+            compileSdkVersion   : 29,
+            versionCode         : 10000,
+            versionName         : '1.1.0',
     ]
 
     dependencies = [
-            "constraint"          : 'com.android.support.constraint:constraint-layout:1.1.3',
-            "junit"               : 'junit:junit:4.12',
+            "constraint"          : 'com.android.support.constraint:constraint-layout:2.0.0-beta2',
+            "junit"               : 'junit:junit:4.13-beta-3',
             "simplezxing"         : 'com.acker:simplezxing:1.5',
             "runner"              : 'com.android.support.test:runner:1.0.2',
+
     ]
 
 }
