@@ -51,6 +51,31 @@ public abstract class BaseSkipFragment extends BaseFragment {
     }
 
 
+    /**
+     * request必须大于0才调用
+     * @param intent
+     * @param bundle
+     * @param requestCode
+     */
+    public void skipActivity(Intent intent,Integer requestCode,Bundle bundle,boolean isActivity,int skipAnimStatue)
+    {
+        if (bundle!=null)
+        {
+            intent.putExtras(bundle);
+        }
+        super.startActivityForResult(intent,requestCode);
+        switch (skipAnimStatue)
+        {
+            case 1:
+                getActivity().overridePendingTransition(R.anim.pure_activity_enter_right,R.anim.pure_activity_exit_left);
+                break;
+            case 2:
+                getActivity().overridePendingTransition(R.anim.pure_actiivty_enter_alpha,0);
+                break;
+
+        }
+    }
+
 
     protected int skipAnimEnter()
     {

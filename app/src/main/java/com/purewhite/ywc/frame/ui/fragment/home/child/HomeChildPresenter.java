@@ -53,7 +53,7 @@ public class HomeChildPresenter extends PresenterImp<HomeChildContract.UiView>
 
             private void handlerAdapter(boolean network,List<ShopBean> list)
             {
-                mView.getAdapter().refreshComplete(network,flush,list);
+                mView.getAdapter().addDataFlush(flush,list,network);
             }
         });
     }

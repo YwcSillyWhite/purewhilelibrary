@@ -86,23 +86,5 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
     }
 
 
-    @Override
-    protected int skipAnimEnter() {
-        return R.anim.pure_actiivty_enter_alpha;
-    }
 
-    @Override
-    protected int skipAnimExit() {
-        return 0;
-    }
-
-    @Override
-    protected int finishAnimEnter() {
-        return 0;
-    }
-
-    @Override
-    protected int finishAnimExit() {
-        return R.anim.pure_activity_exit_alpha;
-    }
 }

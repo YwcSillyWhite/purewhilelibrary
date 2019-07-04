@@ -49,7 +49,7 @@ public class PicViewAdapter extends BindAdapter<String> {
     {
         final List<String> listPath = PicSeletorManager.newInstance().getListPath();
         this.path=path;
-        super.flush(listPath);
+        super.flush(listPath,true);
         return listPath.contains(path);
     }
 }

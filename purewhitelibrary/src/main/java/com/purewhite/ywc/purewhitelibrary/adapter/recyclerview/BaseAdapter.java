@@ -642,61 +642,33 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
 
 
 
-
-    /************  数据处理   ****************/
-    //添加数据
-    public  void  refreshComplete(boolean network,int page,List<T> list)
+    /**
+     * 数据处理
+     * @param page
+     * @param list
+     * @param network
+     */
+    public void addDataFlush(int page,List<T> list,boolean network)
     {
-        refreshComplete(network,page==1,list);
-
-    }
-
-    public void  refreshComplete(boolean network,boolean flush,List<T> list)
-    {
-        if (list!=null&&list.size()>0)
-        {
-            addDataFlush(flush,list);
-        }
-        else
-        {
-            if (flush)
-            {
-                setLoadState(LoadView.REST,false);
-                if (obtianDataCount()==0)
-                {
-                    setFullState(network?FullView.DATA:FullView.NETWORK,true);
-                }
-            }
-            else
-            {
-                setLoadState(network?LoadView.DATA:LoadView.NETWORK,true);
-            }
-        }
-
+        addDataFlush(page==1,list,network);
     }
 
 
-    public void addDataFlush(int page,List<T> list)
-    {
-        addDataFlush(page==1,list);
-    }
-
-
-    public void addDataFlush(boolean flush,List<T> list)
+    public void addDataFlush(boolean flush,List<T> list,boolean network)
     {
         if (flush)
         {
-            flush(list);
+            flush(list,network);
         }
         else
         {
-            addData(list);
+            addData(list,network);
         }
     }
 
 
     //刷新数据
-    public void flush(List<T> list)
+    public void flush(List<T> list,boolean network)
     {
         if (obtianDataCount()>0)
         {
@@ -709,39 +681,47 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         }
         else
         {
+            setFullState(network?FullView.DATA:FullView.NETWORK,false);
             setLoadState(LoadView.REST,false);
         }
         notifyDataSetChanged();
     }
 
+
+    //刷新数据
+    public void flush(List<T> list){
+        flush(list,true);
+    }
+
     //添加数据
-    public  void addData(List<T> list)
+    public  void addData(List<T> list,boolean network)
     {
         if (obtianDataCount()==0)
         {
-            flush(list);
+            flush(list,network);
         }
         else
         {
             if (list!=null&&list.size()>0)
             {
-                if (list.size()>=pageSize)
-                {
-                    setLoadState(LoadView.FINISH,false);
-                }
-                else
-                {
-                    setLoadState(LoadView.DATA,true);
-                }
+                setLoadState(list.size()>=pageSize?LoadView.FINISH:LoadView.DATA,false);
                 obtainData().addAll(list);
                 notifyItemRangeInserted(obtianDataCount()-list.size() + getHeadCount(), list.size());
             }
             else
             {
-                setLoadState(LoadView.DATA,true);
+                setLoadState(network?LoadView.DATA:LoadView.NETWORK,true);
             }
         }
     }
+
+
+    //添加数据
+    public  void addData(List<T> list)
+    {
+        addData(list,true);
+    }
+
 
 
     //删除数据
@@ -750,7 +730,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         if (obtianDataCount()>position)
         {
             obtainData().remove(position);
-            notifyItemRemoved(position);
+            notifyItemRemoved(getHeadCount()+position);
         }
     }
 

@@ -13,6 +13,10 @@ import com.purewhite.ywc.purewhitelibrary.R;
  */
 public abstract class BaseSkipActivity extends BaseActivity{
 
+    private int finishAnimStatue=1;
+    public void setFinishAnimStatue(int finishAnimStatue) {
+        this.finishAnimStatue = finishAnimStatue;
+    }
 
     /**
      * 跳转
@@ -63,42 +67,37 @@ public abstract class BaseSkipActivity extends BaseActivity{
      */
     public void skipActivity(Intent intent,Integer requestCode,Bundle bundle)
     {
+        skipActivity(intent,requestCode,bundle,1);
+    }
+
+
+
+    /**
+     * request必须大于0才调用
+     * @param intent
+     * @param bundle
+     * @param requestCode
+     */
+    public void skipActivity(Intent intent,Integer requestCode,Bundle bundle,int skipAnimStatue)
+    {
         if (bundle!=null)
         {
             intent.putExtras(bundle);
         }
         super.startActivityForResult(intent,requestCode);
-        if (isSkipAnim())
+        switch (skipAnimStatue)
         {
-            //跳转动画
-            int skipAnimEnter = skipAnimEnter();
-            int skipAnimExit = skipAnimExit();
-            if (skipAnimEnter!=0||skipAnimExit!=0)
-            {
-                overridePendingTransition(skipAnimEnter,skipAnimExit);
-            }
+            case 1:
+                overridePendingTransition(R.anim.pure_activity_enter_right,R.anim.pure_activity_exit_left);
+                break;
+            case 2:
+                overridePendingTransition(R.anim.pure_actiivty_enter_alpha,0);
+                break;
+
         }
-
     }
 
 
-    @AnimRes
-    protected int skipAnimEnter()
-    {
-        return R.anim.pure_activity_enter_right;
-    }
-
-    @AnimRes
-    protected int skipAnimExit()
-    {
-        return R.anim.pure_activity_exit_left;
-    }
-
-
-    protected boolean isSkipAnim()
-    {
-        return true;
-    }
 
 
     /**
@@ -132,8 +131,6 @@ public abstract class BaseSkipActivity extends BaseActivity{
 
 
 
-
-
     //结束动画默认是关闭的
     @Override
     public void onBackPressed() {
@@ -147,37 +144,17 @@ public abstract class BaseSkipActivity extends BaseActivity{
         finishAnim();
     }
 
-
-    protected int finishAnimEnter()
+    private void finishAnim()
     {
-        return 0;
-    }
-
-    protected int finishAnimExit()
-    {
-        return R.anim.pure_activity_exit_right;
-    }
-
-
-    protected void finishAnim()
-    {
-        if (isFinishAnim())
+        //skipAnimStatueNew 负数就没有动画了
+        switch (finishAnimStatue)
         {
-            int finishAnimEnter = finishAnimEnter();
-            int finishAnimExit = finishAnimExit();
-            if (finishAnimEnter!=0||finishAnimExit!=0)
-            {
-                overridePendingTransition(finishAnimEnter,finishAnimExit);
-            }
+            case 1:
+                overridePendingTransition(0,R.anim.pure_activity_exit_right);
+                break;
+            case 2:
+                overridePendingTransition(0,R.anim.pure_activity_exit_alpha);
+                break;
         }
-
     }
-
-
-    protected boolean isFinishAnim()
-    {
-        return true;
-    }
-
-
 }

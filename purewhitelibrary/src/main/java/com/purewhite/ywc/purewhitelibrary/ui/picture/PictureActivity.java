@@ -56,7 +56,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                 Folder folder = pictureWindowAdapter.obtainT(position);
                 pictureWindowAdapter.setSeleterPosition(position);
                 mDataBinding.recyclerView.scrollToPosition(0);
-                pictureAdapter.flush(folder.getImageBeanList());
+                pictureAdapter.flush(folder.getImageBeanList(),true);
                 mDataBinding.pictureTextTag.setText(folder.getName());
             }
         }
@@ -221,9 +221,9 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                     .setSplace(1f,0,0,mDataBinding.bottomLinearLayout.getHeight())
                     .setRecyclerView(R.id.recycler_view,pictureWindowAdapter,new LinearLayoutManager(this))
                     .addAnim(WindowAnimStyle.bottom_anim_window);
-            pictureWindowAdapter.flush(folders);
+            pictureWindowAdapter.flush(folders,true);
             pictureWindowAdapter.setSeleterPosition(0);
-            pictureAdapter.flush(folders.get(0).getImageBeanList());
+            pictureAdapter.flush(folders.get(0).getImageBeanList(),true);
             pictureWindowAdapter.setOnItemListener(this);
         }
     }

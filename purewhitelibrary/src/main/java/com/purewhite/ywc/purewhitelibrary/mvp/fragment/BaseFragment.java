@@ -48,6 +48,8 @@ public abstract class BaseFragment extends Fragment{
             if (view==null) {
                 view=setLayoutView(inflater,container,layout);
             }
+            initView();
+            afterView();
         }
         return view;
     }
@@ -61,8 +63,6 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initView();
-        afterView();
         soleLoad=true;
         //用户是否可见
         decideSoleLoad(getUserVisibleHint());

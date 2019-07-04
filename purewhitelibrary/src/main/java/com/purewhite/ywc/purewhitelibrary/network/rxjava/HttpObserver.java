@@ -20,7 +20,6 @@ public abstract class HttpObserver<T> implements Observer<T> {
 
     private Context context;
 
-
     /**
      * 这个生命周期app绑定的，使用的时候要注意
      */
