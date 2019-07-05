@@ -27,6 +27,7 @@ public abstract class BaseSkipActivity extends BaseActivity{
         skipActivity(cla, -1,null);
     }
 
+
     public void skipActivity(Class<?> cla,Bundle bundle)
     {
         skipActivity(cla,-1,bundle);
@@ -38,6 +39,11 @@ public abstract class BaseSkipActivity extends BaseActivity{
     }
 
     public void skipActivity(Class<?> cla,int requestCode,Bundle bundle)
+    {
+        skipActivity(cla,requestCode,bundle,1);
+    }
+
+    public void skipActivity(Class<?> cla,int requestCode,Bundle bundle,int skipAnimStatue)
     {
         skipActivity(new Intent(this,cla),requestCode,bundle);
     }

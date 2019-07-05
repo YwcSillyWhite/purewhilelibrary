@@ -32,9 +32,20 @@ public abstract class BaseSkipFragment extends BaseFragment {
         skipActivity(new Intent(getContext(),cla),bundle,requestCode,isActivity);
     }
 
+
     public void skipActivity(Intent intent,Bundle bundle,int requestCode,boolean isActivity)
     {
+        skipActivity(intent,requestCode,bundle,isActivity,1);
+    }
 
+    /**
+     * request必须大于0才调用
+     * @param intent
+     * @param bundle
+     * @param requestCode
+     */
+    public void skipActivity(Intent intent,int requestCode,Bundle bundle,boolean isActivity,int skipAnimStatue)
+    {
         if (bundle!=null)
         {
             intent.putExtras(bundle);
@@ -45,25 +56,8 @@ public abstract class BaseSkipFragment extends BaseFragment {
         }
         else
         {
-            startActivityForResult(intent,requestCode);
+            super.startActivityForResult(intent,requestCode);
         }
-        skipAnim();
-    }
-
-
-    /**
-     * request必须大于0才调用
-     * @param intent
-     * @param bundle
-     * @param requestCode
-     */
-    public void skipActivity(Intent intent,Integer requestCode,Bundle bundle,boolean isActivity,int skipAnimStatue)
-    {
-        if (bundle!=null)
-        {
-            intent.putExtras(bundle);
-        }
-        super.startActivityForResult(intent,requestCode);
         switch (skipAnimStatue)
         {
             case 1:
@@ -74,32 +68,6 @@ public abstract class BaseSkipFragment extends BaseFragment {
                 break;
 
         }
-    }
-
-
-    protected int skipAnimEnter()
-    {
-        return R.anim.pure_activity_enter_right;
-    }
-
-    protected int skipAnimExit()
-    {
-        return R.anim.pure_activity_exit_left;
-    }
-
-    protected boolean isSkipAnim()
-    {
-        return true;
-    }
-
-
-    private void skipAnim()
-    {
-        if (isSkipAnim())
-        {
-            getActivity().overridePendingTransition(skipAnimEnter(),skipAnimExit());
-        }
-
     }
 
 
