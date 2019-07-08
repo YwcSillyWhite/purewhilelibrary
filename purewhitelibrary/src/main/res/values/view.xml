@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
     <declare-styleable name="BottomMenu">
         //选中图片
         <attr name="img_check_true" format="reference"></attr>
@@ -33,9 +35,27 @@
 
 
 
-    <!-- tablayout文字大小 -->
-    <style name="TabLayoutTextSize" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textAllCaps">false</item>
-    </style>
+    <declare-styleable name="ScrollSwipeLayout">
+        <attr name="scroll_swipe" format="boolean"></attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="ScrollPtrLayout">
+        <attr name="scroll_ptr" format="boolean"></attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="MaxHeightRecyclerView">
+        <attr name="maxHeight" format="dimension"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="RatioImageView">
+        <attr name="high" format="integer"></attr>
+        <attr name="wide" format="integer"></attr>
+    </declare-styleable>
+
+
+
+
+
 </resources>

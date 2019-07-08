@@ -12,4 +12,6 @@ public interface OnLoadListener {
     void loadMore();
     //重新加载
     void loadAgain();
+
+
 }

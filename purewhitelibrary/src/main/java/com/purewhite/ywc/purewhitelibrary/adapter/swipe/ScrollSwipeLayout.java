@@ -1,40 +1,39 @@
-package com.purewhite.ywc.purewhitelibrary.adapter.ptr;
+package com.purewhite.ywc.purewhitelibrary.adapter.swipe;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 
+
 /**
- * //解决与viewpager使用的时候滑动冲突
  * @author yuwenchao
  */
-public class ScrollPtrLayout extends PtrLayout{
+public class ScrollSwipeLayout extends BaseSwipeRefreshLayout{
 
-    //上一次x,y的位置；
-    private float lastX,lastY;
+    //是否解决滑动冲突
     private boolean scroll=true;
+    //滑动的时候上次xy位置
+    private float lastX,lastY;
 
-    public ScrollPtrLayout(Context context) {
+    public ScrollSwipeLayout(@NonNull Context context) {
         this(context,null);
     }
 
-    public ScrollPtrLayout(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
-    }
-
-    public ScrollPtrLayout(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+    public ScrollSwipeLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
         initView(attrs);
     }
 
     private void initView(AttributeSet attrs) {
         if (attrs!=null)
         {
-            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ScrollPtrLayout);
-            scroll = typedArray.getBoolean(R.styleable.ScrollPtrLayout_scroll_ptr, true);
+            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ScrollSwipeLayout);
+            scroll = typedArray.getBoolean(R.styleable.ScrollSwipeLayout_scroll_swipe, true);
             typedArray.recycle();
         }
     }
@@ -65,5 +64,7 @@ public class ScrollPtrLayout extends PtrLayout{
         }
         return super.onInterceptTouchEvent(ev);
     }
+
+
 
 }

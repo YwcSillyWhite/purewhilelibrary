@@ -3,7 +3,7 @@ package com.purewhite.ywc.purewhitelibrary.adapter.ptr.base;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.purewhite.ywc.purewhitelibrary.adapter.ptr.callback.OnPtrListener;
+import com.purewhite.ywc.purewhitelibrary.adapter.ptr.callback.PtrLoadListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.ptr.head.PtrFrameHead;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -54,18 +54,16 @@ public abstract class BasePtrFrameLayout extends PtrFrameLayout {
         //手动刷新
         autoRefresh(true);
 
-
         setEnabled(false);
-
-
     }
 
 
     //设置下拉刷新监听
-    public void setOnPtrListener(OnPtrListener onPtrListener)
+    public void setOnLoadListener(PtrLoadListener ptrLoadListener)
     {
-        setPtrHandler(onPtrListener);
+        setPtrHandler(ptrLoadListener);
     }
+
 
     //添加头部
     public void addHeadView(PtrFrameHead ptrFrameHead)

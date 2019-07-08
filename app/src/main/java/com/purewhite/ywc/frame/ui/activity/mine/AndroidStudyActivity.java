@@ -21,7 +21,7 @@ public class AndroidStudyActivity extends MvpActivity<ActivityAndroidStudyBindin
     private AndroidStudyAdapter androidStudyAdapter;
     private OnItemListener onItemListener=new OnItemListener() {
         @Override
-        public void OnClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView) {
+        public void onClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView) {
             if (adapter instanceof AndroidStudyAdapter)
             {
                 String uri = ((AndroidStudyAdapter) adapter).obtainUri(position);

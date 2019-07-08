@@ -24,7 +24,7 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            skipActivity(MainActivity.class);
+            skipActivity(MainActivity.class,-1,null,2);
             backActivity();
         }
 
@@ -33,6 +33,8 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
 
         }
     };
+
+
 
     @Override
     protected PresenterImp creartPresenter() {
@@ -45,12 +47,6 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
     }
 
     @Override
-    protected void initView() {
-        initStartAnim();
-    }
-
-
-    @Override
     protected void initBar() {
         BarUtils.obtianBarConfig()
                 .with(this)
@@ -59,6 +55,16 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
                 .build();
     }
 
+    @Override
+    protected void beforeView() {
+        super.beforeView();
+        setFinishAnimStatue(2);
+    }
+
+    @Override
+    protected void initView() {
+        initStartAnim();
+    }
 
 
     /**

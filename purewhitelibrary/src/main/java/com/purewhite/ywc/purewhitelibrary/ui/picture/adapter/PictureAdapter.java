@@ -52,7 +52,7 @@ public class PictureAdapter extends BindAdapter<ImageBean> {
                     {
                         flushPosition(position);
                         if (onItemListener!=null)
-                            onItemListener.OnClick(PictureAdapter.this,v,position,false);
+                            onItemListener.onClick(PictureAdapter.this,v,position,false);
                     }
                 }
             });

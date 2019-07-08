@@ -45,7 +45,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
     private PictureWindowAdapter pictureWindowAdapter;
     //recycler点击
     @Override
-    public void OnClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView) {
+    public void onClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView) {
         if (adapter instanceof PictureWindowAdapter)
         {
             dialogUtils.dismiss();
@@ -81,8 +81,6 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                         startActivity(new Intent(this, PicViewActivity.class).putExtras(build),compat.toBundle());
                     }
-
-//                    skipActivity(PicViewActivity.class,PictureStype.SKIP_PICVIEW,build);
                 }
             }
             else

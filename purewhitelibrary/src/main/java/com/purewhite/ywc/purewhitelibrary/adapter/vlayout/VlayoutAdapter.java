@@ -178,7 +178,7 @@ public class VlayoutAdapter extends DelegateAdapter
                         if (onFullListener!=null&&NetWorkUtils.isConnected())
                         {
                             setFullSate(FullView.LODA,true);
-                            onFullListener.again();
+                            onFullListener.loadAgain();
                         }
                     }
                 });

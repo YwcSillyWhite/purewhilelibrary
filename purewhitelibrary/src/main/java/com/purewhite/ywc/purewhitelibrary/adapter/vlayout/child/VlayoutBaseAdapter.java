@@ -115,7 +115,7 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
             public void onSingleClick(View v) {
                 if (onItemListener!=null&&parentClick)
                 {
-                    onItemListener.OnClick(VlayoutBaseAdapter.this,v,position,true);
+                    onItemListener.onClick(VlayoutBaseAdapter.this,v,position,true);
                 }
             }
         });

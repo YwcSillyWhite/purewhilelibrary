@@ -69,6 +69,12 @@ public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> 
     }
 
     @Override
+    protected void beforeView() {
+        super.beforeView();
+        setFinishAnimStatue(2);
+    }
+
+    @Override
     protected void initView() {
         sparseArray=new SparseArray<>();
         sparseArray.append(0,new HomeFragment());

@@ -18,5 +18,5 @@ public interface OnItemListener {
      * @param position 点击数据的position
      * @param itemView 是否为itemview
      */
-    void OnClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView);
+    void onClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView);
 }

@@ -6,7 +6,7 @@ package com.purewhite.ywc.purewhitelibrary.adapter.callback;
 public abstract   class OnLoadListenerImp implements OnLoadListener{
 
     //是否可以加载更多
-    protected boolean judge()
+    protected boolean judgeLoad()
     {
         return true;
     }
@@ -16,7 +16,7 @@ public abstract   class OnLoadListenerImp implements OnLoadListener{
 
     @Override
     public void loadMore() {
-        if (judge())
+        if (judgeLoad())
         {
             pullUp();
         }

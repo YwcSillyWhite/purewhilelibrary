@@ -15,7 +15,8 @@ import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnFullListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnLoadListenerImp;
 import com.purewhite.ywc.purewhitelibrary.adapter.fullview.FullView;
-import com.purewhite.ywc.purewhitelibrary.adapter.ptr.callback.OnPtrListener;
+import com.purewhite.ywc.purewhitelibrary.adapter.ptr.callback.PtrLoadListener;
+import com.purewhite.ywc.purewhitelibrary.adapter.swipe.SwipLoadListener;
 import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
 
 public class HomeChildFragment extends MvpFragment<FragHomeChildBinding,HomeChildPresenter>
@@ -36,14 +37,24 @@ public class HomeChildFragment extends MvpFragment<FragHomeChildBinding,HomeChil
         }
     };
 
-    private OnFullListener onFullListener=new OnFullListener() {
+    private SwipLoadListener swipLoadListener=new SwipLoadListener() {
         @Override
-        public void again() {
+        public void pullDown() {
             mPresenter.obtianShopList(position,true);
         }
+
     };
 
-    private OnPtrListener onPtrListener=new OnPtrListener() {
+    private OnFullListener onFullListener=new OnFullListener() {
+
+        @Override
+        public void loadAgain() {
+            mPresenter.obtianShopList(position,true);
+        }
+
+    };
+
+    private PtrLoadListener onPtrListener=new PtrLoadListener() {
         @Override
         public void pullDown() {
             mPresenter.obtianShopList(position,true);
@@ -52,7 +63,7 @@ public class HomeChildFragment extends MvpFragment<FragHomeChildBinding,HomeChil
 
     private OnItemListener onItemListener=new OnItemListener() {
         @Override
-        public void OnClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView) {
+        public void onClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView) {
             if (adapter instanceof HomeChildAdapter)
             {
                 ShopBean shopBean = ((HomeChildAdapter) adapter).obtainT(position);
@@ -84,7 +95,9 @@ public class HomeChildFragment extends MvpFragment<FragHomeChildBinding,HomeChil
         homeChildAdapter.setOnLoadListener(onLoadListenerImp);
         homeChildAdapter.setOnFullListener(onFullListener);
         homeChildAdapter.setOnItemListener(onItemListener);
-        mDataBinding.ptrLayout.setOnPtrListener(onPtrListener);
+
+        mDataBinding.swipeLayout.setOnLoadLinstener(swipLoadListener);
+//        mDataBinding.ptrLayout.setOnPtrListener(onPtrListener);
 
     }
 
@@ -102,6 +115,6 @@ public class HomeChildFragment extends MvpFragment<FragHomeChildBinding,HomeChil
 
     @Override
     public void respon(boolean flush) {
-        mDataBinding.ptrLayout.refreshComplete(flush);
+        mDataBinding.swipeLayout.refreshComplete(flush);
     }
 }

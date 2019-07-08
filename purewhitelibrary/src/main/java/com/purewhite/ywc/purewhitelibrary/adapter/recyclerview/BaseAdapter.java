@@ -318,7 +318,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
                         if (NetWorkUtils.isConnected()&&onFullListener!=null)
                         {
                             setFullState(FullView.LODA,true);
-                            onFullListener.again();
+                            onFullListener.loadAgain();
                         }
                     }
                 });
@@ -382,7 +382,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
                 if (onItemListener!=null&&parentClick)
                 {
                     int position=viewhold.getLayoutPosition() - getFootCount();
-                    onItemListener.OnClick(BaseAdapter.this,view, position,true);
+                    onItemListener.onClick(BaseAdapter.this,view, position,true);
                 }
             }
         });

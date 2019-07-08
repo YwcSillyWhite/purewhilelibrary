@@ -8,7 +8,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 /**
  * @author yuwenchao
  */
-public abstract class OnPtrListener extends PtrDefaultHandler {
+public abstract class PtrLoadListener extends PtrDefaultHandler {
     @Override
     public void onRefreshBegin(PtrFrameLayout frame) {
         pullDown();
