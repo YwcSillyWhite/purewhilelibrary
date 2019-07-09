@@ -1,9 +1,11 @@
 package com.purewhite.ywc.frame.ui.fragment.home.child;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.bean.ShopBean;

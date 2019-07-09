@@ -1,7 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.network.okhttp;
 
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-import com.purewhite.ywc.purewhitelibrary.network.okhttp.interceptor.ParamsInterceptor;
 
 import java.util.concurrent.TimeUnit;
 

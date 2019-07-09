@@ -1,1 +1,1 @@
-include ':app', ':purewhitelibrary'
+include ':app', ':purewhitelibrary', ':tbslibrary'

@@ -2,11 +2,13 @@ package com.purewhite.ywc.purewhitelibrary.view.bottom;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.Nullable;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;

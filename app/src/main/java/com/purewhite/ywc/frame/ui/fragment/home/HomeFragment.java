@@ -1,11 +1,12 @@
 package com.purewhite.ywc.frame.ui.fragment.home;
 
 import android.animation.ValueAnimator;
-import android.support.design.widget.TabLayout;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.FragHomeBinding;
 import com.purewhite.ywc.frame.ui.adapter.HomePagerAdapter;

@@ -1,7 +1,9 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture.adapter;
 
-import android.databinding.ViewDataBinding;
+
 import android.view.View;
+
+import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.BindAdapter;

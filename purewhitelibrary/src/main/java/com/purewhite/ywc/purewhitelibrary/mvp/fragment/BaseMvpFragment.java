@@ -1,8 +1,10 @@
 package com.purewhite.ywc.purewhitelibrary.mvp.fragment;
 
-import android.databinding.ViewDataBinding;
+
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;

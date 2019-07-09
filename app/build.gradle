@@ -3,14 +3,13 @@ apply plugin: 'com.android.application'
 android {
 
     compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId    rootProject.ext.android.applicationId
         minSdkVersion    rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode      rootProject.ext.android.versionCode
         versionName      rootProject.ext.android.versionName
-
-
         multiDexEnabled true
     }
 
@@ -28,11 +27,11 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation project(':purewhitelibrary')
     testImplementation rootProject.ext.dependencies["junit"]
+    implementation project(':purewhitelibrary')
+    implementation project(':tbslibrary')
     implementation rootProject.ext.dependencies["constraint"]
     implementation rootProject.ext.dependencies["simplezxing"]
     implementation rootProject.ext.dependencies["runner"]
-
 
 }

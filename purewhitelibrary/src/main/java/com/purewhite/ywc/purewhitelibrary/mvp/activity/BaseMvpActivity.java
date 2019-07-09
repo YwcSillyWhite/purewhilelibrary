@@ -1,7 +1,8 @@
 package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 
 import android.content.Context;
-import android.databinding.ViewDataBinding;
+
+import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;

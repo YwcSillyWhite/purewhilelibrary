@@ -1,8 +1,10 @@
 package com.purewhite.ywc.purewhitelibrary.config;
 
-import android.support.annotation.StringRes;
+
 import android.text.TextUtils;
 import android.widget.Toast;
+
+import androidx.annotation.StringRes;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 

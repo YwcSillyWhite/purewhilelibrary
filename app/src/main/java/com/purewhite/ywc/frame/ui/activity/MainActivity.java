@@ -2,13 +2,15 @@ package com.purewhite.ywc.frame.ui.activity;
 
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
+
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityMainBinding;
 import com.purewhite.ywc.frame.ui.fragment.home.HomeFragment;

@@ -1,8 +1,10 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.vlayout.child;
 
-import android.support.annotation.NonNull;
+
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;

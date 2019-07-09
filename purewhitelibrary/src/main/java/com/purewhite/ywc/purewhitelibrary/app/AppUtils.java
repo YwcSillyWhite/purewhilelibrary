@@ -6,8 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
-import com.purewhite.ywc.purewhitelibrary.network.retrofit.RetrofitUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 
 import java.util.Map;
@@ -28,9 +26,9 @@ public final class  AppUtils {
     public static String baseUri="http://v2.api.haodanku.com";
     //oKhttp公共参数
     public static Map<String,String> mapOkhhtp;
-
     private static Application application;
     private static Stack<Activity> stack=new Stack<>();
+
     private AppUtils() {
 
     }
@@ -113,12 +111,16 @@ public final class  AppUtils {
         return null;
     }
 
-    public static Application getContext()
+    public static Context getContext()
     {
-        return application;
+        return application.getApplicationContext();
     }
 
 
+    public static Application getApplication()
+    {
+        return application;
+    }
 
 
     /**

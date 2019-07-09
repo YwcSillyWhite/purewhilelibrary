@@ -1,13 +1,15 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.viewholder;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
@@ -25,7 +27,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public <T extends View>T findViewId(@NonNull@IdRes int id)
+    public <T extends View>T findViewId(@NonNull @IdRes int id)
     {
         View view = sparseArray.get(id);
         if (view==null)

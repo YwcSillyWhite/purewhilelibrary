@@ -6,10 +6,10 @@
         android:orientation="vertical">
         <include layout="@layout/actionbar_one" android:id="@+id/action_bar"/>
         <include layout="@layout/view_line"/>
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/recycler_view">
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </layout>

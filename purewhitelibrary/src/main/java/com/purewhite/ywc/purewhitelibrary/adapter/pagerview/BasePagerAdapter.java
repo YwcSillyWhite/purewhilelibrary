@@ -1,10 +1,12 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.pagerview;
 
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
+
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

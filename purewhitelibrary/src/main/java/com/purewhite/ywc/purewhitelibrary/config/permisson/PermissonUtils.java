@@ -3,11 +3,10 @@ package com.purewhite.ywc.purewhitelibrary.config.permisson;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;

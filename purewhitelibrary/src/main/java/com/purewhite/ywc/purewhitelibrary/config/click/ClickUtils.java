@@ -2,8 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.config.click;
 
 import android.view.View;
 
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-
 /**
  *
  * @author yuwenchao

@@ -1,6 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.viewholder;
 
-import android.databinding.ViewDataBinding;
+
+import androidx.databinding.ViewDataBinding;
 
 /**
  *

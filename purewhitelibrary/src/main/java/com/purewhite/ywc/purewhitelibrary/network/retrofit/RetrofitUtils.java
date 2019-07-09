@@ -2,14 +2,12 @@ package com.purewhite.ywc.purewhitelibrary.network.retrofit;
 
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkManager;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.interceptor.ParamsInterceptor;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

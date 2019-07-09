@@ -1,6 +1,8 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture.manager;
 
-import android.support.annotation.NonNull;
+
+
+import androidx.annotation.NonNull;
 
 import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
 

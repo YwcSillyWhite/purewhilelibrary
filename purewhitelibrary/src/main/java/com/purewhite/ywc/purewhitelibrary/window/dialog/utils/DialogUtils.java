@@ -2,10 +2,11 @@ package com.purewhite.ywc.purewhitelibrary.window.dialog.utils;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.StyleRes;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.StyleRes;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;

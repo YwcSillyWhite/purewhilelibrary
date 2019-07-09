@@ -1,7 +1,8 @@
 package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 
 /**
  *绑定acticity
@@ -13,6 +14,6 @@ public abstract class BaseBindActivity<D extends ViewDataBinding> extends BaseTr
 
     @Override
     protected final void initSetView(int layoutId) {
-        mDataBinding=DataBindingUtil.setContentView(this,layoutId);
+        mDataBinding= DataBindingUtil.setContentView(this,layoutId);
     }
 }

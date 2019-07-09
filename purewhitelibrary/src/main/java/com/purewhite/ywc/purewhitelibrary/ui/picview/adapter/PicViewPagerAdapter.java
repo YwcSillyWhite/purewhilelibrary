@@ -1,6 +1,5 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picview.adapter;
 
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -1,12 +1,14 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.recyclerview;
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
+
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BindHolder;
 
@@ -35,7 +37,7 @@ public abstract class BindAdapter<T> extends BaseAdapter<T,BindHolder>{
 
 
     //添加布局
-    protected final void addLayout(int viewType,@NonNull@LayoutRes int layoutId)
+    protected final void addLayout(int viewType,@NonNull @LayoutRes int layoutId)
     {
         if (sparseIntArray==null)
         {

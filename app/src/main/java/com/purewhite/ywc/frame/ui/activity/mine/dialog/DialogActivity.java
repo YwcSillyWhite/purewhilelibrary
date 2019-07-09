@@ -1,10 +1,10 @@
 package com.purewhite.ywc.frame.ui.activity.mine.dialog;
 
-import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+
 import android.view.Gravity;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityDialogBinding;

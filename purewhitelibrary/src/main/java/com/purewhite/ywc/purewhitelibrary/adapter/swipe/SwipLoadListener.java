@@ -1,7 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.swipe;
 
-import android.support.v4.widget.SwipeRefreshLayout;
 
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * @author yuwenchao

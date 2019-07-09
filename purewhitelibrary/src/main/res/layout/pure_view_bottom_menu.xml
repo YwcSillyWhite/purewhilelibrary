@@ -30,7 +30,7 @@
                 android:layout_marginTop="2dp"
                 android:lines="1"/>
         </LinearLayout>
-        <android.support.v7.widget.AppCompatTextView
+        <TextView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_toRightOf="@+id/linear"

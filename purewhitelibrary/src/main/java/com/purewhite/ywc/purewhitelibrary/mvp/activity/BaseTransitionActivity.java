@@ -1,7 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 
 
-import android.content.Intent;
 import android.os.Build;
 import android.transition.Explode;
 import android.transition.Fade;

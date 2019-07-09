@@ -13,13 +13,13 @@
             android:id="@+id/view_pager">
         </com.purewhite.ywc.purewhitelibrary.view.viewpager.NoSlideViewPager>
         <include layout="@layout/view_line"></include>
-        <android.support.design.widget.BottomNavigationView
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bottom_view"
             android:background="@color/write"
             app:menu="@menu/menu_main_bottom"
             app:itemTextColor="@drawable/bottom_view_text_color">
-        </android.support.design.widget.BottomNavigationView>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
     </LinearLayout>
 </layout>

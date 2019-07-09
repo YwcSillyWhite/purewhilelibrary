@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.AnimRes;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 

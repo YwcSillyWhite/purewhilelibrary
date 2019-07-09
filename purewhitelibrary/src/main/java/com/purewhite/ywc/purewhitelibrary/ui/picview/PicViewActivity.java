@@ -2,12 +2,13 @@ package com.purewhite.ywc.purewhitelibrary.ui.picview;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
+
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;

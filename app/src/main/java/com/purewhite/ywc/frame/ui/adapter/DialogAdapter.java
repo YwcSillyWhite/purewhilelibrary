@@ -1,7 +1,9 @@
 package com.purewhite.ywc.frame.ui.adapter;
 
-import android.databinding.ViewDataBinding;
+
 import android.view.View;
+
+import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.AdapterDialogTwoBinding;

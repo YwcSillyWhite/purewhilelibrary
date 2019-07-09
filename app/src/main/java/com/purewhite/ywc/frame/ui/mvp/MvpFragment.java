@@ -1,7 +1,9 @@
 package com.purewhite.ywc.frame.ui.mvp;
 
-import android.databinding.ViewDataBinding;
+
 import android.view.View;
+
+import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.fragment.BaseMvpFragment;

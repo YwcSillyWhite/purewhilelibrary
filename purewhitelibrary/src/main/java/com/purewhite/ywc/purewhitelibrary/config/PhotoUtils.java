@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.FileProvider;
+
+
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 
 import java.io.File;
 
@@ -39,7 +41,7 @@ public class PhotoUtils {
                  * 只使用顶层意图的grant标志。
                  */
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                uri=FileProvider.getUriForFile(activity,providerFileContent,file);
+                uri= FileProvider.getUriForFile(activity,providerFileContent,file);
             }
             else
             {
@@ -59,8 +61,8 @@ public class PhotoUtils {
      * @param file
      * @param requestCode
      */
-    public  static void intentCamera(Fragment fragment,String providerFileContent
-            ,File file,int requestCode)
+    public  static void intentCamera(Fragment fragment, String providerFileContent
+            , File file, int requestCode)
     {
         if (file!=null&&fragment!=null)
         {

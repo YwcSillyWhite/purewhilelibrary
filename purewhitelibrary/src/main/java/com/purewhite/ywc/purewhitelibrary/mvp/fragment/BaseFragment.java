@@ -2,13 +2,14 @@ package com.purewhite.ywc.purewhitelibrary.mvp.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
@@ -22,7 +23,7 @@ import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
  * @author yuwenchao
  * @date 2018/11/14
  */
-public abstract class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment {
 
     //唯一加载
     private boolean soleLoad;

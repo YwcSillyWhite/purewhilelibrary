@@ -1,7 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.network.okhttp.interceptor;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 
 import java.io.IOException;
 import java.util.Map;

@@ -2,10 +2,11 @@ package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
@@ -21,7 +22,7 @@ import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
  * @date 2018/11/3
  */
 
-public abstract class BaseActivity extends AppCompatActivity{
+public abstract class BaseActivity extends AppCompatActivity {
 
 
     @Override
@@ -81,7 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     private void initAdaptive() {
         if (isAdaptive())
         {
-            AdaptiveUtils.adaptiveWidth(this, AppUtils.getContext(),AppUtils.adaptiveWightDp);
+            AdaptiveUtils.adaptiveWidth(this, AppUtils.getApplication(),AppUtils.adaptiveWightDp);
         }
     }
 

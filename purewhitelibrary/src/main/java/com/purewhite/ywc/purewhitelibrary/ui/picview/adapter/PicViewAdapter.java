@@ -1,14 +1,15 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picview.adapter;
 
-import android.databinding.ViewDataBinding;
+
 import android.text.TextUtils;
+
+import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.BindAdapter;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BindHolder;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureAdapterPicViewBinding;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.manager.PicSeletorManager;
 
 import java.util.List;

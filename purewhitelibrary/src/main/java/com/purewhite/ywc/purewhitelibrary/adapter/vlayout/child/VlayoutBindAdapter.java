@@ -1,10 +1,12 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.vlayout.child;
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
+
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BindHolder;
 

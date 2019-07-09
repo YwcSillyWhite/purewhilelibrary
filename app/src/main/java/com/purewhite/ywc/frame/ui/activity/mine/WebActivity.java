@@ -1,6 +1,7 @@
 package com.purewhite.ywc.frame.ui.activity.mine;
 
 import android.graphics.Bitmap;
+
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,10 +24,10 @@ public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
             switch (v.getId())
             {
                 case R.id.left_img:
-                    if (!mDataBinding.webLayout.isRollback())
-                    {
-                        finish();
-                    }
+//                    if (!mDataBinding.webLayout.isRollback())
+//                    {
+//                        finish();
+//                    }
                     break;
             }
         }
@@ -54,19 +55,19 @@ public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
         String web_uri = getIntent().getStringExtra(TagUtils.web_uri);
         if (TextUtils.isEmpty(web_uri))
             finish();
-        mDataBinding.webLayout.getWebView().loadUrl(web_uri);
+
         mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
         mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
         mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
         mDataBinding.actionBar.centerText.setText("web");
-        mDataBinding.webLayout.getWebView().setWebViewClient(webViewClient);
-        mDataBinding.webLayout.getWebView().setWebChromeClient(webChromeClient);
+
+//        mDataBinding.webView.loadUrl(web_uri);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mDataBinding.webLayout.onDestory();
+
     }
 
 
@@ -106,10 +107,10 @@ public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode==KeyEvent.KEYCODE_BACK)
         {
-            if (mDataBinding.webLayout.isRollback())
-            {
-                return true;
-            }
+//            if (mDataBinding.webLayout.isRollback())
+//            {
+//                return true;
+//            }
         }
         return super.onKeyDown(keyCode, event);
     }

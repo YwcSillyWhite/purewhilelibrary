@@ -1,9 +1,11 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.top;
 
-import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
+
 import android.view.View;
+
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorCompat;
+import androidx.core.view.ViewPropertyAnimatorListener;
 
 import java.lang.ref.WeakReference;
 

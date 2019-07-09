@@ -1,6 +1,7 @@
 package com.purewhite.ywc.frame.ui.adapter;
 
-import android.databinding.ViewDataBinding;
+
+import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.bean.ShopBean;

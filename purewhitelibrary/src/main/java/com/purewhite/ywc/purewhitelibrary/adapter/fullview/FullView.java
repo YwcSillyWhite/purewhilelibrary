@@ -1,8 +1,10 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.fullview;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
+
 import android.view.View;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
 
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BaseViewHolder;
 

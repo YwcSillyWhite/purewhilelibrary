@@ -2,11 +2,13 @@ package com.purewhite.ywc.purewhitelibrary.view.viewpager;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 

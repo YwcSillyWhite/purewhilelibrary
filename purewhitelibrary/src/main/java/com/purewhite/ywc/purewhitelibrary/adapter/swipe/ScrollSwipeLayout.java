@@ -2,10 +2,12 @@ package com.purewhite.ywc.purewhitelibrary.adapter.swipe;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 

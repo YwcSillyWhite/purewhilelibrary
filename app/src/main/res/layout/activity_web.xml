@@ -10,11 +10,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.purewhite.ywc.purewhitelibrary.view.webview.WebLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/web_layout">
-            </com.purewhite.ywc.purewhitelibrary.view.webview.WebLayout>
             <ProgressBar
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -22,6 +17,11 @@
                 android:id="@+id/progress_bar"
                 android:progressDrawable="@drawable/progress_web"
                 android:visibility="gone"/>
+            <com.example.tbslibrary.view.X5WebView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/web_view">
+            </com.example.tbslibrary.view.X5WebView>
         </RelativeLayout>
     </LinearLayout>
 </layout>

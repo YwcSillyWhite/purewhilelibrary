@@ -1,15 +1,14 @@
 package com.purewhite.ywc.purewhitelibrary.window.base;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StyleRes;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
 
 /**
  * @author yuwenchao
@@ -18,7 +17,7 @@ public class WindowDialogUtils<T extends WindowViewUtils> extends WindowViewUtil
     protected Dialog dialog;
     protected Window window;
 
-    public WindowDialogUtils(Context context,@LayoutRes int layoutId, Dialog dialog) {
+    public WindowDialogUtils(Context context, @LayoutRes int layoutId, Dialog dialog) {
         super(context,layoutId);
         this.dialog=dialog;
         this.window=dialog.getWindow();
