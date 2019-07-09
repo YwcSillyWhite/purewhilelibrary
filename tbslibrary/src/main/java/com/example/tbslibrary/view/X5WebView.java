@@ -4,20 +4,20 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.tbslibrary.app.TbsAppUtils;
+import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 
 /**
  * 防止内存泄露
  */
 public class X5WebView extends RelativeLayout {
 
-    private WebView webView;
-    private ProgressBar progressBar;
+    protected WebView webView;
 
     public WebView getWebView() {
         return webView;
@@ -41,11 +41,6 @@ public class X5WebView extends RelativeLayout {
         webView = new WebView(TbsAppUtils.getApplication());
         addView(webView,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
         initSetting(webView.getSettings());
-
-        progressBar = new ProgressBar(getContext());
-
-//        progressBar.setProgressDrawable();
-
     }
 
     private void initSetting(WebSettings webSetting) {
@@ -68,6 +63,26 @@ public class X5WebView extends RelativeLayout {
         // webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH);
         webSetting.setCacheMode(WebSettings.LOAD_NO_CACHE);
     }
+
+    public void addWebCall(WebViewClient webViewClient, WebChromeClient webChromeClient,String uri)
+    {
+        if (webView!=null)
+        {
+            webView.setWebViewClient(webViewClient);
+            webView.setWebChromeClient(webChromeClient);
+            webView.loadUrl(uri);
+        }
+    }
+
+    public void loadUrl(String uri)
+    {
+        if (webView!=null)
+        {
+            webView.loadUrl(uri);
+        }
+    }
+
+
 
 
 

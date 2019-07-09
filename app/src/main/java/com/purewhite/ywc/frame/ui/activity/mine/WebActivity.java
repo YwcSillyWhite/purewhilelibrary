@@ -5,16 +5,18 @@ import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.config.TagUtils;
 import com.purewhite.ywc.frame.databinding.ActivityWebBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
+import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 
 public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
 
@@ -24,58 +26,21 @@ public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
             switch (v.getId())
             {
                 case R.id.left_img:
-//                    if (!mDataBinding.webLayout.isRollback())
-//                    {
-//                        finish();
-//                    }
+                    if (!mDataBinding.webView.isRollback())
+                    {
+                        finish();
+                    }
                     break;
             }
         }
     };
-
-    @Override
-    protected View onBarTitleView() {
-        return mDataBinding.actionBar.barLayout;
-    }
-
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
-
-    @Override
-    protected int getLayout() {
-        return R.layout.activity_web;
-    }
-
-
-
-    @Override
-    protected void initView() {
-        String web_uri = getIntent().getStringExtra(TagUtils.web_uri);
-        if (TextUtils.isEmpty(web_uri))
-            finish();
-
-        mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
-        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.centerText.setText("web");
-
-//        mDataBinding.webView.loadUrl(web_uri);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
-
 
     private WebViewClient webViewClient=new WebViewClient()
     {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            LogUtils.debug("web_url","开始");
             mDataBinding.progressBar.setVisibility(View.VISIBLE);
         }
 
@@ -84,6 +49,13 @@ public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
             super.onPageFinished(view, url);
             mDataBinding.progressBar.setVisibility(View.GONE);
         }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView webView, String url) {
+            webView.loadUrl(url);
+            return true;
+        }
+
     };
 
 
@@ -104,13 +76,46 @@ public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
 
 
     @Override
+    protected View onBarTitleView() {
+        return mDataBinding.actionBar.barLayout;
+    }
+
+    @Override
+    protected PresenterImp creartPresenter() {
+        return null;
+    }
+
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_web;
+    }
+
+    @Override
+    protected void initView() {
+        String web_url = getIntent().getStringExtra(TagUtils.web_uri);
+        if (TextUtils.isEmpty(web_url))
+            finish();
+        mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
+        mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
+        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.actionBar.centerText.setText("web");
+        mDataBinding.webView.addWebCall(webViewClient,webChromeClient,web_url);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode==KeyEvent.KEYCODE_BACK)
         {
-//            if (mDataBinding.webLayout.isRollback())
-//            {
-//                return true;
-//            }
+            if (mDataBinding.webView.isRollback())
+            {
+                return true;
+            }
         }
         return super.onKeyDown(keyCode, event);
     }
