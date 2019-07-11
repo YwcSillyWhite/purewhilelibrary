@@ -42,10 +42,10 @@ public class BottomMenu extends FrameLayout {
     private float img_size;
     private float center_distance;
 
+
     public BottomMenu(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context,attrs);
-
     }
 
     private void initView(Context context, AttributeSet attrs) {
@@ -53,53 +53,118 @@ public class BottomMenu extends FrameLayout {
         bottomImg = ((ImageView) view.findViewById(R.id.bottomImg));
         bottomTv = ((TextView) view.findViewById(R.id.bottomTv));
         bottomNum = ((TextView) view.findViewById(R.id.bottomNum));
-        //获取xml属性
-        TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.BottomMenu);
-        text_check_true = typedArray.getColor(R.styleable.BottomMenu_text_check_true, 0Xff333333);
-        text_check_false = typedArray.getColor(R.styleable.BottomMenu_text_check_false, 0Xff666666);
-        text_content = typedArray.getString(R.styleable.BottomMenu_text_content);
-        text_size = typedArray.getDimensionPixelSize(R.styleable.BottomMenu_text_size, -1);
+        if (attrs!=null)
+        {
+            //获取xml属性
+            TypedArray typedArray = context.obtainStyledAttributes(attrs,R.styleable.BottomMenu);
+            text_check_true = typedArray.getColor(R.styleable.BottomMenu_text_check_true, 0Xff333333);
+            text_check_false = typedArray.getColor(R.styleable.BottomMenu_text_check_false, 0Xff666666);
+            text_content = typedArray.getString(R.styleable.BottomMenu_text_content);
+            text_size = typedArray.getDimensionPixelSize(R.styleable.BottomMenu_text_size, -1);
 
-        img_check_true = typedArray.getResourceId(R.styleable.BottomMenu_img_check_true, R.mipmap.pure_load_error);
-        img_check_false = typedArray.getResourceId(R.styleable.BottomMenu_img_check_false, R.mipmap.pure_load_error);
-        img_size = typedArray.getDimension(R.styleable.BottomMenu_img_size, -1);
-        animPosition = typedArray.getInt(R.styleable.BottomMenu_anim_position, 0);
-        center_distance = typedArray.getDimension(R.styleable.BottomMenu_center_distance, -1);
-        //释放资源
-        typedArray.recycle();
-        initData();
-    }
+            img_check_true = typedArray.getResourceId(R.styleable.BottomMenu_img_check_true, R.mipmap.pure_load_error);
+            img_check_false = typedArray.getResourceId(R.styleable.BottomMenu_img_check_false, R.mipmap.pure_load_error);
+            img_size = typedArray.getDimension(R.styleable.BottomMenu_img_size, -1);
+            animPosition = typedArray.getInt(R.styleable.BottomMenu_anim_position, 0);
+            center_distance = typedArray.getDimension(R.styleable.BottomMenu_center_distance, -1);
+            //释放资源
+            typedArray.recycle();
 
-    private void initData() {
+
+
+            if (text_size>0)
+            {
+                bottomTv.setTextSize(TypedValue.COMPLEX_UNIT_PX,text_size);
+            }
+
+            if (img_size>0)
+            {
+
+                ViewGroup.LayoutParams layoutParams = bottomImg.getLayoutParams();
+                layoutParams.width= ((int) img_size);
+                layoutParams.height= ((int) img_size);
+            }
+
+            if (center_distance>0)
+            {
+                LinearLayout.LayoutParams layoutParams = ( LinearLayout.LayoutParams)bottomTv.getLayoutParams();
+                layoutParams.topMargin= ((int) center_distance);
+            }
+
+            if (!TextUtils.isEmpty(text_content))
+            {
+                bottomTv.setText(text_content);
+            }
+
+            setData();
+        }
         //设置数值
         setMessageNum(0);
-        if (text_size>0)
-        {
-            bottomTv.setTextSize(TypedValue.COMPLEX_UNIT_PX,text_size);
-        }
-
-        if (img_size>0)
-        {
-
-            ViewGroup.LayoutParams layoutParams = bottomImg.getLayoutParams();
-            layoutParams.width= ((int) img_size);
-            layoutParams.height= ((int) img_size);
-        }
-
-        if (center_distance>0)
-        {
-            LinearLayout.LayoutParams layoutParams = ( LinearLayout.LayoutParams)bottomTv.getLayoutParams();
-            layoutParams.topMargin= ((int) center_distance);
-        }
-
-        if (!TextUtils.isEmpty(text_content))
-        {
-            bottomTv.setText(text_content);
-        }
-
-
-        setData();
     }
+
+
+
+    /**
+     * 初始化被选中
+     */
+    public void setInitCheck() {
+        isCheck=true;
+        setData();
+        anim(isCheck,true);
+    }
+
+
+    //    设置是否选中
+    public void setCheck(boolean check)
+    {
+        if (isCheck==check)
+            return;
+        isCheck=check;
+        setData();
+        if (isCheck)
+        {
+            setMessageNum(0);
+        }
+        //状态变化之后动画
+        anim(isCheck,false);
+    }
+
+    //设置消息数
+    public void setMessageNum(int num)
+    {
+        if (num<=0)
+        {
+            bottomNum.setVisibility(GONE);
+        }
+        else
+        {
+            bottomNum.setVisibility(VISIBLE);
+            if (num>99)
+            {
+                bottomNum.setText("99+");
+            }
+            else
+            {
+                bottomNum.setText(num+"");
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+    //设置选中状态
+    private void setData()
+    {
+        bottomImg.setImageResource(isCheck?img_check_true:img_check_false);
+        bottomTv.setTextColor(isCheck?text_check_true:text_check_false);
+    }
+
 
 
     private void anim(boolean seleter,boolean init)
@@ -149,58 +214,5 @@ public class BottomMenu extends FrameLayout {
 
 
 
-
-
-    //    设置是否选中
-    public void setCheck(boolean check)
-    {
-        if (isCheck==check)
-            return;
-        isCheck=check;
-        setData();
-        if (isCheck)
-        {
-            setMessageNum(0);
-        }
-        //状态变化之后动画
-        anim(isCheck,false);
-    }
-
-    /**
-     * 初始化被选中
-     */
-    public void setInitCheck() {
-        isCheck=true;
-        setData();
-        anim(isCheck,true);
-    }
-
-    //设置选中状态
-    private void setData()
-    {
-        bottomImg.setImageResource(isCheck?img_check_true:img_check_false);
-        bottomTv.setTextColor(isCheck?text_check_true:text_check_false);
-    }
-
-    //设置消息数
-    public void setMessageNum(int num)
-    {
-        if (num<=0)
-        {
-            bottomNum.setVisibility(GONE);
-        }
-        else
-        {
-            bottomNum.setVisibility(VISIBLE);
-            if (num>99)
-            {
-                bottomNum.setText("99+");
-            }
-            else
-            {
-                bottomNum.setText(num+"");
-            }
-        }
-    }
 
 }

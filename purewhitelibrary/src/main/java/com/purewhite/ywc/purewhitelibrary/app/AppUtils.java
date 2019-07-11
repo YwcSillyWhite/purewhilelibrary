@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.util.Map;
 import java.util.Stack;
@@ -98,6 +99,13 @@ public final class  AppUtils {
         mapOkhhtp=map;
         AppUtils.application =application;
         application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
+
+
+        //内存检测
+        if (!LeakCanary.isInAnalyzerProcess(application)) {
+            LeakCanary.install(application);
+        }
+
     }
 
     public static Activity getTopActivity()

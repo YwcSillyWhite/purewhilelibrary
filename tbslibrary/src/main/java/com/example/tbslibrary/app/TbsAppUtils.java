@@ -9,7 +9,6 @@ import com.tencent.smtt.sdk.QbSdk;
 public final class TbsAppUtils {
 
     private static Application application;
-
     private static final QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
 
         @Override

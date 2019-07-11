@@ -7,12 +7,13 @@ import com.purewhite.ywc.frame.databinding.ActivityCustomMainBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.view.bottom.BottomLayout;
+import com.purewhite.ywc.purewhitelibrary.view.bottom.BottomMenu;
 
 public class CustomMainActivity extends MvpActivity<ActivityCustomMainBinding,PresenterImp> {
 
     private BottomLayout.OnBottomLayoutChageListener onBottomLayoutChageListener=new BottomLayout.OnBottomLayoutChageListener() {
         @Override
-        public void onCheckChange(View view) {
+        public void onCheckChange(BottomMenu view) {
 
         }
     };

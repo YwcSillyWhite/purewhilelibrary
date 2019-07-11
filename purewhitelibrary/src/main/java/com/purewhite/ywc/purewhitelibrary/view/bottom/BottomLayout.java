@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 import com.purewhite.ywc.purewhitelibrary.R;
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 
 
@@ -27,7 +28,29 @@ public class BottomLayout extends LinearLayout{
     private SparseArray<BottomMenu> viewArray;
     //上次选中bottom
     private BottomMenu lastView;
-    private BottomMenu lastLastView;
+
+    /***** 事件监听 *****/
+    private OnClickListener onClickListener=new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (ClickUtils.clickable(view)&&view instanceof BottomMenu)
+            {
+                if (lastView!=null&&lastView==view)
+                    return;
+                BottomMenu bottomMenu = (BottomMenu) view;
+                if (lastView!=null)
+                {
+                    lastView.setCheck(false);
+                }
+                lastView=bottomMenu;
+                bottomMenu.setCheck(true);
+                if (onBottomLayoutChageListener!=null)
+                {
+                    onBottomLayoutChageListener.onCheckChange(bottomMenu);
+                }
+            }
+        }
+    };
 
     //添加绑定
     public void addOnBottomLayoutChageListener(OnBottomLayoutChageListener onBottomLayoutChageListener) {
@@ -46,7 +69,6 @@ public class BottomLayout extends LinearLayout{
 
     public BottomLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs,0);
-
     }
 
     public BottomLayout(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -56,8 +78,14 @@ public class BottomLayout extends LinearLayout{
 
     //初始化
     private void initView(AttributeSet attrs) {
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BottomLayout);
-        bottomLayout_checkPosition = typedArray.getInteger(R.styleable.BottomLayout_checkPosition, 0);
+        if (attrs!=null)
+        {
+            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BottomLayout);
+            bottomLayout_checkPosition = typedArray.getInteger(R.styleable.BottomLayout_checkPosition, 0);
+            //释放资源
+            typedArray.recycle();
+        }
+
     }
 
 
@@ -79,14 +107,19 @@ public class BottomLayout extends LinearLayout{
             if (view instanceof BottomMenu)
             {
                 viewArray.put(position, ((BottomMenu) view));
-                view.setOnClickListener(onSingleListener);
+                view.setOnClickListener(onClickListener);
                 position++;
             }
         }
-        lastView = viewArray.get(bottomLayout_checkPosition,null)==null
-                ?viewArray.get(0):viewArray.get(bottomLayout_checkPosition,null);
-        lastView.setInitCheck();
+        lastView = viewArray.get(bottomLayout_checkPosition,null)==null ?viewArray.get(0)
+                :viewArray.get(bottomLayout_checkPosition,null);
+        if (lastView!=null)
+        {
+            lastView.setInitCheck();
+        }
     }
+
+
 
 
     //清空选中
@@ -101,36 +134,11 @@ public class BottomLayout extends LinearLayout{
 
 
 
-    /***** 事件监听 *****/
-
-    private OnClickListener onSingleListener=new OnSingleListener() {
-        @Override
-        public void onSingleClick(View view) {
-            childChange(((BottomMenu) view));
-        }
-    };
-
-    private void childChange(BottomMenu view)
-    {
-        if (lastView==view)
-            return;
-        if (lastView!=null)
-        {
-            lastLastView=lastView;
-            lastView.setCheck(false);
-        }
-        lastView=view;
-        view.setCheck(true);
-        if (onBottomLayoutChageListener!=null)
-            onBottomLayoutChageListener.onCheckChange(view);
-    }
-
-
 
     /***** io接口  *****/
     public interface OnBottomLayoutChageListener
     {
-        void onCheckChange(View view);
+        void onCheckChange(BottomMenu view);
     }
     
 }

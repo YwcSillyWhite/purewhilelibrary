@@ -40,7 +40,6 @@ public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            LogUtils.debug("web_url","开始");
             mDataBinding.progressBar.setVisibility(View.VISIBLE);
         }
 
