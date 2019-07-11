@@ -25,8 +25,6 @@ import com.purewhite.ywc.purewhitelibrary.ui.picview.io.PhotoClickListener;
 
 import java.util.List;
 
-
-
 public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,PresenterImp>
         implements ViewPager.OnPageChangeListener,View.OnClickListener, PhotoClickListener {
 
