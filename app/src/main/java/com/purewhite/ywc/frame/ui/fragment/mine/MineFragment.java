@@ -6,24 +6,31 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.acker.simplezxing.activity.CaptureActivity;
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.FragMineBinding;
 import com.purewhite.ywc.frame.ui.activity.mine.AndroidStudyActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CameraActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CustomMainActivity;
-import com.purewhite.ywc.frame.ui.activity.mine.TransitionActivity;
+import com.purewhite.ywc.frame.ui.activity.mine.SocketActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.dialog.DialogHomeActiivty;
+import com.purewhite.ywc.frame.ui.adapter.MineAdapter;
 import com.purewhite.ywc.frame.ui.mvp.MvpFragment;
+import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
 import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
-import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureActivity;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
 
-public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter>
-        implements MineContract.UiView,View.OnClickListener {
+import java.util.Arrays;
+
+public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
+        implements OnItemListener,View.OnClickListener {
 
 
     @Override
@@ -31,38 +38,45 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter>
         return mDataBinding.actionBar.barLayout;
     }
 
+
+    @Override
+    public void onClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView) {
+        switch (position)
+        {
+            case 0:
+                skipActivity(AndroidStudyActivity.class);
+                break;
+            case 1:
+                skipActivity(CustomMainActivity.class);
+                break;
+            case 2:
+                skipActivity(DialogHomeActiivty.class);
+                break;
+            case 3:
+                skipActivity(CameraActivity.class);
+                break;
+            case 4:
+                startCaptureActivityForResult();
+                break;
+            case 5:
+                skipActivity(SocketActivity.class);
+                break;
+
+        }
+    }
+
+
     @Override
     public void onClick(View v) {
         if (!ClickUtils.clickable(v))
             return;
         switch (v.getId())
         {
-            case R.id.android_study:
-                skipActivity(AndroidStudyActivity.class);
-                break;
-            case R.id.bottom_navigation:
-                skipActivity(CustomMainActivity.class);
-                break;
-            case R.id.dialog:
-                skipActivity(DialogHomeActiivty.class);
-                break;
-            case R.id.camera:
-                skipActivity(CameraActivity.class);
-                break;
             case R.id.head_img:
                 Bundle build = BundleUtils.buidler()
                         .put(PictureStype.SKIP_STYPE, PictureStype.SKIP_STYPE_PIC_ONLY)
                         .build();
                 skipActivity(PictureActivity.class,build);
-                break;
-            case R.id.zxing:
-                startCaptureActivityForResult();
-                break;
-            case R.id.transition:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Intent intent = new Intent(getActivity(), TransitionActivity.class);
-                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-                }
                 break;
         }
     }
@@ -84,10 +98,6 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter>
     }
 
 
-    @Override
-    protected MinePresenter creartPresenter() {
-        return new MinePresenter();
-    }
 
     @Override
     protected int getLayout() {
@@ -98,19 +108,19 @@ public class MineFragment extends MvpFragment<FragMineBinding,MinePresenter>
     protected void initView() {
         mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
         mDataBinding.actionBar.centerText.setText("个人中心");
-        mDataBinding.androidStudy.setOnClickListener(this);
-        mDataBinding.bottomNavigation.setOnClickListener(this);
-        mDataBinding.dialog.setOnClickListener(this);
-        mDataBinding.camera.setOnClickListener(this);
         mDataBinding.headImg.setOnClickListener(this);
-        mDataBinding.zxing.setOnClickListener(this);
-        mDataBinding.transition.setOnClickListener(this);
         ImageLoader.newInstance().initCircle(mDataBinding.headImg,R.mipmap.icon_logo);
+        MineAdapter mineAdapter = new MineAdapter(Arrays.asList(getResources().getStringArray(R.array.home_recycler_title)));
+        mDataBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mDataBinding.recyclerView.setAdapter(mineAdapter);
+        mineAdapter.setOnItemListener(this);
     }
 
 
-
-
+    @Override
+    protected PresenterImp creartPresenter() {
+        return null;
+    }
 
 
 }

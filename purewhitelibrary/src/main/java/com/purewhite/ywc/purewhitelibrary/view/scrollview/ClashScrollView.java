@@ -5,11 +5,13 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
 
+import androidx.core.widget.NestedScrollView;
+
 /**
  * 解决滑动冲突
  * @author yuwenchao
  */
-public class ClashScrollView extends ScrollView {
+public class ClashScrollView extends NestedScrollView {
 
     protected int lastX,lastY;
 

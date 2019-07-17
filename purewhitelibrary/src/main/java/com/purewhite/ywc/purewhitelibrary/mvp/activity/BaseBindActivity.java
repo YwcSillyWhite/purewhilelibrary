@@ -8,7 +8,7 @@ import androidx.databinding.ViewDataBinding;
  *绑定acticity
  * @author yuwenchao
  */
-public abstract class BaseBindActivity<D extends ViewDataBinding> extends BaseTransitionActivity {
+public abstract class BaseBindActivity<D extends ViewDataBinding> extends BaseSkipActivity {
 
     protected D mDataBinding;
 

@@ -54,7 +54,7 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     private FullView fullView=new FullViewImp();
     //设置全局布局
     public final void setFullView(FullView fullView) {
-        if (loadView==null) {
+        if (fullView==null) {
             throw new UnsupportedOperationException("fullview can not null");
         }
         this.fullView = fullView;

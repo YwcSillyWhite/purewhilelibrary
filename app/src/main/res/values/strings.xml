@@ -33,6 +33,20 @@
 
 
 
+    <string-array name="home_recycler_title">
+        <item>android学习资料</item>
+        <item>自定义Bottom（底部导航）</item>
+        <item>dialog</item>
+        <item>相册</item>
+        <item>扫码</item>
+        <item>scoket</item>
+
+    </string-array>
+
+
+
+
+
 
 
 </resources>

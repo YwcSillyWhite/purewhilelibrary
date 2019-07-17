@@ -16,20 +16,37 @@ public final class ClickUtils {
         return clickable(view,600);
     }
 
+    /**
+     *
+     * @param view
+     * @param time
+     * @return 返回值false不可以点击，true可以点击
+     */
     public static boolean  clickable(View view,int time)
     {
         Object tag = view.getTag(view.getId());
-        long oldTime=0;
-        if (tag instanceof Long)
+        if (tag==null)
         {
-            oldTime= ((Long) tag);
-        }
-        long newTime = System.currentTimeMillis();
-        if (newTime-oldTime>=time)
-        {
+            long newTime = System.currentTimeMillis();
             view.setTag(view.getId(),newTime);
-            return true;
         }
-        return false;
+        else
+        {
+            //如果这个view已存其他tag，那么去除点击间隔
+            if (tag instanceof Long)
+            {
+                long oldTime= ((Long) tag);
+                long newTime = System.currentTimeMillis();
+                if (newTime-oldTime>time)
+                {
+                    view.setTag(view.getId(),newTime);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

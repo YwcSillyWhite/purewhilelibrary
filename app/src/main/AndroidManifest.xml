@@ -53,7 +53,7 @@
         <!-- dialog页面 -->
         <activity android:name=".ui.activity.mine.dialog.DialogActivity"/>
         <activity android:name=".ui.activity.mine.dialog.BottomsheetActivity"/>
-        <activity android:name=".ui.activity.mine.TransitionActivity"/>
+        <activity android:name=".ui.activity.mine.SocketActivity"/>
     </application>
 
 </manifest>
