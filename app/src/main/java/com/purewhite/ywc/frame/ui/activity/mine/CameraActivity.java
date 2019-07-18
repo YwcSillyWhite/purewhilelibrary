@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.purewhite.ywc.frame.BuildConfig;
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.config.FileManagerUtils;
 import com.purewhite.ywc.frame.config.TagUtils;
@@ -37,7 +38,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
             {
                 picFile = FileManagerUtils.createTimeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
                 PhotoUtils.intentCamera(CameraActivity.this
-                        ,"com.purewhite.ywc.frame1.provider"
+                        , BuildConfig.APPLICATION_ID+".fileprovider"
                         ,picFile, TagUtils.request_camera);
             }
         }

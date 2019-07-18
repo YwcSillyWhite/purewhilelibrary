@@ -20,6 +20,7 @@ import com.purewhite.ywc.frame.ui.activity.mine.dialog.DialogHomeActiivty;
 import com.purewhite.ywc.frame.ui.adapter.MineAdapter;
 import com.purewhite.ywc.frame.ui.mvp.MvpFragment;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
+import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
 import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
@@ -68,15 +69,16 @@ public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
 
     @Override
     public void onClick(View v) {
-        if (!ClickUtils.clickable(v))
-            return;
+//        if (!ClickUtils.clickable(v))
+//            return;
         switch (v.getId())
         {
             case R.id.head_img:
-                Bundle build = BundleUtils.buidler()
-                        .put(PictureStype.SKIP_STYPE, PictureStype.SKIP_STYPE_PIC_ONLY)
-                        .build();
-                skipActivity(PictureActivity.class,build);
+                ToastUtils.show("吐血");
+//                Bundle build = BundleUtils.buidler()
+//                        .put(PictureStype.SKIP_STYPE, PictureStype.SKIP_STYPE_PIC_ONLY)
+//                        .build();
+//                skipActivity(PictureActivity.class,build);
                 break;
         }
     }

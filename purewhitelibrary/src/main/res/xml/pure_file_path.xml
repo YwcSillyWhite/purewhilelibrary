@@ -6,7 +6,6 @@
     <external-path name="external" path="path"/>
     <external-files-path name="external_files" path="path"/>
     <external-cache-path name="external_cache" path="path"/>
-
 <!--
 <root-path/> 代表设备的根目录new File("/");
 <files-path/> 代表context.getFilesDir()
@@ -19,5 +18,4 @@
 <!--
 path即为代表目录下的子目录
 -->
-
 </paths>

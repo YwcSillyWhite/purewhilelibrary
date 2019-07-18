@@ -1,4 +1,4 @@
-package com.purewhite.ywc.frame1;
+package com.purewhite.ywc.frame;
 
 import org.junit.Test;
 

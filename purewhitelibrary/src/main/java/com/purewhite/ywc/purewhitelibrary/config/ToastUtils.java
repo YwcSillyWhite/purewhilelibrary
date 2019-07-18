@@ -1,49 +1,64 @@
 package com.purewhite.ywc.purewhitelibrary.config;
 
 
+import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
+import android.util.SparseArray;
+import android.view.Gravity;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
+import com.purewhite.ywc.purewhitelibrary.BuildConfig;
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 
 
+
+
 /**
+ * android x对吐司优化
  * @author yuwenchao
  */
 public class ToastUtils {
-    private static Toast toast;
+
     public static void show(String content)
+    {
+        show(content,Toast.LENGTH_SHORT);
+    }
+
+
+    public static void show(String content,int duration)
+    {
+        show(content,duration,0,0,0,false);
+    }
+
+
+    public static void show(String content,int duration,int gravity,int x,int y)
+    {
+        show(content,duration,gravity,x,y,true);
+    }
+
+
+
+    public static void show(String content,int duration,int gravity,int x,int y,boolean isGravity)
     {
         if (!TextUtils.isEmpty(content))
         {
-            if (toast==null)
+            Toast toast = Toast.makeText(AppUtils.getContext(), "", duration);
+            toast.setText(content);
+            if (isGravity)
             {
-                toast=Toast.makeText(AppUtils.getContext(),content,Toast.LENGTH_SHORT);
-            }
-            else
-            {
-                toast.setText(content);
+                toast.setGravity(gravity,x,y);
             }
             toast.show();
         }
     }
 
 
-    public static void show(@StringRes int res)
-    {
-        if (res!=0)
-        {
-            if (toast==null)
-            {
-                toast=Toast.makeText(AppUtils.getContext(),res,Toast.LENGTH_SHORT);
-            }
-            else
-            {
-                toast.setText(res);
-            }
-            toast.show();
-        }
-    }
+
+
+
 }

@@ -70,6 +70,7 @@ public class HomeChildFragment extends MvpFragment<FragHomeChildBinding,HomeChil
             {
                 ShopBean shopBean = ((HomeChildAdapter) adapter).obtainT(position);
                 ToastUtils.show(shopBean.getItemtitle());
+
             }
         }
     };

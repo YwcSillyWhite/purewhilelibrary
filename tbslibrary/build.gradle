@@ -35,6 +35,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation 'androidx.test:runner:1.2.0'
     api files('libs/tbs.jar')
+
+
 
 }

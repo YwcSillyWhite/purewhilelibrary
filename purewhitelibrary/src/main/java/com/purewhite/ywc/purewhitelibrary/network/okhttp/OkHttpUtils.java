@@ -1,6 +1,9 @@
 package com.purewhite.ywc.purewhitelibrary.network.okhttp;
 
 
+import android.os.Build;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.GetBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostBuilder;
@@ -9,13 +12,19 @@ import com.purewhite.ywc.purewhitelibrary.network.okhttp.executor.OkThreadSave;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.interceptor.ParamsInterceptor;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.SSLContext;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.ConnectionSpec;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.TlsVersion;
 
 /**
  * @author yuwenchao
@@ -43,9 +52,12 @@ public class OkHttpUtils {
     public OkHttpUtils() {
         if (okHttpClient==null)
         {
-            okHttpClient=OkManager.obtainBuilder().addInterceptor(new ParamsInterceptor()).build();
+            OkHttpClient.Builder builder = OkManager.obtainBuilder();
+            builder.addInterceptor(new ParamsInterceptor());
+            okHttpClient=builder.build();
         }
     }
+
 
     public void cancleTag(Object tag)
     {

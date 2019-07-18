@@ -3,6 +3,8 @@ package com.purewhite.ywc.frame.app;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.multidex.MultiDex;
+
 import com.example.tbslibrary.app.TbsAppUtils;
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 
@@ -11,18 +13,14 @@ import java.util.Map;
 
 public class BaseApp extends Application {
 
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-    }
-
 
     @Override
     public void onCreate() {
         super.onCreate();
+        //纯白框架
         initPure();
+        //tx x5
         initTbs();
-
     }
 
     private void initTbs() {

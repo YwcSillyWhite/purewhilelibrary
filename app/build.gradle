@@ -10,6 +10,8 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode      rootProject.ext.android.versionCode
         versionName      rootProject.ext.android.versionName
+
+
         multiDexEnabled true
     }
 
@@ -27,11 +29,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation rootProject.ext.dependencies["junit"]
     implementation project(':purewhitelibrary')
     implementation project(':tbslibrary')
     implementation rootProject.ext.dependencies["constraint"]
     implementation rootProject.ext.dependencies["simplezxing"]
-    implementation rootProject.ext.dependencies["runner"]
 
 }
