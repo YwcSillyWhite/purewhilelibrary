@@ -23,7 +23,8 @@ public abstract class MvpActivity<DB extends ViewDataBinding,P extends Presenter
     protected void initBar()
     {
         BarUtils.obtianBarConfig().with(this)
-                .setStatusBarHideFlag()
+                .setStatusBar(1)
+                .setBarChange(false)
                 .setStatusBarTextColorFlag(true)
                 .build();
     }

@@ -50,8 +50,7 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
     protected void initBar() {
         BarUtils.obtianBarConfig()
                 .with(this)
-                .setNavigationHideFlag()
-                .setStatusBarHideFlag()
+                .setStatusBar(6)
                 .build();
     }
 

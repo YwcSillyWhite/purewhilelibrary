@@ -140,7 +140,8 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
     protected void beforeView() {
         super.beforeView();
         BarUtils.obtianBarConfig().with(this)
-                .setStatusBarHideFlag()
+                .setStatusBar(6)
+                .setBarChange(false)
                 .setStatusBarTextColorFlag(true)
                 .build();
     }

@@ -64,7 +64,7 @@ public class TitleConfig {
 
 
 
-    public int getStatusBarHeight()
+    private int getStatusBarHeight()
     {
         return  getInternalDimensionSize(AppUtils.getContext(), "status_bar_height");
     }
