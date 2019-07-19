@@ -146,6 +146,8 @@ public class PermissonUtils {
      */
     public void disposePermissions(int requestCode,String[] permissions,int[] grantResults)
     {
+        if (permissonCallBack==null)
+            return;
         if (this.requestCode==requestCode)
         {
             List<String> permissonList=new ArrayList<>();

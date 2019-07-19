@@ -7,6 +7,7 @@ import com.purewhite.ywc.purewhitelibrary.BuildConfig;
 
 
 /**
+ * Log日志
  * @author yuwenchao
  */
 public final class LogUtils {
@@ -29,7 +30,7 @@ public final class LogUtils {
     {
         if (debug)
         {
-            export(1,"Debug-"+tag+"：",msg);
+            export(DEBUG,"Debug-"+tag,msg);
         }
     }
 
@@ -44,7 +45,7 @@ public final class LogUtils {
     {
         if (error)
         {
-            export(0,"Error-"+tag+"：",msg);
+            export(ERROR,"Error-"+tag,msg);
         }
     }
 

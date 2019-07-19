@@ -49,9 +49,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void beforeView() {
         //设置横竖平
         initOrientation();
-        //适配
-        initAdaptive();
-
     }
 
     //是否竖屏
@@ -73,18 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         }
     }
-    //能否适配
-    protected boolean isAdaptive()
-    {
-        return true;
-    }
-    //初始化适配
-    private void initAdaptive() {
-        if (isAdaptive())
-        {
-            AdaptiveUtils.adaptiveWidth(this, AppUtils.getApplication(),AppUtils.adaptiveWightDp);
-        }
-    }
+
 
     //设置布局
     protected void initSetView(int layoutId)
@@ -111,6 +97,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     {
 
     }
+
+
 
 
 

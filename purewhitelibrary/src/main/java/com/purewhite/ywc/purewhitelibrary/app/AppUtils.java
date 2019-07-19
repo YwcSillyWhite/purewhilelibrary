@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -38,6 +39,7 @@ public final class  AppUtils {
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
             stack.add(activity);
+            AdaptiveUtils.adaptiveWidth(activity, application,adaptiveWightDp);
         }
 
         @Override
@@ -124,11 +126,6 @@ public final class  AppUtils {
         return application.getApplicationContext();
     }
 
-
-    public static Application getApplication()
-    {
-        return application;
-    }
 
 
     /**

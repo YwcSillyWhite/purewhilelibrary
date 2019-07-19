@@ -4,12 +4,15 @@ import android.text.TextUtils;
 
 import java.text.DecimalFormat;
 
+
+/**
+ * string相关的东西
+ */
 public class StringUtils {
 
     //字符串转换长数字
     public static double stringToDouble(String context)
     {
-
         if (!TextUtils.isEmpty(context))
         {
             return 0;
@@ -30,6 +33,7 @@ public class StringUtils {
             }
 
         }
+
     }
 
 
