@@ -29,10 +29,6 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
         return R.layout.activity_socket;
     }
 
-    @Override
-    protected View onBarTitleView() {
-        return mDataBinding.actionBar.barLayout;
-    }
 
     @Override
     protected void initView() {

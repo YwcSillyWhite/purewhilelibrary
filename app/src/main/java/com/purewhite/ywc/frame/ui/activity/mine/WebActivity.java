@@ -69,15 +69,11 @@ public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
-            mDataBinding.actionBar.centerText.setText(TextUtils.isEmpty(title)?"web":title);
+            mDataBinding.titleBarLayout.centerText.setText(TextUtils.isEmpty(title)?"web":title);
         }
     };
 
 
-    @Override
-    protected View onBarTitleView() {
-        return mDataBinding.actionBar.barLayout;
-    }
 
     @Override
     protected PresenterImp creartPresenter() {
@@ -94,11 +90,13 @@ public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
         String web_url = getIntent().getStringExtra(TagUtils.web_uri);
         if (TextUtils.isEmpty(web_url))
             finish();
-        mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
-        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.centerText.setText("web");
+        mDataBinding.titleBarLayout.leftImg.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.leftImg.setOnClickListener(onSingleListener);
+        mDataBinding.titleBarLayout.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.centerText.setText("web");
         mDataBinding.webView.addWebCall(webViewClient,webChromeClient,web_url);
+        View viewById = findViewById(R.id.progress_bar);
+        viewById.setOnClickListener(onSingleListener);
     }
 
     @Override

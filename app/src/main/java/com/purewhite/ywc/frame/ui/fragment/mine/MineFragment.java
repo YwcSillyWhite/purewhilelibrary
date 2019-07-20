@@ -34,10 +34,6 @@ public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
         implements OnItemListener,View.OnClickListener {
 
 
-    @Override
-    protected View onBarTitleView() {
-        return mDataBinding.actionBar.barLayout;
-    }
 
 
     @Override
@@ -108,8 +104,8 @@ public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
 
     @Override
     protected void initView() {
-        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.centerText.setText("个人中心");
+        mDataBinding.titleBarLayout.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.centerText.setText("个人中心");
         mDataBinding.headImg.setOnClickListener(this);
         ImageLoader.newInstance().initCircle(mDataBinding.headImg,R.mipmap.icon_logo);
         MineAdapter mineAdapter = new MineAdapter(Arrays.asList(getResources().getStringArray(R.array.home_recycler_title)));

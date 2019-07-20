@@ -58,12 +58,11 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
                 .setStatusBarTextColorFlag(true)
                 .build();
     }
-    @Override
-    protected void afterView() {
-        super.afterView();
-        BarUtils.obtianTitleConfig().setTitleBarPadding(mDataBinding.actionBar.actionBarLayout);
-    }
 
+    @Override
+    protected int getTitleBarId() {
+        return R.id.action_bar_layout;
+    }
 
 
     @Override
@@ -169,9 +168,6 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
             mDataBinding.recyclerView.setLayoutManager(linearLayoutManager);
             boolean flush = picViewAdapter.flush(imageBeanList.get(position).getPath());
             mDataBinding.picViewSelectorImg.setSelected(flush);
-
-
-
 
         }
 

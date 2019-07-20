@@ -27,7 +27,7 @@ public abstract class BaseFragment extends Fragment {
 
     //唯一加载
     private boolean soleLoad;
-    private View view;
+    protected View view;
     @Override
     public Context getContext() {
         return super.getContext()!=null?super.getContext():AppUtils.getContext();

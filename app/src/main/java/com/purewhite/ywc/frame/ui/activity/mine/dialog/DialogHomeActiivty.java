@@ -39,10 +39,6 @@ public class DialogHomeActiivty extends MvpActivity<ActivityDialogHomeBinding,Pr
         }
     };
 
-    @Override
-    protected View onBarTitleView() {
-        return mDataBinding.actionBar.barLayout;
-    }
 
     @Override
     protected int getLayout() {

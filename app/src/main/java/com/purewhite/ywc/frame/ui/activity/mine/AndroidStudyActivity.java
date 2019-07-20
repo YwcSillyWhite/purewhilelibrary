@@ -48,10 +48,6 @@ public class AndroidStudyActivity extends MvpActivity<ActivityAndroidStudyBindin
         return null;
     }
 
-    @Override
-    protected View onBarTitleView() {
-        return mDataBinding.actionBar.barLayout;
-    }
 
     @Override
     protected int getLayout() {
@@ -60,10 +56,10 @@ public class AndroidStudyActivity extends MvpActivity<ActivityAndroidStudyBindin
 
     @Override
     protected void initView() {
-        mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
-        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.centerText.setText("纯白学习");
+        mDataBinding.titleBarLayout.leftImg.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.leftImg.setOnClickListener(onSingleListener);
+        mDataBinding.titleBarLayout.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.centerText.setText("纯白学习");
         androidStudyAdapter = new AndroidStudyAdapter(Arrays.asList(getResources().getStringArray(R.array.android_study_text))
                 ,Arrays.asList(getResources().getStringArray(R.array.android_study_uri)));
         mDataBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));

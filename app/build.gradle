@@ -34,4 +34,6 @@ dependencies {
     implementation rootProject.ext.dependencies["constraint"]
     implementation rootProject.ext.dependencies["simplezxing"]
 
+    implementation 'com.contrarywind:Android-PickerView:4.1.8'
+
 }

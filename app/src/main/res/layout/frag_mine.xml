@@ -4,7 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <include layout="@layout/actionbar_one" android:id="@+id/action_bar"></include>
+        <include layout="@layout/actionbar_one" android:id="@+id/title_bar_layout"></include>
         <include layout="@layout/view_line"></include>
 
         <com.purewhite.ywc.purewhitelibrary.view.scrollview.PureScrollView

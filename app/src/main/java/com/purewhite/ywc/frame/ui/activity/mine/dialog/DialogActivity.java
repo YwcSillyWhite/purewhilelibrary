@@ -91,10 +91,7 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
 
     }
 
-    @Override
-    protected View onBarTitleView() {
-        return mDataBinding.actionBar.barLayout;
-    }
+
 
     @Override
     protected PresenterImp creartPresenter() {

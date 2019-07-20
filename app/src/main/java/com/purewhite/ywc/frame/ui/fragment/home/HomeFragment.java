@@ -69,10 +69,6 @@ public class HomeFragment extends MvpFragment<FragHomeBinding,PresenterImp> {
     }
 
 
-    @Override
-    protected View onBarTitleView() {
-        return mDataBinding.tabLayout;
-    }
 
     @Override
     protected PresenterImp creartPresenter() {
@@ -91,10 +87,10 @@ public class HomeFragment extends MvpFragment<FragHomeBinding,PresenterImp> {
         HomePagerAdapter homePagerAdapter = new HomePagerAdapter(getChildFragmentManager(), Arrays.asList(home_tag_title));
         mDataBinding.viewPager.setAdapter(homePagerAdapter);
         mDataBinding.viewPager.setOffscreenPageLimit(home_tag_title.length);
-        mDataBinding.tabLayout.setupWithViewPager(mDataBinding.viewPager);
-        mDataBinding.tabLayout.addOnTabSelectedListener(talayout);
+        mDataBinding.titleBarLayout.setupWithViewPager(mDataBinding.viewPager);
+        mDataBinding.titleBarLayout.addOnTabSelectedListener(talayout);
         for (int i = 0; i < home_tag_title.length; i++) {
-            mDataBinding.tabLayout.getTabAt(i).setCustomView(addTabLayout(i,home_tag_title[i]));
+            mDataBinding.titleBarLayout.getTabAt(i).setCustomView(addTabLayout(i,home_tag_title[i]));
         }
     }
 
@@ -122,6 +118,6 @@ public class HomeFragment extends MvpFragment<FragHomeBinding,PresenterImp> {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mDataBinding.tabLayout.removeOnTabSelectedListener(talayout);
+        mDataBinding.titleBarLayout.removeOnTabSelectedListener(talayout);
     }
 }

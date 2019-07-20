@@ -80,10 +80,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
         return null;
     }
 
-    @Override
-    protected View onBarTitleView() {
-        return mDataBinding.actionBar.barLayout;
-    }
+
 
 
     @Override
@@ -93,10 +90,10 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
 
     @Override
     protected void initView() {
-        mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
-        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.centerText.setText("图片");
+        mDataBinding.titleBarLayout.leftImg.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.leftImg.setOnClickListener(onSingleListener);
+        mDataBinding.titleBarLayout.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.centerText.setText("图片");
         mDataBinding.imgObtain.setOnClickListener(onSingleListener);
         mDataBinding.imgClear.setOnClickListener(onSingleListener);
         mDataBinding.openImg.setOnClickListener(onSingleListener);

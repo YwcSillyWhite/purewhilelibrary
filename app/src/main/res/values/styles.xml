@@ -7,4 +7,12 @@
         <!--<item name="android:windowBackground">@android:color/transparent</item>-->
     </style>
 
+
+
+
+    <declare-styleable name="MorePickerView">
+        <attr name="wheelNum" format="integer"></attr>
+    </declare-styleable>
+
+
 </resources>

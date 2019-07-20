@@ -153,6 +153,11 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
     }
 
     @Override
+    protected int getTitleBarId() {
+        return 0;
+    }
+
+    @Override
     protected PicturePresenter creartPresenter() {
         return new PicturePresenter();
     }

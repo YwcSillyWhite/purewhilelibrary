@@ -5,7 +5,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include layout="@layout/actionbar_one"
-            android:id="@+id/action_bar" />
+            android:id="@+id/title_bar_layout" />
 
         <include layout="@layout/view_line"/>
         <TextView

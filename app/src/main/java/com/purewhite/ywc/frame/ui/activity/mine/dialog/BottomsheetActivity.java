@@ -60,10 +60,6 @@ public class BottomsheetActivity extends MvpActivity<ActivityBottomsheetBinding,
         return R.layout.activity_bottomsheet;
     }
 
-    @Override
-    protected View onBarTitleView() {
-        return mDataBinding.actionBar.barLayout;
-    }
 
     @Override
     protected void initView() {
