@@ -56,6 +56,7 @@ public class MorePickerView extends LinearLayout{
             LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
             layoutParams.weight=1;
             addView(wheelView,layoutParams);
+            wheelView.setVisibility(INVISIBLE);
             wheelViewList.add(wheelView);
         }
     }
