@@ -47,27 +47,42 @@ public class MorePickerView extends LinearLayout{
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.MorePickerView);
             int wheelNum = typedArray.getInt(R.styleable.MorePickerView_wheelNum, 0);
             boolean cyc_scroll = typedArray.getBoolean(R.styleable.MorePickerView_cyc_scroll, false);
-//            typedArray.getDimensionPixelSize(R.styleable.wheel_textsize,0)
+            int textSize = typedArray.getInt(R.styleable.MorePickerView_wheel_textsize, 0);
             typedArray.recycle();
-            initWheelNum(wheelNum,cyc_scroll);
+            initWheelNum(wheelNum,cyc_scroll,textSize);
 
         }
 
     }
 
-    private void initWheelNum(int wheelNum,boolean cyc_scroll) {
+    public void setWheelColor(int seletorColor,int noSeletorColore)
+    {
+        for (int i = 0; i < wheelViewList.size(); i++) {
+            WheelView wheelView = wheelViewList.get(i);
+            wheelView.setTextColorCenter(seletorColor);
+            wheelView.setTextColorOut(noSeletorColore);
+        }
+    }
+
+    private void initWheelNum(int wheelNum,boolean cyc_scroll,float textSize) {
         setWeightSum(wheelNum);
         for (int i = 0; i < wheelNum; i++) {
             WheelView wheelView = new WheelView(getContext());
             LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             layoutParams.weight=1;
-            wheelView.setTextColorCenter(Color.RED);
+            wheelView.setTextColorCenter(Color.parseColor("#333333"));
+            wheelView.setTextColorOut(Color.parseColor("#666666"));
             wheelView.setCyclic(cyc_scroll);
             wheelView.setAdapter(new BaseWheelAdapterImp());
+            if (textSize!=0)
+            {
+                wheelView.setTextSize(textSize);
+            }
             addView(wheelView,layoutParams);
             wheelViewList.add(wheelView);
         }
     }
+
 
     public void setWheelViewList(int position,WheelAdapter  ...wheelAdapters)
     {
