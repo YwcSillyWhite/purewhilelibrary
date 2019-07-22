@@ -2,6 +2,7 @@ package com.purewhite.ywc.frame.wheel.base;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -44,19 +45,22 @@ public class MorePickerView extends LinearLayout{
         {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.MorePickerView);
             int wheelNum = typedArray.getInt(R.styleable.MorePickerView_wheelNum, 0);
+            boolean cyc_scroll = typedArray.getBoolean(R.styleable.MorePickerView_cyc_scroll, false);
             typedArray.recycle();
-            initWheelNum(wheelNum);
+            initWheelNum(wheelNum,cyc_scroll);
 
         }
 
     }
 
-    private void initWheelNum(int wheelNum) {
+    private void initWheelNum(int wheelNum,boolean cyc_scroll) {
         setWeightSum(wheelNum);
         for (int i = 0; i < wheelNum; i++) {
             WheelView wheelView = new WheelView(getContext());
             LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             layoutParams.weight=1;
+            wheelView.setTextColorCenter(Color.RED);
+            wheelView.setCyclic(cyc_scroll);
             wheelView.setVisibility(INVISIBLE);
             wheelView.setAdapter(new BaseWheelAdapterImp());
             addView(wheelView,layoutParams);
