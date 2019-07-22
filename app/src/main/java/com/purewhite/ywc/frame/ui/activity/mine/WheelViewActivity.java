@@ -31,8 +31,7 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
         mDataBinding.morePickerView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
-                mDataBinding.morePickerView.setWheelAdapterPosition(3,null);
-                mDataBinding.morePickerView.setWheelAdapterPosition(4,null);
+             mDataBinding.morePickerView.setWheelViewList(1,null,null,null,null);
 
             }
         }, new OnItemSelectedListener() {

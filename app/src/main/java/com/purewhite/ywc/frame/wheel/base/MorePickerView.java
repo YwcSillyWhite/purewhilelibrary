@@ -11,6 +11,7 @@ import com.contrarywind.adapter.WheelAdapter;
 import com.contrarywind.listener.OnItemSelectedListener;
 import com.contrarywind.view.WheelView;
 import com.purewhite.ywc.frame.R;
+import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapter;
 import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapterImp;
 import com.purewhite.ywc.frame.wheel.callback.WheelCallBack;
 
@@ -46,6 +47,7 @@ public class MorePickerView extends LinearLayout{
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.MorePickerView);
             int wheelNum = typedArray.getInt(R.styleable.MorePickerView_wheelNum, 0);
             boolean cyc_scroll = typedArray.getBoolean(R.styleable.MorePickerView_cyc_scroll, false);
+//            typedArray.getDimensionPixelSize(R.styleable.wheel_textsize,0)
             typedArray.recycle();
             initWheelNum(wheelNum,cyc_scroll);
 
@@ -61,7 +63,6 @@ public class MorePickerView extends LinearLayout{
             layoutParams.weight=1;
             wheelView.setTextColorCenter(Color.RED);
             wheelView.setCyclic(cyc_scroll);
-            wheelView.setVisibility(INVISIBLE);
             wheelView.setAdapter(new BaseWheelAdapterImp());
             addView(wheelView,layoutParams);
             wheelViewList.add(wheelView);
@@ -77,12 +78,11 @@ public class MorePickerView extends LinearLayout{
                 WheelView wheelView = wheelViewList.get(i);
                 if (wheelAdapter==null)
                 {
-                    wheelView.setAdapter(wheelAdapter);
-                    wheelView.setVisibility(VISIBLE);
+                    wheelView.setAdapter(new BaseWheelAdapterImp());
                 }
                 else
                 {
-                    wheelView.setVisibility(INVISIBLE);
+                    wheelView.setAdapter(wheelAdapter);
                 }
             }
         }
@@ -97,11 +97,10 @@ public class MorePickerView extends LinearLayout{
             if (wheelAdapter!=null)
             {
                 wheelView.setAdapter(wheelAdapter);
-                wheelView.setVisibility(VISIBLE);
             }
             else
             {
-                wheelView.setVisibility(INVISIBLE);
+                wheelView.setAdapter(new BaseWheelAdapterImp());
             }
 
         }
@@ -128,7 +127,8 @@ public class MorePickerView extends LinearLayout{
             List<Integer> list=new ArrayList<>();
             for (int i = 0; i < wheelViewList.size(); i++) {
                 WheelView wheelView = wheelViewList.get(i);
-                if (wheelView.getVisibility()==VISIBLE)
+                WheelAdapter adapter = wheelView.getAdapter();
+                if (adapter instanceof BaseWheelAdapter&&((BaseWheelAdapter) adapter).isData)
                 {
                     list.add(wheelView.getCurrentItem());
                 }
@@ -136,6 +136,7 @@ public class MorePickerView extends LinearLayout{
                 {
                     break;
                 }
+
             }
             wheelCallBack.callBack(list);
         }

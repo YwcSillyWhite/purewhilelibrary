@@ -13,6 +13,7 @@
     <declare-styleable name="MorePickerView">
         <attr name="wheelNum" format="integer"></attr>
         <attr name="cyc_scroll" format="boolean"></attr>
+        <attr name="wheel_textsize" format="dimension"></attr>
     </declare-styleable>
 
 
