@@ -5,12 +5,12 @@ import com.contrarywind.adapter.WheelAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseWheelAdapter implements WheelAdapter<String> {
+public abstract class BaseWheelAdapter<T> implements WheelAdapter<String> {
 
-    private List<String> list;
+    protected List<T> list;
 
-    public BaseWheelAdapter(List<String> list) {
-        this.list = list==null?new ArrayList<String>():list;
+    public BaseWheelAdapter(List<T> list) {
+        this.list= list==null? new ArrayList<T>() :list;
     }
 
     @Override
@@ -19,12 +19,8 @@ public class BaseWheelAdapter implements WheelAdapter<String> {
     }
 
     @Override
-    public String getItem(int index) {
-        return list.get(index);
-    }
-
-    @Override
     public int indexOf(String o) {
         return 0;
     }
+
 }

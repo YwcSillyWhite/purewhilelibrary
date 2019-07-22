@@ -7,6 +7,7 @@ import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityWheelBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapter;
+import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapterImp;
 import com.purewhite.ywc.frame.wheel.callback.WheelCallBack;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
@@ -30,6 +31,8 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
         mDataBinding.morePickerView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
+                mDataBinding.morePickerView.setWheelAdapterPosition(3,null);
+                mDataBinding.morePickerView.setWheelAdapterPosition(4,null);
 
             }
         }, new OnItemSelectedListener() {
@@ -56,15 +59,15 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
 
 
         mDataBinding.morePickerView.setWheelAdapterPosition(0
-                ,new BaseWheelAdapter(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
+                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
         mDataBinding.morePickerView.setWheelAdapterPosition(1
-                ,new BaseWheelAdapter(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
-        mDataBinding.morePickerView.setWheelAdapterPosition(2
-                ,new BaseWheelAdapter(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
-        mDataBinding.morePickerView.setWheelAdapterPosition(3
-                ,new BaseWheelAdapter(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
-        mDataBinding.morePickerView.setWheelAdapterPosition(4
-                ,new BaseWheelAdapter(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
+                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
+//        mDataBinding.morePickerView.setWheelAdapterPosition(2
+//                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
+//        mDataBinding.morePickerView.setWheelAdapterPosition(3
+//                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
+//        mDataBinding.morePickerView.setWheelAdapterPosition(4
+//                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
 
         mDataBinding.morePickerView.setWheelCallBack(new WheelCallBack() {
             @Override

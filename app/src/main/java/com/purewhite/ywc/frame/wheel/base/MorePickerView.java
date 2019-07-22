@@ -10,6 +10,7 @@ import com.contrarywind.adapter.WheelAdapter;
 import com.contrarywind.listener.OnItemSelectedListener;
 import com.contrarywind.view.WheelView;
 import com.purewhite.ywc.frame.R;
+import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapterImp;
 import com.purewhite.ywc.frame.wheel.callback.WheelCallBack;
 
 import java.util.ArrayList;
@@ -56,9 +57,30 @@ public class MorePickerView extends LinearLayout{
             WheelView wheelView = new WheelView(getContext());
             LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             layoutParams.weight=1;
-            addView(wheelView,layoutParams);
             wheelView.setVisibility(INVISIBLE);
+            wheelView.setAdapter(new BaseWheelAdapterImp());
+            addView(wheelView,layoutParams);
             wheelViewList.add(wheelView);
+        }
+    }
+
+    public void setWheelViewList(int position,WheelAdapter  ...wheelAdapters)
+    {
+        if (position+wheelAdapters.length==wheelViewList.size())
+        {
+            for (int i = position; i < wheelViewList.size(); i++) {
+                WheelAdapter wheelAdapter = wheelAdapters[1 - position];
+                WheelView wheelView = wheelViewList.get(i);
+                if (wheelAdapter==null)
+                {
+                    wheelView.setAdapter(wheelAdapter);
+                    wheelView.setVisibility(VISIBLE);
+                }
+                else
+                {
+                    wheelView.setVisibility(INVISIBLE);
+                }
+            }
         }
     }
 
