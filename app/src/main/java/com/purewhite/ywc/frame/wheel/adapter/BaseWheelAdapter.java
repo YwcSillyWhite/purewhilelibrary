@@ -21,10 +21,10 @@ public abstract  class BaseWheelAdapter<T> implements WheelAdapter<String> {
 
     @Override
     public final String getItem(int index) {
-        return isData?obtianItem(index):" ";
+        return isData?obtianItem(list.get(index),index):" ";
     }
 
-    public abstract String obtianItem(int index);
+    public abstract String obtianItem(T t,int index);
 
     @Override
     public int indexOf(String o) {

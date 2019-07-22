@@ -13,8 +13,8 @@ public class BaseWheelAdapterImp extends BaseWheelAdapter<String>{
     }
 
     @Override
-    public String obtianItem(int index) {
-        return list.get(index);
+    public String obtianItem(String s, int index) {
+        return s;
     }
 
 
