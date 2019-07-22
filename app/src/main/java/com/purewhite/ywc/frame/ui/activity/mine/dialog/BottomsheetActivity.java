@@ -63,11 +63,11 @@ public class BottomsheetActivity extends MvpActivity<ActivityBottomsheetBinding,
 
     @Override
     protected void initView() {
-        mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
+        mDataBinding.titleBarLayout.leftImg.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.leftImg.setOnClickListener(onSingleListener);
 
-        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.centerText.setText("BottomSheet");
+        mDataBinding.titleBarLayout.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.centerText.setText("BottomSheet");
 
         mDataBinding.bottomsheet.setOnClickListener(onSingleListener);
     }

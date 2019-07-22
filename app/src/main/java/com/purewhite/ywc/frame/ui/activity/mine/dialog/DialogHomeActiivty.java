@@ -47,10 +47,10 @@ public class DialogHomeActiivty extends MvpActivity<ActivityDialogHomeBinding,Pr
 
     @Override
     protected void initView() {
-        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.centerText.setText("window框架");
-        mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.leftImg.setOnClickListener(onSingleListener);
+        mDataBinding.titleBarLayout.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.centerText.setText("window框架");
+        mDataBinding.titleBarLayout.leftImg.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.leftImg.setOnClickListener(onSingleListener);
         mDataBinding.bottomsheetUtils.setOnClickListener(onSingleListener);
         mDataBinding.dialogUtils.setOnClickListener(onSingleListener);
         mDataBinding.popupwindowUtils.setOnClickListener(onSingleListener);

@@ -105,13 +105,15 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
 
     @Override
     protected void initView() {
-        mDataBinding.actionBar.centerText.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.centerText.setText("dialog");
-        mDataBinding.actionBar.leftImg.setVisibility(View.VISIBLE);
-        mDataBinding.actionBar.leftImg.setOnClickListener(this);
+        mDataBinding.titleBarLayout.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.centerText.setText("dialog");
+        mDataBinding.titleBarLayout.leftImg.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.leftImg.setOnClickListener(this);
         mDataBinding.dialogTwo.setOnClickListener(this);
         mDataBinding.dialog.setOnClickListener(this);
         mDataBinding.dialogThree.setOnClickListener(this);
+        mDataBinding.tabLayout.addTab(mDataBinding.tabLayout.newTab().setText("我的"));
+        mDataBinding.tabLayout.addTab(mDataBinding.tabLayout.newTab().setText("你的"));
     }
 
     @Override
