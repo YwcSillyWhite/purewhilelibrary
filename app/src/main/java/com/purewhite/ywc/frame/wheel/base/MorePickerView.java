@@ -69,7 +69,7 @@ public class MorePickerView extends LinearLayout{
         if (position+wheelAdapters.length==wheelViewList.size())
         {
             for (int i = position; i < wheelViewList.size(); i++) {
-                WheelAdapter wheelAdapter = wheelAdapters[1 - position];
+                WheelAdapter wheelAdapter = wheelAdapters[i - position];
                 WheelView wheelView = wheelViewList.get(i);
                 if (wheelAdapter==null)
                 {

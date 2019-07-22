@@ -62,12 +62,12 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
                 ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
         mDataBinding.morePickerView.setWheelAdapterPosition(1
                 ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
-//        mDataBinding.morePickerView.setWheelAdapterPosition(2
-//                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
-//        mDataBinding.morePickerView.setWheelAdapterPosition(3
-//                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
-//        mDataBinding.morePickerView.setWheelAdapterPosition(4
-//                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
+        mDataBinding.morePickerView.setWheelAdapterPosition(2
+                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
+        mDataBinding.morePickerView.setWheelAdapterPosition(3
+                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
+        mDataBinding.morePickerView.setWheelAdapterPosition(4
+                ,new BaseWheelAdapterImp(Arrays.asList(getResources().getStringArray(R.array.home_tab_title))));
 
         mDataBinding.morePickerView.setWheelCallBack(new WheelCallBack() {
             @Override
