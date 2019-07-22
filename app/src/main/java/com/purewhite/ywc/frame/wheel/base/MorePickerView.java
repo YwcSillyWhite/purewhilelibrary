@@ -102,7 +102,7 @@ public class MorePickerView extends LinearLayout{
                 WheelView wheelView = wheelViewList.get(i);
                 if (wheelView.getVisibility()==VISIBLE)
                 {
-                    list.add(i);
+                    list.add(wheelView.getCurrentItem());
                 }
                 else
                 {
