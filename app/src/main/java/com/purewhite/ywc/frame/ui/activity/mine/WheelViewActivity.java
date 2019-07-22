@@ -2,10 +2,14 @@ package com.purewhite.ywc.frame.ui.activity.mine;
 
 import android.view.View;
 
+import com.contrarywind.adapter.WheelAdapter;
 import com.contrarywind.listener.OnItemSelectedListener;
+import com.contrarywind.view.WheelView;
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityWheelBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
+import com.purewhite.ywc.frame.wheel.OneWheelAdapter;
+import com.purewhite.ywc.frame.wheel.WheelBean;
 import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapter;
 import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapterImp;
 import com.purewhite.ywc.frame.wheel.callback.WheelCallBack;
@@ -31,7 +35,17 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
         mDataBinding.morePickerView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
-             mDataBinding.morePickerView.setWheelViewList(1,null,null,null,null);
+                WheelView wheelView = mDataBinding.morePickerView.obtianPisitonWheelView(0);
+                if (wheelView!=null)
+                {
+                    WheelAdapter adapter = wheelView.getAdapter();
+                    if (adapter instanceof OneWheelAdapter)
+                    {
+                        List<WheelBean.DataBean> dataBeans = ((OneWheelAdapter) adapter).obtainList();
+                        WheelBean.DataBean dataBean = dataBeans.get(index);
+                    }
+                }
+
 
             }
         }, new OnItemSelectedListener() {

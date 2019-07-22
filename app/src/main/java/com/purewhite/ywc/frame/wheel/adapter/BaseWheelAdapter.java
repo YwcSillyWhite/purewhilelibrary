@@ -8,6 +8,11 @@ import java.util.List;
 public abstract  class BaseWheelAdapter<T> implements WheelAdapter<String> {
 
     protected List<T> list;
+
+    public List<T> obtainList()
+    {
+        return list;
+    }
     public boolean isData;
     public BaseWheelAdapter(List<T> list) {
         this.list= list==null? new ArrayList<T>() :list;
