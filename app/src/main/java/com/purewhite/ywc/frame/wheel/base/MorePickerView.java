@@ -64,6 +64,15 @@ public class MorePickerView extends LinearLayout{
         }
     }
 
+    public void setDivider(int color, WheelView.DividerType dividerType)
+    {
+        for (int i = 0; i < wheelViewList.size(); i++) {
+            WheelView wheelView = wheelViewList.get(i);
+            wheelView.setDividerColor(color);
+            wheelView.setDividerType(dividerType);
+        }
+    }
+
     private void initWheelNum(int wheelNum,boolean cyc_scroll,float textSize) {
         setWeightSum(wheelNum);
         for (int i = 0; i < wheelNum; i++) {
@@ -72,6 +81,7 @@ public class MorePickerView extends LinearLayout{
             layoutParams.weight=1;
             wheelView.setTextColorCenter(Color.parseColor("#333333"));
             wheelView.setTextColorOut(Color.parseColor("#666666"));
+            wheelView.setDividerColor(Color.parseColor("#333333"));
             wheelView.setCyclic(cyc_scroll);
             wheelView.setAdapter(new BaseWheelAdapterImp());
             if (textSize!=0)
