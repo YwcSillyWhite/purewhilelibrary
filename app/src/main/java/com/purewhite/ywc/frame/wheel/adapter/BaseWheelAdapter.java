@@ -1,14 +1,16 @@
-package com.purewhite.ywc.frame.wheel.base;
+package com.purewhite.ywc.frame.wheel.adapter;
 
 import com.contrarywind.adapter.WheelAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseWheelAdapter<T> implements WheelAdapter<String> {
-    List<T> list;
-    public BaseWheelAdapter(List<T> list) {
-        this.list = list==null?new ArrayList<T>():list;
+public class BaseWheelAdapter implements WheelAdapter<String> {
+
+    private List<String> list;
+
+    public BaseWheelAdapter(List<String> list) {
+        this.list = list==null?new ArrayList<String>():list;
     }
 
     @Override
@@ -18,7 +20,7 @@ public abstract class BaseWheelAdapter<T> implements WheelAdapter<String> {
 
     @Override
     public String getItem(int index) {
-        return null;
+        return list.get(index);
     }
 
     @Override

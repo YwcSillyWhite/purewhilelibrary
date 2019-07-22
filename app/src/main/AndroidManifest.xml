@@ -57,6 +57,7 @@
         <activity android:name=".ui.activity.mine.dialog.DialogActivity"/>
         <activity android:name=".ui.activity.mine.dialog.BottomsheetActivity"/>
         <activity android:name=".ui.activity.mine.SocketActivity"/>
+        <activity android:name=".ui.activity.mine.WheelViewActivity"/>
     </application>
 
 </manifest>

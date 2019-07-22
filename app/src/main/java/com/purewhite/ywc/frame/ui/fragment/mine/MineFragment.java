@@ -16,6 +16,7 @@ import com.purewhite.ywc.frame.ui.activity.mine.AndroidStudyActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CameraActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CustomMainActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.SocketActivity;
+import com.purewhite.ywc.frame.ui.activity.mine.WheelViewActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.dialog.DialogHomeActiivty;
 import com.purewhite.ywc.frame.ui.adapter.MineAdapter;
 import com.purewhite.ywc.frame.ui.mvp.MvpFragment;
@@ -57,6 +58,9 @@ public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
                 break;
             case 5:
                 skipActivity(SocketActivity.class);
+                break;
+            case 6:
+                skipActivity(WheelViewActivity.class);
                 break;
 
         }
