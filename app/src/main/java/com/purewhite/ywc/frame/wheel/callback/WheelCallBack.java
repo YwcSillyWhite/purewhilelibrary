@@ -1,7 +1,10 @@
 package com.purewhite.ywc.frame.wheel.callback;
 
+import com.contrarywind.adapter.WheelAdapter;
+import com.contrarywind.view.WheelView;
+
 import java.util.List;
 
 public interface WheelCallBack {
-    void callBack(List<Integer> list);
+    void callBack(List<WheelView> list);
 }

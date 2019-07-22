@@ -156,13 +156,13 @@ public class MorePickerView extends LinearLayout{
     {
         if (wheelCallBack!=null)
         {
-            List<Integer> list=new ArrayList<>();
+            List<WheelView> list=new ArrayList<>();
             for (int i = 0; i < wheelViewList.size(); i++) {
-                WheelView wheelView = wheelViewList.get(i);
+                final WheelView wheelView = wheelViewList.get(i);
                 WheelAdapter adapter = wheelView.getAdapter();
                 if (adapter instanceof BaseWheelAdapter&&((BaseWheelAdapter) adapter).isData)
                 {
-                    list.add(wheelView.getCurrentItem());
+                    list.add(wheelView);
                 }
                 else
                 {
