@@ -43,7 +43,9 @@ public class MorePickerView extends LinearLayout{
         {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.MorePickerView);
             int wheelNum = typedArray.getInt(R.styleable.MorePickerView_wheelNum, 0);
+            typedArray.recycle();
             initWheelNum(wheelNum);
+
         }
 
     }
