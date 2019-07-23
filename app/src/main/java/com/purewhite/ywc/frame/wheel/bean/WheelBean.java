@@ -1,4 +1,4 @@
-package com.purewhite.ywc.frame.wheel;
+package com.purewhite.ywc.frame.wheel.bean;
 
 import java.util.List;
 

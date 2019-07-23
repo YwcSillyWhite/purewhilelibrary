@@ -13,14 +13,10 @@ import com.purewhite.ywc.frame.wheel.FourWheelAdapter;
 import com.purewhite.ywc.frame.wheel.OneWheelAdapter;
 import com.purewhite.ywc.frame.wheel.ThreeWheelAdapter;
 import com.purewhite.ywc.frame.wheel.TwoWheelAdapter;
-import com.purewhite.ywc.frame.wheel.WheelBean;
-import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapter;
-import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapterImp;
+import com.purewhite.ywc.frame.wheel.bean.WheelBean;
 import com.purewhite.ywc.frame.wheel.callback.WheelCallBack;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,PresenterImp> {

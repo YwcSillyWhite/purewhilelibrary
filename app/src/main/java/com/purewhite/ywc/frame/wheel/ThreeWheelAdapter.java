@@ -1,6 +1,7 @@
 package com.purewhite.ywc.frame.wheel;
 
 import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapter;
+import com.purewhite.ywc.frame.wheel.bean.WheelBean;
 
 import java.util.List;
 
