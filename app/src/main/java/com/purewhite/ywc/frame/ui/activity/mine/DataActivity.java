@@ -13,8 +13,6 @@ import java.util.List;
 
 public class DataActivity extends MvpActivity<ActivityDataBinding,PresenterImp> {
 
-    private String title[]={"标题1","标题2","标题3","标题4","纯白框架"};
-    private String center[]={"内容：1\n地址：我加","内容：1\n地址：我加\n小区：可爱","内容：1\n地址：我加\n小区：可爱","内容：1\n地址：我加\n小区：可爱","人称：ywc"};
     @Override
     protected PresenterImp creartPresenter() {
         return null;
@@ -27,6 +25,10 @@ public class DataActivity extends MvpActivity<ActivityDataBinding,PresenterImp> 
 
     @Override
     protected void initView() {
+        String[] title = getResources().getStringArray(R.array.data_title);
+        String[] center = getResources().getStringArray(R.array.data_center);
+        center[0]=String.format(center[0],"目标1","目标2");
+
         mDataBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mDataBinding.recyclerView.setAdapter(new DataAdapter(Arrays.asList(title),Arrays.asList(center)));
     }
