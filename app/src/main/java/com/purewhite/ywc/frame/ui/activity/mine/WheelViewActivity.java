@@ -15,11 +15,12 @@ import com.purewhite.ywc.frame.wheel.ThreeWheelAdapter;
 import com.purewhite.ywc.frame.wheel.TwoWheelAdapter;
 import com.purewhite.ywc.frame.wheel.bean.WheelBean;
 import com.purewhite.ywc.frame.wheel.callback.WheelCallBack;
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
 import java.util.List;
 
-public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,PresenterImp> {
+public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,PresenterImp> implements View.OnClickListener {
     @Override
     protected PresenterImp creartPresenter() {
         return null;
@@ -34,6 +35,12 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
     WheelBean wheelBean;
     @Override
     protected void initView() {
+
+        mDataBinding.titleBarLayout.centerText.setText("wheelview");
+        mDataBinding.titleBarLayout.centerText.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.leftImg.setVisibility(View.VISIBLE);
+        mDataBinding.titleBarLayout.leftImg.setOnClickListener(this);
+
         mDataBinding.morePickerView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
@@ -198,6 +205,19 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
         else
         {
             mDataBinding.morePickerView.setWheelViewList(3,null);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (ClickUtils.clickable(view))
+        {
+            switch (view.getId())
+            {
+                case R.id.left_img:
+                    backActivity();
+                    break;
+            }
         }
     }
 }

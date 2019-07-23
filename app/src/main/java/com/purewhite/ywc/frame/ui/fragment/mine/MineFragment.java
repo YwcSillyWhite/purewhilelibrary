@@ -1,8 +1,6 @@
 package com.purewhite.ywc.frame.ui.fragment.mine;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -15,7 +13,6 @@ import com.purewhite.ywc.frame.databinding.FragMineBinding;
 import com.purewhite.ywc.frame.ui.activity.mine.AndroidStudyActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CameraActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CustomMainActivity;
-import com.purewhite.ywc.frame.ui.activity.mine.DataActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.SocketActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.WheelViewActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.dialog.DialogHomeActiivty;
@@ -23,12 +20,8 @@ import com.purewhite.ywc.frame.ui.adapter.MineAdapter;
 import com.purewhite.ywc.frame.ui.mvp.MvpFragment;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
 import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
-import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
-import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureActivity;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
 
 import java.util.Arrays;
 
@@ -62,9 +55,6 @@ public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
                 break;
             case 6:
                 skipActivity(WheelViewActivity.class);
-                break;
-            case 7:
-                skipActivity(DataActivity.class);
                 break;
         }
     }
