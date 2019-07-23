@@ -19,6 +19,7 @@ import com.purewhite.ywc.purewhitelibrary.adapter.loadview.LoadView;
 import com.purewhite.ywc.purewhitelibrary.adapter.loadview.LoadViewImp;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BaseViewHolder;
 import com.purewhite.ywc.purewhitelibrary.config.NetWorkUtils;
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 
 import java.util.ArrayList;
@@ -46,65 +47,6 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         this.pageSize = pageSize;
     }
     private List<T> mData;
-    //头部
-    private LinearLayout mHeaderLayout;
-    //尾部
-    private LinearLayout mFooterLayout;
-    //全局布局
-    private FullView fullView=new FullViewImp();
-    //设置全局布局
-    public final void setFullView(FullView fullView) {
-        if (fullView==null) {
-            throw new UnsupportedOperationException("fullview can not null");
-        }
-        this.fullView = fullView;
-    }
-
-    public final void setFullState(int state) {
-        setFullState(state,false);
-    }
-
-    //设置full状态，并且是否刷新
-    public final void setFullState(int statue,boolean flush) {
-        fullView.setFullState(statue);
-        if (flush) {
-            notifyDataSetChanged();
-        }
-    }
-    private OnFullListener onFullListener;
-    //设置全局布局的监听
-    public final void setOnFullListener(OnFullListener onFullListener) {
-        this.onFullListener=onFullListener;
-    }
-
-    private boolean showFull=false;
-    public final void setShowFull(boolean showFull) {
-        this.showFull=showFull;
-    }
-
-    //加载布局
-    private LoadView loadView=new LoadViewImp();
-    //设置加载布局
-    public final void setLoadView(LoadView loadView) {
-        if (loadView==null) {
-            throw new UnsupportedOperationException("loadview can not null");
-        }
-        this.loadView = loadView;
-    }
-    //设置加载布局状态，加载布局是否刷新
-    private final void setLoadState(int statue,boolean flush) {
-        loadView.setLoadStatue(statue);
-        if (flush) {
-            notifyItemChanged(getItemCount()-1);
-        }
-    }
-    //滑动监听
-    protected OnLoadListener onLoadListener;
-    //设置滑动监听
-    public final void setOnLoadListener(OnLoadListener onLoadListener) {
-        this.onLoadListener = onLoadListener;
-    }
-
     //父View是否可以点击
     private boolean parentClick=true;
     public final void setParentClick(boolean parentClick) {
@@ -115,12 +57,10 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     public final void setOnItemListener(OnItemListener onItemListener) {
         this.onItemListener = onItemListener;
     }
-
     private final int HEAD_ITEM=Integer.MIN_VALUE;
     private final int FOOT_ITEM=Integer.MIN_VALUE+1;
     private final int LOAD_ITEM=Integer.MIN_VALUE+2;
     private final int FULL_ITEM=Integer.MIN_VALUE+3;
-
 
     public BaseAdapter(List<T> list) {
         this.mData = list!=null?list:new ArrayList<T>();
@@ -151,6 +91,8 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     }
 
 
+
+
     /************  item的长度  ****************/
     /**
      * data数据的长度
@@ -169,16 +111,6 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         return getFullCount()>0?getFullCount():getHeadCount()+obtianDataCount()+getFootCount()+getLoadCount();
     }
 
-    /**
-     * 没有数据的长度
-     * @return
-     */
-    private int getFullCount() {
-        if (!showFull||obtianDataCount()>0) {
-            return 0;
-        }
-        return fullView.isShow()?1:0;
-    }
 
     /**
      * 头部数据的长度
@@ -203,25 +135,23 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     }
 
     /**
-     * 加载更多的长度
+     * 没有数据的长度
      * @return
      */
-    private int getLoadCount() {
-        if (onLoadListener==null) {
-            return 0;
+    private int getFullCount() {
+        if (isFullView()&&obtianDataCount()==0&&fullView.isFullView())
+        {
+            return 1;
         }
-        return 1;
+        return 0;
     }
+
+    //loadview的长度
+    private int getLoadCount() {
+        return isLoadView()?1:0;
+    }
+
     /************  item的长度  ****************/
-
-
-
-
-
-
-
-
-
 
 
 
@@ -276,11 +206,6 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
                 &&viewType!=LOAD_ITEM&&viewType!=FULL_ITEM;
     }
     /************  item的类型 ****************/
-
-
-
-
-
 
 
 
@@ -364,10 +289,10 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         if (view == null) {
             return;
         }
-        view.setOnClickListener(new OnSingleListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSingleClick(View v) {
-                if (onItemListener!=null&&parentClick)
+            public void onClick(View view) {
+                if (ClickUtils.clickable(view))
                 {
                     int position=viewhold.getLayoutPosition() - getFootCount();
                     onItemListener.onClick(BaseAdapter.this,view, position,true);
@@ -376,8 +301,6 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         });
     }
     /************  onCreateViewHolder ****************/
-
-
 
 
 
@@ -448,7 +371,145 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
 
 
 
+
+
+
+
+
+
+
+    /************  解决Layoutmanager影响full，head，foot的宽度bug  ****************/
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        if(layoutManager instanceof GridLayoutManager)
+        {
+            final GridLayoutManager gridManager = ((GridLayoutManager) layoutManager);
+            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    return dataType(getItemViewType(position))
+                            ? obtainDataSpanSize(position-getHeadCount(),gridManager)
+                            :gridManager.getSpanCount();
+                }
+            });
+        }
+    }
+
+    protected int obtainDataSpanSize(int position,GridLayoutManager gridManager) {
+        return 1;
+    }
+
+    @Override
+    public void onViewAttachedToWindow(V holder) {
+        super.onViewAttachedToWindow(holder);
+        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
+        if(layoutParams != null ) {
+            if (layoutParams instanceof StaggeredGridLayoutManager.LayoutParams)
+            {
+                StaggeredGridLayoutManager.LayoutParams params =
+                        (StaggeredGridLayoutManager.LayoutParams) layoutParams;
+                params.setFullSpan(!dataType(holder));
+            }
+        }
+    }
+
+
+
+
+
+
+
+    /**        fullview         **/
+    //全局布局
+    private FullView fullView=new FullViewImp();
+    private OnFullListener onFullListener;
+    //设置全局布局
+    public final void setFullView(FullView fullView) {
+        if (fullView==null) {
+            throw new UnsupportedOperationException("fullview can not null");
+        }
+        this.fullView = fullView;
+    }
+
+    public final void setFullState(int state) {
+        setFullState(state,false);
+    }
+    //设置full状态，并且是否刷新
+    public final void setFullState(int statue,boolean flush) {
+        if (isFullView())
+        {
+            fullView.setFullState(statue);
+            if (flush) {
+                notifyDataSetChanged();
+            }
+        }
+
+    }
+
+    //是否启动fullview
+    private boolean isFullView()
+    {
+        return onFullListener!=null;
+
+    }
+    //设置全局布局的监听
+    public final void setOnFullListener(OnFullListener onFullListener) {
+        this.onFullListener=onFullListener;
+    }
+    /**        fullview         **/
+
+
+
+
+
+
+
+
+
+    /**        loadview         **/
+    //加载布局
+    private LoadView loadView=new LoadViewImp();
+    //loadview滑动监听
+    protected OnLoadListener onLoadListener;
+    //设置加载布局
+    public final void setLoadView(LoadView loadView) {
+        if (loadView==null) {
+            throw new UnsupportedOperationException("loadview can not null");
+        }
+        this.loadView = loadView;
+    }
+    //是否启动loadview
+    private boolean isLoadView()
+    {
+        return onLoadListener!=null;
+    }
+    //设置loadview的状态
+    private final void setLoadState(int statue,boolean flush) {
+        if (isLoadView())
+        {
+            loadView.setLoadStatue(statue);
+            if (flush) {
+                notifyItemChanged(getItemCount()-1);
+            }
+        }
+    }
+    //设置滑动监听
+    public final void setOnLoadListener(OnLoadListener onLoadListener) {
+        this.onLoadListener = onLoadListener;
+    }
+    /**        loadview       **/
+
+
+
+
+
     /************  添加删除头尾   ****************/
+    //头部
+    private LinearLayout mHeaderLayout;
+    //尾部
+    private LinearLayout mFooterLayout;
     //添加头尾
     public final void addHeadView(View header) {
         addHeadView(header,-1);
@@ -574,52 +635,6 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
 
 
 
-    /************  解决Layoutmanager影响full，head，foot的宽度bug  ****************/
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-        if(layoutManager instanceof GridLayoutManager)
-        {
-            final GridLayoutManager gridManager = ((GridLayoutManager) layoutManager);
-            gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    return dataType(getItemViewType(position))
-                            ? obtainDataSpanSize(position-getHeadCount(),gridManager)
-                            :gridManager.getSpanCount();
-                }
-            });
-        }
-    }
-
-    protected int obtainDataSpanSize(int position,GridLayoutManager gridManager) {
-        return 1;
-    }
-
-    @Override
-    public void onViewAttachedToWindow(V holder) {
-        super.onViewAttachedToWindow(holder);
-        ViewGroup.LayoutParams layoutParams = holder.itemView.getLayoutParams();
-        if(layoutParams != null ) {
-            if (layoutParams instanceof StaggeredGridLayoutManager.LayoutParams)
-            {
-                StaggeredGridLayoutManager.LayoutParams params =
-                        (StaggeredGridLayoutManager.LayoutParams) layoutParams;
-                params.setFullSpan(!dataType(holder));
-            }
-        }
-    }
-
-
-
-
-
-
-
-
-
-
     /**
      * 数据处理
      * @param page
@@ -668,13 +683,10 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         notifyDataSetChanged();
     }
 
-
-
     //添加数据
     public  void addData(List<T> list) {
         addData(list,true);
     }
-
 
     //添加数据
     public  void addData(List<T> list,boolean network) {
@@ -698,10 +710,6 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     }
 
 
-
-
-
-
     //删除数据
     public void removePosition(int position) {
         if (obtianDataCount()>position)
@@ -711,12 +719,14 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         }
     }
 
-
     //刷新
     public void flushPosition(int position) {
         //刷新
         notifyItemChanged(getHeadCount()+position);
     }
+
+
+
 
 
 }

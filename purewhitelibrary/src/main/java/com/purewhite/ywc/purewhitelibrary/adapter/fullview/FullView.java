@@ -72,7 +72,7 @@ public abstract class FullView {
 
     public abstract void setItemView(View itemView);
 
-    public final  boolean isShow()
+    public final  boolean isFullView()
     {
         if (fullState==DATA||fullState==NETWORK||fullState==LODA) {
             return true;

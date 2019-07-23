@@ -29,7 +29,6 @@ public class VlayoutAdapter extends DelegateAdapter
     private final int LOAD_VIEW=Integer.MIN_VALUE;
     private final int FULL_VIEW=Integer.MIN_VALUE+1;
 
-
     //数据长度
     private int pageSize=10;
     public final void setPageSize(int pageSize) {
@@ -43,10 +42,13 @@ public class VlayoutAdapter extends DelegateAdapter
     //设置full状态，并且是否刷新
     public final void setFullSate(int statue,boolean flush)
     {
-        fullView.setFullState(statue);
-        if (flush)
+        if (isFullView())
         {
-            notifyDataSetChanged();
+            fullView.setFullState(statue);
+            if (flush)
+            {
+                notifyDataSetChanged();
+            }
         }
     }
     public final void setFullView(FullView fullView) {
@@ -64,10 +66,14 @@ public class VlayoutAdapter extends DelegateAdapter
     private LoadView loadView=new LoadViewImp();
     private void setLoadState(int statue,boolean flush)
     {
-        loadView.setLoadStatue(statue);
-        if (flush) {
-            notifyItemChanged(getItemCount()-1);
+        if (isLoadView())
+        {
+            loadView.setLoadStatue(statue);
+            if (flush) {
+                notifyItemChanged(getItemCount()-1);
+            }
         }
+
     }
     public  final void setLoadView(LoadView loadView) {
         if (loadView==null) {
@@ -99,13 +105,19 @@ public class VlayoutAdapter extends DelegateAdapter
         return obtianDataCount()+getLoadCount();
     }
 
+    private boolean isFullView()
+    {
+        return onFullListener!=null;
+    }
+
     //全局布局长度
     private  int getFullCount()
     {
-        if (obtianDataCount()>0) {
-            return 0;
+        if (isFullView()&&obtianDataCount()==0&&fullView.isFullView())
+        {
+            return 1;
         }
-        return fullView.isShow()?1:0;
+        return 0;
     }
 
     public int obtianDataCount()
@@ -113,13 +125,15 @@ public class VlayoutAdapter extends DelegateAdapter
         return super.getItemCount();
     }
 
+    private boolean isLoadView()
+    {
+        return onLoadListener!=null;
+    }
+
     //加载更多布局的item
     private final int getLoadCount()
     {
-        if (onLoadListener==null) {
-            return 0;
-        }
-        return 1;
+        return isLoadView()?1:0;
     }
 
     @Override
