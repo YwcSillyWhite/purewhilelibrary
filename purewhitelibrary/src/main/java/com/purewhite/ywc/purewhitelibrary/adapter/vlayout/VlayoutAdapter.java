@@ -42,13 +42,10 @@ public class VlayoutAdapter extends DelegateAdapter
     //设置full状态，并且是否刷新
     public final void setFullSate(int statue,boolean flush)
     {
-        if (isFullView())
+        fullView.setFullState(statue);
+        if (isFullView()&&flush)
         {
-            fullView.setFullState(statue);
-            if (flush)
-            {
-                notifyDataSetChanged();
-            }
+            notifyDataSetChanged();
         }
     }
     public final void setFullView(FullView fullView) {
@@ -66,14 +63,10 @@ public class VlayoutAdapter extends DelegateAdapter
     private LoadView loadView=new LoadViewImp();
     private void setLoadState(int statue,boolean flush)
     {
-        if (isLoadView())
-        {
-            loadView.setLoadStatue(statue);
-            if (flush) {
-                notifyItemChanged(getItemCount()-1);
-            }
+        loadView.setLoadStatue(statue);
+        if (isLoadView()&&flush) {
+            notifyItemChanged(getItemCount()-1);
         }
-
     }
     public  final void setLoadView(LoadView loadView) {
         if (loadView==null) {

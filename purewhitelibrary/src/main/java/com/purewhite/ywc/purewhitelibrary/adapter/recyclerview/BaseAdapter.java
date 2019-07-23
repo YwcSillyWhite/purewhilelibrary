@@ -438,14 +438,10 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     }
     //设置full状态，并且是否刷新
     public final void setFullState(int statue,boolean flush) {
-        if (isFullView())
-        {
-            fullView.setFullState(statue);
-            if (flush) {
-                notifyDataSetChanged();
-            }
+        fullView.setFullState(statue);
+        if (isFullView()&&flush) {
+            notifyDataSetChanged();
         }
-
     }
 
     //是否启动fullview
@@ -487,12 +483,9 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     }
     //设置loadview的状态
     private final void setLoadState(int statue,boolean flush) {
-        if (isLoadView())
-        {
-            loadView.setLoadStatue(statue);
-            if (flush) {
-                notifyItemChanged(getItemCount()-1);
-            }
+        loadView.setLoadStatue(statue);
+        if (isLoadView()&&flush) {
+            notifyItemChanged(getItemCount()-1);
         }
     }
     //设置滑动监听

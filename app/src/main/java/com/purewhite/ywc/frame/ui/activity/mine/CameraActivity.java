@@ -19,6 +19,7 @@ import com.purewhite.ywc.purewhitelibrary.config.ConfigUtils;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.PhotoUtils;
 import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
@@ -28,18 +29,27 @@ import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
 
 import java.io.File;
 
-public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterImp> {
+public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterImp> implements View.OnClickListener{
 
     private File picFile;
     private PermissonCallBack permissonCallBack=new PermissonCallBack() {
         @Override
         public void onPermissonSuccess(int requestCode) {
-            if (requestCode==1)
+            switch (requestCode)
             {
-                picFile = FileManagerUtils.createTimeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
-                PhotoUtils.intentCamera(CameraActivity.this
-                        , BuildConfig.APPLICATION_ID+".fileprovider"
-                        ,picFile, TagUtils.request_camera);
+                case 1:
+                    picFile = FileManagerUtils.createTimeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
+                    PhotoUtils.intentCamera(CameraActivity.this
+                            , BuildConfig.APPLICATION_ID+".fileprovider"
+                            ,picFile, TagUtils.request_camera);
+                    break;
+                case 2:
+                    Bundle build = BundleUtils.buidler()
+                            .put(PictureStype.SELECTOR_PIC_MAX_NUM, 9)
+                            .put(PictureStype.SKIP_STYPE,PictureStype.SKIP_STYPE_PIC_LIST)
+                            .build();
+                    skipActivity(PictureActivity.class,ConfigUtils.INTENT_REQUEST_PIC,build);
+                    break;
             }
         }
 
@@ -49,39 +59,34 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
         }
     };
 
-    private OnSingleListener onSingleListener=new OnSingleListener() {
-        @Override
-        public void onSingleClick(View v) {
-            switch (v.getId())
+    @Override
+    public void onClick(View view) {
+        if (ClickUtils.clickable(view))
+        {
+            switch (view.getId())
             {
                 case R.id.left_img:
-                    finish();
+                    backActivity();
                     break;
                 case R.id.img_obtain:
-                    startPermisson(1,permissonCallBack,Manifest.permission.CAMERA,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    startPermisson(1,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                     break;
                 case R.id.img_clear:
                     FileManagerUtils.removeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
                     break;
                 case R.id.open_img:
-                    Bundle build = BundleUtils.buidler()
-                            .put(PictureStype.SELECTOR_PIC_MAX_NUM, 9)
-                            .put(PictureStype.SKIP_STYPE,PictureStype.SKIP_STYPE_PIC_LIST)
-                            .build();
-                    skipActivity(PictureActivity.class,ConfigUtils.INTENT_REQUEST_PIC,build);
+                    startPermisson(2,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                     break;
             }
         }
-    };
+    }
+
+
 
     @Override
     protected PresenterImp creartPresenter() {
         return null;
     }
-
-
-
 
     @Override
     protected int getLayout() {
@@ -91,12 +96,12 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
     @Override
     protected void initView() {
         mDataBinding.titleBarLayout.leftImg.setVisibility(View.VISIBLE);
-        mDataBinding.titleBarLayout.leftImg.setOnClickListener(onSingleListener);
         mDataBinding.titleBarLayout.centerText.setVisibility(View.VISIBLE);
         mDataBinding.titleBarLayout.centerText.setText("图片");
-        mDataBinding.imgObtain.setOnClickListener(onSingleListener);
-        mDataBinding.imgClear.setOnClickListener(onSingleListener);
-        mDataBinding.openImg.setOnClickListener(onSingleListener);
+        mDataBinding.titleBarLayout.leftImg.setOnClickListener(this);
+        mDataBinding.imgObtain.setOnClickListener(this);
+        mDataBinding.imgClear.setOnClickListener(this);
+        mDataBinding.openImg.setOnClickListener(this);
     }
 
 
@@ -127,4 +132,6 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                 break;
         }
     }
+
+
 }

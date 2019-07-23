@@ -98,6 +98,13 @@ public class BarConfig {
                     flag |= View.SYSTEM_UI_FLAG_FULLSCREEN;
                     break;
                 case 6:
+                    //透明全屏模式
+                    flag |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+                    flag |= View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+                    setStatusBarColor(Color.TRANSPARENT);
+                    setNavigationBarColor(Color.TRANSPARENT);
+                    break;
+                case 7:
                     //全屏模式
                     flag |= View.SYSTEM_UI_FLAG_FULLSCREEN;
                     flag |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
