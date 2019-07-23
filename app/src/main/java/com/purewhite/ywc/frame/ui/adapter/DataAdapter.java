@@ -18,14 +18,20 @@ public class DataAdapter extends BindAdapter<String> {
 
     //内容
     private List<String> list_center;
+    private int[] type;
     //标题
-    public DataAdapter(List<String> list,List<String> list_center) {
+    public DataAdapter(List<String> list,List<String> list_center,int[] type) {
         super(list);
         this.list_center=list_center==null?new ArrayList<String>():list_center;
-        addLayout(R.layout.adapter_data);
-
+        this.type=type;
+        addLayout(0,R.layout.adapter_data);
+        addLayout(1,R.layout.adapter_data_two);
     }
 
+    @Override
+    protected int obtianDataType(int position) {
+        return type!=null&&type.length>position?type[position]:0;
+    }
 
     @Override
     protected void onData(BindHolder holder, int position, String s) {
@@ -63,6 +69,5 @@ public class DataAdapter extends BindAdapter<String> {
         {
             binding.center.setText("");
         }
-        binding.title.setGravity(position+1==obtianDataCount()?Gravity.RIGHT:Gravity.LEFT);
     }
 }

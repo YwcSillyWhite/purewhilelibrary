@@ -13,6 +13,8 @@ import java.util.List;
 
 public class DataActivity extends MvpActivity<ActivityDataBinding,PresenterImp> {
 
+    private int[] dataType={1,0,1,0,1,0,1,1};
+
     @Override
     protected PresenterImp creartPresenter() {
         return null;
@@ -30,6 +32,6 @@ public class DataActivity extends MvpActivity<ActivityDataBinding,PresenterImp> 
         center[0]=String.format(center[0],"目标1","目标2");
 
         mDataBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mDataBinding.recyclerView.setAdapter(new DataAdapter(Arrays.asList(title),Arrays.asList(center)));
+        mDataBinding.recyclerView.setAdapter(new DataAdapter(Arrays.asList(title),Arrays.asList(center),dataType));
     }
 }

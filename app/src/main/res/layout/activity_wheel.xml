@@ -5,10 +5,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <include layout="@layout/actionbar_one" android:id="@+id/title_bar_layout"></include>
         <com.purewhite.ywc.frame.wheel.base.MorePickerView
             android:layout_width="match_parent"
             android:layout_height="500dp"
             app:wheelNum="4"
+            app:cyc_scroll="true"
             app:wheel_textsize="15"
             android:id="@+id/more_picker_view">
         </com.purewhite.ywc.frame.wheel.base.MorePickerView>
