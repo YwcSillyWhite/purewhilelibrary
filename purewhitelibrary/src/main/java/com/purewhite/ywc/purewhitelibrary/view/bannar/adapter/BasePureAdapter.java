@@ -13,37 +13,56 @@ import java.util.List;
 public abstract class BasePureAdapter<T> extends PagerAdapter {
 
     private List<T> list;
+    private List<T> handerList(List<T> list)
+    {
+        if (list==null)
+        {
+            list=new ArrayList<>();
+        }
+        return list;
+    }
     private SparseArray<View> sparseArray;
     public BasePureAdapter(List<T> list) {
-        this.list=handlerList(list);
+        this.list = handerList(list);
         sparseArray=new SparseArray<>();
     }
 
-    @Override
-    public int getCount() {
+    //list真实长度
+    public int getRealCount()
+    {
         return list.size();
     }
 
     @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view==object;
+    public int getCount() {
+        return getRealCount()>1?Integer.MAX_VALUE:getRealCount();
     }
 
-    @NonNull
-    @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        T t = obtianT(position);
-        View view = sparseArray.get(position);
-        if (view==null)
+    //当前真实position
+    public int getRealPosition(int position)
+    {
+        final int realCount = getRealCount();
+        if (realCount>0)
         {
-            view=obtianView(container,position,t);
-            sparseArray.put(position,view);
+            return position%getRealCount();
         }
-        container.addView(view);
-        return view;
+        return 0;
     }
 
-    public abstract View obtianView(ViewGroup container, int position,T t);
+    public int initPosition()
+    {
+        int realCount = getRealCount();
+        if (realCount<=1)
+        {
+            return realCount-1;
+        }
+        else
+        {
+            int centerPosition = getCount() / 2;
+            int realPosition = centerPosition % realCount;
+            return centerPosition-realPosition;
+        }
+    }
 
     public T obtianT(int position)
     {
@@ -56,37 +75,47 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
 
 
     @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        View view = sparseArray.get(position);
-        if (view!=null)
-        {
-            container.removeView(view);
-        }
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return view==object;
     }
+
+
+    @NonNull
+    @Override
+    public final Object instantiateItem(@NonNull ViewGroup container, int position) {
+        int realPosition = getRealPosition(position);
+        return instantiateItemReal(container,realPosition);
+    }
+
+    public final Object instantiateItemReal(@NonNull ViewGroup container, int position)
+    {
+        T t = obtianT(position);
+        View view = sparseArray.get(position);
+        if (view==null)
+        {
+            view=obtianView(container,position,t);
+            sparseArray.put(position,view);
+        }
+        //重复复用所以要先移除view
+        container.removeView(view);
+        container.addView(view);
+        return view;
+    }
+
+    public abstract View obtianView(ViewGroup container, int position, T t);
+
+
+    @Override
+    public final void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+
+    }
+
+
 
     public void flush(List<T> list)
     {
-        this.list=handlerList(list);
+        this.list=handerList(list);
+        sparseArray.clear();
         notifyDataSetChanged();
-    }
-
-
-    private List<T> handlerList(List<T> list)
-    {
-        if (list==null)
-        {
-            list=new ArrayList<>();
-        }
-        else
-        {
-            if (list.size()>1)
-            {
-                T endT = list.get(0);
-                T startT = list.get(list.size() - 1);
-                list.add(0,startT);
-                list.add(endT);
-            }
-        }
-        return list;
     }
 }
