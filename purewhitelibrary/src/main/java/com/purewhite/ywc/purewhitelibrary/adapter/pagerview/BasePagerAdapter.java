@@ -49,8 +49,9 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
         if (view==null)
         {
             view= obtainView(container,position, t);
+            sparseArray.put(position,view);
         }
-        sparseArray.put(position,view);
+
         container.addView(view);
         return view;
     }
