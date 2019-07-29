@@ -16,7 +16,10 @@ import com.purewhite.ywc.frame.wheel.adapter.BaseWheelAdapterImp;
 import com.purewhite.ywc.frame.wheel.callback.WheelCallBack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import io.reactivex.annotations.NonNull;
 
 public class MorePickerView extends LinearLayout{
 
@@ -101,22 +104,31 @@ public class MorePickerView extends LinearLayout{
     }
 
 
-    public void setWheelViewList(int position,WheelAdapter  ...wheelAdapters)
+    public void  setWheelViewList(int position,List<WheelAdapter> list)
     {
-        if (position+wheelAdapters.length==wheelViewList.size())
+        if (position+list.size()<=wheelViewList.size())
         {
             for (int i = position; i < wheelViewList.size(); i++) {
-                WheelAdapter wheelAdapter = wheelAdapters[i - position];
                 WheelView wheelView = wheelViewList.get(i);
+                WheelAdapter wheelAdapter=null;
+                if (i-position<list.size())
+                {
+                    wheelAdapter=list.get(i-position);
+                }
                 if (wheelAdapter==null)
                 {
-                    wheelView.setAdapter(new BaseWheelAdapterImp());
+                    wheelAdapter=new BaseWheelAdapterImp();
                 }
-                else
-                {
-                    wheelView.setAdapter(wheelAdapter);
-                }
+                wheelView.setAdapter(wheelAdapter);
             }
+        }
+    }
+
+    public void setWheelViewList(int position,@NonNull WheelAdapter  ...wheelAdapters)
+    {
+        if (wheelAdapters!=null)
+        {
+            setWheelViewList(position, Arrays.asList(wheelAdapters));
         }
     }
 
