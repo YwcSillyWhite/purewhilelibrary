@@ -32,7 +32,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':purewhitelibrary')
     implementation project(':tbslibrary')
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
     implementation 'com.acker:simplezxing:1.5'
 
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
