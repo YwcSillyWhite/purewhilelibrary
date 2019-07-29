@@ -56,6 +56,13 @@
 
 
 
+    <declare-styleable name="PureViewPager">
+        <attr name="autoTime" format="integer"></attr>
+        <attr name="autoPlay" format="boolean"></attr>
+        <attr name="child_margin" format="dimension"></attr>
+        <attr name="parent_margin" format="dimension"></attr>
+        <attr name="run_color" format="boolean"></attr>
+    </declare-styleable>
 
 
 </resources>

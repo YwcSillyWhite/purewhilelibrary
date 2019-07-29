@@ -1,7 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.window.base;
 
 import android.content.Context;
-
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.LayoutInflater;

@@ -1,18 +1,9 @@
 package com.purewhite.ywc.purewhitelibrary.config;
 
 
-import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
-import android.util.SparseArray;
-import android.view.Gravity;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.StringRes;
-
-import com.purewhite.ywc.purewhitelibrary.BuildConfig;
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 
 

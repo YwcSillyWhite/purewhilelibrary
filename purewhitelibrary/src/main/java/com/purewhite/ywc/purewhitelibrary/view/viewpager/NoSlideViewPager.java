@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.view.viewpager;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 

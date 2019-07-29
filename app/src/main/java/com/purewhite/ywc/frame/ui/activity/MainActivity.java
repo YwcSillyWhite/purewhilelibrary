@@ -2,7 +2,6 @@ package com.purewhite.ywc.frame.ui.activity;
 
 import android.os.Handler;
 import android.os.Message;
-
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.MenuItem;

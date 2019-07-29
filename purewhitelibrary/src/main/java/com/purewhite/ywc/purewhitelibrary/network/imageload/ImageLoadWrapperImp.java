@@ -1,11 +1,12 @@
 package com.purewhite.ywc.purewhitelibrary.network.imageload;
 
-import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.purewhite.ywc.purewhitelibrary.R;
+import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -115,25 +116,35 @@ public class ImageLoadWrapperImp implements ImageLoadWrapper{
     }
 
     @Override
-    public void clear(final Context context) {
+    public void clear() {
         //清理内存缓存 可以在UI主线程中进行
-        Glide.get(context).clearMemory();
+        Glide.get(AppUtils.getContext()).clearMemory();
         //清理磁盘缓存 需要在子线程中执行
         Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
             public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
-                Glide.get(context).clearDiskCache();
+                Glide.get(AppUtils.getContext()).clearDiskCache();
             }
         }).subscribeOn(Schedulers.io()).subscribe();
     }
 
     @Override
-    public void stop(Context context) {
-        Glide.with(context).pauseRequests();
+    public void stop() {
+        Glide.with(AppUtils.getContext()).pauseRequests();
     }
 
     @Override
-    public void start(Context context) {
-        Glide.with(context).resumeRequests();
+    public void start() {
+        Glide.with(AppUtils.getContext()).resumeRequests();
+    }
+
+
+
+    public void obtianBitmap(String uri, BitmapImageViewTarget bitmapImageViewTarget) {
+         Glide.with(AppUtils.getContext())
+                .asBitmap()
+                .load(uri)
+                .centerCrop()
+                .into(bitmapImageViewTarget);
     }
 }

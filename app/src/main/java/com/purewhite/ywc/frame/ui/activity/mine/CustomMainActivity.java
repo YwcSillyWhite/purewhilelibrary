@@ -1,7 +1,5 @@
 package com.purewhite.ywc.frame.ui.activity.mine;
 
-import android.view.View;
-
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityCustomMainBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;

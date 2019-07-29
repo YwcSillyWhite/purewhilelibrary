@@ -6,7 +6,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.scroll.OnScrollLoadListener;
 import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;

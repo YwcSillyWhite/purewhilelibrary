@@ -1,7 +1,6 @@
 package com.purewhite.ywc.frame.ui.activity.mine.dialog;
 
 import android.content.Intent;
-
 import android.view.View;
 
 import androidx.annotation.Nullable;

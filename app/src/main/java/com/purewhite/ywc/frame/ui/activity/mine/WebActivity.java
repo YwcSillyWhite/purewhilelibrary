@@ -1,7 +1,6 @@
 package com.purewhite.ywc.frame.ui.activity.mine;
 
 import android.graphics.Bitmap;
-
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -10,10 +9,8 @@ import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.config.TagUtils;
 import com.purewhite.ywc.frame.databinding.ActivityWebBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
-import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;

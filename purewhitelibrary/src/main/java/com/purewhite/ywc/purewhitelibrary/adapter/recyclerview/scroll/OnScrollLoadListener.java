@@ -34,11 +34,11 @@ public class OnScrollLoadListener extends RecyclerView.OnScrollListener {
         {
             if (newState==RecyclerView.SCROLL_STATE_IDLE)
             {
-                ImageLoader.newInstance().start(recyclerView.getContext());
+                ImageLoader.newInstance().start();
             }
             else
             {
-                ImageLoader.newInstance().stop(recyclerView.getContext());
+                ImageLoader.newInstance().stop();
             }
         }
 

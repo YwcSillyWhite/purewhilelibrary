@@ -1,6 +1,5 @@
 package com.purewhite.ywc.frame.wheel.callback;
 
-import com.contrarywind.adapter.WheelAdapter;
 import com.contrarywind.view.WheelView;
 
 import java.util.List;

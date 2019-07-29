@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 
-
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 

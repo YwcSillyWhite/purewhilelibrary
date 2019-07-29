@@ -1,7 +1,8 @@
 package com.purewhite.ywc.purewhitelibrary.network.imageload;
 
-import android.content.Context;
 import android.widget.ImageView;
+
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 /**
  *
@@ -20,9 +21,11 @@ public interface ImageLoadWrapper {
      //大的图片只进行磁盘缓存
      void initBig(ImageView imageView, Object url);
      //清除缓存
-     void clear(Context context);
+     void clear();
      //暂停加载
-     void stop(Context context);
+     void stop();
      //启动加载
-     void start(Context context);
+     void start();
+
+     void obtianBitmap(String uri, BitmapImageViewTarget bitmapImageViewTarget);
 }

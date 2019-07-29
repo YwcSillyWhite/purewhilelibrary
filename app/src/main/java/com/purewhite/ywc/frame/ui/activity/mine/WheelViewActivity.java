@@ -18,7 +18,6 @@ import com.purewhite.ywc.frame.wheel.callback.WheelCallBack;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,PresenterImp> implements View.OnClickListener {
@@ -167,7 +166,7 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
         }
         else
         {
-            mDataBinding.morePickerView.setWheelViewList(0,new ArrayList<WheelAdapter>());
+            mDataBinding.morePickerView.setWheelViewList(0,null,null,null,null);
         }
     }
 
@@ -180,7 +179,7 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
         }
         else
         {
-            mDataBinding.morePickerView.setWheelViewList(1,new ArrayList<WheelAdapter>());
+            mDataBinding.morePickerView.setWheelViewList(1,null,null,null);
         }
     }
 
@@ -193,7 +192,7 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
         }
         else
         {
-            mDataBinding.morePickerView.setWheelViewList(2,new ArrayList<WheelAdapter>());
+            mDataBinding.morePickerView.setWheelViewList(2,null,null);
         }
     }
 
@@ -205,7 +204,7 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
         }
         else
         {
-            mDataBinding.morePickerView.setWheelViewList(3,new ArrayList<WheelAdapter>());
+//            mDataBinding.morePickerView.setWheelViewList(3,null);
         }
     }
 

@@ -1,7 +1,6 @@
 package com.purewhite.ywc.frame.ui.fragment.home;
 
 import android.animation.ValueAnimator;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;

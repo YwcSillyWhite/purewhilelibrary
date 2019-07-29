@@ -1,24 +1,30 @@
 package com.purewhite.ywc.purewhitelibrary.view.bannar;
 
+import android.animation.ArgbEvaluator;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
-import androidx.viewpager.widget.PagerAdapter;
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
+import com.purewhite.ywc.purewhitelibrary.R;
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.BasePureAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.StringPureAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.listener.OnPureChangeListener;
+import com.purewhite.ywc.purewhitelibrary.view.bannar.palette.PureViewPalette;
+import com.purewhite.ywc.purewhitelibrary.view.bannar.trans.PagerTransZoom;
 
 import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.annotations.NonNull;
 
-public class PureViewPager extends FrameLayout {
+public class PureViewPager extends RelativeLayout {
 
     private ViewPager viewPager;
     //自动播放时间
@@ -28,23 +34,17 @@ public class PureViewPager extends FrameLayout {
     private Runnable runnable=new Runnable() {
         @Override
         public void run() {
-            PagerAdapter adapter = viewPager.getAdapter();
-            if (adapter instanceof BasePureAdapter)
+            int count = viewPager.getAdapter().getCount();
+            int currentItem = viewPager.getCurrentItem();
+            if (currentItem+1<count)
             {
-                int currentItem = viewPager.getCurrentItem();
-                if (currentItem+1<adapter.getCount())
-                {
-                    viewPager.setCurrentItem(currentItem+1);
-                }
-                else
-                {
-                    int initPosition = ((BasePureAdapter) adapter).initPosition();
-                    viewPager.setCurrentItem(initPosition,false);
-                    play(true);
-                }
+                viewPager.setCurrentItem(currentItem+1);
             }
         }
     };
+    private ArgbEvaluator evaluator = new ArgbEvaluator();
+    //是否滑动变色
+    private boolean run_color;
 
     public PureViewPager(Context context) {
         this(context,null);
@@ -62,6 +62,34 @@ public class PureViewPager extends FrameLayout {
     private void initView(AttributeSet attrs) {
         viewPager = new ViewPager(getContext());
         addView(viewPager,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        if (attrs!=null)
+        {
+            TypedArray typedArray = getContext().obtainStyledAttributes(attrs,R.styleable.PureViewPager);
+            autoPlay = typedArray.getBoolean(R.styleable.PureViewPager_autoPlay, true);
+            autoTime= typedArray.getInt(R.styleable.PureViewPager_autoTime, 3000);
+            run_color = typedArray.getBoolean(R.styleable.PureViewPager_run_color, false);
+            if (autoTime<=0)
+            {
+                autoPlay=false;
+            }
+            int child_margin = typedArray.getDimensionPixelOffset(R.styleable.PureViewPager_child_margin, 0);
+            int parent_margin = typedArray.getDimensionPixelOffset(R.styleable.PureViewPager_parent_margin, 0);
+
+            if (child_margin>0)
+            {
+                if (child_margin*2>parent_margin)
+                {
+                    parent_margin=child_margin*3;
+                }
+                viewPager.setPadding(parent_margin,0,parent_margin,0);
+                viewPager.setOffscreenPageLimit(2);
+                viewPager.setPageMargin(child_margin);
+                viewPager.setClipToPadding(false);
+                setClipChildren(false);
+            }
+            typedArray.recycle();
+        }
+//        viewPager.setPageTransformer(false,new PagerTransZoom(0.8f));
     }
 
 
@@ -71,23 +99,46 @@ public class PureViewPager extends FrameLayout {
     {
         if (pureAdapter!=null)
         {
+            PureViewPalette.newInstance().clear();
             viewPager.setAdapter(pureAdapter);
+            pureAdapter.setPalette(true);
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                    if (onPureChangeListener!=null)
+                    if (pureAdapter.getCount()>1)
                     {
                         int realPosition = pureAdapter.getRealPosition(position);
-                        onPureChangeListener.onPageScrolled(realPosition,position,positionOffset,positionOffsetPixels);
+                        if (onPureChangeListener!=null)
+                        {
+                            onPureChangeListener.onPageScrolled(realPosition,positionOffset,positionOffsetPixels);
+                        }
+                        if (run_color)
+                        {
+                            int colorNew = PureViewPalette.newInstance().obtianPositionColor(position);
+                            int colorNext;
+                            if (realPosition==pureAdapter.getRealCount()-1)
+                            {
+                                colorNext=PureViewPalette.newInstance().obtianPositionColor(0);
+                            }
+                            else
+                            {
+                                colorNext=PureViewPalette.newInstance().obtianPositionColor(realPosition+1);
+                            }
+                            int evaluate = (int) evaluator.evaluate(positionOffset, colorNew, colorNext);
+                            setBackgroundColor(evaluate);
+                        }
+
                     }
                 }
 
                 @Override
                 public void onPageSelected(int position) {
-                    if (onPureChangeListener!=null)
+                    if (pureAdapter.getCount()>1)
                     {
-                        int realPosition = pureAdapter.getRealPosition(position);
-                        onPureChangeListener.onPageSelected(realPosition,position);
+                        if (onPureChangeListener!=null)
+                        {
+                            onPureChangeListener.onPageSelected(pureAdapter.getRealPosition(position));
+                        }
                     }
                 }
 
@@ -97,62 +148,79 @@ public class PureViewPager extends FrameLayout {
                     {
                         onPureChangeListener.onPageScrollStateChanged(state);
                     }
-                    if (state==ViewPager.SCROLL_STATE_IDLE)
+                    int count = pureAdapter.getCount();
+                    if (count>1)
                     {
-                        play(true);
-                    }
-                    else
-                    {
-                        play(false);
+                        if (state==ViewPager.SCROLL_STATE_IDLE)
+                        {
+                            int currentItem = viewPager.getCurrentItem();
+                            if (currentItem==0)
+                            {
+                                viewPager.setCurrentItem(count-2,false);
+                            }
+                            else if (currentItem==count-1)
+                            {
+                                viewPager.setCurrentItem(1,false);
+                            }
+                            play(true);
+                        }
+                        else
+                        {
+                            play(false);
+                        }
                     }
                 }
             });
-            initCenter(pureAdapter);
+
+            if (pureAdapter.getCount()>1)
+            {
+                viewPager.setCurrentItem(1,false);
+                play(true);
+            }
         }
     }
 
 
-    //
-    public void initCenter(BasePureAdapter pureAdapter)
+    public void setPageTransformer(boolean reverseDrawingOrder, @Nullable ViewPager.PageTransformer transformer)
     {
-        int initPosition = pureAdapter.initPosition();
-        if (initPosition>0)
-        {
-            viewPager.setCurrentItem(initPosition,false);
-            play(true);
-        }
+        viewPager.setPageTransformer(reverseDrawingOrder,transformer);
     }
 
 
-    public void setAdapter(String[] images)
+
+
+    public void setAdapter(String[] images,  OnPureChangeListener onPureChangeListener)
     {
-        setAdapter(Arrays.asList(images));
+        setAdapter(Arrays.asList(images),onPureChangeListener);
     }
 
 
-    public void setAdapter(List<String> images)
+    public void setAdapter(List<String> images,   OnPureChangeListener onPureChangeListener)
     {
-        setAdapter(new StringPureAdapter(images),null);
+        setAdapter(new StringPureAdapter(images),onPureChangeListener);
     }
 
 
     private void play(boolean start)
     {
-        if (autoPlay)
-        {
-            if (start)
-            {
-                handler.postDelayed(runnable,autoTime);
-            }
-            else
-            {
-                handler.removeCallbacks(runnable);
+        if (autoPlay) {
+            handler.removeCallbacks(runnable);
+            if (start) {
+                handler.postDelayed(runnable, autoTime);
             }
         }
     }
 
-    public void onDestory()
+
+    public void onResume()
+    {
+        play(true);
+    }
+
+
+    public void onPause()
     {
         play(false);
     }
+
 }

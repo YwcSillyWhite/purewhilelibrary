@@ -3,9 +3,9 @@ package com.purewhite.ywc.purewhitelibrary.view.bannar.listener;
 
 public interface  OnPureChangeListener  {
 
-    void onPageScrolled(int realPosition,int position,float positionOffset,int positionOffsetPixels);
+    void onPageScrolled(int position,float positionOffset,int positionOffsetPixels);
 
-    void onPageSelected(int realPosition,int position);
+    void onPageSelected(int position);
 
     void onPageScrollStateChanged(int statue);
 }

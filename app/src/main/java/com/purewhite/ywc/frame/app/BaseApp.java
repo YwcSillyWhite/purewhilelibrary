@@ -1,9 +1,6 @@
 package com.purewhite.ywc.frame.app;
 
 import android.app.Application;
-import android.content.Context;
-
-import androidx.multidex.MultiDex;
 
 import com.example.tbslibrary.app.TbsAppUtils;
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;

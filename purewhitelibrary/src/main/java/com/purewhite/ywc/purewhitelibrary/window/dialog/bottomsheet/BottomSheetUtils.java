@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.window.dialog.bottomsheet;
 
 import android.content.Context;
 
-
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.window.base.WindowDialogUtils;

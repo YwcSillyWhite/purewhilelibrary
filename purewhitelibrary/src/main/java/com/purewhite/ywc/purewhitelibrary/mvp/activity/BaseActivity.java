@@ -8,8 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
-import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
