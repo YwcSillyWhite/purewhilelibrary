@@ -21,7 +21,6 @@ public class OkNetUtils {
         OkHttpUtils.get().addParams(paramsRequest)
                 .tag(activity)
                 .url(url)
-                .build()
                 .enqueue(okCallBack);
     }
 
@@ -30,7 +29,6 @@ public class OkNetUtils {
         OkHttpUtils.get().addParams(paramsRequest)
                 .tag(fragment)
                 .url(url)
-                .build()
                 .enqueue(okCallBack);
     }
 

@@ -28,7 +28,7 @@ public class OkhttpBuilder {
         }
         else if (tag.equals(longLink))
         {
-
+            okHttpClient=longLink();
         }
         else
         {

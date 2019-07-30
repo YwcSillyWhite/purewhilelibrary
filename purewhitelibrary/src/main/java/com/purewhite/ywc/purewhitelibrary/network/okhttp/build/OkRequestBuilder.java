@@ -42,23 +42,26 @@ public abstract class OkRequestBuilder<B extends OkRequestBuilder> {
     public abstract B addParams(Map<String,String> map);
 
 
-    public abstract B build();
+    protected abstract B build();
 
 
 
     public  void enqueue(OkCallBack okCallBack)
     {
+        build();
         enqueue(OkhttpBuilder.defaultOKhttp,okCallBack);
     }
 
     public  void enqueue(String key,OkCallBack okCallBack)
     {
+        build();
         OkHttpUtils.newInstance().enqueue(key,builder.build(),okCallBack);
     }
 
 
     public void newWebSocket(String key, WebSocketListener webSocketListener)
     {
+        build();
         OkHttpUtils.newInstance().newWebSocket(key,builder.build(),webSocketListener);
     }
 
