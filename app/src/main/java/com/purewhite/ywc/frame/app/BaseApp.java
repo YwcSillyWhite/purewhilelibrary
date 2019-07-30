@@ -25,8 +25,7 @@ public class BaseApp extends Application {
     }
 
     private void initPure() {
-        Map<String,String> map=new HashMap<>();
-        map.put("apikey","pureWhite");
-        AppUtils.initLibrary(this,"",0,map);
+
+        AppUtils.initLibrary(this,"",375);
     }
 }

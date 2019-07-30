@@ -48,37 +48,37 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
             @Override
             public void onClosed(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
                 super.onClosed(webSocket, code, reason);
-                LogUtils.debug("无聊","失败");
+                LogUtils.debug("无聊","onClosed");
             }
 
             @Override
             public void onClosing(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
                 super.onClosing(webSocket, code, reason);
-                LogUtils.debug("无聊","失败");
+                LogUtils.debug("无聊","onClosing");
             }
 
             @Override
             public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response) {
                 super.onFailure(webSocket, t, response);
-                LogUtils.debug("无聊","失败");
+                LogUtils.debug("无聊","onFailure");
             }
 
             @Override
             public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
                 super.onMessage(webSocket, text);
-                LogUtils.debug("无聊","失败");
+                LogUtils.debug("无聊","onFailure");
             }
 
             @Override
             public void onMessage(@NotNull WebSocket webSocket, @NotNull ByteString bytes) {
                 super.onMessage(webSocket, bytes);
-                LogUtils.debug("无聊","失败");
+                LogUtils.debug("无聊","onFailure");
             }
 
             @Override
             public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
                 super.onOpen(webSocket, response);
-                LogUtils.debug("无聊","成功");
+                LogUtils.debug("无聊","onOpen");
             }
         });
     }

@@ -26,8 +26,6 @@ public final class  AppUtils {
     public static int adaptiveWightDp=375;
     //retrofit默认请求接口
     public static String baseUri="http://v2.api.haodanku.com";
-    //oKhttp公共参数
-    public static Map<String,String> mapOkhhtp;
     private static Application application;
     private static Stack<Activity> stack=new Stack<>();
 
@@ -86,7 +84,7 @@ public final class  AppUtils {
      * @param adaptiveWight     屏幕适配的dp
      * @Param map     okHttp公共参数
      */
-    public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight,Map<String,String> map)
+    public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight)
     {
 
         if (!TextUtils.isEmpty(retrofitBaseUri))
@@ -98,7 +96,6 @@ public final class  AppUtils {
         {
             adaptiveWightDp=adaptiveWight;
         }
-        mapOkhhtp=map;
         AppUtils.application =application;
         application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
 
