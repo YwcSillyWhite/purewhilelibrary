@@ -51,8 +51,7 @@ public class HomeChildPresenter extends PresenterImp<HomeChildContract.UiView>
                 mView.respon(flush);
             }
 
-            private void handlerAdapter(boolean network,List<ShopBean> list)
-            {
+            private void handlerAdapter(boolean network,List<ShopBean> list) {
                 mView.getAdapter().addDataFlush(flush,list,network);
             }
         });

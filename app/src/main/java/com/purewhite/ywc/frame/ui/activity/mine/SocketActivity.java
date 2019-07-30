@@ -1,5 +1,6 @@
 package com.purewhite.ywc.frame.ui.activity.mine;
 
+import android.os.Handler;
 import android.view.View;
 
 import com.purewhite.ywc.frame.R;
@@ -28,6 +29,32 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
         return null;
     }
 
+    private Handler handler=new Handler();
+    private WebSocket webSocket;
+    private void sendHandler()
+    {
+        handler.removeCallbacks(null);
+        handler.postDelayed(runnable,15000);
+    }
+    private Runnable runnable=new Runnable() {
+        @Override
+        public void run() {
+            send("心跳检测",true);
+        }
+    };
+
+    private void send(String content,boolean detection)
+    {
+        if (webSocket!=null)
+        {
+            webSocket.send("心跳检测");
+            if (detection)
+            {
+                sendHandler();
+            }
+        }
+    }
+
     private View.OnClickListener onClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -53,44 +80,42 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
 
     private void initTwo() {
         //标签用来取消常链接
-        OkHttpUtils.get().url("ws:47.105.113.174:9502?action=create_room&userId=26&auctionId=58").newWebSocket(OkhttpBuilder.longLink, new WebSocketListener() {
+        OkHttpUtils.get().tag(this).url("ws:47.105.113.174:9502?action=create_room&userId=26&auctionId=58").newWebSocket(OkhttpBuilder.longLink, new WebSocketListener() {
             @Override
             public void onClosed(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
                 super.onClosed(webSocket, code, reason);
-                LogUtils.debug("无聊","onClosed");
             }
 
             @Override
             public void onClosing(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
                 super.onClosing(webSocket, code, reason);
-                LogUtils.debug("无聊","onClosing");
             }
 
             @Override
             public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response) {
                 super.onFailure(webSocket, t, response);
-                LogUtils.debug("无聊","onFailure");
             }
 
             @Override
             public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
                 super.onMessage(webSocket, text);
-                LogUtils.debug("无聊","onMessage");
+                sendHandler();
             }
 
             @Override
             public void onMessage(@NotNull WebSocket webSocket, @NotNull ByteString bytes) {
                 super.onMessage(webSocket, bytes);
-                LogUtils.debug("无聊","onMessage");
             }
 
             @Override
             public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
                 super.onOpen(webSocket, response);
-                LogUtils.debug("无聊","onOpen");
+                SocketActivity.this.webSocket=webSocket;
             }
         });
     }
+
+
 
 
 
@@ -99,5 +124,6 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
     protected void onDestroy() {
         super.onDestroy();
         OkHttpUtils.newInstance().cancleTag(this);
+        handler.removeCallbacks(runnable);
     }
 }
