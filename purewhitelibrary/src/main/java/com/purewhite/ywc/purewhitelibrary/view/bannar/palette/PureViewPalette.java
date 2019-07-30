@@ -2,15 +2,10 @@ package com.purewhite.ywc.purewhitelibrary.view.bannar.palette;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.util.SparseArray;
 import android.util.SparseIntArray;
 
 import androidx.annotation.Nullable;
 import androidx.palette.graphics.Palette;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class PureViewPalette {
 

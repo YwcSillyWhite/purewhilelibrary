@@ -6,7 +6,6 @@ import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.GetBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.executor.OkThreadSave;
-import com.purewhite.ywc.purewhitelibrary.network.okhttp.interceptor.ParamsInterceptor;
 
 import org.jetbrains.annotations.NotNull;
 
