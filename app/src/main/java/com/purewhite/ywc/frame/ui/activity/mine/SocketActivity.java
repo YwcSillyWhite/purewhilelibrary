@@ -13,6 +13,10 @@ import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkhttpBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
@@ -43,8 +47,13 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
 
     @Override
     protected void initView() {
+        initTwo();
+
+    }
+
+    private void initTwo() {
         //标签用来取消常链接
-        OkHttpUtils.get().tag(this).url("ws:47.105.113.174:9502?action=create_room&userId=26&auctionId=58").newWebSocket(OkhttpBuilder.longLink, new WebSocketListener() {
+        OkHttpUtils.get().url("ws:47.105.113.174:9502?action=create_room&userId=26&auctionId=58").newWebSocket(OkhttpBuilder.longLink, new WebSocketListener() {
             @Override
             public void onClosed(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
                 super.onClosed(webSocket, code, reason);
@@ -66,13 +75,13 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
             @Override
             public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
                 super.onMessage(webSocket, text);
-                LogUtils.debug("无聊","onFailure");
+                LogUtils.debug("无聊","onMessage");
             }
 
             @Override
             public void onMessage(@NotNull WebSocket webSocket, @NotNull ByteString bytes) {
                 super.onMessage(webSocket, bytes);
-                LogUtils.debug("无聊","onFailure");
+                LogUtils.debug("无聊","onMessage");
             }
 
             @Override
@@ -82,6 +91,9 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
             }
         });
     }
+
+
+
 
     @Override
     protected void onDestroy() {

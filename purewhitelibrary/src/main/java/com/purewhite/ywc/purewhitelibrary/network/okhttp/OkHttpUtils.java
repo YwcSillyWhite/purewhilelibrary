@@ -2,6 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.network.okhttp;
 
 
 import com.google.gson.Gson;
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.GetBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
@@ -12,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -100,6 +102,7 @@ public class OkHttpUtils {
         if (okHttpClient==null)
         {
             okHttpClient=okhttpBuilder.obtianClient(key);
+            map.put(key,okHttpClient);
         }
         final OkHttpClient ok=okHttpClient;
         if (ok!=null)
@@ -218,6 +221,7 @@ public class OkHttpUtils {
         if (okHttpClient==null)
         {
             okHttpClient = okhttpBuilder.obtianClient(key);
+            map.put(key,okHttpClient);
         }
         final OkHttpClient ok=okHttpClient;
         if (ok!=null)

@@ -29,7 +29,7 @@ public class PostBuilder extends OkRequestBuilder<PostBuilder>{
     }
 
     @Override
-    public PostBuilder build() {
+    public void build() {
         builder.post(obtianBody());
         builder.url(url);
         if (objectTag!=null)
@@ -37,7 +37,6 @@ public class PostBuilder extends OkRequestBuilder<PostBuilder>{
             builder.tag(objectTag);
         }
         builder.build();
-        return this;
     }
 
 

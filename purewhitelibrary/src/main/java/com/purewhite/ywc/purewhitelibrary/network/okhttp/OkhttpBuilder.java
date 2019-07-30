@@ -67,18 +67,11 @@ public class OkhttpBuilder {
     protected OkHttpClient longLink()
     {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                LogUtils.debug("okhttp-link",message);
-            }
-        });
-        builder.addInterceptor(httpLoggingInterceptor);
         builder.retryOnConnectionFailure(true);//失败重新连接
         //时间设置  请求，读取，写入
-        builder.readTimeout(3, TimeUnit.MILLISECONDS);
-        builder.writeTimeout(3,TimeUnit.MILLISECONDS);
-        builder.readTimeout(3,TimeUnit.MILLISECONDS);
+        builder.readTimeout(5000, TimeUnit.MILLISECONDS);
+        builder.writeTimeout(5000,TimeUnit.MILLISECONDS);
+        builder.readTimeout(5000,TimeUnit.MILLISECONDS);
         return builder.build();
     }
 

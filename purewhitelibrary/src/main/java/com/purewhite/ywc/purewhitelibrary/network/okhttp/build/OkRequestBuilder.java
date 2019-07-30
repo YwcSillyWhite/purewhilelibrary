@@ -42,7 +42,7 @@ public abstract class OkRequestBuilder<B extends OkRequestBuilder> {
     public abstract B addParams(Map<String,String> map);
 
 
-    protected abstract B build();
+    protected abstract void build();
 
 
 

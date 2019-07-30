@@ -2,6 +2,8 @@ package com.purewhite.ywc.purewhitelibrary.network.okhttp.build;
 
 import android.net.Uri;
 
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -28,7 +30,7 @@ public class GetBuilder extends OkRequestBuilder<GetBuilder> {
     }
 
     @Override
-    public GetBuilder build() {
+    public void build() {
         builder.get();
         if (objectTag!=null)
         {
@@ -36,7 +38,6 @@ public class GetBuilder extends OkRequestBuilder<GetBuilder> {
         }
         obtainUri();
         builder.url(url);
-        return this;
     }
 
     private void obtainUri()
