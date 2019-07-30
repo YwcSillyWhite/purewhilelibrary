@@ -8,7 +8,10 @@ import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.executor.OkThreadSave;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.interceptor.ParamsInterceptor;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -16,15 +19,31 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.WebSocketListener;
 
 /**
  * @author yuwenchao
  */
 public class OkHttpUtils {
     private static OkHttpUtils okhttpUtils;
-    private OkHttpClient okHttpClient;
-    private OkThreadSave okThreadSave;
-    private Gson gson;
+    private Map<String,OkHttpClient> map=new HashMap<>();
+    private OkhttpBuilder okhttpBuilder=new OkhttpBuilder();
+
+    public void setOkhttpBuilder(OkhttpBuilder okhttpBuilder) {
+        if (okhttpBuilder!=null)
+        {
+            this.okhttpBuilder = okhttpBuilder;
+        }
+    }
+
+    private Gson gson=new Gson();
+    private OkThreadSave okThreadSave=new OkThreadSave();
+
+
+    private OkHttpUtils() {
+        map.put(OkhttpBuilder.defaultOKhttp,okhttpBuilder.obtianClient(OkhttpBuilder.defaultOKhttp));
+    }
+
 
     public static OkHttpUtils newInstance() {
         if (okhttpUtils==null)
@@ -40,96 +59,111 @@ public class OkHttpUtils {
         return okhttpUtils;
     }
 
-    public OkHttpUtils() {
-        if (okHttpClient==null)
-        {
-            OkHttpClient.Builder builder = OkManager.obtainBuilder();
-            builder.addInterceptor(new ParamsInterceptor());
-            okHttpClient=builder.build();
-        }
-    }
 
 
     public void cancleTag(Object tag)
     {
-        for (Call call:okHttpClient.dispatcher().queuedCalls())
+        cancleTag(OkhttpBuilder.defaultOKhttp,tag);
+    }
+
+    public void cancleTag(String key,Object tag)
+    {
+        OkHttpClient okHttpClient = map.get(key);
+        if (okHttpClient!=null)
         {
-            if (tag.equals(call.request().tag()))
+            for (Call call:okHttpClient.dispatcher().queuedCalls())
             {
-                call.cancel();
+                if (tag.equals(call.request().tag()))
+                {
+                    call.cancel();
+                }
             }
-        }
-        for (Call call:okHttpClient.dispatcher().runningCalls())
-        {
-            if (tag.equals(call.request().tag()))
+            for (Call call:okHttpClient.dispatcher().runningCalls())
             {
-                call.cancel();
+                if (tag.equals(call.request().tag()))
+                {
+                    call.cancel();
+                }
             }
+
         }
     }
 
 
-    /**
-     * 发起请求
-     * @param okCallBack
-     */
-    public void enqueue(OkCallBack okCallBack,Request request)
+    public void enqueue(Request request,OkCallBack okCallBack)
     {
-        if (okCallBack==null)
-            return;
-        final OkCallBack finalOkCallBack=okCallBack;
-        okCallBack.onBefore();
-        okHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                sendFailResultCallback(e,finalOkCallBack);
-            }
+        enqueue(OkhttpBuilder.defaultOKhttp,request,okCallBack);
+    }
 
-            @Override
-            public void onResponse(Call call, Response response){
-                try
-                {
-                    if (call.isCanceled())
+    public void enqueue(String key,Request request,final OkCallBack okCallBack)
+    {
+        OkHttpClient okHttpClient = map.get(key);
+        if (okHttpClient==null)
+        {
+            okHttpClient=okhttpBuilder.obtianClient(key);
+        }
+        final OkHttpClient ok=okHttpClient;
+        if (ok!=null)
+        {
+            if (okCallBack!=null)
+            {
+                okCallBack.onBefore();
+            }
+            ok.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    if (okCallBack!=null)
                     {
-                        sendFailResultCallback(new Exception("Canceled"), finalOkCallBack);
+                        sendFailResultCallback(e,okCallBack);
                     }
-                    else
+                }
+
+                @Override
+                public void onResponse(@NotNull Call call, @NotNull Response response){
+                    if (okCallBack!=null)
                     {
-                        if (response.code()==200)
+                        //是否请求成功
+                        if (call.isCanceled())
                         {
-                            String responseBody = response.body().string();
-                            if (finalOkCallBack.mType==null||
-                                    finalOkCallBack.mType==String.class)
-                            {
-                                sendSuccessResultCallback(responseBody,finalOkCallBack);
-                            }
-                            else
-                            {
-                                if (gson==null)
-                                    gson=new Gson();
-                                Object object= gson.fromJson(responseBody, finalOkCallBack.mType);
-                                sendSuccessResultCallback(object,finalOkCallBack);
-                            }
+                            sendFailResultCallback(new Exception("Canceled"), okCallBack);
                         }
                         else
                         {
-                            sendFailResultCallback(new Exception("response.code = 200"), finalOkCallBack);
+                            if (response.code()!=200)
+                            {
+                                sendFailResultCallback(new Exception("response.code = 200"), okCallBack);
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    String responseBody = response.body().string();
+                                    if (okCallBack.mType==null|| okCallBack.mType==String.class)
+                                    {
+                                        sendSuccessResultCallback(responseBody,okCallBack);
+                                    }
+                                    else
+                                    {
+                                        Object object= gson.fromJson(responseBody, okCallBack.mType);
+                                        sendSuccessResultCallback(object,okCallBack);
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    sendFailResultCallback(e, okCallBack);
+                                }
+                                finally {
+                                    if (response.body()!=null)
+                                    {
+                                        response.body().close();
+                                    }
+                                }
+                            }
                         }
                     }
                 }
-                catch (Exception e)
-                {
-                    sendFailResultCallback(e, finalOkCallBack);
-
-                }
-                finally {
-                    if (response.body()!=null)
-                    {
-                        response.body().close();
-                    }
-                }
-            }
-        });
+            });
+        }
     }
 
 
@@ -139,10 +173,6 @@ public class OkHttpUtils {
      * @param okCallBack
      */
     private void sendFailResultCallback(final Exception exception, final OkCallBack okCallBack) {
-        if (okCallBack==null)
-            return;
-        if (okThreadSave==null)
-            okThreadSave=new OkThreadSave();
         okThreadSave.executor(new Runnable() {
             @Override
             public void run() {
@@ -159,10 +189,6 @@ public class OkHttpUtils {
      */
     private void sendSuccessResultCallback(final Object object, final OkCallBack okCallBack)
     {
-        if (okCallBack==null)
-            return;
-        if (okThreadSave==null)
-            okThreadSave=new OkThreadSave();
         okThreadSave.executor(new Runnable() {
             @Override
             public void run() {
@@ -182,6 +208,25 @@ public class OkHttpUtils {
         });
     }
 
+
+
+
+
+
+    public void newWebSocket(String key, Request request, WebSocketListener webSocketListener)
+    {
+        OkHttpClient okHttpClient = map.get(key);
+        if (okHttpClient==null)
+        {
+            okHttpClient = okhttpBuilder.obtianClient(key);
+        }
+        final OkHttpClient ok=okHttpClient;
+        if (ok!=null)
+        {
+            ok.newWebSocket(request,webSocketListener);
+            ok.dispatcher().executorService().shutdown();
+        }
+    }
 
 
 

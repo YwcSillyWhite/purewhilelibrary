@@ -2,11 +2,13 @@ package com.purewhite.ywc.purewhitelibrary.network.okhttp.build;
 
 
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkhttpBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
 
 import java.util.Map;
 
 import okhttp3.Request;
+import okhttp3.WebSocketListener;
 
 /**
  * @author yuwenchao
@@ -49,11 +51,23 @@ public abstract class OkRequestBuilder<B extends OkRequestBuilder> {
 
     public abstract B build();
 
+
+
     public  void enqueue(OkCallBack okCallBack)
     {
-        OkHttpUtils.newInstance().enqueue(okCallBack,builder.build());
+        enqueue(OkhttpBuilder.defaultOKhttp,okCallBack);
     }
 
+    public  void enqueue(String key,OkCallBack okCallBack)
+    {
+        OkHttpUtils.newInstance().enqueue(key,builder.build(),okCallBack);
+    }
+
+
+    public void newWebSocket(String key, WebSocketListener webSocketListener)
+    {
+        OkHttpUtils.newInstance().newWebSocket(key,builder.build(),webSocketListener);
+    }
 
 
 }

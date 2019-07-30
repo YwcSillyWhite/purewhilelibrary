@@ -65,7 +65,9 @@ public class GetBuilder extends OkRequestBuilder<GetBuilder> {
             build.appendQueryParameter(key,paramsRequest.get(key).toString());
         }
         this.url=build.build().toString();
-
     }
+
+
+
 
 }
