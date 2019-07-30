@@ -2,6 +2,8 @@ package com.purewhite.ywc.purewhitelibrary.mvp.view;
 
 import android.content.Context;
 
+import androidx.fragment.app.Fragment;
+
 /**
  *
  * @author yuwenchao
@@ -12,4 +14,6 @@ import android.content.Context;
 public interface BaseUiView {
 
     Context getContext();
+
+    Fragment getFragment();
 }

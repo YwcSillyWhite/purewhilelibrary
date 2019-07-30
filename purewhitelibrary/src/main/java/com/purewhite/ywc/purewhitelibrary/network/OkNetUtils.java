@@ -1,5 +1,9 @@
 package com.purewhite.ywc.purewhitelibrary.network;
 
+import android.app.Activity;
+
+import androidx.fragment.app.Fragment;
+
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
@@ -11,8 +15,23 @@ import java.util.Map;
  */
 public class OkNetUtils {
 
-    public static <T> void get(String url, Map<String, String> paramsRequest, OkCallBack<T> okCallBack)
+
+    public static <T> void get(Activity activity,String url,Map<String,String> paramsRequest,OkCallBack<T> okCallBack)
     {
-        OkHttpUtils.get(url,AppUtils.getContext(),paramsRequest).build().enqueue(okCallBack);
+        OkHttpUtils.get().addParams(paramsRequest)
+                .tag(activity)
+                .url(url)
+                .build()
+                .enqueue(okCallBack);
     }
+
+    public static <T> void get(Fragment fragment, String url, Map<String,String> paramsRequest, OkCallBack<T> okCallBack)
+    {
+        OkHttpUtils.get().addParams(paramsRequest)
+                .tag(fragment)
+                .url(url)
+                .build()
+                .enqueue(okCallBack);
+    }
+
 }

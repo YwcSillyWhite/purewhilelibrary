@@ -12,20 +12,8 @@ import java.util.Map;
  */
 public class GetBuilder extends OkRequestBuilder<GetBuilder> {
 
-
-    public GetBuilder() {
-    }
-
-    public GetBuilder(String url, Object objectTag, Map<String, String> paramsRequest) {
-        super(url, objectTag, paramsRequest);
-    }
-
     @Override
     public GetBuilder addParam(String key, String value) {
-        if (paramsRequest==null)
-        {
-            paramsRequest=new HashMap<>();
-        }
         paramsRequest.put(key,value);
         return this;
     }
@@ -66,8 +54,4 @@ public class GetBuilder extends OkRequestBuilder<GetBuilder> {
         }
         this.url=build.build().toString();
     }
-
-
-
-
 }

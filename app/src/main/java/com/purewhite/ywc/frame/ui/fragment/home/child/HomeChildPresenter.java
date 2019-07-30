@@ -23,7 +23,7 @@ public class HomeChildPresenter extends PresenterImp<HomeChildContract.UiView>
         map.put("cid",position+"");
         map.put("back","10");
         map.put("min_id",page+"");
-        OkNetUtils.get(UrlUtils.shop, map, new OkCallBack<BaseBean<List<ShopBean>>>() {
+        OkNetUtils.get(mView.getFragment(),UrlUtils.shop, map, new OkCallBack<BaseBean<List<ShopBean>>>() {
             @Override
             public void onSuccess(BaseBean<List<ShopBean>> baseBean) {
                 if (baseBean.getCode()==1)

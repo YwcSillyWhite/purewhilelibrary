@@ -3,6 +3,7 @@ package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 import android.content.Context;
 
 import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
 
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
@@ -18,9 +19,15 @@ public abstract class BaseMvpActivity<D extends ViewDataBinding,P extends Presen
         extends BaseBindActivity<D> implements BaseUiView {
 
     protected P mPresenter;
+
     @Override
     public Context getContext() {
         return this;
+    }
+
+    @Override
+    public Fragment getFragment() {
+        return null;
     }
 
     //创建PresenterImp对象

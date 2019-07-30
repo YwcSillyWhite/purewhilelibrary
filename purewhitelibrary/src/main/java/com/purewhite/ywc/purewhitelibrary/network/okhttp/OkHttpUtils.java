@@ -235,10 +235,6 @@ public class OkHttpUtils {
         return new GetBuilder();
     }
 
-    public static GetBuilder get(String url, Object objectTag, Map<String, String> paramsRequest)
-    {
-        return new GetBuilder(url,objectTag,paramsRequest);
-    }
 
     public static PostBuilder post()
     {
@@ -246,11 +242,6 @@ public class OkHttpUtils {
     }
 
 
-
-    public static PostBuilder post(String url, Object objectTag, Map<String, String> paramsRequest)
-    {
-        return new PostBuilder(url,objectTag,paramsRequest);
-    }
 
 
 

@@ -13,19 +13,9 @@ import okhttp3.RequestBody;
 public class PostBuilder extends OkRequestBuilder<PostBuilder>{
 
 
-    public PostBuilder() {
-    }
-
-    public PostBuilder(String url, Object objectTag, Map<String, String> paramsRequest) {
-        super(url, objectTag, paramsRequest);
-    }
-
     @Override
     public PostBuilder addParam(String key, String value) {
-        if (paramsRequest==null)
-        {
-            paramsRequest=new HashMap<>();
-        }
+        paramsRequest.put(key,value);
         return this;
     }
 
@@ -43,7 +33,9 @@ public class PostBuilder extends OkRequestBuilder<PostBuilder>{
         builder.post(obtianBody());
         builder.url(url);
         if (objectTag!=null)
+        {
             builder.tag(objectTag);
+        }
         builder.build();
         return this;
     }
@@ -52,13 +44,7 @@ public class PostBuilder extends OkRequestBuilder<PostBuilder>{
     private RequestBody obtianBody()
     {
         FormBody.Builder builder = new FormBody.Builder();
-        addParams(builder);
-        return builder.build();
-    }
-
-    private void addParams(FormBody.Builder builder)
-    {
-        if (paramsRequest!=null&&paramsRequest.size()>0)
+        if (paramsRequest.size()>0)
         {
             Iterator<String> iterator = paramsRequest.keySet().iterator();
             while (iterator.hasNext())
@@ -67,5 +53,7 @@ public class PostBuilder extends OkRequestBuilder<PostBuilder>{
                 builder.add(key,paramsRequest.get(key));
             }
         }
+        return builder.build();
     }
+
 }

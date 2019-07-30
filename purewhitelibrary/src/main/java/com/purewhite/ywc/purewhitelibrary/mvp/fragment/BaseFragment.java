@@ -28,10 +28,6 @@ public abstract class BaseFragment extends Fragment {
     //唯一加载
     private boolean soleLoad;
     protected View view;
-    @Override
-    public Context getContext() {
-        return super.getContext()!=null?super.getContext():AppUtils.getContext();
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
