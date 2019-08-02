@@ -10,7 +10,6 @@ import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 import com.squareup.leakcanary.LeakCanary;
 
-import java.util.Map;
 import java.util.Stack;
 
 import io.reactivex.annotations.NonNull;

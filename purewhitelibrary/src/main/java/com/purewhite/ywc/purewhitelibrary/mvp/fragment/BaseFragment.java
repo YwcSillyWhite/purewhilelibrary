@@ -1,6 +1,5 @@
 package com.purewhite.ywc.purewhitelibrary.mvp.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;

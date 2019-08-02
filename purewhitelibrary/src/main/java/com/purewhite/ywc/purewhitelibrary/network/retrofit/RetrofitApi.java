@@ -26,4 +26,7 @@ public interface RetrofitApi {
     @FormUrlEncoded
     @POST
     Observable<ResponseBody> post(@Url String uri,@FieldMap Map<String,Object> map);
+
+
+
 }

@@ -7,6 +7,8 @@ import android.util.SparseIntArray;
 import androidx.annotation.Nullable;
 import androidx.palette.graphics.Palette;
 
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
+
 public class PureViewPalette {
 
     private static PureViewPalette pureViewPalette;
@@ -63,8 +65,12 @@ public class PureViewPalette {
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(@Nullable Palette palette) {
-                int darkMutedColor = palette.getDarkMutedColor(Color.TRANSPARENT);
-                sparseIntArray.append(position,darkMutedColor);
+
+
+                Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
+                int rgb = vibrantSwatch.getRgb();
+                LogUtils.debug(rgb+"颜色");
+                sparseIntArray.append(position,rgb);
             }
         });
     }

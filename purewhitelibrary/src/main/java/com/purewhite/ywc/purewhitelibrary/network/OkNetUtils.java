@@ -4,7 +4,6 @@ import android.app.Activity;
 
 import androidx.fragment.app.Fragment;
 
-import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
 
@@ -30,6 +29,7 @@ public class OkNetUtils {
                 .tag(fragment)
                 .url(url)
                 .enqueue(okCallBack);
+
     }
 
 }

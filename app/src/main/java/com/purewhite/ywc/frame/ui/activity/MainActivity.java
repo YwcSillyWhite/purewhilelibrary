@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityMainBinding;
 import com.purewhite.ywc.frame.ui.fragment.home.HomeFragment;
@@ -19,6 +21,9 @@ import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.adapter.pagerview.BaseFragmentAdapterImp;
 import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> {
 
@@ -87,8 +92,8 @@ public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> 
         mDataBinding.viewPager.setOffscreenPageLimit(sparseArray.size()-1);
         mDataBinding.bottomView.setItemIconTintList(null);
         mDataBinding.bottomView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
-
     }
+
 
 
     @Override

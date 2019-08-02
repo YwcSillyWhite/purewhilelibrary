@@ -2,9 +2,9 @@ package com.purewhite.ywc.purewhitelibrary.network.okhttp;
 
 
 import com.google.gson.Gson;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.GetBuilder;
-import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostBuilder;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostFormBuilder;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostStringBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.executor.OkThreadSave;
 
@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -240,9 +239,16 @@ public class OkHttpUtils {
     }
 
 
-    public static PostBuilder post()
+    //表单请求
+    public static PostFormBuilder postForm()
     {
-        return new PostBuilder();
+        return new PostFormBuilder();
+    }
+
+
+    public static PostStringBuilder postString()
+    {
+        return new PostStringBuilder();
     }
 
 

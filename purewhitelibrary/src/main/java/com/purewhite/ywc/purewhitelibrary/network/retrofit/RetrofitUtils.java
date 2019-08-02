@@ -32,6 +32,10 @@ public class RetrofitUtils {
         }
     }
 
+
+
+
+
     public RetrofitUtils() {
         okHttpClientMap.put(OkhttpBuilder.defaultOKhttp,okhttpBuilder.obtianClient(OkhttpBuilder.defaultOKhttp));
     }

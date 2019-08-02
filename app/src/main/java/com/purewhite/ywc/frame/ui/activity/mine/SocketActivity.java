@@ -34,11 +34,12 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
     private void sendHandler()
     {
         handler.removeCallbacks(null);
-        handler.postDelayed(runnable,15000);
+        handler.postDelayed(runnable,10000);
     }
     private Runnable runnable=new Runnable() {
         @Override
         public void run() {
+            LogUtils.debug("心跳");
             send("心跳检测",true);
         }
     };
@@ -47,7 +48,7 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
     {
         if (webSocket!=null)
         {
-            webSocket.send("心跳检测");
+            webSocket.send(content);
             if (detection)
             {
                 sendHandler();
@@ -81,36 +82,49 @@ public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterI
     private void initTwo() {
         //标签用来取消常链接
         OkHttpUtils.get().tag(this).url("ws:47.105.113.174:9502?action=create_room&userId=26&auctionId=58").newWebSocket(OkhttpBuilder.longLink, new WebSocketListener() {
+
+            //已断开链接
             @Override
             public void onClosed(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
                 super.onClosed(webSocket, code, reason);
+                LogUtils.debug("onClosed");
             }
+
 
             @Override
             public void onClosing(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
                 super.onClosing(webSocket, code, reason);
+                LogUtils.debug("onClosing");
             }
 
+            //链接失败
             @Override
             public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable t, @Nullable Response response) {
                 super.onFailure(webSocket, t, response);
+                //链接失败
+//                handler.removeCallbacks(null);
+//                initTwo();
             }
 
             @Override
             public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
                 super.onMessage(webSocket, text);
+                LogUtils.debug("onMessage");
                 sendHandler();
             }
 
             @Override
             public void onMessage(@NotNull WebSocket webSocket, @NotNull ByteString bytes) {
                 super.onMessage(webSocket, bytes);
+                LogUtils.debug("onMessage");
             }
 
+            //链接成功
             @Override
             public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
                 super.onOpen(webSocket, response);
                 SocketActivity.this.webSocket=webSocket;
+                LogUtils.debug("onOpen");
             }
         });
     }

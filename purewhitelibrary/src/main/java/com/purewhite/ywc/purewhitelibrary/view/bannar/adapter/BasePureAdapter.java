@@ -140,7 +140,7 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
             {
                 @Override
                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-
+                    imageView.setImageBitmap(resource);
                     PureViewPalette.newInstance().putColor(realPosition,resource);
                 }
             });

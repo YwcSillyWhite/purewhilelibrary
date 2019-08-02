@@ -1,58 +1,44 @@
 package com.purewhite.ywc.purewhitelibrary.network.okhttp.build;
 
 import android.net.Uri;
+import android.text.TextUtils;
 
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.base.OkRequestParamBuilder;
 
 /**
  * @author yuwenchao
  */
-public class GetBuilder extends OkRequestBuilder<GetBuilder> {
+public class GetBuilder extends OkRequestParamBuilder<GetBuilder> {
 
-    @Override
-    public GetBuilder addParam(String key, String value) {
-        paramsRequest.put(key,value);
-        return this;
-    }
 
-    @Override
-    public GetBuilder addParams(Map<String, String> map) {
-        if (map!=null)
-        {
-            paramsRequest=map;
-        }
-        return this;
-    }
 
     @Override
     public void build() {
         builder.get();
-        if (objectTag!=null)
-        {
-            builder.tag(objectTag);
-        }
-        obtainUri();
-        builder.url(url);
+        builder.url(obtainUri());
     }
 
-    private void obtainUri()
+    private String obtainUri()
     {
-        if (url==null||paramsRequest==null||paramsRequest.size()==0)
+        if (TextUtils.isEmpty(url))
         {
-            return;
+            return "";
         }
-        Uri.Builder build= Uri.parse(url).buildUpon();
-        Iterator<String> iterator = paramsRequest.keySet().iterator();
-        while (iterator.hasNext())
+        else
         {
-            String key = iterator.next();
-            build.appendQueryParameter(key,paramsRequest.get(key).toString());
+            if (paramsRequest.size()==0)
+            {
+                return url;
+            }
+            else
+            {
+                Uri.Builder build= Uri.parse(url).buildUpon();
+                for (String key:paramsRequest.keySet())
+                {
+                    build= Uri.parse(url).buildUpon();
+                }
+                return build.build().toString();
+            }
         }
-        this.url=build.build().toString();
     }
 }
