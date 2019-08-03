@@ -4,12 +4,15 @@ package com.purewhite.ywc.purewhitelibrary.network.okhttp.build.base;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkhttpBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.load.LoadRequestBody;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.load.OnLoadProgressLinstener;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.annotations.NonNull;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.WebSocketListener;
 
 /**
@@ -18,9 +21,10 @@ import okhttp3.WebSocketListener;
 public abstract class OkRequestBuilder<B extends OkRequestBuilder> {
 
     protected String url;
-
     protected Request.Builder builder=new Request.Builder();
     private Map<String,String> headMap=new HashMap<>();
+    //上传回掉接口
+    protected OnLoadProgressLinstener onLoadProgressLinstener;
 
 
     public B addHead(@NonNull String key, @NonNull String value)
@@ -54,6 +58,14 @@ public abstract class OkRequestBuilder<B extends OkRequestBuilder> {
     }
 
 
+    //是否接入上传进度功能
+    public B addLoadProgress(OnLoadProgressLinstener onLoadProgressLinstener)
+    {
+        this.onLoadProgressLinstener=onLoadProgressLinstener;
+        return ((B) this);
+    }
+
+
     private void buildBefore()
     {
         if (headMap.size()>0)
@@ -67,6 +79,17 @@ public abstract class OkRequestBuilder<B extends OkRequestBuilder> {
     }
 
     protected abstract void build();
+
+
+
+    protected RequestBody obtianBody(RequestBody requestBody)
+    {
+        if (onLoadProgressLinstener!=null)
+        {
+            return new LoadRequestBody(requestBody,onLoadProgressLinstener);
+        }
+        return requestBody;
+    }
 
 
     public  void enqueue(OkCallBack okCallBack)

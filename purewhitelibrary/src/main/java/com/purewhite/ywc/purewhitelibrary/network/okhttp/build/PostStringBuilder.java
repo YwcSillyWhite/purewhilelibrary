@@ -33,9 +33,8 @@ public class PostStringBuilder extends OkRequestBuilder<PostStringBuilder> {
 
     @Override
     protected void build() {
-        builder.post(obtianBody());
+        builder.post(obtianBody(obtianBody()));
     }
-
 
 
     private RequestBody obtianBody()
