@@ -19,7 +19,7 @@ public abstract class OkRequestParamBuilder<B> extends OkRequestBuilder{
 
     public B addParams(Map<String,String> paramsRequest)
     {
-        if (paramsRequest!=null)
+        if (paramsRequest!=null&&paramsRequest.size()>0)
         {
             for (String key:paramsRequest.keySet())
             {
