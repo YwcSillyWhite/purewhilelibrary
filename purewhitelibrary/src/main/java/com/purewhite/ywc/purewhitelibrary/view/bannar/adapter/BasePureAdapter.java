@@ -12,6 +12,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.palette.PureViewPalette;
 
@@ -20,92 +21,112 @@ import java.util.List;
 
 public abstract class BasePureAdapter<T> extends PagerAdapter {
 
-    private List<T> realList;
-    private List<T> list;
-    private boolean isPalette=false;
-
-    public void setPalette(boolean palette) {
-        isPalette = palette;
-    }
-
-    private List<T> handerList(List<T> list)
+    //显示卡片数量
+    private int cardNum=3;
+    //布局
+    private SparseArray<View> sparseArray=new SparseArray<>();
+    //真实list
+    private List<T> realList=new ArrayList<>();
+    //假设的list
+    private List<T> datalist=new ArrayList<>();
+    //处理list
+    private void handerList(List<T> list)
     {
         realList.clear();
-        if (list==null)
-        {
-            list=new ArrayList<>();
-        }
-        else
+        datalist.clear();
+        sparseArray.clear();
+        if (list!=null&&list.size()>0)
         {
             realList.addAll(list);
-            if (list.size()>1)
-            {
-                T endT = list.get(0);
-                T staetT = list.get(list.size() - 1);
-                list.add(0,staetT);
-                list.add(endT);
+            datalist.addAll(list);
+            int cir_num = cardNum / list.size();
+            for (int i = 0; i < cir_num; i++) {
+                for (int j = 0; j < list.size(); j++) {
+                    datalist.add(list.get(j));
+                }
             }
         }
-        return list;
     }
 
-    private SparseArray<View> sparseArray;
+    public BasePureAdapter(List<T> list,int cardNum) {
+        this.cardNum=cardNum;
+        handerList(list);
+    }
+
     public BasePureAdapter(List<T> list) {
-        this.realList=new ArrayList<>();
-        this.list = handerList(list);
-        sparseArray=new SparseArray<>();
+        this(list,3);
     }
 
-    //list真实长度
-    public int getRealCount()
-    {
-        return realList.size();
-    }
-
-    public boolean isReal()
-    {
-        return getRealCount()>1;
-    }
-
+    //当前真实position
     public int getRealPosition(int position)
     {
-        if (getCount()>1)
+        final int realCount = realList.size();
+        if (realCount<=1)
         {
-            int realPosition;
-            if (position==0)
-            {
-                realPosition=getCount()-2;
-            }
-            else if (getCount()-1==position)
-            {
-                realPosition=1;
-            }
-            else
-            {
-                realPosition=position;
-            }
-            return realPosition-1;
+            return 0;
         }
         else
         {
-            return position;
+            return position%realCount;
         }
     }
+
+    public boolean isRealTop(int position)
+    {
+        return position+1==realList.size();
+    }
+
+    public int initPosition()
+    {
+        final int size = realList.size();
+        if (size<=1)
+        {
+            return 0;
+        }
+        else
+        {
+            return Integer.MAX_VALUE/2-Integer.MAX_VALUE%size;
+        }
+    }
+
+
+    //当前view的positon
+    private int getDataPosition(int position)
+    {
+       final int endCount = datalist.size();
+       if (endCount<=1)
+       {
+           return 0;
+       }
+       else
+       {
+           return position%endCount;
+       }
+    }
+
 
     @Override
     public int getCount() {
-        return getRealCount()>1?list.size():getRealCount();
+        return realList.size()>1?Integer.MAX_VALUE:realList.size();
     }
 
+    //获取当前数据的postion
     public T obtianT(int position)
     {
-        if (position<getCount())
+        final int dataCount = datalist.size();
+        if (dataCount>0)
         {
-            return list.get(position);
+            if (dataCount==1)
+            {
+                return datalist.get(0);
+            }
+            else
+            {
+                return datalist.get(position%dataCount);
+            }
         }
         return null;
     }
-
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
@@ -115,46 +136,33 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
     @NonNull
     @Override
     public final Object instantiateItem(@NonNull ViewGroup container, int position) {
-        T t = obtianT(position);
-        View view = sparseArray.get(position);
+        int dataPosition = getDataPosition(position);
+        LogUtils.debug(dataPosition+"dataPosition");
+        View view = sparseArray.get(dataPosition);
         if (view==null)
         {
-            view=obtianView(container,position,t);
-            sparseArray.put(position,view);
+            T t = obtianT(position);
+            view=obtianView(container,dataPosition,t);
+            sparseArray.put(dataPosition,view);
+        }
+        else
+        {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent!=null)
+            {
+                parent.removeView(view);
+            }
         }
         container.addView(view);
         return view;
     }
 
 
-    public abstract View obtianView(ViewGroup container, int position, T t);
-
-
-
-    public void setImageView(ImageView imageView,String uri,int position)
-    {
-        if (isPalette&&isReal())
-        {
-            final int realPosition = getRealPosition(position);
-            ImageLoader.newInstance().obtianBitmap(uri,new BitmapImageViewTarget(imageView)
-            {
-                @Override
-                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-                    imageView.setImageBitmap(resource);
-                    PureViewPalette.newInstance().putColor(realPosition,resource);
-                }
-            });
-        }
-        else
-        {
-            ImageLoader.newInstance().init(imageView,uri);
-        }
-    }
-
 
     @Override
     public final void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        View view = sparseArray.get(position);
+        int dataPosition = getDataPosition(position);
+        View view = sparseArray.get(dataPosition);
         if (view!=null)
         {
             ViewGroup parent = (ViewGroup) view.getParent();
@@ -166,10 +174,37 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
     }
 
 
+    public abstract View obtianView(ViewGroup container, int position, T t);
+
+
+
+    public void setImageView(ImageView imageView,String uri,int position)
+    {
+        ImageLoader.newInstance().init(imageView,uri);
+        if (getCount()>1)
+        {
+            final int realPosition = getRealPosition(position);
+            ImageLoader.newInstance().obtianBitmap(uri,new BitmapImageViewTarget(imageView) {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    imageView.setImageBitmap(resource);
+                    PureViewPalette.newInstance().putColor(realPosition,resource);
+                }
+            });
+        }
+        else
+        {
+            ImageLoader.newInstance().init(imageView,uri);
+        }
+
+    }
+
+
+
+
     public void flush(List<T> list)
     {
-        this.list=handerList(list);
-        sparseArray.clear();
+        handerList(list);
         notifyDataSetChanged();
     }
 

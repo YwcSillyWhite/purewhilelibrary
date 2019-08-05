@@ -4,6 +4,7 @@ import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityPagerBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
+import com.purewhite.ywc.purewhitelibrary.view.bannar.trans.PagerTransZoom;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +31,7 @@ public class PagerActivity extends MvpActivity<ActivityPagerBinding,PresenterImp
             list.add(stringArray[i]);
         }
         mDataBinding.titleBarLayout.setAdapter(list,null);
-//        mDataBinding.titleBarLayout.setList(Arrays.asList(colors));
+        mDataBinding.titleBarLayout.setPageTransformer(true,new PagerTransZoom(0.8f));
     }
 
 

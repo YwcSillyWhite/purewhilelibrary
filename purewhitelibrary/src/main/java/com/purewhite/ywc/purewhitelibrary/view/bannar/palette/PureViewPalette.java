@@ -65,12 +65,8 @@ public class PureViewPalette {
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             @Override
             public void onGenerated(@Nullable Palette palette) {
-
-
-                Palette.Swatch vibrantSwatch = palette.getVibrantSwatch();
-                int rgb = vibrantSwatch.getRgb();
-                LogUtils.debug(rgb+"颜色");
-                sparseIntArray.append(position,rgb);
+                int mutedColor = palette.getLightMutedColor(Color.TRANSPARENT);
+                sparseIntArray.append(position,mutedColor);
             }
         });
     }

@@ -9,13 +9,16 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.BasePureAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.StringPureAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.listener.OnPureChangeListener;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.palette.PureViewPalette;
+import com.purewhite.ywc.purewhitelibrary.view.bannar.trans.PagerTransZoom;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,13 +37,20 @@ public class PureViewPager extends RelativeLayout {
         public void run() {
             int count = viewPager.getAdapter().getCount();
             int currentItem = viewPager.getCurrentItem();
-            if (currentItem+1<count)
+            if (count>1)
             {
-                viewPager.setCurrentItem(currentItem+1);
+                if (currentItem==Integer.MAX_VALUE)
+                {
+                    initCurrenItem();
+                }
+                else
+                {
+                    viewPager.setCurrentItem(currentItem+1);
+                }
             }
         }
     };
-    private ArgbEvaluator evaluator = new ArgbEvaluator();
+    private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     //是否滑动变色
     private boolean run_color;
 
@@ -59,35 +69,29 @@ public class PureViewPager extends RelativeLayout {
 
     private void initView(AttributeSet attrs) {
         viewPager = new ViewPager(getContext());
+
         addView(viewPager,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        if (attrs!=null)
-        {
-            TypedArray typedArray = getContext().obtainStyledAttributes(attrs,R.styleable.PureViewPager);
+        if (attrs!=null) {
+            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.PureViewPager);
             autoPlay = typedArray.getBoolean(R.styleable.PureViewPager_autoPlay, true);
-            autoTime= typedArray.getInt(R.styleable.PureViewPager_autoTime, 3000);
+            autoTime = typedArray.getInt(R.styleable.PureViewPager_autoTime, 3000);
             run_color = typedArray.getBoolean(R.styleable.PureViewPager_run_color, false);
-            if (autoTime<=0)
-            {
-                autoPlay=false;
+            if (autoTime <= 0) {
+                autoPlay = false;
             }
             int child_margin = typedArray.getDimensionPixelOffset(R.styleable.PureViewPager_child_margin, 0);
             int parent_margin = typedArray.getDimensionPixelOffset(R.styleable.PureViewPager_parent_margin, 0);
-
-            if (child_margin>0)
+            if (parent_margin!=0)
             {
-                if (child_margin*2>parent_margin)
-                {
-                    parent_margin=child_margin*3;
-                }
-                viewPager.setPadding(parent_margin,0,parent_margin,0);
-                viewPager.setOffscreenPageLimit(2);
-                viewPager.setPageMargin(child_margin);
-                viewPager.setClipToPadding(false);
+                viewPager.setPadding(parent_margin, 0, parent_margin, 0);
                 setClipChildren(false);
             }
-            typedArray.recycle();
+            if (child_margin!=0)
+            {
+                viewPager.setPageMargin(child_margin);
+                viewPager.setClipToPadding(false);
+            }
         }
-//        viewPager.setPageTransformer(false,new PagerTransZoom(0.8f));
     }
 
 
@@ -99,44 +103,32 @@ public class PureViewPager extends RelativeLayout {
         {
             PureViewPalette.newInstance().clear();
             viewPager.setAdapter(pureAdapter);
-            pureAdapter.setPalette(true);
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                    if (pureAdapter.getCount()>1)
+                    if (onPureChangeListener!=null)
                     {
+                        onPureChangeListener.onPageScrolled(position,positionOffset,positionOffsetPixels);
+                    }
+                    int count = pureAdapter.getCount();
+                    if (count>1&&run_color)
+                    {
+                        LogUtils.debug("onPageScrolled"+positionOffset+","+positionOffsetPixels);
                         int realPosition = pureAdapter.getRealPosition(position);
-                        if (onPureChangeListener!=null)
-                        {
-                            onPureChangeListener.onPageScrolled(realPosition,positionOffset,positionOffsetPixels);
-                        }
-                        if (run_color)
-                        {
-                            int colorNew = PureViewPalette.newInstance().obtianPositionColor(position);
-                            int colorNext;
-                            if (realPosition==pureAdapter.getRealCount()-1)
-                            {
-                                colorNext=PureViewPalette.newInstance().obtianPositionColor(0);
-                            }
-                            else
-                            {
-                                colorNext=PureViewPalette.newInstance().obtianPositionColor(realPosition+1);
-                            }
-                            int evaluate = (int) evaluator.evaluate(positionOffset, colorNew, colorNext);
-                            setBackgroundColor(evaluate);
-                        }
-
+                        int positionColor = PureViewPalette.newInstance().obtianPositionColor(realPosition);
+                        int nextColor=pureAdapter.isRealTop(realPosition)?
+                                PureViewPalette.newInstance().obtianPositionColor(0):
+                                PureViewPalette.newInstance().obtianPositionColor(realPosition+1);
+                        int currentLastColor = (int) (argbEvaluator.evaluate(positionOffset, positionColor, nextColor));
+                        setBackgroundColor(currentLastColor);
                     }
                 }
 
                 @Override
                 public void onPageSelected(int position) {
-                    if (pureAdapter.getCount()>1)
+                    if (onPureChangeListener!=null)
                     {
-                        if (onPureChangeListener!=null)
-                        {
-                            onPureChangeListener.onPageSelected(pureAdapter.getRealPosition(position));
-                        }
+                        onPureChangeListener.onPageSelected(pureAdapter.getRealPosition(position));
                     }
                 }
 
@@ -146,20 +138,11 @@ public class PureViewPager extends RelativeLayout {
                     {
                         onPureChangeListener.onPageScrollStateChanged(state);
                     }
-                    int count = pureAdapter.getCount();
+                    final int count = pureAdapter.getCount();
                     if (count>1)
                     {
                         if (state==ViewPager.SCROLL_STATE_IDLE)
                         {
-                            int currentItem = viewPager.getCurrentItem();
-                            if (currentItem==0)
-                            {
-                                viewPager.setCurrentItem(count-2,false);
-                            }
-                            else if (currentItem==count-1)
-                            {
-                                viewPager.setCurrentItem(1,false);
-                            }
                             play(true);
                         }
                         else
@@ -169,15 +152,25 @@ public class PureViewPager extends RelativeLayout {
                     }
                 }
             });
-
-            if (pureAdapter.getCount()>1)
-            {
-                viewPager.setCurrentItem(1,false);
-                play(true);
-            }
+            initCurrenItem();
         }
     }
 
+
+    //初始化位置
+    public void initCurrenItem()
+    {
+        PagerAdapter adapter = viewPager.getAdapter();
+        if (adapter!=null&&adapter.getCount()>1&&adapter instanceof BasePureAdapter)
+        {
+            int initPosition = ((BasePureAdapter) adapter).initPosition();
+            viewPager.setCurrentItem(initPosition,false);
+            int realPosition = ((BasePureAdapter) adapter).getRealPosition(initPosition);
+            setBackgroundColor( PureViewPalette.newInstance().obtianPositionColor(realPosition));
+            play(true);
+
+        }
+    }
 
     public void setPageTransformer(boolean reverseDrawingOrder, @Nullable ViewPager.PageTransformer transformer)
     {
@@ -195,7 +188,7 @@ public class PureViewPager extends RelativeLayout {
 
     public void setAdapter(List<String> images,   OnPureChangeListener onPureChangeListener)
     {
-        setAdapter(new StringPureAdapter(images),onPureChangeListener);
+        setAdapter(new StringPureAdapter(images,5),onPureChangeListener);
     }
 
 

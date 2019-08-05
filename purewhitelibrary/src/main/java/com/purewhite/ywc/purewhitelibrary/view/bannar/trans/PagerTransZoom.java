@@ -21,9 +21,8 @@ public class PagerTransZoom implements ViewPager.PageTransformer {
             } else if (position > 1) {
                 position = 1;
             }
-            float tempScale = position < 0 ? 1 + position : 1 - position;
-            float slope = 1-zoom;
-            float scaleValue = zoom + tempScale * slope;
+            float tempScale = position < 0 ? -position :  position;
+            float scaleValue = 1 + tempScale*(zoom-1);
             page.setScaleX(scaleValue);
             page.setScaleY(scaleValue);
         }
