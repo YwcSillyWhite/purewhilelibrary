@@ -85,7 +85,8 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
         }
         else
         {
-            return Integer.MAX_VALUE/2-Integer.MAX_VALUE%size;
+            int centerPosition = Integer.MAX_VALUE / 2;
+            return centerPosition-centerPosition%size;
         }
     }
 
