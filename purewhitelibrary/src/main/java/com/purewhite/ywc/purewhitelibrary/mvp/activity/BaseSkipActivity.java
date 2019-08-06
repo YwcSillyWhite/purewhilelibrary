@@ -10,7 +10,7 @@ import com.purewhite.ywc.purewhitelibrary.R;
  * 跳转动画
  * @author yuwenchao
  */
-public abstract class BaseSkipActivity extends BaseBarActivity{
+public abstract class BaseSkipActivity extends BaseBarEventbusActivity {
 
     private int finishAnimStatue=1;
     public void setFinishAnimStatue(int finishAnimStatue) {

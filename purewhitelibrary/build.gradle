@@ -51,11 +51,11 @@ dependencies {
     api 'androidx.test:runner:1.3.0-alpha02'
     //rxjava
     api 'io.reactivex.rxjava2:rxjava:2.2.8'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.6.0'
-    api 'com.squareup.retrofit2:converter-gson:2.6.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
+    api 'com.squareup.retrofit2:converter-gson:2.6.1'
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     //网络请求框架 retrofit
-    api 'com.squareup.retrofit2:retrofit:2.6.0'
+    api 'com.squareup.retrofit2:retrofit:2.6.1'
     //okhttp log日志
     api 'com.squareup.okhttp3:logging-interceptor:4.0.1'
     api 'com.squareup.okhttp3:mockwebserver:4.0.1'
@@ -68,7 +68,13 @@ dependencies {
     //手势imageview
     api  'com.github.chrisbanes:PhotoView:v2.0.0'
     api 'androidx.appcompat:appcompat:1.1.0-rc01'
-    api 'com.google.android.material:material:1.1.0-alpha08'
+    //design包
+    api 'com.google.android.material:material:1.1.0-alpha09'
+    //图片取色
     api 'androidx.palette:palette:1.0.0'
+    //eventbus 消息传递
+    api 'org.greenrobot:eventbus:3.1.1'
+    //下拉刷新
+    api 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
 
 }

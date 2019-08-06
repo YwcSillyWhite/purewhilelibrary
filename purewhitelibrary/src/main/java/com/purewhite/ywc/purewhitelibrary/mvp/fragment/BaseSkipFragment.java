@@ -10,7 +10,7 @@ import com.purewhite.ywc.purewhitelibrary.R;
 /**
  * @author yuwenchao
  */
-public abstract class BaseSkipFragment extends BaseBarFragment {
+public abstract class BaseSkipFragment extends BaseBarEventbusFragment {
 
 
     public void skipActivity(Class<?> cla)
