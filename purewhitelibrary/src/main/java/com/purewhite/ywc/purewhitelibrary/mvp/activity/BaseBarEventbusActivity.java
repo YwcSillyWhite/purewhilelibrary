@@ -52,17 +52,23 @@ public abstract class BaseBarEventbusActivity extends BaseActivity{
         initTitleBar();
     }
 
+
     //延伸布局高度适应沉淀状态栏
     private void initTitleBar() {
         BarUtils.obtianTitleConfig().setTitleBarPadding(getTitleBarView());
     }
+
 
     protected View getTitleBarView()
     {
         return findViewById(getTitleBarId());
     }
 
-    protected abstract int getTitleBarId();
+
+    protected int getTitleBarId()
+    {
+        return 0;
+    }
 
 
 

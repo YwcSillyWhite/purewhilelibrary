@@ -2,6 +2,11 @@ package com.purewhite.ywc.frame.ui.activity.mine;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.contrarywind.adapter.WheelAdapter;
 import com.contrarywind.listener.OnItemSelectedListener;
 import com.contrarywind.view.WheelView;
@@ -15,6 +20,7 @@ import com.purewhite.ywc.frame.wheel.ThreeWheelAdapter;
 import com.purewhite.ywc.frame.wheel.TwoWheelAdapter;
 import com.purewhite.ywc.frame.wheel.bean.WheelBean;
 import com.purewhite.ywc.frame.wheel.callback.WheelCallBack;
+import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.scroll.OnScrollLoadListener;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
@@ -147,6 +153,27 @@ public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,Presente
         Gson gson = new Gson();
         wheelBean= gson.fromJson(getResources().getString(R.string.json), WheelBean.class);
         setOneWheel(wheelBean);
+
+
+
+        mDataBinding.recyclerView.setAdapter(new com.purewhite.ywc.frame.ui.activity.mine.WheelAdapter());
+        mDataBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        new LinearSnapHelper().attachToRecyclerView(mDataBinding.recyclerView);
+
+
+        mDataBinding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
+
 
 
     }

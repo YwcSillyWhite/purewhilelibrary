@@ -37,7 +37,7 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
 
     @Override
     public void onPageSelected(int i) {
-        mDataBinding.actionBar.actionBarLeftText.setText((i+1)+" / "+imageBeanList.size());
+//        mDataBinding.actionBar.actionBarLeftText.setText((i+1)+" / "+imageBeanList.size());
         //刷新
         boolean flush = picViewAdapter.flush(imageBeanList.get(i).getPath());
         mDataBinding.picViewSelectorImg.setSelected(flush);
@@ -50,17 +50,13 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
 
 
     @Override
-    protected void beforeView() {
-        super.beforeView();
-        BarUtils.obtianBarConfig().with(this)
-                .setStatusBar(1)
-                .setStatusBarTextColorFlag(true)
-                .build();
+    protected View getTitleBarView() {
+        return mDataBinding.topLayout;
     }
 
     @Override
     protected int getTitleBarId() {
-        return R.id.action_bar_layout;
+        return 0;
     }
 
 
@@ -100,7 +96,7 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
                     ,Animation.RELATIVE_TO_SELF,-1,Animation.RELATIVE_TO_SELF,0);
             translateAnimationTop.setDuration(200);
             translateAnimationTop.setFillAfter(true);
-            mDataBinding.actionBar.actionBarLayout.startAnimation(translateAnimationTop);
+//            mDataBinding.actionBar.actionBarLayout.startAnimation(translateAnimationTop);
 
 
             TranslateAnimation translateAnimationBottom = new TranslateAnimation(Animation.RELATIVE_TO_SELF,0,Animation.RELATIVE_TO_SELF,0
@@ -115,7 +111,7 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
                     ,Animation.RELATIVE_TO_SELF,0,Animation.RELATIVE_TO_SELF,-1);
             translateAnimationTop.setDuration(200);
             translateAnimationTop.setFillAfter(true);
-            mDataBinding.actionBar.actionBarLayout.startAnimation(translateAnimationTop);
+//            mDataBinding.actionBar.actionBarLayout.startAnimation(translateAnimationTop);
 
 
             TranslateAnimation translateAnimationBottom = new TranslateAnimation(Animation.RELATIVE_TO_SELF,0,Animation.RELATIVE_TO_SELF,0
@@ -154,10 +150,10 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
             mDataBinding.viewPager.setAdapter(picViewPagerAdapter);
             mDataBinding.viewPager.setCurrentItem(position);
             mDataBinding.viewPager.addOnPageChangeListener(this);
-            mDataBinding.actionBar.actionBarLeftImg.setOnClickListener(this);
+            mDataBinding.actionBarLeftImg.setOnClickListener(this);
             mDataBinding.picSelector.setOnClickListener(this);
-            mDataBinding.actionBar.actionBarLayout.setBackgroundColor(Color.parseColor("#55444444"));
-            mDataBinding.actionBar.actionBarLeftText.setText(position+" / "+imageBeanList.size());
+//            mDataBinding.actionBarLayout.setBackgroundColor(Color.parseColor("#55444444"));
+//            mDataBinding.actionBar.actionBarLeftText.setText(position+" / "+imageBeanList.size());
 
             //recyclerview
             picViewAdapter = new PicViewAdapter();
@@ -174,6 +170,7 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
     }
 
 
+
     @Override
     protected void initRquest() {
         super.initRquest();
@@ -183,16 +180,16 @@ public class PicViewActivity extends BaseMvpActivity<PureActivityPicViewBinding,
     //更新sure空间
     private void upDataSure()
     {
-        if (PicSeletorManager.newInstance().obtainPicCount()>0)
-        {
-            mDataBinding.actionBar.actionBarSure.setEnabled(true);
-            mDataBinding.actionBar.actionBarSure.setText(PicSeletorManager.newInstance().obtainPicContent()+"完成");
-        }
-        else
-        {
-            mDataBinding.actionBar.actionBarSure.setEnabled(false);
-            mDataBinding.actionBar.actionBarSure.setText(PicSeletorManager.newInstance().obtainPicContent()+"完成");
-        }
+//        if (PicSeletorManager.newInstance().obtainPicCount()>0)
+//        {
+//            mDataBinding.actionBar.actionBarSure.setEnabled(true);
+//            mDataBinding.actionBar.actionBarSure.setText(PicSeletorManager.newInstance().obtainPicContent()+"完成");
+//        }
+//        else
+//        {
+//            mDataBinding.actionBar.actionBarSure.setEnabled(false);
+//            mDataBinding.actionBar.actionBarSure.setText(PicSeletorManager.newInstance().obtainPicContent()+"完成");
+//        }
 
     }
 

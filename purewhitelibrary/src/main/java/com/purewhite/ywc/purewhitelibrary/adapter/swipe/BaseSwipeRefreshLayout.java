@@ -32,6 +32,7 @@ public abstract class BaseSwipeRefreshLayout extends SwipeRefreshLayout {
         setSize(SwipeRefreshLayout.DEFAULT);
         //设置开始不能加载
         setEnabled(false);
+
     }
 
 
