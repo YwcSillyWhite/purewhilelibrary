@@ -40,8 +40,10 @@ public abstract class BaseBarEventbusFragment extends BaseFragment{
         return view.findViewById(getTitleBarId());
     }
 
-    protected abstract int getTitleBarId();
-
+    protected  int getTitleBarId()
+    {
+        return 0;
+    }
 
 
 
@@ -52,7 +54,7 @@ public abstract class BaseBarEventbusFragment extends BaseFragment{
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    private void receiveEvent(BaseEvent baseEvent)
+    public final void receiveEvent(BaseEvent baseEvent)
     {
         if (baseEvent!=null)
         {

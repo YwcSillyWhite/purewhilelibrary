@@ -34,7 +34,8 @@ public class PresenterImp<V extends BaseUiView> implements BasePresenter<V> {
         if (dialogUtils == null)
         {
             dialogUtils=DialogUtils.withBack(mView.getContext(), R.layout.pure_dialog_load)
-                    .setScreenWidth(0.8f)
+                    .setSplace(0.8f,0)
+                    .setCancelable(false)
                     .setCanceledOnTouchOutside(false);
         }
         dialogUtils.setTextView(R.id.dialog_content,content,false);

@@ -214,14 +214,13 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         {
             pictureWindowAdapter=new PictureWindowAdapter();
             dialogUtils=DialogUtils.withBack(this,R.layout.pure_window_picture)
-                    .setGravity(Gravity.BOTTOM)
                     .setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
                             mDataBinding.relativeLayout.setVisibility(View.GONE);
                         }
                     })
-                    .setSplace(1f,0,0,mDataBinding.bottomLinearLayout.getHeight())
+                    .setSplace(1f,0,0,mDataBinding.bottomLinearLayout.getHeight(),Gravity.BOTTOM)
                     .setRecyclerView(R.id.recycler_view,pictureWindowAdapter,new LinearLayoutManager(this))
                     .addAnim(WindowAnimStyle.bottom_anim_window);
             pictureWindowAdapter.flush(folders,true);

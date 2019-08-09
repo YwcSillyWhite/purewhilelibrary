@@ -34,8 +34,6 @@ public class WindowDialogUtils<T extends WindowViewUtils> extends WindowViewUtil
     }
 
 
-
-
     public T setCanceledOnTouchOutside(boolean cancelable)
     {
         dialog.setCanceledOnTouchOutside(cancelable);

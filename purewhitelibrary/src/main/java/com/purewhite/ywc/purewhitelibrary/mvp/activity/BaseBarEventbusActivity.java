@@ -81,7 +81,7 @@ public abstract class BaseBarEventbusActivity extends BaseActivity{
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    private void receiveEvent(BaseEvent baseEvent)
+    public final void receiveEvent(BaseEvent baseEvent)
     {
         if (baseEvent!=null)
         {

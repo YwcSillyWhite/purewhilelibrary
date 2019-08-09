@@ -2,7 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.config.event;
 
 public class BaseEvent<T> {
     private int code;
-    private String name;
+    private String content;
     private T data;
 
 
@@ -15,11 +15,11 @@ public class BaseEvent<T> {
     }
 
     public String getName() {
-        return name;
+        return content;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public T getData() {

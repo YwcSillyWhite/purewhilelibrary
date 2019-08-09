@@ -2,6 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.window.dialog.utils;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
@@ -20,48 +21,44 @@ import com.purewhite.ywc.purewhitelibrary.window.base.WindowDialogUtils;
 public class DialogUtils extends WindowDialogUtils<DialogUtils> {
 
 
+
     public static DialogUtils with(Context context,@LayoutRes int layoutId)
     {
-        return with(context,layoutId,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        return with(context,layoutId,R.style.BaseDialog);
     }
 
 
     public static DialogUtils withBack(Context context,@LayoutRes int layoutId)
     {
-        return with(context,layoutId,R.style.BaseDialogNo,
-                ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        return with(context,layoutId,R.style.BaseDialogNo);
     }
 
-    public static DialogUtils with(Context context,@LayoutRes int layoutId,int width,int height)
+
+
+    public static DialogUtils with(Context context,@LayoutRes int layoutId,@StyleRes int theme)
     {
-        return with(context,layoutId,R.style.BaseDialog,width,height);
+        return new DialogUtils(context,layoutId,theme);
     }
 
-    public static DialogUtils with(Context context,@LayoutRes int layoutId,@StyleRes int theme
-            ,int width,int height)
-    {
-        return new DialogUtils(context,layoutId,theme,width,height);
-    }
 
-    public DialogUtils(Context context,@LayoutRes int layoutId,@StyleRes int theme,int width,int height) {
+    public DialogUtils(Context context,@LayoutRes int layoutId,@StyleRes int theme) {
         super(context, layoutId, new Dialog(context,theme));
-        dialog.setContentView(viewParent,new ViewGroup.LayoutParams(width, height));
+        dialog.setContentView(viewParent);
     }
 
 
-
-    public DialogUtils setScreenWidth(float scale) {
-        if (scale>0&&scale<=1)
-        {
-            WindowManager.LayoutParams lp = window.getAttributes();
-            lp.width =(int)(SizeUtils.getScreenWidth()*scale);
-            window.setAttributes(lp);
-        }
-        return this;
+    public DialogUtils setSplace(float scaleX,float scaleY)
+    {
+        return setSplace(scaleX,scaleY,Gravity.NO_GRAVITY);
     }
 
 
-    public DialogUtils setSplace(float scaleX,float scaleY,int x,int y)
+    public DialogUtils setSplace(float scaleX,float scaleY,int gravity)
+    {
+        return setSplace(scaleX,scaleY,0,0,gravity);
+    }
+
+    public DialogUtils setSplace(float scaleX,float scaleY,int x,int y,int gravity)
     {
         WindowManager.LayoutParams lp = window.getAttributes();
         if (scaleX>0&&scaleX<=1)
@@ -76,25 +73,42 @@ public class DialogUtils extends WindowDialogUtils<DialogUtils> {
         {
             lp.x=x;
         }
-        if (x!=y)
+        if (y!=0)
         {
             lp.y=y;
         }
+        lp.gravity=gravity;
+        window.setAttributes(lp);
         return this;
     }
 
-    public DialogUtils setLayout(int width, int height)
+    public DialogUtils setSplace(int width,int height)
     {
-        window.setLayout(width,height);
-        return this;
+        return setSplace(width,height,Gravity.NO_GRAVITY);
+    }
+
+    public DialogUtils setSplace(int width,int height,int gravity)
+    {
+        return setSplace(width,height,0,0,gravity);
     }
 
 
-    public DialogUtils setGravity(int gravity) {
-        window.setGravity(gravity);
+    public DialogUtils setSplace(int width,int height,int x,int y,int gravity)
+    {
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.width = width;
+        lp.height = height;
+        if (x!=0)
+        {
+            lp.x=x;
+        }
+        if (x!=0)
+        {
+            lp.y=y;
+        }
+        lp.gravity=gravity;
+        window.setAttributes(lp);
         return this;
     }
-
-
 
 }
