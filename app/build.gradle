@@ -11,7 +11,6 @@ android {
         versionCode      10000
         versionName      '1.0.0'
 
-
         multiDexEnabled true
     }
 
@@ -35,9 +34,11 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(':purewhitelibrary')
     implementation project(':tbslibrary')
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
     implementation 'com.acker:simplezxing:1.5'
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
 }

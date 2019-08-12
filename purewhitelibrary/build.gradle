@@ -48,7 +48,10 @@ dependencies {
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-alpha-3'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
-    api 'androidx.test:runner:1.3.0-alpha02'
+    //基础包
+    testImplementation 'junit:junit:4.12'
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.appcompat:appcompat:1.1.0-rc01'
     //rxjava
     api 'io.reactivex.rxjava2:rxjava:2.2.8'
     api 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
@@ -67,7 +70,6 @@ dependencies {
     api 'com.alibaba.android:vlayout:1.3.0@aar'
     //手势imageview
     api  'com.github.chrisbanes:PhotoView:v2.0.0'
-    api 'androidx.appcompat:appcompat:1.1.0-rc01'
     //design包
     api 'com.google.android.material:material:1.1.0-alpha09'
     //图片取色
