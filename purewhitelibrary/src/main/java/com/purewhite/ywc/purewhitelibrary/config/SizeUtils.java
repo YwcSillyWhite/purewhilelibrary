@@ -14,6 +14,15 @@ public final class SizeUtils {
     }
 
 
+    public static float dpToPxFloat(float dp)
+    {
+        final float scale = AppUtils.getContext().getResources().getDisplayMetrics().density;
+        return dp * scale + 0.5f;
+    }
+
+
+
+
     /**
      * 获取屏幕的宽度
      */

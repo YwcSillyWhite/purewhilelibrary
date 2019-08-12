@@ -7,6 +7,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
+import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -42,78 +43,48 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ImageLoadWrapperImp implements ImageLoadWrapper{
 
-    private RequestOptions options,optionsCricle;
-    private final int cricle=1;
-    private final int defalut=0;
-
-    public RequestOptions getOptions(int what) {
-        RequestOptions requestOptions;
-        if (what==cricle)
-        {
-            if (optionsCricle == null) {
-                optionsCricle = new RequestOptions();
-                //不加载动画
-                optionsCricle.dontTransform()
-                        //圆形图片
-                        .circleCrop();
-            }
-            requestOptions=optionsCricle;
-        }
-        else
-        {
-            if (options == null) {
-                options = new RequestOptions();
-                //不加载动画
-                options.dontTransform()
-                        //占位图片
-                        .placeholder(R.mipmap.pure_load_error)
-                        //加载失败的图片
-                        .error(R.mipmap.pure_load_error);
-            }
-            requestOptions=options;
-
-        }
-        return requestOptions;
-    }
-
 
 
 
     @Override
     public void init(ImageView imageView, Object url) {
-        Glide.with(imageView.getContext())
-                .load(url)
-                .apply(getOptions(defalut))
-                .into(imageView);
+        init(ImageLoadType.initDefalut,imageView,url);
     }
 
     @Override
     public void initCircle(ImageView imageView, Object url) {
-        Glide.with(imageView.getContext())
-                .asBitmap()
-                .load(url)
-                .apply(getOptions(cricle))
-                .into(imageView);
-                //只允许加载静态图片
+        init(ImageLoadType.initCricle,imageView,url);
     }
 
+
     @Override
-    public void initHead(ImageView imageView, Object url) {
+    public void init(String key, ImageView imageView, Object url) {
         Glide.with(imageView.getContext())
-                .asBitmap()
                 .load(url)
-                .apply(getOptions(cricle))
+                .apply(ImageLoadType.newInstance().obtianRequestOptions(key))
                 .into(imageView);
     }
 
     @Override
-    public void initBig(ImageView imageView, Object url) {
+    public void init(String key, ImageView imageView, Object url, int wight, int height) {
         Glide.with(imageView.getContext())
-                .asBitmap()
                 .load(url)
-                .apply(getOptions(defalut))
+                .apply(ImageLoadType.newInstance().obtianRequestOptions(key,wight,height))
                 .into(imageView);
     }
+
+    @Override
+    public void initRadio(ImageView imageView, Object url, int radioAd) {
+        Glide.with(imageView.getContext())
+                .load(url)
+                .apply(ImageLoadType.newInstance().obtianRequestOptions(ImageLoadType.initDefalut,radioAd))
+                .into(imageView);
+    }
+
+
+
+
+
 
     @Override
     public void clear() {
@@ -128,6 +99,11 @@ public class ImageLoadWrapperImp implements ImageLoadWrapper{
         }).subscribeOn(Schedulers.io()).subscribe();
     }
 
+
+
+
+
+
     @Override
     public void stop() {
         Glide.with(AppUtils.getContext()).pauseRequests();
@@ -137,6 +113,8 @@ public class ImageLoadWrapperImp implements ImageLoadWrapper{
     public void start() {
         Glide.with(AppUtils.getContext()).resumeRequests();
     }
+
+
 
 
 

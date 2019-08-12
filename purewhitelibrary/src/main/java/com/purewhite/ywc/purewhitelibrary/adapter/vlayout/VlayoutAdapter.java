@@ -92,10 +92,11 @@ public class VlayoutAdapter extends DelegateAdapter
 
     @Override
     public final int getItemCount() {
-        if (obtianDataCount()==0) {
+        final int dataCount = obtianDataCount();
+        if (dataCount==0) {
             return getFullCount();
         }
-        return obtianDataCount()+getLoadCount();
+        return dataCount+getLoadCount();
     }
 
     private boolean isFullView()
@@ -256,31 +257,28 @@ public class VlayoutAdapter extends DelegateAdapter
     public void refreshComplete(boolean network,boolean flush,int pagesize)
     {
         //如果item的长度等于fullview的长度，并且返回的数据长度等于的0的时候
-        if (flush)
+        if (pagesize<this.pageSize)
         {
-            if (pagesize<this.pageSize)
+            if (flush)
             {
                 setLoadState(LoadView.REST,false);
-                if (obtianDataCount()==0)
+                if (pagesize==0)
                 {
                     setFullSate(network?FullView.DATA:FullView.NETWORK,true);
+                }
+                else
+                {
+                    setFullSate(FullView.REST,false);
                 }
             }
             else
             {
-                setLoadState(LoadView.FINISH,true);
+                setLoadState(network?LoadView.DATA:LoadView.NETWORK,false);
             }
         }
         else
         {
-            if (pagesize<this.pageSize)
-            {
-                setLoadState(network||pagesize>0?LoadView.DATA:LoadView.NETWORK,true);
-            }
-            else
-            {
-                setLoadState(LoadView.FINISH,true);
-            }
+            setLoadState(LoadView.FINISH,true);
         }
     }
 

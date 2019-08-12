@@ -26,7 +26,7 @@ public class HomeChildAdapter extends BindAdapter<ShopBean> {
     }
 
     private void initAFHC(AdapterFragHomeChildBinding binding, int position, ShopBean shopBean) {
-        ImageLoader.newInstance().init(binding.shopImg,shopBean.getItempic());
+        ImageLoader.newInstance().initRadio(binding.shopImg,shopBean.getItempic(),100);
         binding.shopTitle.setText(shopBean.getItemtitle());
     }
 
