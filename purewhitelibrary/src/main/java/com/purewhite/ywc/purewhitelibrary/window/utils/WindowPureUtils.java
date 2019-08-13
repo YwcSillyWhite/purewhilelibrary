@@ -1,6 +1,8 @@
 package com.purewhite.ywc.purewhitelibrary.window.utils;
 
-import com.purewhite.ywc.purewhitelibrary.window.base.WindowDialogUtils;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.BaseDialogUtils;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
+import com.purewhite.ywc.purewhitelibrary.window.popup.PopupWindowUtils;
 
 /**
  * @author yuwenchao
@@ -8,15 +10,28 @@ import com.purewhite.ywc.purewhitelibrary.window.base.WindowDialogUtils;
 public class WindowPureUtils {
 
 
-    public static void onDialogDestory(WindowDialogUtils...wds)
+    public static void onDialogDestory(BaseDialogUtils...dialogUtils)
     {
-        for (WindowDialogUtils windowUtils:wds) {
-            if (windowUtils!=null)
+        for (BaseDialogUtils dialogUtil:dialogUtils) {
+            if (dialogUtil!=null)
             {
-                windowUtils.onDestroy();
+                dialogUtil.dismiss();
             }
         }
     }
+
+
+    public static void onDialogBottomDestory(PopupWindowUtils...popupWindowUtils)
+    {
+        for (PopupWindowUtils popupWindowUtil:popupWindowUtils) {
+            if (popupWindowUtil!=null)
+            {
+//                popupWindowUtil.dismiss();
+            }
+        }
+    }
+
+
 
 
 }

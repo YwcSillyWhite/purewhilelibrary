@@ -13,6 +13,7 @@ import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.BaseDialogBuilder;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
 
@@ -60,12 +61,14 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
             case 1:
                 if (dialogOne==null)
                 {
-                    dialogOne=DialogUtils.with(this,R.layout.dialog_one)
+                    dialogOne= new BaseDialogBuilder()
+                            .setContentView(R.layout.dialog_one)
                             .setOnClickListener(this)
+                            .setAnim(WindowAnimStyle.left_anim_window)
+                            .buildDialog(this)
                             .setTextView(R.id.dialog_content,"纯白框架必然是精品",false)
                             .setTextView(R.id.dialog_sure,"确定",true)
                             .setTextView(R.id.dialog_clear,"取消",true)
-                            .addAnim(WindowAnimStyle.left_anim_window)
                             .setSplace(0.8f,0);
                 }
                 dialogOne.show();
@@ -75,11 +78,13 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                 {
                     DialogAdapter dialogAdapter = new DialogAdapter(Arrays.asList(getResources().getStringArray(R.array.dialog_list)));
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                    dialogTwo=DialogUtils.with(this,R.layout.dialog_two)
+                    dialogTwo= new BaseDialogBuilder()
+                            .setContentView(R.layout.dialog_two)
                             .setOnClickListener(this)
+                            .setAnim(WindowAnimStyle.bottom_anim_window)
+                            .buildDialog(this)
                             .setTextView(R.id.list_clear,"确定",true)
                             .setRecyclerView(R.id.recycler_view,dialogAdapter,linearLayoutManager)
-                            .addAnim(WindowAnimStyle.bottom_anim_window)
                             .setSplace(1f,0,Gravity.BOTTOM);
                 }
                 dialogTwo.show();

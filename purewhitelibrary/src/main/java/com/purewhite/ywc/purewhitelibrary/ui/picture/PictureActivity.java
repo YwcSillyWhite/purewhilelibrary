@@ -29,6 +29,7 @@ import com.purewhite.ywc.purewhitelibrary.ui.picture.manager.PicSeletorManager;
 import com.purewhite.ywc.purewhitelibrary.ui.picview.PicViewActivity;
 import com.purewhite.ywc.purewhitelibrary.view.recyclerview.AroundItemDecoration;
 import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.BaseDialogBuilder;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
 
@@ -213,16 +214,18 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         if (folders!=null&&folders.size()>0)
         {
             pictureWindowAdapter=new PictureWindowAdapter();
-            dialogUtils=DialogUtils.withBack(this,R.layout.pure_window_picture)
+            new BaseDialogBuilder()
+                    .setContentView(R.layout.pure_window_picture)
+                    .setAnim(WindowAnimStyle.bottom_anim_window)
                     .setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
-                        public void onDismiss(DialogInterface dialog) {
+                        public void onDismiss(DialogInterface dialogInterface) {
                             mDataBinding.relativeLayout.setVisibility(View.GONE);
                         }
                     })
+                    .buildDialog(this)
                     .setSplace(1f,0,0,mDataBinding.bottomLinearLayout.getHeight(),Gravity.BOTTOM)
-                    .setRecyclerView(R.id.recycler_view,pictureWindowAdapter,new LinearLayoutManager(this))
-                    .addAnim(WindowAnimStyle.bottom_anim_window);
+                    .setRecyclerView(R.id.recycler_view,pictureWindowAdapter,new LinearLayoutManager(this));
             pictureWindowAdapter.flush(folders,true);
             pictureWindowAdapter.setSeleterPosition(0);
             pictureAdapter.flush(folders.get(0).getImageBeanList(),true);
@@ -239,8 +242,9 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
             case 1:
                 if (dialogUtils!=null)
                 {
+                    dialogUtils.show();
 
-                    dialogUtils.show(mDataBinding.relativeLayout);
+//                    dialogUtils.show(mDataBinding.relativeLayout);
                 }
                 break;
         }

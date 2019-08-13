@@ -98,7 +98,6 @@ public final class  AppUtils {
         AppUtils.application =application;
         application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
 
-
         //内存检测
         if (!LeakCanary.isInAnalyzerProcess(application)) {
             LeakCanary.install(application);

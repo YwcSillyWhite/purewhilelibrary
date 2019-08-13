@@ -3,7 +3,6 @@ package com.purewhite.ywc.purewhitelibrary.window.base;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +10,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,21 +25,13 @@ public class WindowViewUtils<T extends WindowViewUtils>{
     protected Context context;
     protected View.OnClickListener onClickListener;
 
-    public WindowViewUtils(Context context,@LayoutRes int layoutId) {
-        this.context=context;
-        this.viewParent = LayoutInflater.from(context).inflate(layoutId,null);
+
+    public WindowViewUtils(View view, View.OnClickListener onClickListener)
+    {
+        this.viewParent=view;
+        this.onClickListener=onClickListener;
     }
 
-    /**
-     * 设置onClickListener
-     * @param onClickListener
-     * @return
-     */
-    public T setOnClickListener(View.OnClickListener onClickListener)
-    {
-        this.onClickListener=onClickListener;
-        return (T)this;
-    }
 
 
     public <V extends View> V fdView(@IdRes int id)
@@ -58,7 +48,7 @@ public class WindowViewUtils<T extends WindowViewUtils>{
 
     /**
      * 设置点击事件
-     * @param ids
+     * @param
      * @return
      */
     public T setClick(@IdRes int ...ids)

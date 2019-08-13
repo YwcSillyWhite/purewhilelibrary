@@ -8,7 +8,8 @@ import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
-import com.purewhite.ywc.purewhitelibrary.window.dialog.bottomsheet.BottomSheetUtils;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.BaseDialogBuilder;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.BaseDialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
 
 /**
@@ -34,7 +35,7 @@ public class BottomsheetActivity extends MvpActivity<ActivityBottomsheetBinding,
 
 
 
-    private BottomSheetUtils dialog_one;
+    private BaseDialogUtils dialog_one;
     private void createDialog(int what)
     {
         switch (what)
@@ -42,8 +43,8 @@ public class BottomsheetActivity extends MvpActivity<ActivityBottomsheetBinding,
             case 1:
                 if (dialog_one==null)
                 {
-                    dialog_one=BottomSheetUtils.with(this,R.layout.dialog_one)
-                            .addAnim(WindowAnimStyle.bottom_anim_window);
+                    dialog_one=new BaseDialogBuilder().setContentView(R.layout.dialog_one)
+                            .setAnim(WindowAnimStyle.bottom_anim_window).buildBottom(this);
                 }
                 dialog_one.show();
                 break;
