@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.ui.picture.scanner;
+package com.purewhite.ywc.purewhitelibrary.ui.image.scanner;
 
 import android.content.ContentResolver;
 import android.database.Cursor;

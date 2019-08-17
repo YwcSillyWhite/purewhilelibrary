@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.bean.FileInput;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.base.OkRequestParamBuilder;
-import com.purewhite.ywc.purewhitelibrary.network.okhttp.load.LoadRequestBody;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;

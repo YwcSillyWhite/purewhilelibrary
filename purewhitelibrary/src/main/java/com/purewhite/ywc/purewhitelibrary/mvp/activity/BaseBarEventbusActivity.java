@@ -3,6 +3,7 @@ package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 
 import android.view.View;
 
+import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
 import com.purewhite.ywc.purewhitelibrary.config.event.BaseEvent;
 import com.purewhite.ywc.purewhitelibrary.config.event.EventBusUtils;
@@ -59,15 +60,13 @@ public abstract class BaseBarEventbusActivity extends BaseActivity{
     }
 
 
-    protected View getTitleBarView()
-    {
+    protected View getTitleBarView() {
         return findViewById(getTitleBarId());
     }
 
 
-    protected int getTitleBarId()
-    {
-        return 0;
+    protected int getTitleBarId() {
+        return R.id.bar_layout;
     }
 
 

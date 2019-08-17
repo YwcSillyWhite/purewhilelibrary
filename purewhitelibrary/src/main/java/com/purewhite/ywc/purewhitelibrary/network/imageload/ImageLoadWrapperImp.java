@@ -3,11 +3,8 @@ package com.purewhite.ywc.purewhitelibrary.network.imageload;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
-import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;

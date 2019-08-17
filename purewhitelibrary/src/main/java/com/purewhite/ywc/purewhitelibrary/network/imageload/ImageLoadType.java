@@ -1,10 +1,8 @@
 package com.purewhite.ywc.purewhitelibrary.network.imageload;
 
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.purewhite.ywc.purewhitelibrary.R;
-import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
 
 import java.util.HashMap;
 import java.util.Map;

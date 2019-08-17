@@ -24,7 +24,7 @@ public class PicViewAdapter extends BindAdapter<String> {
     }
 
     @Override
-    protected void onData(BindHolder holder, int position, String imageBean) {
+    protected void onData(BindHolder holder, int position, String imageBean,int itemType) {
         ViewDataBinding binding = holder.getBinding();
         if (binding instanceof PureAdapterPicViewBinding)
         {
@@ -53,4 +53,6 @@ public class PicViewAdapter extends BindAdapter<String> {
         super.flush(listPath,true);
         return listPath.contains(path);
     }
+
+
 }

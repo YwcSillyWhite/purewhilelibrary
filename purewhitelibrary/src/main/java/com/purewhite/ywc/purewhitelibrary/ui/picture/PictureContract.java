@@ -2,7 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture;
 
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
 import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.Folder;
 
 import java.util.List;
 

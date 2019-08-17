@@ -5,7 +5,6 @@ import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -21,7 +20,7 @@ import java.util.List;
  * 使用数据里面的
  */
 
-public abstract class BindAdapter<T> extends BaseAdapter<T,BindHolder>{
+public abstract class BindAdapter<T> extends BaseMoreAdapter<T,BindHolder> {
 
     private SparseIntArray sparseIntArray;
 
@@ -36,39 +35,12 @@ public abstract class BindAdapter<T> extends BaseAdapter<T,BindHolder>{
     }
 
 
-    //添加布局
-    protected final void addLayout(int viewType,@NonNull @LayoutRes int layoutId)
-    {
-        if (sparseIntArray==null)
-        {
-            sparseIntArray=new SparseIntArray();
-        }
-        sparseIntArray.put(viewType,layoutId);
-    }
-
-    protected final void addLayout(int layout)
-    {
-        addLayout(0,layout);
-    }
-
-
     @Override
-    protected final BindHolder onCreateData(ViewGroup parent, int viewType) {
-        int layoutId = getLayout(viewType);
-        if (layoutId!=0)
-        {
-            ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
-                    , layoutId, parent, false);
-            return new BindHolder(binding);
-        }
-        return null;
+    protected BindHolder onDataCreateViewHolder(@NonNull ViewGroup parent, int viewType, int layoutIds) {
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
+                , layoutIds, parent, false);
+        return new BindHolder(binding);
     }
 
-
-
-    protected int getLayout(int viewType)
-    {
-        return sparseIntArray.get(viewType,0);
-    }
 
 }

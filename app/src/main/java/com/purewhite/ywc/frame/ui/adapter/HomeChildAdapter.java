@@ -17,7 +17,7 @@ public class HomeChildAdapter extends BindAdapter<ShopBean> {
     }
 
     @Override
-    protected void onData(BindHolder holder, int position, ShopBean shopBean) {
+    protected void onData(BindHolder holder, int position, ShopBean shopBean,int itemType) {
         ViewDataBinding binding = holder.getBinding();
         if (binding instanceof AdapterFragHomeChildBinding)
         {

@@ -3,8 +3,8 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture.config;
 import android.text.TextUtils;
 
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.Folder;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.ImageBean;
 
 import java.io.File;
 import java.util.ArrayList;

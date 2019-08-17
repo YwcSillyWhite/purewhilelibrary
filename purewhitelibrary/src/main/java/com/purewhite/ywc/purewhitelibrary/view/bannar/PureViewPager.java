@@ -18,7 +18,6 @@ import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.BasePureAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.StringPureAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.listener.OnPureChangeListener;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.palette.PureViewPalette;
-import com.purewhite.ywc.purewhitelibrary.view.bannar.trans.PagerTransZoom;
 
 import java.util.Arrays;
 import java.util.List;

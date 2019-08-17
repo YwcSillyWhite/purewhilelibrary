@@ -29,14 +29,9 @@ public class AndroidStudyAdapter extends BindAdapter<String> {
     }
 
 
-    @Override
-    public int obtianDataCount() {
-        return super.obtianDataCount();
-    }
-
 
     @Override
-    protected void onData(BindHolder holder, int position, String s) {
+    protected void onData(BindHolder holder, int position, String s,int itemType) {
         ViewDataBinding binding = holder.getBinding();
         if (binding instanceof AdapterAndroidStudyBinding)
         {
@@ -46,7 +41,7 @@ public class AndroidStudyAdapter extends BindAdapter<String> {
 
     private void initBind(AdapterAndroidStudyBinding binding, int position, String s) {
         binding.androidStudyText.setText(s);
-        binding.viewLine.setVisibility(position==obtianDataCount()-1?View.GONE:View.VISIBLE);
+        binding.viewLine.setVisibility(position==obtainDataCount()-1?View.GONE:View.VISIBLE);
     }
 
 }

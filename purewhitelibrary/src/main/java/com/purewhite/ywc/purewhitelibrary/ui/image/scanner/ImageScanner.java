@@ -1,17 +1,16 @@
-package com.purewhite.ywc.purewhitelibrary.ui.picture.scanner;
+package com.purewhite.ywc.purewhitelibrary.ui.image.scanner;
 
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.ImageBean;
 
 /**
  * 图片筛选类
  * @author yuwenchao
  */
 public class ImageScanner extends MediaStoreScanner<ImageBean> {
-
 
     @Override
     protected Uri getScanUri() {
@@ -43,6 +42,8 @@ public class ImageScanner extends MediaStoreScanner<ImageBean> {
         return new String[]{"image/jpeg", "image/png", "image/gif"};
     }
 
+
+
     /**
      *  desc倒序排列，从最新时间排列
      * @return
@@ -51,6 +52,7 @@ public class ImageScanner extends MediaStoreScanner<ImageBean> {
     protected String getOrder() {
         return MediaStore.Images.Media.DATE_TAKEN+" desc";
     }
+
 
     @Override
     protected ImageBean parse(Cursor cursor) {

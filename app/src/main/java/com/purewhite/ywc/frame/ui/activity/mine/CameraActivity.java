@@ -2,6 +2,7 @@ package com.purewhite.ywc.frame.ui.activity.mine;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,6 +23,7 @@ import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
+import com.purewhite.ywc.purewhitelibrary.ui.image.PictureUtils;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureActivity;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
 
@@ -42,11 +44,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                             ,picFile, TagUtils.request_camera);
                     break;
                 case 2:
-                    Bundle build = BundleUtils.buidler()
-                            .put(PictureStype.SELECTOR_PIC_MAX_NUM, 9)
-                            .put(PictureStype.SKIP_STYPE,PictureStype.SKIP_STYPE_PIC_LIST)
-                            .build();
-                    skipActivity(PictureActivity.class,ConfigUtils.INTENT_REQUEST_PIC,build);
+                    PictureUtils.intent(CameraActivity.this,null,1);
                     break;
             }
         }

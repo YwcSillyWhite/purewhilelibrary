@@ -6,5 +6,6 @@
     <application >
         <activity android:name=".ui.picture.PictureActivity"/>
         <activity android:name=".ui.picview.PicViewActivity"/>
+        <activity android:name=".ui.image.activity.PictureSelectActivity"/>
     </application>
 </manifest>

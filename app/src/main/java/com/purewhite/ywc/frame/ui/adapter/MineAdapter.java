@@ -17,7 +17,7 @@ public class MineAdapter extends BindAdapter<String> {
     }
 
     @Override
-    protected void onData(BindHolder holder, int position, String s) {
+    protected void onData(BindHolder holder, int position, String s,int itemType) {
         ViewDataBinding binding = holder.getBinding();
         if (binding instanceof AdapterFragMineBinding)
         {

@@ -8,7 +8,7 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.pagerview.BasePagerAdapter;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.ImageBean;
 import com.purewhite.ywc.purewhitelibrary.ui.picview.io.PhotoClickListener;
 
 import java.util.List;

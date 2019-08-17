@@ -10,7 +10,7 @@ import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.BindAdapter;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BindHolder;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureAdapterPictureBinding;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.ImageBean;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.manager.PicSeletorManager;
 
@@ -31,7 +31,7 @@ public class PictureAdapter extends BindAdapter<ImageBean> {
     }
 
     @Override
-    protected void onData(BindHolder holder, int position, ImageBean imageBean) {
+    protected void onData(BindHolder holder, int position, ImageBean imageBean,int itemType) {
         ViewDataBinding binding = holder.getBinding();
         if (binding instanceof PureAdapterPictureBinding)
         {

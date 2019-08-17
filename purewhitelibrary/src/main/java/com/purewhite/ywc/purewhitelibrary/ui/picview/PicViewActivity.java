@@ -1,6 +1,5 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picview;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -10,12 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
-import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureActivityPicViewBinding;
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.ImageBean;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.manager.PicSeletorManager;
 import com.purewhite.ywc.purewhitelibrary.ui.picview.adapter.PicViewAdapter;

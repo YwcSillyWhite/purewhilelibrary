@@ -22,8 +22,7 @@ public abstract class BindTypeAdapter<T extends BaseTypeBean> extends BindAdapte
     }
 
     @Override
-    protected int obtianDataType(int position) {
+    protected int obtainDataType(int position) {
         return obtainT(position)!=null?obtainT(position).getTypeBean():0;
     }
-
 }

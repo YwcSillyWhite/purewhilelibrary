@@ -7,8 +7,6 @@ import android.util.SparseIntArray;
 import androidx.annotation.Nullable;
 import androidx.palette.graphics.Palette;
 
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-
 public class PureViewPalette {
 
     private static PureViewPalette pureViewPalette;

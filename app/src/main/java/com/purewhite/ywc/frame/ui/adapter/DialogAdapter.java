@@ -20,7 +20,7 @@ public class DialogAdapter extends BindAdapter<String> {
     }
 
     @Override
-    protected void onData(BindHolder holder, int position, String s) {
+    protected void onData(BindHolder holder, int position, String s,int itemType) {
         ViewDataBinding binding = holder.getBinding();
         if (binding instanceof AdapterDialogTwoBinding)
         {
@@ -30,7 +30,8 @@ public class DialogAdapter extends BindAdapter<String> {
 
     private void initAdapterDialog(AdapterDialogTwoBinding binding, int position, String s) {
         binding.dialogListText.setText(s);
-        binding.viewLine.setVisibility(position==obtianDataCount()-1?View.GONE:View.VISIBLE);
+        binding.viewLine.setVisibility(position==obtainDataCount()-1?View.GONE:View.VISIBLE);
+
     }
 
 

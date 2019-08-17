@@ -3,10 +3,10 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.HttpObserver;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxSchedulers;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.Folder;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.ImageBean;
+import com.purewhite.ywc.purewhitelibrary.ui.image.scanner.ImageScanner;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureUtils;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.scanner.ImageScanner;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -20,10 +20,10 @@ import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureActivityPictureBinding;
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.Folder;
+import com.purewhite.ywc.purewhitelibrary.ui.image.bean.ImageBean;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureWindowAdapter;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.manager.PicSeletorManager;
 import com.purewhite.ywc.purewhitelibrary.ui.picview.PicViewActivity;
@@ -72,7 +72,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                 }
                 else
                 {
-                    final List<ImageBean> imageBeanList = pictureAdapter.obtainListT();
+                    final List<ImageBean> imageBeanList = pictureAdapter.obtainData();
                     Bundle build = BundleUtils.buidler().put(PictureStype.SKIP_PIC_LIST, imageBeanList)
                             .put(PictureStype.SKIP_PIC_LIST_POSITION,position)
                             .build();
@@ -90,13 +90,13 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
                 {
                     if (PicSeletorManager.newInstance().obtainPicCount()>0)
                     {
-                        mDataBinding.actionBar.actionBarSure.setEnabled(true);
-                        mDataBinding.actionBar.actionBarSure.setText(PicSeletorManager.newInstance().obtainPicContent()+"完成");
+//                        mDataBinding.actionBar.actionBarSure.setEnabled(true);
+//                        mDataBinding.actionBar.actionBarSure.setText(PicSeletorManager.newInstance().obtainPicContent()+"完成");
                     }
                     else
                     {
-                        mDataBinding.actionBar.actionBarSure.setEnabled(false);
-                        mDataBinding.actionBar.actionBarSure.setText("完成");
+//                        mDataBinding.actionBar.actionBarSure.setEnabled(false);
+//                        mDataBinding.actionBar.actionBarSure.setText("完成");
                     }
                 }
             }
@@ -150,7 +150,7 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
     @Override
     protected void afterView() {
         super.afterView();
-        BarUtils.obtianTitleConfig().setTitleBarPadding(mDataBinding.actionBar.actionBarLayout);
+//        BarUtils.obtianTitleConfig().setTitleBarPadding(mDataBinding.actionBar.actionBarLayout);
     }
 
     @Override
@@ -179,13 +179,13 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
         if (skip_stype==PictureStype.SKIP_STYPE_PIC_ONLY)
         {
             PicSeletorManager.newInstance().setPicSize(0);
-            mDataBinding.actionBar.actionBarSure.setVisibility(View.GONE);
+//            mDataBinding.actionBar.actionBarSure.setVisibility(View.GONE);
             mDataBinding.textViewLook.setVisibility(View.GONE);
         }
         else
         {
             PicSeletorManager.newInstance().setPicSize(selector);
-            mDataBinding.actionBar.actionBarSure.setVisibility(View.VISIBLE);
+//            mDataBinding.actionBar.actionBarSure.setVisibility(View.VISIBLE);
             mDataBinding.textViewLook.setVisibility(View.VISIBLE);
         }
 
@@ -197,8 +197,8 @@ public class PictureActivity extends BaseMvpActivity<PureActivityPictureBinding,
 
 
         mDataBinding.windowLayout.setOnClickListener(this);
-        mDataBinding.actionBar.actionBarLeftImg.setOnClickListener(this);
-        mDataBinding.actionBar.actionBarSure.setOnClickListener(this);
+//        mDataBinding.actionBar.actionBarLeftImg.setOnClickListener(this);
+//        mDataBinding.actionBar.actionBarSure.setOnClickListener(this);
         mDataBinding.textViewLook.setOnClickListener(this);
     }
 
