@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.view.View;
 
 import com.purewhite.ywc.purewhitelibrary.window.base.WindowViewUtils;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.DialogBuilder;
 
 public class BaseDialogUtils<T extends BaseDialogUtils> extends WindowViewUtils<T> {
 
@@ -13,8 +14,6 @@ public class BaseDialogUtils<T extends BaseDialogUtils> extends WindowViewUtils<
         super(view, onClickListener);
         this.dialog=dialog;
     }
-
-
 
 
     public void show()

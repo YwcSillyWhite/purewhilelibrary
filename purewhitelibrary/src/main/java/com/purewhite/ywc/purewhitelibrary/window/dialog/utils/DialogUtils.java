@@ -7,6 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.purewhite.ywc.purewhitelibrary.config.SizeUtils;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.DialogBuilder;
 
 /**
  * dialogutils
@@ -89,6 +90,10 @@ public class DialogUtils extends BaseDialogUtils<DialogUtils> {
 
 
 
+    public static DialogBuilder builder()
+    {
+        return new DialogBuilder();
+    }
 
 
 

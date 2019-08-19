@@ -13,7 +13,7 @@ import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
-import com.purewhite.ywc.purewhitelibrary.window.dialog.BaseDialogBuilder;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.DialogBuilder;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
 
@@ -61,7 +61,7 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
             case 1:
                 if (dialogOne==null)
                 {
-                    dialogOne= new BaseDialogBuilder()
+                    dialogOne= DialogUtils.builder()
                             .setContentView(R.layout.dialog_one)
                             .setOnClickListener(this)
                             .setAnim(WindowAnimStyle.left_anim_window)
@@ -78,7 +78,7 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
                 {
                     DialogAdapter dialogAdapter = new DialogAdapter(Arrays.asList(getResources().getStringArray(R.array.dialog_list)));
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-                    dialogTwo= new BaseDialogBuilder()
+                    dialogTwo=DialogUtils.builder()
                             .setContentView(R.layout.dialog_two)
                             .setOnClickListener(this)
                             .setAnim(WindowAnimStyle.bottom_anim_window)

@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.purewhite.ywc.purewhitelibrary.view.recyclerview.MaxHeightRecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:maxHeight="400dp"
-        android:id="@+id/recycler_view">
+        android:background="@color/pure_write"
+        android:id="@+id/recycler_view"
+        app:maxHeight="450dp">
     </com.purewhite.ywc.purewhitelibrary.view.recyclerview.MaxHeightRecyclerView>
-</LinearLayout>
+</layout>

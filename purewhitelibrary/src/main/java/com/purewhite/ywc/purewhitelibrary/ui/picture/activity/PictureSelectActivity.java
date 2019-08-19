@@ -2,8 +2,10 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.PopupWindow;
 
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.purewhite.ywc.purewhitelibrary.R;
@@ -14,10 +16,15 @@ import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureConfig;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureSelectAdapter;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureWindowAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.contract.PictureSelectContract;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.presenter.PictureSelectPresenter;
+import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
+import com.purewhite.ywc.purewhitelibrary.window.base.WindowViewUtils;
+import com.purewhite.ywc.purewhitelibrary.window.popup.PopupWindowUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSelectBinding, PictureSelectPresenter>
@@ -47,6 +54,8 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
             }
         }
     };
+    private PictureWindowAdapter pictureWindowAdapter;
+    private PopupWindowUtils popupWindowUtils;
 
     @Override
     protected void onClickUtils(View view) {
@@ -56,7 +65,11 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
         }
         else if (id==R.id.action_bar_center)
         {
-
+            if (pictureWindowAdapter.getItemCount()>0)
+            {
+                mDataBinding.pureLucencyLayout.getRoot().setVisibility(View.VISIBLE);
+                popupWindowUtils.showAsDropDown(mDataBinding.barLayoutRelative);
+            }
         }
     }
 
@@ -77,6 +90,17 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
         pictureSelectAdapter.setOnItemListener(onItemListener);
         mDataBinding.recyclerView.setLayoutManager(new GridLayoutManager(this, PictureManager.newInstance().getLineNum()));
         mDataBinding.recyclerView.setAdapter(pictureSelectAdapter);
+        pictureWindowAdapter = new PictureWindowAdapter(new ArrayList<>());
+        popupWindowUtils = PopupWindowUtils.builder().setContentView(R.layout.pure_window_picture)
+                .setAnim(WindowAnimStyle.top_anim_window)
+                .setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        mDataBinding.pureLucencyLayout.getRoot().setVisibility(View.GONE);
+                    }
+                })
+                .Builder(this)
+                .setRecyclerView(R.id.recycler_view, pictureWindowAdapter, new LinearLayoutManager(this));
     }
 
 
@@ -90,5 +114,7 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
     @Override
     public void responList(List<Folder> folderList) {
         pictureSelectAdapter.flush(folderList,0);
+        pictureWindowAdapter.flush(folderList);
     }
+
 }

@@ -13,6 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:id="@+id/bar_layout_relative"
             android:background="@color/pure_write">
             <ImageView
                 android:layout_width="wrap_content"
@@ -34,43 +35,42 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/relative_bottom"
+                android:background="@color/pure_write">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="预览"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:textColor="#333"
+                    android:textSize="15sp"
+                    android:paddingRight="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="请选择"
+                    android:layout_alignParentRight="true"
+                    android:paddingLeft="10dp"
+                    android:gravity="center"
+                    android:textColor="#333"
+                    android:textSize="15sp"
+                    android:paddingRight="10dp"/>
+            </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/recycler_view"
-                android:padding="2dp">
+                android:padding="2dp"
+                android:layout_above="@id/relative_bottom">
             </androidx.recyclerview.widget.RecyclerView>
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/popup_window">
-            </FrameLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/pure_write">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="预览"
-                android:paddingLeft="10dp"
-                android:gravity="center"
-                android:textColor="#333"
-                android:textSize="15sp"
-                android:paddingRight="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="请选择"
-                android:layout_alignParentRight="true"
-                android:paddingLeft="10dp"
-                android:gravity="center"
-                android:textColor="#333"
-                android:textSize="15sp"
-                android:paddingRight="10dp"/>
+            <include layout="@layout/pure_lucency_layout" android:visibility="gone"
+                android:id="@+id/pure_lucency_layout"></include>
         </RelativeLayout>
     </LinearLayout>
 </layout>

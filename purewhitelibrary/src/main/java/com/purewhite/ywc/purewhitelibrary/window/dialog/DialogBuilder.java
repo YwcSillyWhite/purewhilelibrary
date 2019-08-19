@@ -15,7 +15,7 @@ import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.BaseDialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
 
-public class BaseDialogBuilder {
+public class DialogBuilder {
 
     private int layoutId;
     private int wight = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -28,53 +28,53 @@ public class BaseDialogBuilder {
     private DialogInterface.OnDismissListener onDismissListener;
     private DialogInterface.OnKeyListener onKeyListener;
 
-    public BaseDialogBuilder setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
+    public DialogBuilder setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
         this.onDismissListener = onDismissListener;
         return this;
     }
 
-    public BaseDialogBuilder setOnKeyListener(DialogInterface.OnKeyListener onKeyListener) {
+    public DialogBuilder setOnKeyListener(DialogInterface.OnKeyListener onKeyListener) {
         this.onKeyListener = onKeyListener;
         return this;
     }
 
-    public BaseDialogBuilder setContentView(@LayoutRes int layoutId)
+    public DialogBuilder setContentView(@LayoutRes int layoutId)
     {
         this.layoutId=layoutId;
         return this;
     }
 
-    public BaseDialogBuilder setWight(int wight) {
+    public DialogBuilder setWight(int wight) {
         this.wight = wight;
         return this;
     }
 
-    public BaseDialogBuilder setHeight(int height) {
+    public DialogBuilder setHeight(int height) {
         this.height = height;
         return this;
     }
 
-    public BaseDialogBuilder setAnim(int anim) {
+    public DialogBuilder setAnim(int anim) {
         this.anim = anim;
         return this;
     }
 
-    public BaseDialogBuilder setCanceledOnTouchOutside(boolean canceledOnTouchOutside) {
+    public DialogBuilder setCanceledOnTouchOutside(boolean canceledOnTouchOutside) {
         this.canceledOnTouchOutside = canceledOnTouchOutside;
         return this;
     }
 
-    public BaseDialogBuilder setCanceled(boolean canceled) {
+    public DialogBuilder setCanceled(boolean canceled) {
         this.canceled = canceled;
         return this;
     }
 
-    public BaseDialogBuilder setThemeRes(int themeRes) {
+    public DialogBuilder setThemeRes(int themeRes) {
         this.themeRes = themeRes;
         return this;
     }
 
-    public BaseDialogBuilder setOnClickListener(View.OnClickListener onClickListener) {
+    public DialogBuilder setOnClickListener(View.OnClickListener onClickListener) {
         this.onClickListener = onClickListener;
         return this;
     }

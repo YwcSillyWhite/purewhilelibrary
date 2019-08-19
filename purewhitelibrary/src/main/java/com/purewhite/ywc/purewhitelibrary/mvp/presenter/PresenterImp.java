@@ -3,7 +3,7 @@ package com.purewhite.ywc.purewhitelibrary.mvp.presenter;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
-import com.purewhite.ywc.purewhitelibrary.window.dialog.BaseDialogBuilder;
+import com.purewhite.ywc.purewhitelibrary.window.dialog.DialogBuilder;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
 
@@ -33,7 +33,7 @@ public class PresenterImp<V extends BaseUiView> implements BasePresenter<V> {
     public void showLoad(String content) {
         if (dialogUtils == null)
         {
-            dialogUtils=new BaseDialogBuilder()
+            dialogUtils=DialogUtils.builder()
                     .setContentView(R.layout.pure_dialog_load)
                     .setCanceled(false)
                     .setCanceledOnTouchOutside(false)
