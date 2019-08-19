@@ -15,11 +15,9 @@ import com.purewhite.ywc.frame.config.TagUtils;
 import com.purewhite.ywc.frame.databinding.ActivityCameraBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.PhotoUtils;
-import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureBuilder;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureUtils;
 
 import java.io.File;
@@ -39,7 +37,8 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                             ,picFile, TagUtils.request_camera);
                     break;
                 case 2:
-                    new PictureBuilder().setPictureMaxNum(3)
+                    PictureUtils.buidler()
+                            .setPictureMaxNum(3)
                             .setLineNum(3)
                             .build(CameraActivity.this);
                     break;

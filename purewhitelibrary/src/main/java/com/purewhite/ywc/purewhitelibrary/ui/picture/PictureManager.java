@@ -1,7 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture;
 
 import android.text.TextUtils;
-import android.widget.TextView;
 
 import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
 

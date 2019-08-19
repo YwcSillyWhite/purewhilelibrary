@@ -19,12 +19,16 @@
                 android:layout_height="match_parent"
                 android:src="@mipmap/pure_picture_back"
                 android:padding="12dp"
+                android:id="@+id/action_bar_left"
+                android:onClick="onClickView"
                 android:adjustViewBounds="true" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="全部"
+                android:id="@+id/action_bar_center"
+                android:onClick="onClickView"
                 android:textSize="18sp"
                 android:textColor="#333"/>
         </RelativeLayout>

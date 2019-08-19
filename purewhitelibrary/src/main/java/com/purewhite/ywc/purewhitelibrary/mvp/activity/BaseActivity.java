@@ -22,7 +22,7 @@ import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
  * @date 2018/11/3
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     @Override
@@ -144,6 +144,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     //点击事件
     public final void onClickView(View view) {
+        if (ClickUtils.clickable(view))
+        {
+            onClickUtils(view);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
         if (ClickUtils.clickable(view))
         {
             onClickUtils(view);

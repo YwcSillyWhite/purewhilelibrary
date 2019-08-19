@@ -14,7 +14,6 @@ import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PictureSelectAdapter extends BindAdapter<ImageBean> {

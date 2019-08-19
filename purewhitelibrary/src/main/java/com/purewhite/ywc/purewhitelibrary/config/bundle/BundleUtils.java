@@ -14,19 +14,19 @@ import io.reactivex.annotations.Nullable;
  */
 public class BundleUtils {
 
-    public static BBuidler buidler()
+    public static Builder buidler()
     {
-        return new BBuidler();
+        return new Builder();
     }
 
-    public static class BBuidler
+    public static class  Builder
     {
         private Bundle bundle;
-        public BBuidler() {
+        public Builder() {
             bundle = new Bundle();
         }
 
-        public BBuidler put(@Nullable String key,@Nullable Object object)
+        public Builder put(@Nullable String key,@Nullable Object object)
         {
             if (object instanceof Integer)
             {
@@ -52,12 +52,11 @@ public class BundleUtils {
             return this;
         }
 
-        public BBuidler putStringArrayList(@Nullable String key,@Nullable List<String> list)
+        public Builder putStringArrayList(@Nullable String key,@Nullable List<String> list)
         {
             bundle.putSerializable(key, ((ArrayList<String>) list));
             return this;
         }
-
 
 
         public Bundle build()
