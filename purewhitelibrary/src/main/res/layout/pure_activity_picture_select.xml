@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="内容"
+                android:text="全部"
                 android:textSize="18sp"
                 android:textColor="#333"/>
         </RelativeLayout>

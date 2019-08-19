@@ -15,7 +15,8 @@
             android:text="获取图片"
             android:id="@+id/img_obtain"
             android:textSize="16sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:onClick="onClickView"/>
 
         <include layout="@layout/view_line"/>
         <TextView
@@ -25,7 +26,8 @@
             android:text="打开图片"
             android:id="@+id/open_img"
             android:textSize="16sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:onClick="onClickView"/>
 
         <include layout="@layout/view_line"/>
         <TextView
@@ -35,7 +37,8 @@
             android:text="清空图片"
             android:id="@+id/img_clear"
             android:textSize="16sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:onClick="onClickView"/>
 
         <ImageView
             android:layout_width="200dp"

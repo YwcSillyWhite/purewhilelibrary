@@ -39,7 +39,9 @@ public abstract class BindAdapter<T> extends BaseMoreAdapter<T,BindHolder> {
     protected BindHolder onDataCreateViewHolder(@NonNull ViewGroup parent, int viewType, int layoutIds) {
         ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
                 , layoutIds, parent, false);
-        return new BindHolder(binding);
+        BindHolder bindHolder = new BindHolder(binding);
+        bindDataListener(bindHolder);
+        return bindHolder;
     }
 
 

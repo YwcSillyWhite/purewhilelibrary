@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureUtils;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.BasePureAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.StringPureAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.listener.OnPureChangeListener;

@@ -15,8 +15,8 @@
                 android:paddingRight="10dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="15dp"
-                android:visibility="gone"
                 android:id="@+id/left_img"
+                android:onClick="onClickView"
                 android:src="@mipmap/icon_arrow_left"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
                 android:textColor="#333"
                 android:id="@+id/center_text"
                 android:layout_centerInParent="true"
-                android:visibility="gone"/>
+                android:text="Title"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

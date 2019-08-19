@@ -4,8 +4,9 @@
     //网络状态权限
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application >
-        <activity android:name=".ui.picture.PictureActivity"/>
-        <activity android:name=".ui.picview.PicViewActivity"/>
-        <activity android:name=".ui.image.activity.PictureSelectActivity"/>
+        //图片选择
+        <activity android:name=".ui.picture.activity.PictureSelectActivity"/>
+        //看图片
+        <activity android:name=".ui.picture.activity.LookPictureActivity"/>
     </application>
 </manifest>

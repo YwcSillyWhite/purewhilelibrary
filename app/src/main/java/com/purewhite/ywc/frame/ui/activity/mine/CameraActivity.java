@@ -2,9 +2,7 @@ package com.purewhite.ywc.frame.ui.activity.mine;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Camera;
 import android.os.Build;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -16,20 +14,17 @@ import com.purewhite.ywc.frame.config.FileManagerUtils;
 import com.purewhite.ywc.frame.config.TagUtils;
 import com.purewhite.ywc.frame.databinding.ActivityCameraBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
-import com.purewhite.ywc.purewhitelibrary.config.ConfigUtils;
 import com.purewhite.ywc.purewhitelibrary.config.PhotoUtils;
-import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
-import com.purewhite.ywc.purewhitelibrary.ui.image.PictureUtils;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureActivity;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.config.PictureStype;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureBuilder;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureUtils;
 
 import java.io.File;
 
-public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterImp> implements View.OnClickListener{
+public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterImp>{
 
     private File picFile;
     private PermissonCallBack permissonCallBack=new PermissonCallBack() {
@@ -44,7 +39,9 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                             ,picFile, TagUtils.request_camera);
                     break;
                 case 2:
-                    PictureUtils.intent(CameraActivity.this,null,1);
+                    new PictureBuilder().setPictureMaxNum(3)
+                            .setLineNum(3)
+                            .build(CameraActivity.this);
                     break;
             }
         }
@@ -55,27 +52,28 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
         }
     };
 
+
     @Override
-    public void onClick(View view) {
-        if (ClickUtils.clickable(view))
+    protected void onClickUtils(View view) {
+        switch (view.getId())
         {
-            switch (view.getId())
-            {
-                case R.id.left_img:
-                    backActivity();
-                    break;
-                case R.id.img_obtain:
-                    startPermisson(1,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                    break;
-                case R.id.img_clear:
-                    FileManagerUtils.removeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
-                    break;
-                case R.id.open_img:
-                    startPermisson(2,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                    break;
-            }
+            case R.id.left_img:
+                backActivity();
+                break;
+            case R.id.img_obtain:
+                startPermisson(1,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                break;
+            case R.id.img_clear:
+                FileManagerUtils.removeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
+                break;
+            case R.id.open_img:
+                startPermisson(2,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                break;
         }
+
     }
+
+
 
 
 
@@ -94,10 +92,6 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
         mDataBinding.titleBarLayout.leftImg.setVisibility(View.VISIBLE);
         mDataBinding.titleBarLayout.centerText.setVisibility(View.VISIBLE);
         mDataBinding.titleBarLayout.centerText.setText("图片");
-        mDataBinding.titleBarLayout.leftImg.setOnClickListener(this);
-        mDataBinding.imgObtain.setOnClickListener(this);
-        mDataBinding.imgClear.setOnClickListener(this);
-        mDataBinding.openImg.setOnClickListener(this);
     }
 
 

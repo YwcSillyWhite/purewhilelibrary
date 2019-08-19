@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
@@ -21,7 +22,7 @@ import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
  * @author yuwenchao
  * @date 2018/11/14
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements View.OnClickListener{
 
     //唯一加载
     private boolean soleLoad;
@@ -136,5 +137,19 @@ public abstract class BaseFragment extends Fragment {
         {
             permissonUtils.disposePermissions(requestCode,permissions,grantResults);
         }
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        if (ClickUtils.clickable(view))
+        {
+            onClickUtils(view);
+        }
+    }
+
+    protected void onClickUtils(View view)
+    {
+
     }
 }

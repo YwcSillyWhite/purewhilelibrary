@@ -27,7 +27,7 @@ import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import java.util.Arrays;
 
 public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
-        implements OnItemListener,View.OnClickListener {
+        implements OnItemListener {
 
 
 
@@ -63,12 +63,11 @@ public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
         }
     }
 
-
     @Override
-    public void onClick(View v) {
-//        if (!ClickUtils.clickable(v))
+    protected void onClickUtils(View view) {
+        //        if (!ClickUtils.clickable(v))
 //            return;
-        switch (v.getId())
+        switch (view.getId())
         {
             case R.id.head_img:
                 ToastUtils.show("吐血");
@@ -78,7 +77,9 @@ public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
 //                skipActivity(PictureActivity.class,build);
                 break;
         }
+
     }
+
 
 
 

@@ -2,12 +2,14 @@ package com.purewhite.ywc.purewhitelibrary.mvp.activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
@@ -137,6 +139,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         {
             permissonUtils.disposePermissions(requestCode,permissions,grantResults);
         }
+    }
+
+
+    //点击事件
+    public final void onClickView(View view) {
+        if (ClickUtils.clickable(view))
+        {
+            onClickUtils(view);
+        }
+    }
+
+    protected void onClickUtils(View view)
+    {
+
     }
 
 

@@ -32,7 +32,8 @@
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:id="@+id/head_img"/>
+                        android:id="@+id/head_img"
+                        android:onClick="onClickView"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"

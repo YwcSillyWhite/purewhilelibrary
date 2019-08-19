@@ -1,14 +1,18 @@
-package com.purewhite.ywc.purewhitelibrary.ui.image.adapter;
+package com.purewhite.ywc.purewhitelibrary.ui.picture.adapter;
+
+import android.view.View;
 
 import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.BindAdapter;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BindHolder;
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureAdapterPictureSelectBinding;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
-import com.purewhite.ywc.purewhitelibrary.ui.image.bean.Folder;
-import com.purewhite.ywc.purewhitelibrary.ui.image.bean.ImageBean;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +20,14 @@ import java.util.List;
 public class PictureSelectAdapter extends BindAdapter<ImageBean> {
 
     private boolean isCamera=false;
-    private List<String> selectList=new ArrayList<>();
-
-    public void setSelectList(List<String> selectList) {
-        this.selectList = selectList==null?new ArrayList<>():selectList;
-    }
-
     public PictureSelectAdapter() {
         addLayout(R.layout.pure_adapter_picture_select);
     }
 
+    public int obtainPosition(int position)
+    {
+        return isCamera?position-1:position;
+    }
 
     @Override
     protected int obtainDataCount() {
@@ -43,6 +45,7 @@ public class PictureSelectAdapter extends BindAdapter<ImageBean> {
                 {
                     PureAdapterPictureSelectBinding pictureSelectBinding = (PureAdapterPictureSelectBinding) binding;
                     ImageLoader.newInstance().init(pictureSelectBinding.picImg,R.mipmap.leak_canary_icon);
+                    pictureSelectBinding.picClick.setVisibility(View.GONE);
                 }
             }
             else
@@ -63,15 +66,34 @@ public class PictureSelectAdapter extends BindAdapter<ImageBean> {
         {
             PureAdapterPictureSelectBinding pictureSelectBinding = (PureAdapterPictureSelectBinding) binding;
             ImageLoader.newInstance().init(pictureSelectBinding.picImg,imageBean.getPath());
-        }
-        //是否以选中
-        if (selectList.contains(imageBean))
-        {
 
-        }
-        else
-        {
-
+            pictureSelectBinding.picClick.setVisibility(View.VISIBLE);
+            if (PictureManager.newInstance().isSelector(imageBean.getPath()))
+            {
+                pictureSelectBinding.picClick.setSelected(true);
+                pictureSelectBinding.picImg.setScaleX(1.5f);
+                pictureSelectBinding.picImg.setScaleY(1.5f);
+                pictureSelectBinding.picImg.setAlpha(0.5f);
+            }
+            else
+            {
+                pictureSelectBinding.picClick.setSelected(false);
+                pictureSelectBinding.picImg.setScaleX(1f);
+                pictureSelectBinding.picImg.setScaleY(1f);
+                pictureSelectBinding.picImg.setAlpha(1f);
+            }
+            pictureSelectBinding.picClick.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (ClickUtils.clickable(view))
+                    {
+                        if ( PictureManager.newInstance().alterImage(imageBean.getPath()))
+                        {
+                            flushPosition(position);
+                        }
+                    }
+                }
+            });
         }
     }
 

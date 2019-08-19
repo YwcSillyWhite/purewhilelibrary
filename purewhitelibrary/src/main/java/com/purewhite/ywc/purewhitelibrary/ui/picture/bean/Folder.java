@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.ui.image.bean;
+package com.purewhite.ywc.purewhitelibrary.ui.picture.bean;
 
 import java.util.ArrayList;
 import java.util.List;

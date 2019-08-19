@@ -26,28 +26,30 @@
                 android:layout_centerInParent="true"
                 android:text="内容"
                 android:textSize="18sp"
-                android:textColor="#333"/>
+                android:textColor="#333" />
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:src="@drawable/pure_seletor_pic"
+                android:id="@+id/action_bar_right"
+                android:onClick="onClickView"/>
         </RelativeLayout>
-        <androidx.viewpager2.widget.ViewPager2
+        <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
             android:id="@+id/view_pager">
-        </androidx.viewpager2.widget.ViewPager2>
+        </androidx.viewpager.widget.ViewPager>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/pure_write">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="预览"
-                android:paddingLeft="10dp"
-                android:gravity="center"
-                android:textColor="#333"
-                android:textSize="15sp"
-                android:paddingRight="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

@@ -57,7 +57,7 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
     }
 
 
-    private T obtainT(int position)
+    protected T obtainT(int position)
     {
         if (position<getCount())
         {

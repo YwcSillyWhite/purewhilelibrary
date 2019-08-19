@@ -1,14 +1,14 @@
-package com.purewhite.ywc.purewhitelibrary.ui.image.presenter;
+package com.purewhite.ywc.purewhitelibrary.ui.picture.presenter;
 
 import android.text.TextUtils;
 
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.HttpObserver;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxSchedulers;
-import com.purewhite.ywc.purewhitelibrary.ui.image.bean.Folder;
-import com.purewhite.ywc.purewhitelibrary.ui.image.bean.ImageBean;
-import com.purewhite.ywc.purewhitelibrary.ui.image.contract.PictureSelectContract;
-import com.purewhite.ywc.purewhitelibrary.ui.image.scanner.ImageScanner;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.contract.PictureSelectContract;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.scanner.ImageScanner;
 
 import java.io.File;
 import java.util.ArrayList;
