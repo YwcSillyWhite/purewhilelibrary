@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 
 import com.purewhite.ywc.purewhitelibrary.R;
+import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseSkipActivity;
 
 /**
  * @author yuwenchao
@@ -15,28 +16,43 @@ public abstract class BaseSkipFragment extends BaseBarEventbusFragment {
 
     public void skipActivity(Class<?> cla)
     {
-        skipActivity(cla,-1,null,true);
+        skipActivity(cla,-1,null);
     }
 
     public void skipActivity(Class<?> cla,Bundle bundle)
     {
-        skipActivity(cla,-1,bundle,true);
+        skipActivity(cla,-1,bundle);
     }
 
-    public void skipActivity(Class<?> cla,int requestCode,boolean isActivity)
+    public void skipActivity(Class<?> cla,int requestCode)
     {
-        skipActivity(cla,requestCode,null,isActivity);
+        skipActivity(cla,requestCode,null);
     }
 
-    public void skipActivity(Class<?> cla,int requestCode,Bundle bundle,boolean isActivity)
+    public void skipActivity(Class<?> cla,int requestCode,Bundle bundle)
     {
-        skipActivity(new Intent(getContext(),cla),bundle,requestCode,isActivity);
+        skipActivity(new Intent(getActivity(),cla),requestCode,bundle);
+    }
+
+    public void skipActivity(Intent intent,int requestCode)
+    {
+        skipActivity(intent,requestCode,null);
+    }
+
+    public void skipActivity(Intent intent,Bundle bundle)
+    {
+        skipActivity(intent,-1,bundle);
+    }
+
+    public void skipActivity(Intent intent,int requestCode,Bundle bundle)
+    {
+        skipActivity(intent,requestCode,bundle,0,false);
     }
 
 
-    public void skipActivity(Intent intent,Bundle bundle,int requestCode,boolean isActivity)
+    public void skipActivity(Class<?> cla,int requestCode,Bundle bundle,int skipAnimStatue,boolean isActivity)
     {
-        skipActivity(intent,requestCode,bundle,isActivity,1);
+        skipActivity(new Intent(getContext(),cla),requestCode,bundle,skipAnimStatue,isActivity);
     }
 
     /**
@@ -45,7 +61,7 @@ public abstract class BaseSkipFragment extends BaseBarEventbusFragment {
      * @param bundle
      * @param requestCode
      */
-    public void skipActivity(Intent intent,int requestCode,Bundle bundle,boolean isActivity,int skipAnimStatue)
+    public void skipActivity(Intent intent,int requestCode,Bundle bundle,int skipAnimStatue,boolean isActivity)
     {
         if (bundle!=null)
         {
@@ -59,15 +75,9 @@ public abstract class BaseSkipFragment extends BaseBarEventbusFragment {
         {
             super.startActivityForResult(intent,requestCode);
         }
-        switch (skipAnimStatue)
+        if (getActivity() instanceof BaseSkipActivity)
         {
-            case 1:
-                getActivity().overridePendingTransition(R.anim.pure_activity_enter_right,R.anim.pure_activity_exit_left);
-                break;
-            case 2:
-                getActivity().overridePendingTransition(R.anim.pure_actiivty_enter_alpha,0);
-                break;
-
+            ((BaseSkipActivity) getActivity()).skipAnim(skipAnimStatue);
         }
     }
 
@@ -76,18 +86,18 @@ public abstract class BaseSkipFragment extends BaseBarEventbusFragment {
     /**
      * 回退activity
      */
-    public void backActivity()
+    public void finishActivity()
     {
-        backActivity(-1);
+        finishActivity(-1);
     }
 
-    public void backActivity(int requestCode)
+    public void finishActivity(int requestCode)
     {
-        backActivity(requestCode,null);
+        finishActivity(requestCode,null);
     }
 
 
-    public void backActivity(int requestCode,Bundle bundle)
+    public void finishActivity(int requestCode,Bundle bundle)
     {
         FragmentActivity activity = getActivity();
         if (requestCode>=0)

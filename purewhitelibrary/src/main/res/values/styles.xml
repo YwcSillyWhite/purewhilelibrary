@@ -19,17 +19,19 @@
         <!-- app没有闪屏页 -->
         <item name="android:windowContentOverlay">@null</item>
         <!-- windowIsTranslucent   这个别随意乱用 ，叫做window背景透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+
     </style>
 
-    <style name="PureBaseTheme" parent="PureBase" ></style>
+
 
 
 
     <style name="activityAnimation" parent="@android:style/Animation">
-        <item name="android:activityOpenEnterAnimation">@anim/pure_activity_enter_left</item>
-        <item name="android:activityOpenExitAnimation">@anim/pure_activity_exit_right</item>
-        <item name="android:activityCloseEnterAnimation">@anim/pure_activity_enter_left</item>
-        <item name="android:activityCloseExitAnimation">@anim/pure_activity_exit_right</item>
+        <item name="android:activityOpenEnterAnimation">@anim/pure_enter_left_p_300</item>
+        <item name="android:activityOpenExitAnimation">@anim/pure_exit_right_p_300</item>
+        <item name="android:activityCloseEnterAnimation">@anim/pure_enter_left_p_300</item>
+        <item name="android:activityCloseExitAnimation">@anim/pure_exit_right_p_300</item>
     </style>
 
 </resources>

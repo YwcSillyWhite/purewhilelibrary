@@ -24,7 +24,7 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            skipActivity(MainActivity.class,-1,null,2);
+            skipActivity(MainActivity.class,-1,null,-1);
             backActivity();
         }
 
@@ -57,7 +57,7 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
     @Override
     protected void beforeView() {
         super.beforeView();
-        setFinishAnimStatue(2);
+        setFinishAnimStatue(-1);
     }
 
     @Override

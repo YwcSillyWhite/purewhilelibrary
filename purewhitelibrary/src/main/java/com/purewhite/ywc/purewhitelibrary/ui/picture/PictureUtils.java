@@ -1,8 +1,10 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseSkipActivity;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.activity.PictureSelectActivity;
 
 import java.util.ArrayList;
@@ -62,11 +64,15 @@ public class PictureUtils {
             return this;
         }
 
-        public void build(Context context)
+        public void build(Activity activity)
         {
             PictureManager.newInstance().init(imageList,pictureMaxNum,lineNum,pictureType,isPreview);
-            Intent intent = new Intent(context, PictureSelectActivity.class);
-            context.startActivity(intent);
+            Intent intent = new Intent(activity, PictureSelectActivity.class);
+            activity.startActivity(intent);
+            if (activity instanceof BaseSkipActivity)
+            {
+                ((BaseSkipActivity) activity).skipAnim(2);
+            }
         }
     }
 

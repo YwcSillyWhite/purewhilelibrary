@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="PureBaseTheme"></style>
+    <style name="AppTheme" parent="PureBase"></style>
 
     <style name="StartTheme" parent="AppTheme">
         <!--&lt;!&ndash; windown布局页面背景颜色 &ndash;&gt;-->

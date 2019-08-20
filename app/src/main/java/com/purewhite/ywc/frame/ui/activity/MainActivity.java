@@ -77,7 +77,7 @@ public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> 
     @Override
     protected void beforeView() {
         super.beforeView();
-        setFinishAnimStatue(2);
+        setFinishAnimStatue(-1);
     }
 
     @Override

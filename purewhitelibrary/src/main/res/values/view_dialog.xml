@@ -30,25 +30,26 @@
 
 
 
+
+
     <style name="LeftWindowAnimStyle" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/dialog_left_in_window</item>
-        <item name="android:windowExitAnimation">@anim/dialog_left_out_window</item>
+        <item name="android:windowEnterAnimation">@anim/pure_enter_left_p_300</item>
+        <item name="android:windowExitAnimation">@anim/pure_exit_left_p_300</item>
     </style>
 
     <style name="RightWindowAnimStyle" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/dialog_right_in_window</item>
-        <item name="android:windowExitAnimation">@anim/dialog_right_out_window</item>
+        <item name="android:windowEnterAnimation">@anim/pure_enter_right_p_300</item>
+        <item name="android:windowExitAnimation">@anim/pure_exit_right_p_300</item>
     </style>
 
     <style name="TopWindowAnimStyle" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/dialog_top_in_window</item>
-        <item name="android:windowExitAnimation">@anim/dialog_top_out_window</item>
+        <item name="android:windowEnterAnimation">@anim/pure_enter_top_p_300</item>
+        <item name="android:windowExitAnimation">@anim/pure_exit_top_p_300</item>
     </style>
 
     <style name="BottomWindowAnimStyle" parent="android:Animation">
-        <item name="android:windowEnterAnimation">@anim/dialog_bottom_in_windown</item>
-        <item name="android:windowExitAnimation">@anim/dialog_bottom_out_windown</item>
+        <item name="android:windowEnterAnimation">@anim/pure_enter_bottom_p_300</item>
+        <item name="android:windowExitAnimation">@anim/pure_exit_bottom_p_300</item>
     </style>
-
 
 </resources>
