@@ -73,22 +73,12 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
         }
     }
 
-    @Override
-    protected PictureSelectPresenter creartPresenter() {
-        return new PictureSelectPresenter();
-    }
-
 
     @Override
     protected int getLayout() {
         return R.layout.pure_activity_picture_select;
     }
 
-    @Override
-    protected void beforeView() {
-        super.beforeView();
-        setFinishAnimStatue(2);
-    }
 
     @Override
     protected void initView() {

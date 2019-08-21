@@ -26,12 +26,18 @@ public abstract class OkCallBack<T> {
      */
     static Type getSuperclassTypeParameter(Class<?> subclass) {
         Type type = subclass.getGenericSuperclass();
-        if (type instanceof Class) {
-            LogUtils.debug("okhttp","不存在范型");
+        if (type==null) {
             return null;
         }
-        Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
-        return canonicalize(actualTypeArguments[0]);
+        if (type instanceof ParameterizedType)
+        {
+            Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
+            if (actualTypeArguments!=null&&actualTypeArguments.length>0)
+            {
+                return canonicalize(actualTypeArguments[0]);
+            }
+        }
+        return null;
     }
 
     /**

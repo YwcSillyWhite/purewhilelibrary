@@ -22,10 +22,6 @@ public class PictureUtils {
 
 
 
-
-
-
-
     public static class Builder
     {
         //图片地址
@@ -71,7 +67,7 @@ public class PictureUtils {
             activity.startActivity(intent);
             if (activity instanceof BaseSkipActivity)
             {
-                ((BaseSkipActivity) activity).skipAnim(2);
+                ((BaseSkipActivity) activity).skipAnim(1);
             }
         }
     }

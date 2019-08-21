@@ -18,9 +18,11 @@
         <item name="windowNoTitle">true</item>
         <!-- app没有闪屏页 -->
         <item name="android:windowContentOverlay">@null</item>
-        <!-- windowIsTranslucent   这个别随意乱用 ，叫做window背景透明 -->
+    </style>
+    
+    <style name="PureBaseTranslucent">
+        <!-- windowIsTranslucent   这个别随意乱用 ，叫做window背景透明 生命周期-->
         <item name="android:windowIsTranslucent">true</item>
-
     </style>
 
 

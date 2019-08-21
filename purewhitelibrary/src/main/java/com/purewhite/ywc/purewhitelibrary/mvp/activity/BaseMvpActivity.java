@@ -8,6 +8,10 @@ import androidx.fragment.app.Fragment;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+
 
 /**
  *
@@ -31,7 +35,24 @@ public abstract class BaseMvpActivity<D extends ViewDataBinding,P extends Presen
     }
 
     //创建PresenterImp对象
-    protected abstract P creartPresenter();
+    protected P creartPresenter()
+    {
+        Type genericSuperclass = this.getClass().getGenericSuperclass();
+        if (genericSuperclass!=null&&genericSuperclass instanceof ParameterizedType)
+        {
+            ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
+            Type[] types = parameterizedType.getActualTypeArguments();
+            if (types!=null&&types.length>1)
+            {
+                try {
+                    return ((Class<P>) types[1]).newInstance();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
 
     @Override
     protected void beforeView() {

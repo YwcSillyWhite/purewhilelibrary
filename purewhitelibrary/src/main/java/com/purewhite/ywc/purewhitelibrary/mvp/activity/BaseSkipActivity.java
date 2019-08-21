@@ -90,15 +90,11 @@ public abstract class BaseSkipActivity extends BaseBarEventbusActivity {
         switch (skipAnimStatue)
         {
             case 0:
-                overridePendingTransition(R.anim.pure_enter_right_p_300,0);
+                overridePendingTransition(R.anim.pure_enter_right_p_300,R.anim.pure_exit_left_p_300);
                 break;
             case 1:
-                overridePendingTransition(R.anim.pure_actiivty_enter_alpha,0);
+                overridePendingTransition(R.anim.pure_enter_alpha,0);
                 break;
-            case 2:
-                overridePendingTransition(R.anim.pure_enter_scale_lt_300,0);
-                break;
-
         }
     }
 
@@ -171,10 +167,7 @@ public abstract class BaseSkipActivity extends BaseBarEventbusActivity {
                 overridePendingTransition(0,R.anim.pure_exit_right_p_300);
                 break;
             case 1:
-                overridePendingTransition(0,R.anim.pure_activity_exit_alpha);
-                break;
-            case 2:
-                overridePendingTransition(0,R.anim.pure_exit_scale_rb_300);
+                overridePendingTransition(0,R.anim.pure_exit_alpha);
                 break;
         }
     }
