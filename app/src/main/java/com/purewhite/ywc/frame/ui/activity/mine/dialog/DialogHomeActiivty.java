@@ -13,10 +13,7 @@ import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
 public class DialogHomeActiivty extends MvpActivity<ActivityDialogHomeBinding,PresenterImp> {
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
+
 
     private OnSingleListener onSingleListener=new OnSingleListener() {
         @Override

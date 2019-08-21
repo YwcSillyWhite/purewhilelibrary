@@ -13,10 +13,6 @@ import java.util.List;
 public class PagerActivity extends MvpActivity<ActivityPagerBinding,PresenterImp> {
 
     private Integer [] colors={0XFF199AFE,0XFFFF8080,0XFF00AB96,0XFF00ff00,0XFF001133};
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
 
     @Override
     protected int getLayout() {

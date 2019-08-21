@@ -35,23 +35,31 @@ public abstract class BaseMvpActivity<D extends ViewDataBinding,P extends Presen
     }
 
     //创建PresenterImp对象
-    protected P creartPresenter()
+    private P creartPresenter()
     {
         Type genericSuperclass = this.getClass().getGenericSuperclass();
         if (genericSuperclass!=null&&genericSuperclass instanceof ParameterizedType)
         {
             ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
             Type[] types = parameterizedType.getActualTypeArguments();
-            if (types!=null&&types.length>1)
+            final int positionPresenter = positionPresenter();
+            if (types!=null&&types.length>positionPresenter)
             {
+                Type type = types[positionPresenter];
                 try {
-                    return ((Class<P>) types[1]).newInstance();
+                    return ((Class<P>) type).newInstance();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
         return null;
+    }
+
+    //第几个范型是Presenter
+    protected int positionPresenter()
+    {
+        return 1;
     }
 
     @Override

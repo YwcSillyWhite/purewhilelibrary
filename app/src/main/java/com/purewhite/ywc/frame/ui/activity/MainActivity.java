@@ -64,10 +64,6 @@ public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> 
     };
 
 
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
 
     @Override
     protected int getLayout() {

@@ -117,10 +117,6 @@ public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
     }
 
 
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
 
 
 }

@@ -54,10 +54,7 @@ public class BottomsheetActivity extends MvpActivity<ActivityBottomsheetBinding,
         }
     }
 
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
+
 
     @Override
     protected int getLayout() {

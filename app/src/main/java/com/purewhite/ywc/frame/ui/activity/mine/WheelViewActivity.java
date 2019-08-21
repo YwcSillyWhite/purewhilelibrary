@@ -27,10 +27,6 @@ import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import java.util.List;
 
 public class WheelViewActivity extends MvpActivity<ActivityWheelBinding,PresenterImp> implements View.OnClickListener {
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
 
     @Override
     protected int getLayout() {

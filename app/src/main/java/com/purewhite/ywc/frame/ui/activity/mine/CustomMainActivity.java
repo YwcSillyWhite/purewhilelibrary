@@ -18,10 +18,6 @@ public class CustomMainActivity extends MvpActivity<ActivityCustomMainBinding,Pr
         }
     };
 
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
 
     @Override
     protected int getLayout() {

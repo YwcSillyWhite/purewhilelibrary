@@ -69,10 +69,6 @@ public class HomeFragment extends MvpFragment<FragHomeBinding,PresenterImp> {
 
 
 
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
 
     @Override
     protected int getLayout() {

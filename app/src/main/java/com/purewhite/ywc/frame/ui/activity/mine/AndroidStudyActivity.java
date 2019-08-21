@@ -43,10 +43,6 @@ public class AndroidStudyActivity extends MvpActivity<ActivityAndroidStudyBindin
         }
     };
 
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
 
 
     @Override

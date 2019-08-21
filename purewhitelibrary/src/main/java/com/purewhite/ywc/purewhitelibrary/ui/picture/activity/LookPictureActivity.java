@@ -23,11 +23,6 @@ public class LookPictureActivity extends BaseMvpActivity<PureActivityLookPicture
     private LookPictureAdapter lookPictureAdapter;
 
     @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
-
-    @Override
     protected int getLayout() {
         return R.layout.pure_activity_look_picture;
     }

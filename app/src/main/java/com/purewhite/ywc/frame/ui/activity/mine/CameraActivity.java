@@ -75,12 +75,6 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
 
 
 
-
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
-
     @Override
     protected int getLayout() {
         return R.layout.activity_camera;

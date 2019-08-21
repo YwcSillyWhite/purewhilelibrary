@@ -36,10 +36,7 @@ public class StartActivity extends MvpActivity<ActivityStartBinding,PresenterImp
 
 
 
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
+
 
     @Override
     protected int getLayout() {

@@ -75,10 +75,7 @@ public class HomeChildFragment extends MvpFragment<FragHomeChildBinding,HomeChil
         }
     };
 
-    @Override
-    protected HomeChildPresenter creartPresenter() {
-        return new HomeChildPresenter();
-    }
+
 
     @Override
     protected int getLayout() {

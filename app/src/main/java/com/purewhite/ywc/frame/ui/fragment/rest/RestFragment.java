@@ -7,10 +7,7 @@ import com.purewhite.ywc.frame.ui.mvp.MvpFragment;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 
 public class RestFragment extends MvpFragment<FragRestBinding,PresenterImp> {
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
+
 
     @Override
     protected int getLayout() {

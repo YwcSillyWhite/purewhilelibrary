@@ -24,10 +24,6 @@ import okhttp3.WebSocketListener;
 import okio.ByteString;
 
 public class SocketActivity extends MvpActivity<ActivitySocketBinding,PresenterImp> {
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
 
     private Handler handler=new Handler();
     private WebSocket webSocket;

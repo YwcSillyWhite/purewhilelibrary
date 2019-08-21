@@ -72,10 +72,6 @@ public class WebActivity extends MvpActivity<ActivityWebBinding,PresenterImp> {
 
 
 
-    @Override
-    protected PresenterImp creartPresenter() {
-        return null;
-    }
 
     @Override
     protected int getLayout() {

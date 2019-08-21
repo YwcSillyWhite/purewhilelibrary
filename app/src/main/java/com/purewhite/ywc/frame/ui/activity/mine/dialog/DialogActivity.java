@@ -95,10 +95,7 @@ public class DialogActivity extends MvpActivity<ActivityDialogBinding,PresenterI
 
 
 
-    @Override
-    protected PresenterImp creartPresenter() {
-        return new PresenterImp();
-    }
+
 
     @Override
     protected int getLayout() {
