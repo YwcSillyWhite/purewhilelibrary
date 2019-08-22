@@ -4,6 +4,20 @@
     //网络状态权限
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application >
+
+
+        <provider
+            android:authorities="com.purewhite.ywc.purewhitelibrary.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/pure_file_path">
+            </meta-data>
+        </provider>
+
+
         //图片选择
         <activity android:name=".ui.picture.activity.PictureSelectActivity"/>
         //看图片

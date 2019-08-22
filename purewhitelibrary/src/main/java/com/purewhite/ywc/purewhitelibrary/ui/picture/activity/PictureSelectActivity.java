@@ -1,7 +1,12 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.PopupWindow;
 
@@ -10,14 +15,20 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.purewhite.ywc.purewhitelibrary.BuildConfig;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
+import com.purewhite.ywc.purewhitelibrary.config.PhotoUtils;
 import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
+import com.purewhite.ywc.purewhitelibrary.config.file.FileManagerUtils;
+import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureActivityPictureSelectBinding;
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
+import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureConfig;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureUtils;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureSelectAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureWindowAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
@@ -28,6 +39,7 @@ import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
 import com.purewhite.ywc.purewhitelibrary.window.popup.PopupWindowUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +47,30 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
         implements PictureSelectContract.UiView {
 
     private PictureSelectAdapter pictureSelectAdapter;
+    private File timeFile;
+    //权限
+    private PermissonCallBack permissonCallBack=new PermissonCallBack() {
+        @Override
+        public void onPermissonSuccess(int requestCode) {
+            switch (requestCode)
+            {
+                case PictureConfig.permisson_picture:
+                    timeFile = FileManagerUtils.createTimeFile("pure/image",FileManagerUtils.FILE_SD);
+                    if (timeFile!=null)
+                    {
+                        PhotoUtils.intentCamera(PictureSelectActivity.this, BuildConfig.APPLICATION_ID+".fileprovider"
+                                ,timeFile, PictureConfig.intent_picture_to_camera);
+                    }
+                    break;
+            }
+        }
+
+        @Override
+        public void onPermissonRepulse(int requestCode, String... permisssons) {
+
+        }
+    };
+
 
     private OnItemListener onItemListener=new OnItemListener() {
         @Override
@@ -47,7 +83,7 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
                     //拍照
                     if (positionReal<0)
                     {
-
+                        startPermisson(PictureConfig.permisson_picture,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                     }
                     else
                     {
@@ -195,6 +231,19 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
                 {
                     pictureSelectAdapter.notifyDataSetChanged();
                     setViewStatue();
+                }
+                break;
+            case PictureConfig.intent_picture_to_camera:
+                if(resultCode==RESULT_OK)
+                {
+                    String photoPath=PhotoUtils.obtainPhotoPath(data,timeFile.getAbsolutePath());
+                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).setData(Uri.fromFile(new File(photoPath))));
+                    ImageBean imageBean = new ImageBean(photoPath,"",0L);
+                    List<Folder> folders = pictureWindowAdapter.obtainData();
+                    mPresenter.obtianListFolder(folders,imageBean,true);
+                    PictureManager.newInstance().alterImage(photoPath);
+                    pictureWindowAdapter.notifyDataSetChanged();
+                    pictureSelectAdapter.flush(folders,0);
                 }
                 break;
         }

@@ -61,8 +61,7 @@ public abstract class MediaStoreScanner<T> {
     public List<T> queryMedia() {
         List<T> list = new ArrayList<>();
         ContentResolver contentResolver = AppUtils.getContext().getContentResolver();
-        Cursor cursor = contentResolver.query(getScanUri(), getProjection(),
-                getSelection(), getSelectionArgs(), getOrder());
+        Cursor cursor = contentResolver.query(getScanUri(), getProjection(), getSelection(), getSelectionArgs(), getOrder());
         if (cursor != null&&cursor.getCount()>0)
         {
             while (cursor.moveToNext())

@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.BindAdapter;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BindHolder;
+import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureAdapterPictureSelectBinding;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureAdapterPictureSelectCameraBinding;
@@ -59,6 +60,7 @@ public class PictureSelectAdapter extends BindAdapter<ImageBean> {
         ViewDataBinding binding = holder.getBinding();
         if (binding instanceof PureAdapterPictureSelectBinding)
         {
+            LogUtils.debug(imageBean.getPath()+"图片地址");
             PureAdapterPictureSelectBinding pictureSelectBinding = (PureAdapterPictureSelectBinding) binding;
             ImageLoader.newInstance().init(pictureSelectBinding.picImg,imageBean.getPath());
             pictureSelectBinding.picClick.setVisibility(View.VISIBLE);

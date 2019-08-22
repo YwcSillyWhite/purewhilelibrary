@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.purewhite.ywc.frame.BuildConfig;
 import com.purewhite.ywc.frame.R;
-import com.purewhite.ywc.frame.config.FileManagerUtils;
+import com.purewhite.ywc.purewhitelibrary.config.file.FileManagerUtils;
 import com.purewhite.ywc.frame.config.TagUtils;
 import com.purewhite.ywc.frame.databinding.ActivityCameraBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
@@ -31,7 +31,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
             switch (requestCode)
             {
                 case 1:
-                    picFile = FileManagerUtils.createTimeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
+//                    picFile = FileManagerUtils.createTimeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
                     PhotoUtils.intentCamera(CameraActivity.this
                             , BuildConfig.APPLICATION_ID+".fileprovider"
                             ,picFile, TagUtils.request_camera);
@@ -63,7 +63,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                 startPermisson(1,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 break;
             case R.id.img_clear:
-                FileManagerUtils.removeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
+//                FileManagerUtils.removeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
                 break;
             case R.id.open_img:
                 startPermisson(2,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
