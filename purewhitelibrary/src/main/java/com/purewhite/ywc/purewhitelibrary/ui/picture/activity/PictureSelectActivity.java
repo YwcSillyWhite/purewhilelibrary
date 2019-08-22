@@ -142,7 +142,9 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
         }
         else if (id==R.id.picture_sure)
         {
-
+            Bundle build = BundleUtils.buidler().put(PictureConfig.pictureArtwork, PictureManager.newInstance().getSelectorList())
+                    .build();
+            backActivity(PictureConfig.back_picture_to_,build);
         }
         else if (id==R.id.picture_preview)
         {
@@ -225,7 +227,9 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
             case PictureConfig.intent_picture_to_look:
                 if (resultCode==PictureConfig.back_look_to_picture)
                 {
-
+                    Bundle build = BundleUtils.buidler().put(PictureConfig.pictureArtwork, PictureManager.newInstance().getSelectorList())
+                            .build();
+                    backActivity(PictureConfig.back_picture_to_,build);
                 }
                 else
                 {

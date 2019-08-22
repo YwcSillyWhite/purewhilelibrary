@@ -21,26 +21,36 @@ import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterImp>{
 
-    private File picFile;
+    private List<String> list=new ArrayList<>();
     private PermissonCallBack permissonCallBack=new PermissonCallBack() {
         @Override
         public void onPermissonSuccess(int requestCode) {
             switch (requestCode)
             {
                 case 1:
-//                    picFile = FileManagerUtils.createTimeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
-                    PhotoUtils.intentCamera(CameraActivity.this
-                            , BuildConfig.APPLICATION_ID+".fileprovider"
-                            ,picFile, TagUtils.request_camera);
+                    PictureUtils.buidler()
+                            .setImageMax(6)
+                            .setLineNum(3)
+                            .setCamera(false)
+                            .build(CameraActivity.this,1);
                     break;
                 case 2:
                     PictureUtils.buidler()
                             .setImageMax(6)
                             .setLineNum(3)
-                            .build(CameraActivity.this);
+                            .build(CameraActivity.this,1);
+                    break;
+                case 3:
+                    PictureUtils.buidler()
+                            .setImageMax(6)
+                            .setLineNum(3)
+                            .setSelectorList(list)
+                            .build(CameraActivity.this,1);
                     break;
             }
         }
@@ -59,15 +69,16 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
             case R.id.left_img:
                 backActivity();
                 break;
-            case R.id.img_obtain:
+            case R.id.open_one:
                 startPermisson(1,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 break;
-            case R.id.img_clear:
-//                FileManagerUtils.removeFile(CameraActivity.this,FileManagerUtils.FILE_PICTURES);
-                break;
-            case R.id.open_img:
+            case R.id.open_two:
                 startPermisson(2,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
                 break;
+            case R.id.open_three:
+                startPermisson(3,permissonCallBack,Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                break;
+
         }
 
     }
@@ -93,28 +104,16 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode)
         {
-            case TagUtils.request_camera:
-                if(resultCode==RESULT_OK)
+            case 1:
+                if (data!=null)
                 {
-                    String photoPath=null;
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        photoPath = picFile.getAbsolutePath();
-                    }
-                    else
+                    List<String> list = PictureUtils.obtianArtwork(data,resultCode);
+                    if (list!=null&&list.size()>0)
                     {
-                        if (data.getData()!=null)
-                        {
-                            photoPath = data.getData().getEncodedPath();
-                        }
-                    }
-                    if (!TextUtils.isEmpty(photoPath))
-                    {
-                        ImageLoader.newInstance().init(mDataBinding.imageView,photoPath);
+                        this.list=list;
                     }
                 }
                 break;
         }
     }
-
-
 }

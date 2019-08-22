@@ -32,7 +32,12 @@ public class PictureBean<T> {
     }
 
     public T setSelectorList(List<String> selectorList) {
-        this.selectorList = selectorList;
+        if (this.selectorList.size()>0)
+            this.selectorList.clear();
+        if (selectorList!=null&&selectorList.size()>0)
+        {
+            this.selectorList.addAll(selectorList);
+        }
         return ((T) this);
     }
 

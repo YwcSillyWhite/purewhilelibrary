@@ -5,12 +5,12 @@ public class PictureConfig {
 
 
     public static final String imageBean="imageBean";
-    //是否预览看图
-    public static final String pictureIsPreview="preview";
     //viewpager的position
     public static final String picturePagerPosition="picturePagerPosition";
 
 
+
+    public static final String pictureArtwork="pictureArtwork";
 
 
 
@@ -30,5 +30,7 @@ public class PictureConfig {
 
     //回退返回值 5001开始
     public static final int back_look_to_picture=5001;
+
+    public static final int back_picture_to_=5002;
 
 }

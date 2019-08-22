@@ -43,7 +43,7 @@ public class LookPictureActivity extends BaseMvpActivity<PureActivityLookPicture
         }
         else if (id==R.id.picture_sure)
         {
-
+            backActivity(PictureConfig.back_look_to_picture);
         }
     }
 
