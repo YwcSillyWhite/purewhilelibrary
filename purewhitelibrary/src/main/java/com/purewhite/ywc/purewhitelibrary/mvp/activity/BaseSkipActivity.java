@@ -111,25 +111,32 @@ public abstract class BaseSkipActivity extends BaseBarEventbusActivity {
      */
     public void backActivity()
     {
-        backActivity(-1);
+        backActivity(null);
     }
 
-    public void backActivity(int requestCode)
+    public void backActivity(Integer requestCode)
     {
         backActivity(requestCode,null);
     }
 
 
-    public void backActivity(int requestCode,Bundle bundle)
+    public void backActivity(Integer requestCode,Bundle bundle)
     {
-        if (requestCode>=0)
+        if (requestCode!=null)
         {
-            Intent intent = new Intent();
             if (bundle!=null)
             {
-                intent.putExtras(bundle);
+                Intent intent = new Intent();
+                if (bundle!=null)
+                {
+                    intent.putExtras(bundle);
+                }
+                setResult(requestCode,intent);
             }
-            setResult(requestCode,intent);
+            else
+            {
+                setResult(requestCode,null);
+            }
         }
         finish();
     }

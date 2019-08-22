@@ -66,7 +66,7 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
         return null;
     }
 
-    private List<T> obtainListT()
+    protected List<T> obtainData()
     {
         return list;
     }

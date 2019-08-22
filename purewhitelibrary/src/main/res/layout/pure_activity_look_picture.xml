@@ -26,15 +26,17 @@
                 android:layout_centerInParent="true"
                 android:text="内容"
                 android:textSize="18sp"
+                android:id="@+id/action_bar_center"
                 android:textColor="#333" />
 
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="12dp"
+                android:padding="10dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/pure_seletor_pic"
                 android:id="@+id/action_bar_right"
                 android:onClick="onClickView"/>
@@ -55,11 +57,14 @@
                 android:layout_height="match_parent"
                 android:text="请选择"
                 android:layout_alignParentRight="true"
-                android:paddingLeft="10dp"
+                android:paddingLeft="15dp"
                 android:gravity="center"
-                android:textColor="#333"
+                android:textColor="@drawable/pure_seletor_text_color"
+                android:enabled="false"
                 android:textSize="15sp"
-                android:paddingRight="10dp"/>
+                android:paddingRight="16dp"
+                android:onClick="onClickView"
+                android:id="@+id/picture_sure"/>
         </RelativeLayout>
     </LinearLayout>
 </layout>

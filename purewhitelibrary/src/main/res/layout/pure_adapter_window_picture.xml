@@ -19,14 +19,38 @@
                 android:scaleType="centerCrop"
                 android:layout_height="wrap_content"
                 android:id="@+id/ratio_image_view"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/pure_text_default"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:layout_marginLeft="15dp"
-                android:textSize="16sp"
-                android:textStyle="italic"
-                android:id="@+id/text_view"/>
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/pure_text_default"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="16sp"
+                    android:text="图标"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:id="@+id/picture_title"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/pure_text_hint_default"
+                    android:layout_marginLeft="15dp"
+                    android:textSize="14sp"
+                    android:text="图标"
+                    android:layout_marginTop="4dp"
+                    android:id="@+id/picture_num"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/pure_picture_select"
+                android:id="@+id/pure_picture_select"/>
         </LinearLayout>
         <include layout="@layout/pure_view_line_gray" android:id="@+id/view_line"/>
     </LinearLayout>

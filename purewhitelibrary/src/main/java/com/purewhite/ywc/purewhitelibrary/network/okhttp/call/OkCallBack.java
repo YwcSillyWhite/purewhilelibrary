@@ -1,7 +1,5 @@
 package com.purewhite.ywc.purewhitelibrary.network.okhttp.call;
 
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 

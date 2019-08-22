@@ -20,12 +20,12 @@ public class WindowPureUtils {
     }
 
 
-    public static void onDialogBottomDestory(PopupWindowUtils...popupWindowUtils)
+    public static void onPopupDestory(PopupWindowUtils...popupWindowUtils)
     {
         for (PopupWindowUtils popupWindowUtil:popupWindowUtils) {
             if (popupWindowUtil!=null)
             {
-//                popupWindowUtil.dismiss();
+                popupWindowUtil.dismiss();
             }
         }
     }

@@ -6,6 +6,6 @@
         android:layout_height="wrap_content"
         android:background="@color/pure_write"
         android:id="@+id/recycler_view"
-        app:maxHeight="450dp">
+        app:maxHeight="500dp">
     </com.purewhite.ywc.purewhitelibrary.view.recyclerview.MaxHeightRecyclerView>
 </layout>

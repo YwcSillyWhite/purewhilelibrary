@@ -7,17 +7,14 @@
         <com.purewhite.ywc.purewhitelibrary.view.imageview.RatioImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pic_img"
             android:scaleType="centerCrop"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            android:background="@color/pure_write"/>
         <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:scaleType="fitXY"
-            android:padding="8dp"
-            android:id="@+id/pic_click"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/pure_seletor_pic"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/pure_camera"/>
     </RelativeLayout>
 
 </layout>

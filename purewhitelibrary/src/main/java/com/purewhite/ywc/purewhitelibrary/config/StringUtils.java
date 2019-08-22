@@ -62,6 +62,13 @@ public class StringUtils {
         }
     }
 
+    public static String obtianString(String content)
+    {
+        if (TextUtils.isEmpty(content))
+            return "";
+        return content;
+    }
+
 
     //数字转换成字符串，保留2位小数
     public static String doubleToString2(double num){

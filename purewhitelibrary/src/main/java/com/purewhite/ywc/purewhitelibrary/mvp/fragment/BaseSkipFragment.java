@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseSkipActivity;
 
 /**
@@ -91,23 +90,30 @@ public abstract class BaseSkipFragment extends BaseBarEventbusFragment {
         finishActivity(-1);
     }
 
-    public void finishActivity(int requestCode)
+    public void finishActivity(Integer requestCode)
     {
         finishActivity(requestCode,null);
     }
 
 
-    public void finishActivity(int requestCode,Bundle bundle)
+    public void finishActivity(Integer requestCode,Bundle bundle)
     {
         FragmentActivity activity = getActivity();
-        if (requestCode>=0)
+        if (requestCode!=null)
         {
-            Intent intent = new Intent();
             if (bundle!=null)
             {
-                intent.putExtras(bundle);
+                Intent intent = new Intent();
+                if (bundle!=null)
+                {
+                    intent.putExtras(bundle);
+                }
+                activity.setResult(requestCode,intent);
             }
-            activity.setResult(requestCode,intent);
+            else
+            {
+                activity.setResult(requestCode,null);
+            }
         }
         activity.finish();
     }

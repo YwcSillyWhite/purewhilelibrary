@@ -6,14 +6,15 @@ import android.widget.ImageView;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.BaseAdapter;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BaseViewHolder;
+import com.purewhite.ywc.purewhitelibrary.config.StringUtils;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 
 import java.util.List;
 
 public class PictureWindowAdapter extends BaseAdapter<Folder, BaseViewHolder> {
 
+    private int selectPosition=0;
     public PictureWindowAdapter(List<Folder> mData) {
         super(mData);
         addLayout(R.layout.pure_adapter_window_picture);
@@ -22,16 +23,22 @@ public class PictureWindowAdapter extends BaseAdapter<Folder, BaseViewHolder> {
     @Override
     protected void onData(BaseViewHolder holder, int position, Folder folder, int itemViewType) {
         ImageView imageView = holder.findViewId(R.id.ratio_image_view);
-        if (folder!=null&&folder.getImageBeanList()!=null&&folder.getImageBeanList().size()>0)
-        {
-            ImageLoader.newInstance().init(imageView,folder.getImageBeanList().get(0));
-            holder.setTextView(R.id.text_view,folder.getName()+"("+folder.getImageBeanList().size()+")");
-        }
-        else
-        {
-            ImageLoader.newInstance().init(imageView,R.mipmap.leak_canary_icon);
-            holder.setTextView(R.id.text_view,"");
-        }
-
+        holder.setTextView(R.id.picture_title, StringUtils.obtianString(folder.getName()));
+        ImageLoader.newInstance().init(imageView,folder.getImageBeanList().get(0).getPath());
+        holder.setTextView(R.id.picture_num,folder.getImageBeanList().size()+"张");
+        holder.findViewId(R.id.pure_picture_select).setVisibility(position==selectPosition? View.VISIBLE:View.GONE);
     }
+
+
+    public boolean flushSelectPosition(int position) {
+       if (position!=selectPosition)
+       {
+           this.selectPosition=position;
+           notifyDataSetChanged();
+           return true;
+       }
+       return false;
+    }
+
+
 }

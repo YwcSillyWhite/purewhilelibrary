@@ -38,7 +38,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
                     break;
                 case 2:
                     PictureUtils.buidler()
-                            .setPictureMaxNum(3)
+                            .setImageMax(6)
                             .setLineNum(3)
                             .build(CameraActivity.this);
                     break;

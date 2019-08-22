@@ -15,16 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LookPictureAdapter extends BasePagerAdapter<ImageBean> {
-    //是否预览
-    private boolean isPreview=false;
+
     //预览图片
     private List<String> previewImage=new ArrayList<>();
 
+    private boolean isPreview()
+    {
+        List<ImageBean> imageBeanList = obtainData();
+        return imageBeanList==null||imageBeanList.size()==0;
+    }
 
-    public LookPictureAdapter(List<ImageBean> list, boolean isPreview) {
+    public LookPictureAdapter(List<ImageBean> list) {
         super(list);
-        this.isPreview=isPreview;
-        if (isPreview)
+        if (isPreview())
         {
             this.previewImage.addAll(PictureManager.newInstance().getSelectorList());
         }
@@ -32,15 +35,14 @@ public class LookPictureAdapter extends BasePagerAdapter<ImageBean> {
 
     @Override
     public int getCount() {
-        return isPreview?previewImage.size():super.getCount();
+        return isPreview()?previewImage.size():super.getCount();
     }
 
     @Override
     protected View obtainView(ViewGroup container, int position, ImageBean imageBean) {
-        String uri=isPreview?previewImage.get(position):imageBean.getPath();
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.pure_adapter_look_picture, container, false);
         final PhotoView photoView = (PhotoView) view.findViewById(R.id.photo_view);
-        ImageLoader.newInstance().init(photoView,uri);
+        ImageLoader.newInstance().init(photoView,obtianPath(position));
         return view;
     }
 
@@ -48,8 +50,13 @@ public class LookPictureAdapter extends BasePagerAdapter<ImageBean> {
     {
         if (position<getCount())
         {
-            return isPreview?previewImage.get(position):obtainT(position).getPath();
+            return isPreview()?previewImage.get(position):obtainT(position).getPath();
         }
         return "";
+    }
+
+
+    protected ImageBean obtainT(int position) {
+        return isPreview()?null:super.obtainT(position);
     }
 }

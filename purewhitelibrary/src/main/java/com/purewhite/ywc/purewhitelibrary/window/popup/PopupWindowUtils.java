@@ -32,6 +32,14 @@ public class PopupWindowUtils extends WindowViewUtils<PopupWindowUtils> {
         }
     }
 
+    public void dismiss()
+    {
+        if (basePopupWindow.isShowing())
+        {
+            basePopupWindow.dismiss();
+        }
+    }
+
 
 
     public static Builder builder()
