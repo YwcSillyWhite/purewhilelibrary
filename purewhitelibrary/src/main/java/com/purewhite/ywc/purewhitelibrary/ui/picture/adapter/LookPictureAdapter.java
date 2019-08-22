@@ -9,6 +9,7 @@ import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.pagerview.BasePagerAdapter;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager2;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class LookPictureAdapter extends BasePagerAdapter<ImageBean> {
         return imageBeanList==null||imageBeanList.size()==0;
     }
 
-    public LookPictureAdapter(List<ImageBean> list) {
-        super(list);
+    public LookPictureAdapter() {
+        super(PictureManager2.newInstance().getList());
         if (isPreview())
         {
             this.previewImage.addAll(PictureManager.newInstance().getSelectorList());

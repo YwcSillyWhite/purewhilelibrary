@@ -28,6 +28,7 @@ import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureConfig;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager2;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureUtils;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureSelectAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureWindowAdapter;
@@ -87,10 +88,9 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
                     }
                     else
                     {
-                        Bundle build = BundleUtils.buidler().put(PictureConfig.imageBean, ((PictureSelectAdapter) adapter).obtainData())
-                                .put(PictureConfig.picturePagerPosition, positionReal)
-                                .build();
-                        skipActivity(LookPictureActivity.class,PictureConfig.intent_picture_to_look,build);
+                        PictureManager2.newInstance().setList(((PictureSelectAdapter) adapter).obtainData())
+                                .setSeletorPosition(positionReal);
+                        skipActivity(LookPictureActivity.class,PictureConfig.intent_picture_to_look);
                     }
                 }
                 else if (adapter instanceof PictureWindowAdapter)
@@ -148,6 +148,7 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
         }
         else if (id==R.id.picture_preview)
         {
+            PictureManager2.newInstance().setSeletorPosition(0).setList(null);
             skipActivity(LookPictureActivity.class,PictureConfig.intent_picture_to_look);
         }
     }
@@ -248,6 +249,7 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
                     PictureManager.newInstance().alterImage(photoPath);
                     pictureWindowAdapter.notifyDataSetChanged();
                     pictureSelectAdapter.flush(folders,0);
+                    setViewStatue();
                 }
                 break;
         }

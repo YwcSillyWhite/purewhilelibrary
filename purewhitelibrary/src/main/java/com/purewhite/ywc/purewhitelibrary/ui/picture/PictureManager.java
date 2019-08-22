@@ -3,6 +3,7 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture;
 import android.text.TextUtils;
 
 import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
+import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.PictureBean;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class PictureManager extends PictureBean<PictureManager> {
         }
         return pictureSelectorManager;
     }
+
+
+
 
 
 
@@ -94,8 +98,6 @@ public class PictureManager extends PictureBean<PictureManager> {
 
         }
     }
-
-
 
 
 }
