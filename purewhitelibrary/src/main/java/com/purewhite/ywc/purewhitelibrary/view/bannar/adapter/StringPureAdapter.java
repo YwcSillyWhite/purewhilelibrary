@@ -17,6 +17,8 @@ public class StringPureAdapter extends BasePureAdapter<String>{
 
     public StringPureAdapter(List<String> list, int cardNum,boolean isImagexPalette) {
         super(list, cardNum,isImagexPalette);
+
+
     }
 
     @Override
