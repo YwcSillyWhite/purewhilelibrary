@@ -107,7 +107,7 @@ public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterI
             case 1:
                 if (data!=null)
                 {
-                    List<String> list = PictureUtils.obtianArtwork(data,resultCode);
+                    List<String> list = PictureUtils.obtianArtwork(resultCode);
                     if (list!=null&&list.size()>0)
                     {
                         this.list=list;

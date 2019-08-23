@@ -1,6 +1,5 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture.activity;
 
-import android.content.Intent;
 import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
@@ -11,11 +10,8 @@ import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureConfig;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager2;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.LookPictureAdapter;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 
-import java.io.Serializable;
 import java.util.List;
 
 
@@ -79,14 +75,13 @@ public class LookPictureActivity extends BaseMvpActivity<PureActivityLookPicture
 
     @Override
     protected void initView() {
-
-
+        int seletorPosition = PictureManager.newInstance().getSeletorPosition();
         lookPictureAdapter=new LookPictureAdapter();
         mDataBinding.viewPager.setAdapter(lookPictureAdapter);
-        mDataBinding.viewPager.setCurrentItem(PictureManager2.newInstance().getSeletorPosition());
+        mDataBinding.viewPager.setCurrentItem(seletorPosition);
         setViewStatue();
-        mDataBinding.actionBarRight.setSelected(PictureManager.newInstance().isSelector(lookPictureAdapter.obtianPath(PictureManager2.newInstance().getSeletorPosition())));
-        mDataBinding.actionBarCenter.setText(PictureManager2.newInstance().getSeletorPosition()+1+" / "+lookPictureAdapter.getCount());
+        mDataBinding.actionBarRight.setSelected(PictureManager.newInstance().isSelector(lookPictureAdapter.obtianPath(seletorPosition)));
+        mDataBinding.actionBarCenter.setText(seletorPosition+1+" / "+lookPictureAdapter.getCount());
         mDataBinding.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

@@ -1,10 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.config.file;
 
-import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
-
-import com.purewhite.ywc.purewhitelibrary.config.file.FileUtils;
 
 import java.io.File;
 

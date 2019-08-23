@@ -9,7 +9,6 @@ import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseSkipActivity;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.activity.PictureSelectActivity;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.PictureBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PictureUtils {
@@ -21,11 +20,12 @@ public class PictureUtils {
     }
 
 
-    public static List<String> obtianArtwork(Intent intent,int result)
+    public static List<String> obtianArtwork(int result)
     {
-        if (result==PictureConfig.back_picture_to_&&intent!=null)
+        if (result==PictureConfig.back_picture_to_)
         {
-            return intent.getStringArrayListExtra(PictureConfig.pictureArtwork);
+            final List<String> selectorList = PictureManager.newInstance().getSelectorList();
+            return selectorList;
         }
         return null;
     }

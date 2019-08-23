@@ -3,10 +3,7 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.PopupWindow;
 
@@ -20,23 +17,18 @@ import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
 import com.purewhite.ywc.purewhitelibrary.config.PhotoUtils;
 import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
-import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 import com.purewhite.ywc.purewhitelibrary.config.file.FileManagerUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureActivityPictureSelectBinding;
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
-import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureConfig;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager2;
-import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureUtils;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureSelectAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.PictureWindowAdapter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.ImageBean;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.contract.PictureSelectContract;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.presenter.PictureSelectPresenter;
-import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
 import com.purewhite.ywc.purewhitelibrary.window.popup.PopupWindowUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
 
@@ -88,8 +80,7 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
                     }
                     else
                     {
-                        PictureManager2.newInstance().setList(((PictureSelectAdapter) adapter).obtainData())
-                                .setSeletorPosition(positionReal);
+                        PictureManager.newInstance().setList(((PictureSelectAdapter) adapter).obtainData()).setSeletorPosition(positionReal);
                         skipActivity(LookPictureActivity.class,PictureConfig.intent_picture_to_look);
                     }
                 }
@@ -148,7 +139,7 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
         }
         else if (id==R.id.picture_preview)
         {
-            PictureManager2.newInstance().setSeletorPosition(0).setList(null);
+            PictureManager.newInstance().setSeletorPosition(0).setList(null);
             skipActivity(LookPictureActivity.class,PictureConfig.intent_picture_to_look);
         }
     }

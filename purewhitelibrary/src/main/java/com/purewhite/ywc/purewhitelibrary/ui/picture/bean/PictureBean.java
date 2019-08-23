@@ -1,7 +1,5 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture.bean;
 
-import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,23 +19,13 @@ public class PictureBean<T> {
 
 
 
-
-
-
-
-
     public T setImageMax(int imageMax) {
         this.imageMax = imageMax;
         return ((T) this);
     }
 
     public T setSelectorList(List<String> selectorList) {
-        if (this.selectorList.size()>0)
-            this.selectorList.clear();
-        if (selectorList!=null&&selectorList.size()>0)
-        {
-            this.selectorList.addAll(selectorList);
-        }
+        this.selectorList=selectorList!=null?selectorList:new ArrayList<>();
         return ((T) this);
     }
 
@@ -59,5 +47,38 @@ public class PictureBean<T> {
     public T setCamera(boolean camera) {
         isCamera = camera;
         return ((T) this);
+    }
+
+
+
+
+    public int getImageMax() {
+        return imageMax>0?imageMax:9;
+    }
+
+    public List<String> getSelectorList() {
+        return selectorList;
+    }
+
+    public int getPictureType() {
+        return pictureType;
+    }
+
+    public int getLineNum() {
+        return lineNum;
+    }
+
+    public boolean isPreview() {
+        return isPreview;
+    }
+
+    public boolean isCamera() {
+        return isCamera;
+    }
+
+    //是否选中
+    public boolean isSelector(String path)
+    {
+        return selectorList.contains(path);
     }
 }

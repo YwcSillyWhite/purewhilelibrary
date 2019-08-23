@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture.presenter;
 
 import android.text.TextUtils;
 
-import com.purewhite.ywc.purewhitelibrary.config.file.FileUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.HttpObserver;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxSchedulers;

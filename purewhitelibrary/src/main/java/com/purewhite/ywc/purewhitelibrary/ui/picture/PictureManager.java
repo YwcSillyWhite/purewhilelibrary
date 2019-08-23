@@ -28,44 +28,6 @@ public class PictureManager extends PictureBean<PictureManager> {
     }
 
 
-
-
-
-
-
-    public int getImageMax() {
-        return imageMax>0?imageMax:9;
-    }
-
-    public List<String> getSelectorList() {
-        return selectorList;
-    }
-
-    public int getPictureType() {
-        return pictureType>1?pictureType:3;
-    }
-
-    public int getLineNum() {
-        return lineNum;
-    }
-
-    public boolean isPreview() {
-        return isPreview;
-    }
-
-    public boolean isCamera() {
-        return isCamera;
-    }
-
-    //是否选中
-    public boolean isSelector(String path)
-    {
-        return selectorList.contains(path);
-    }
-
-
-
-
     /**
      * 添加删除图片
      * @param path
@@ -100,4 +62,28 @@ public class PictureManager extends PictureBean<PictureManager> {
     }
 
 
+
+
+    //查看的图片地址
+    private List<ImageBean> list;
+    public PictureManager setList(List<ImageBean> list) {
+        this.list = list!=null? list:new ArrayList<>();
+        return this;
+    }
+
+    public List<ImageBean> getList() {
+        return list;
+    }
+
+    //选中position
+    private int seletorPosition;
+
+    public int getSeletorPosition() {
+        return seletorPosition;
+    }
+
+    public PictureManager setSeletorPosition(int seletorPosition) {
+        this.seletorPosition = seletorPosition;
+        return this;
+    }
 }
