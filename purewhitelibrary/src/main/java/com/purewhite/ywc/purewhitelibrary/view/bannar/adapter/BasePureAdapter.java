@@ -21,8 +21,15 @@ import java.util.List;
 
 public abstract class BasePureAdapter<T> extends PagerAdapter {
 
-    //显示卡片数量
+    //与加载卡片数量
     private int cardNum=3;
+    //是否取色
+    private boolean isImagexPalette;
+
+    public boolean isImagexPalette() {
+        return isImagexPalette;
+    }
+
     //布局
     private SparseArray<View> sparseArray=new SparseArray<>();
     //真实list
@@ -41,20 +48,26 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
             datalist.addAll(list);
             int cir_num = cardNum / list.size();
             for (int i = 0; i < cir_num; i++) {
-                for (int j = 0; j < list.size(); j++) {
-                    datalist.add(list.get(j));
-                }
+                addDataList(datalist,realList);
             }
         }
     }
 
-    public BasePureAdapter(List<T> list,int cardNum) {
+    private void addDataList(List<T> datalist,List<T> realList)
+    {
+        for (int i = 0; i < realList.size(); i++) {
+            datalist.add(realList.get(i));
+        }
+    }
+
+    public BasePureAdapter(List<T> list,int cardNum,boolean isImagexPalette) {
         this.cardNum=cardNum;
+        this.isImagexPalette=isImagexPalette;
         handerList(list);
     }
 
     public BasePureAdapter(List<T> list) {
-        this(list,3);
+        this(list,3,false);
     }
 
     //当前真实position
@@ -114,17 +127,9 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
     //获取当前数据的postion
     public T obtianT(int position)
     {
-        final int dataCount = datalist.size();
-        if (dataCount>0)
+        if (position<realList.size())
         {
-            if (dataCount==1)
-            {
-                return datalist.get(0);
-            }
-            else
-            {
-                return datalist.get(position%dataCount);
-            }
+            realList.get(position);
         }
         return null;
     }
@@ -138,12 +143,11 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
     @Override
     public final Object instantiateItem(@NonNull ViewGroup container, int position) {
         int dataPosition = getDataPosition(position);
-        LogUtils.debug(dataPosition+"dataPosition");
         View view = sparseArray.get(dataPosition);
         if (view==null)
         {
-            T t = obtianT(position);
-            view=obtianView(container,dataPosition,t);
+            int realPosition = getRealPosition(position);
+            view=obtianView(container,realPosition,obtianT(realPosition));
             sparseArray.put(dataPosition,view);
         }
         else
@@ -175,16 +179,14 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
     }
 
 
-    public abstract View obtianView(ViewGroup container, int position, T t);
+    public abstract View obtianView(ViewGroup container, int realPosition, T t);
 
 
 
-    public void setImageView(ImageView imageView,String uri,int position)
+    public void setImageView(ImageView imageView,String uri,int realPosition)
     {
-        ImageLoader.newInstance().init(imageView,uri);
-        if (getCount()>1)
+        if (isImagexPalette)
         {
-            final int realPosition = getRealPosition(position);
             ImageLoader.newInstance().obtianBitmap(uri,new BitmapImageViewTarget(imageView) {
                 @Override
                 public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
@@ -197,7 +199,6 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
         {
             ImageLoader.newInstance().init(imageView,uri);
         }
-
     }
 
 

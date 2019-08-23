@@ -15,13 +15,12 @@ public class StringPureAdapter extends BasePureAdapter<String>{
         super(list);
     }
 
-    public StringPureAdapter(List<String> list, int cardNum) {
-        super(list, cardNum);
+    public StringPureAdapter(List<String> list, int cardNum,boolean isImagexPalette) {
+        super(list, cardNum,isImagexPalette);
     }
 
     @Override
     public View obtianView(ViewGroup container, int position, String s) {
-        LogUtils.debug("obtianView"+position);
         ImageView imageView = new ImageView(container.getContext());
         imageView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

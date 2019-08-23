@@ -6,7 +6,6 @@
         android:layout_height="200dp"
         android:id="@+id/title_bar_layout"
         app:parent_margin="50dp"
-        app:child_margin="5dp"
-        app:run_color="true">
+        app:child_margin="5dp">
     </com.purewhite.ywc.purewhitelibrary.view.bannar.PureViewPager>
 </layout>

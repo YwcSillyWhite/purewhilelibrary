@@ -50,9 +50,6 @@ public class PureViewPager extends RelativeLayout {
         }
     };
     private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
-    //是否滑动变色
-    private boolean run_color;
-
     public PureViewPager(Context context) {
         this(context,null);
     }
@@ -74,7 +71,6 @@ public class PureViewPager extends RelativeLayout {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.PureViewPager);
             autoPlay = typedArray.getBoolean(R.styleable.PureViewPager_autoPlay, true);
             autoTime = typedArray.getInt(R.styleable.PureViewPager_autoTime, 3000);
-            run_color = typedArray.getBoolean(R.styleable.PureViewPager_run_color, false);
             if (autoTime <= 0) {
                 autoPlay = false;
             }
@@ -105,18 +101,15 @@ public class PureViewPager extends RelativeLayout {
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    int realPosition = pureAdapter.getRealPosition(position);
                     if (onPureChangeListener!=null)
                     {
-                        onPureChangeListener.onPageScrolled(position,positionOffset,positionOffsetPixels);
+                        onPureChangeListener.onPageScrolled(realPosition,positionOffset,positionOffsetPixels);
                     }
-                    int count = pureAdapter.getCount();
-                    if (count>1&&run_color)
+                    if (pureAdapter.isImagexPalette())
                     {
-                        LogUtils.debug("onPageScrolled"+positionOffset+","+positionOffsetPixels);
-                        int realPosition = pureAdapter.getRealPosition(position);
                         int positionColor = PureViewPalette.newInstance().obtianPositionColor(realPosition);
-                        int nextColor=pureAdapter.isRealTop(realPosition)?
-                                PureViewPalette.newInstance().obtianPositionColor(0):
+                        int nextColor=pureAdapter.isRealTop(realPosition)? PureViewPalette.newInstance().obtianPositionColor(0):
                                 PureViewPalette.newInstance().obtianPositionColor(realPosition+1);
                         int currentLastColor = (int) (argbEvaluator.evaluate(positionOffset, positionColor, nextColor));
                         setBackgroundColor(currentLastColor);
@@ -185,10 +178,13 @@ public class PureViewPager extends RelativeLayout {
     }
 
 
+
     public void setAdapter(List<String> images,   OnPureChangeListener onPureChangeListener)
     {
-        setAdapter(new StringPureAdapter(images,5),onPureChangeListener);
+        setAdapter(new StringPureAdapter(images,5,true),onPureChangeListener);
     }
+
+
 
 
     private void play(boolean start)

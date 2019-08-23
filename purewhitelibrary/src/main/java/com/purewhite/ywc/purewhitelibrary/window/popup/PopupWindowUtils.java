@@ -23,12 +23,36 @@ public class PopupWindowUtils extends WindowViewUtils<PopupWindowUtils> {
     }
 
 
-
     public void showAsDropDown(View view)
     {
         if (basePopupWindow!=null)
         {
             basePopupWindow.showAsDropDown(view);
+        }
+    }
+
+
+
+    public void showAsDropDown(View anchor, int xoff, int yoff) {
+        if (basePopupWindow!=null)
+        {
+            basePopupWindow.showAsDropDown(anchor, xoff, yoff);
+        }
+    }
+
+
+    public void showAsDropDown(View anchor, int xoff, int yoff, int gravity) {
+        if (basePopupWindow!=null)
+        {
+            basePopupWindow.showAsDropDown(anchor, xoff, yoff, gravity);
+        }
+    }
+
+
+    public void showAtLocation(View parent, int gravity, int x, int y) {
+        if (basePopupWindow!=null)
+        {
+            basePopupWindow.showAtLocation(parent, gravity, x, y);
         }
     }
 
@@ -116,7 +140,6 @@ public class PopupWindowUtils extends WindowViewUtils<PopupWindowUtils> {
                 basePopupWindow.setAnimationStyle(anim);
             }
             return new PopupWindowUtils(basePopupWindow,onClickListener,view);
-
         }
     }
 }
