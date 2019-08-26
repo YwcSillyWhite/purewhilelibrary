@@ -75,17 +75,13 @@ public class PureViewPager extends RelativeLayout {
                 autoPlay = false;
             }
             int child_margin = typedArray.getDimensionPixelOffset(R.styleable.PureViewPager_child_margin, 0);
-            int parent_margin = typedArray.getDimensionPixelOffset(R.styleable.PureViewPager_parent_margin, 0);
             boolean pager_clip = typedArray.getBoolean(R.styleable.PureViewPager_pager_clip, true);
-            if (parent_margin!=0)
-            {
-                viewPager.setPadding(parent_margin, 0, parent_margin, 0);
-            }
             if (child_margin!=0)
             {
                 viewPager.setPageMargin(child_margin);
             }
             viewPager.setClipChildren(pager_clip);
+            viewPager.setClipToPadding(pager_clip);
             typedArray.recycle();
         }
     }
