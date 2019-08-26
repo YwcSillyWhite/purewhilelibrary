@@ -5,9 +5,10 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/title_bar_layout"
-        app:parent_margin="50dp"
-        app:pager_clip="false"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:clipChildren="false"
-        android:background="@color/write">
+        android:clipToPadding="false"
+        app:pager_clip="false">
     </com.purewhite.ywc.purewhitelibrary.view.bannar.PureViewPager>
 </layout>
