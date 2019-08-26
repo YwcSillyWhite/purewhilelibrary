@@ -1,34 +1,34 @@
 # 纯白基本框架
 # 使用
-1.在项目以model接入purewhitelibrary框架
-
-2.在build.gradle加入
-
+1.在项目以model接入purewhitelibrary框架<br>
+2.在build.gradle加入（存在3方框架PhotoView）<br>
   maven { url "https://jitpack.io" } 
-
-3.在build.gradle(app)加入
- 
+3.在build.gradle(app)加入(兼容了databinding) <br>
    dataBinding {
         enabled = true
+    }<br>
+4.初始化 
+     public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight){
+
+        if (!TextUtils.isEmpty(retrofitBaseUri))
+        {
+            baseUri=retrofitBaseUri;
+
+        }
+        if (adaptiveWight>0)
+        {
+            adaptiveWightDp=adaptiveWight;
+        }
+        AppUtils.application =application;
+        application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
+
+        //内存检测
+        if (!LeakCanary.isInAnalyzerProcess(application)) {
+            LeakCanary.install(application);
+        }
     }
 
 
 
-## 版本1.0.0
-* 框架模式 mvp模式封装
-* activity的封装(base,skip,bind,mvp)
-* fragment的封装(base,skip,bind,mvp)
-* 状态栏封装barUtils
-* 相册封装 pic文件里面
-* 屏幕适配封装（根据今日头头条）
-* 适配器封装（recyclerview，vlayout，pager）
-加载更多，头尾，加载状态等
-* 网络请求封装（rxjava+retrofit，okhttp，glide）
-* 自定义view封装（PureScrollView，最大高度recyclerview，pointLoadview等）
-* Permisson封装PermissonUtils<br>
-* dialog封装（window文件）
-* 常用工具类封装（config文件）
-* Toast封装ToastUtils <br>
-* bottom封装类似radiobutton BottomLayout和BottomMenu <br>
 
 #### 有什么不懂的，或者有好的提议可以添加qq 2048525395，欢迎大家一起讨论
