@@ -1,6 +1,6 @@
 纯白框架V1.0.1
 ====
-###加入纯白框架
+### 加入纯白框架
 1.在项目以model接入purewhitelibrary框架<br>
 2.在build.gradle加入（存在3方框架PhotoView）
 ```java
@@ -24,8 +24,8 @@
 ```
 
 
-###拥有功能
-######adapter（vlayout【阿里出品】适配器，recyclerview adapter，pagerview adapter）
+### 拥有功能
+###### adapter（vlayout【阿里出品】适配器，recyclerview adapter，pagerview adapter）
 一.adapter（vlayout【全局加载，加载更多】，recyclerview【全局加载，加载更多，头尾】）<br>
 Fullview【全局布局】，LoadView【加载布局】
 ```java
@@ -83,17 +83,17 @@ protected final void addLayout(int itemType,@LayoutRes int layoutId)
 二.pagerview(提供4种方式)
 BaseFragmentAdapter，BaseFragmentAdapterImp，BasePagerAdapter，BasePagerAdapterImp
 
-######下拉刷新
+###### 下拉刷新
 一ScrollSwipeLayout<br>
 继承于SwipeRefreshLayout做了一些滑动冲突处理<br><br>
 二ScrollPtrLayout<br>
 继承于BasePtrFrameLayout
 
 
-######BarUtils（状态栏处理）
+###### BarUtils（状态栏处理）
 可以查看这个类对应的方法，本项目是延伸到状态栏下处理的
 
-######构建者模式创建的（Bundler，dialog）
+###### 构建者模式创建的（Bundler，dialog）
 dialog可以查看dialogActivity对应的使用方法
 ```java
 构建一个弹窗
@@ -103,7 +103,7 @@ dialog可以查看dialogActivity对应的使用方法
                             .buildBottom(this);
 ```
 
-######点击事件
+###### 点击事件
 我在底层已实现点击
 ```java
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener
@@ -138,7 +138,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 在onclickUtils处理点击事件
 
 
-######EventBus封装
+###### EventBus封装
 ```java
 EventBusUtils 进行发送
  public static void post(int code)
@@ -184,9 +184,9 @@ EventBusUtils 进行发送
     }
 ```
 
-######fileUtils文件创建更严谨
+###### fileUtils文件创建更严谨
 
-####permissonUtils权限
+###### permissonUtils权限
 ```java
 权限使用
 private PermissonCallBack permissonCallBack=new PermissonCallBack() {
@@ -246,9 +246,9 @@ private PermissonCallBack permissonCallBack=new PermissonCallBack() {
     }
 ```
 
-######SpUtils缓存
-######AdaptiveUtils今日头条适配
-######mvp文件
+###### SpUtils缓存
+###### AdaptiveUtils今日头条适配
+###### mvp文件
 mvp文件里面存在功能<br>
 1.mvp设置模式<br>
 2.activity跳转和回退动画，查看BaseSkipActivity这个类
@@ -260,7 +260,7 @@ network文件存在功能<br>
 2.retrofit和rxjava2封装，可以直使用RenetUtils里面的方法<br>
 3.glide封装ImageLoader
 
-######相册
+###### 相册
 ```java
          PictureUtils.buidler()
                             .setImageMax(6)
@@ -288,15 +288,15 @@ network文件存在功能<br>
       压缩自己用鲁班压缩，下个大版本会加入鲁班压缩，和图片裁剪，视屏功能，我喜欢是先获取图片最后在处理图片压缩
 ```
 
-#######PureViewPager（banner）
+####### PureViewPager（banner）
 自己查看PagerActivity里面，下期准备用recycylerview封装
 
 
-######BottomLayout（下标选择）
+###### BottomLayout（下标选择）
 自己可以查看CustomMainActivity使用，
 
 
-######其他view
+###### 其他view
 一.PureScrollView类iosScrollview<br> 
 二.MaxHeightRecyclerView(最大高度recyclerview)<br>
 三.RatioImageView等比例view<br>
