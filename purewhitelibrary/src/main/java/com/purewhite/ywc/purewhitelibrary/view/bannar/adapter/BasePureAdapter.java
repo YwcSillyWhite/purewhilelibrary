@@ -12,7 +12,6 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.palette.PureViewPalette;
 
@@ -74,50 +73,43 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
     public int getRealPosition(int position)
     {
         final int realCount = realList.size();
-        if (realCount<=1)
-        {
-            return 0;
-        }
-        else
+        if (realCount>0)
         {
             return position%realCount;
         }
+        return 0;
     }
-
-    public boolean isRealTop(int position)
-    {
-        return position+1==realList.size();
-    }
-
-    public int initPosition()
-    {
-        final int size = realList.size();
-        if (size<=1)
-        {
-            return 0;
-        }
-        else
-        {
-            int centerPosition = Integer.MAX_VALUE / 2;
-            return centerPosition-centerPosition%size;
-        }
-    }
-
 
     //当前view的positon
     private int getDataPosition(int position)
     {
-       final int endCount = datalist.size();
-       if (endCount<=1)
-       {
-           return 0;
-       }
-       else
-       {
-           return position%endCount;
-       }
+        final int dataCount = datalist.size();
+        if (dataCount>0)
+        {
+            return position%dataCount;
+        }
+        return 0;
     }
 
+    public boolean isRealTop(int realPosition)
+    {
+        return realPosition+1==realList.size();
+    }
+
+    //初始化位置
+    public int initPosition()
+    {
+        final int size = realList.size();
+        if (size>1)
+        {
+            int centerPosition = Integer.MAX_VALUE / 2;
+            return centerPosition-centerPosition%size;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
     @Override
     public int getCount() {
@@ -125,11 +117,11 @@ public abstract class BasePureAdapter<T> extends PagerAdapter {
     }
 
     //获取当前数据的postion
-    public T obtianT(int position)
+    public T obtianT(int realPosition)
     {
-        if (position<realList.size())
+        if (realPosition<realList.size())
         {
-            realList.get(position);
+            return realList.get(realPosition);
         }
         return null;
     }

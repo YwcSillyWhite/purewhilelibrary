@@ -61,6 +61,7 @@
         <attr name="autoPlay" format="boolean"></attr>
         <attr name="child_margin" format="dimension"></attr>
         <attr name="parent_margin" format="dimension"></attr>
+        <attr name="pager_clip" format="boolean"></attr>
     </declare-styleable>
 
 
