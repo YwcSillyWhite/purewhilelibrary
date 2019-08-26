@@ -8,7 +8,8 @@
         enabled = true
     }<br>
 4.初始化 
-     public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight){
+```java
+public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight){
 
         if (!TextUtils.isEmpty(retrofitBaseUri))
         {
@@ -27,6 +28,10 @@
             LeakCanary.install(application);
         }
     }
+```
+
+
+     
 
 
 
