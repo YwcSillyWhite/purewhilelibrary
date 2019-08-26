@@ -288,7 +288,7 @@ network文件存在功能<br>
       压缩自己用鲁班压缩，下个大版本会加入鲁班压缩，和图片裁剪，视屏功能，我喜欢是先获取图片最后在处理图片压缩
 ```
 
-####### PureViewPager（banner）
+###### PureViewPager（banner）
 自己查看PagerActivity里面，下期准备用recycylerview封装
 
 
