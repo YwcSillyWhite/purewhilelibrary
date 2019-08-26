@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -70,7 +71,9 @@ public final class  AppUtils {
             if (stack.isEmpty())
             {
                 RxDisposableManager.getInstance().clear();
+
             }
+
 
         }
     };
@@ -81,7 +84,6 @@ public final class  AppUtils {
      * @param application
      * @param retrofitBaseUri   retrofit默认框架
      * @param adaptiveWight     屏幕适配的dp
-     * @Param map     okHttp公共参数
      */
     public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight)
     {

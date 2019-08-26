@@ -99,24 +99,15 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     }
 
 
-
-
-
-
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //取消网络请求
+        //清空rxjava
         RxDisposableManager.getInstance().removeDis(this);
+        //okhttp取消
         OkHttpUtils.newInstance().cancleTag(this);
+        //如果为null，清空所有的rxjava
     }
-
-
-
-
-
 
     /**
      * 权限使用
