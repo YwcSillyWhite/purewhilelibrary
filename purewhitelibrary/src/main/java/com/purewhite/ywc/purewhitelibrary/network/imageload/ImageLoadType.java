@@ -100,7 +100,8 @@ public class ImageLoadType {
                         //加载中图片
                         .placeholder(R.mipmap.pure_load_error)
                         //加载失败的图片
-                        .error(R.mipmap.pure_load_error);
+                        .error(R.mipmap.pure_load_error)
+                        .centerCrop();
                 break;
             case initCricle:
                 //不加载动画
@@ -109,7 +110,8 @@ public class ImageLoadType {
                         //占位图片
                         .placeholder(R.mipmap.pure_load_error)
                         //加载失败的图片
-                        .error(R.mipmap.pure_load_error);
+                        .error(R.mipmap.pure_load_error)
+                        .centerCrop();
                 break;
         }
     }

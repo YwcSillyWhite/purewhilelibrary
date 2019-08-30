@@ -27,7 +27,7 @@ public class PagerActivity extends MvpActivity<ActivityPagerBinding,PresenterImp
         for (int i = 0; i < stringArray.length; i++) {
             list.add(stringArray[i]);
         }
-        mDataBinding.titleBarLayout.setAdapter(new StringPureAdapter(list,5,true),null);
+        mDataBinding.titleBarLayout.setAdapter(new StringPureAdapter(list,5,false),null);
         mDataBinding.titleBarLayout.setPageTransformer(true,new PagerTransZoom(0.8f));
     }
 
