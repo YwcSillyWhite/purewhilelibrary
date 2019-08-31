@@ -30,8 +30,7 @@ public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> 
     private SparseArray<Fragment> sparseArray;
     private boolean handlerDestroy=false;
     private final int handlerCode=1000;
-    private Handler handler=new Handler()
-    {
+    private Handler handler=new Handler() {
         @Override
         public void dispatchMessage(Message msg) {
             super.dispatchMessage(msg);

@@ -133,9 +133,8 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
         }
         else if (id==R.id.picture_sure)
         {
-            Bundle build = BundleUtils.buidler().put(PictureConfig.pictureArtwork, PictureManager.newInstance().getSelectorList())
-                    .build();
-            backActivity(PictureConfig.back_picture_to_,build);
+
+            backActivity(PictureConfig.back_picture_to_);
         }
         else if (id==R.id.picture_preview)
         {

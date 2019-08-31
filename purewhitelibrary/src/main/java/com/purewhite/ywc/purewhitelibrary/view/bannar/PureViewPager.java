@@ -169,18 +169,6 @@ public class PureViewPager extends RelativeLayout {
 
 
 
-    public void setAdapter(String[] images,  OnPureChangeListener onPureChangeListener)
-    {
-        setAdapter(Arrays.asList(images),onPureChangeListener);
-    }
-
-
-
-    public void setAdapter(List<String> images,   OnPureChangeListener onPureChangeListener)
-    {
-        setAdapter(new StringPureAdapter(images,3,true),onPureChangeListener);
-    }
-
 
 
 

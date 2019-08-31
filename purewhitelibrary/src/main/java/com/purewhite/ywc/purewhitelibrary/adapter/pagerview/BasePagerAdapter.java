@@ -73,7 +73,4 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
 
     protected abstract View obtainView(ViewGroup container,int position,T t);
 
-
-
-
 }

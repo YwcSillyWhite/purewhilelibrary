@@ -54,4 +54,5 @@ public abstract class BaseFragmentAdapter<T> extends FragmentPagerAdapter {
         notifyDataSetChanged();
     }
 
+
 }
