@@ -27,39 +27,11 @@ public class ReNetUtils {
         return retrofitApi.get(url);
     }
 
-    public static void get(String url, Map<String, Object> paramsRequest,HttpObserver<ResponseBody> httpObserver)
+
+    public static Observable<ResponseBody> post(String url, Map<String, Object> paramsRequest)
     {
-        get(url,paramsRequest).compose(RxSchedulers.<ResponseBody>ioToMain()).subscribe(httpObserver);
-    }
-
-
-    public static <T> Observable<T> get(String url, Map<String, Object> paramsRequest, final Class<T> cls)
-    {
-        return get(url,paramsRequest).map(new Function<ResponseBody, T>() {
-            @Override
-            public T apply(ResponseBody responseBody) throws Exception {
-                return new Gson().fromJson(responseBody.string(),cls);
-            }
-        });
-    }
-
-
-    public static <T>void get(String url, Map<String, Object> paramsRequest, Class<T> cls, HttpObserver<T> httpObserver)
-    {
-        get(url,paramsRequest,cls).compose(RxSchedulers.<T>ioToMain()).subscribe(httpObserver);
-    }
-
-
-
-    public static <T> Observable<T> getT(String url, Map<String,Object> paramsRequest, final T t)
-    {
-        return (Observable<T>) get(url,paramsRequest,t.getClass());
-    }
-
-    public static <T> void getT(String url, Map<String, Object> paramsRequest,T t
-            , HttpObserver<T> httpObserver)
-    {
-        getT(url,paramsRequest,t).compose(RxSchedulers.<T>ioToMain()).subscribe(httpObserver);
+        RetrofitApi retrofitApi = RetrofitUtils.newInstance().create(RetrofitApi.class);
+        return retrofitApi.post(url,paramsRequest);
     }
 
 

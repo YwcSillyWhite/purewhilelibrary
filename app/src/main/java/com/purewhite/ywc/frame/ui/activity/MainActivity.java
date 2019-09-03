@@ -21,6 +21,7 @@ import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.adapter.pagerview.BaseFragmentAdapterImp;
 import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
+import com.purewhite.ywc.purewhitelibrary.network.ReNetUtils;
 
 import java.util.ArrayList;
 import java.util.List;
