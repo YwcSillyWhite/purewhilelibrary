@@ -37,8 +37,6 @@
         <item>自定义Bottom（底部导航）</item>
         <item>dialog</item>
         <item>相册</item>
-        <item>扫码</item>
-        <item>scoket</item>
         <item>wheelview</item>
         <item>pager</item>
     </string-array>

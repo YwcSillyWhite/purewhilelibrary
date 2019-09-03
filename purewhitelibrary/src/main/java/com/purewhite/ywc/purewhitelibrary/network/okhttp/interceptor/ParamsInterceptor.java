@@ -55,6 +55,13 @@ public class ParamsInterceptor implements Interceptor {
 
         }
         return chain.proceed(request);
+
+
+//        Request.Builder builder = chain.request().newBuilder();
+//        for (int i = 0; i < key.length; i++) {
+//            builder.addHeader(key[i],value[i]);
+//        }
+//        return chain.proceed(builder.build());
     }
 
 

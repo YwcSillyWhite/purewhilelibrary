@@ -39,6 +39,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-alpha02'
     implementation project(':purewhitelibrary')
     implementation project(':tbslibrary')
-    implementation 'com.acker:simplezxing:1.5'
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
 }
