@@ -14,20 +14,22 @@ public class PostStringBuilder extends OkRequestBuilder<PostStringBuilder> {
     private String content;
     private Gson gson=new Gson();
 
-    public void replaceMediaType(MediaType mediaType)
+    public PostStringBuilder replaceMediaType(MediaType mediaType)
     {
         if (mediaType!=null)
         {
             this.mediaType=mediaType;
         }
+        return this;
     }
 
-    public void addString(String content)
+    public PostStringBuilder addString(String content)
     {
         if (!TextUtils.isEmpty(content))
         {
             this.content=content;
         }
+        return this;
     }
 
 

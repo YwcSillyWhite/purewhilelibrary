@@ -48,17 +48,25 @@ public class PostFormBuilder extends OkRequestParamBuilder<PostFormBuilder> {
 
     public PostFormBuilder addFile(@NonNull String key,@NonNull String filename,@NonNull File file)
     {
-        fileInputList.add(new FileInput(key,filename,file));
+        if (!TextUtils.isEmpty(key)&&!TextUtils.isEmpty(filename)&&file!=null)
+        {
+            addFileParams(key,filename,file);
+        }
         return this;
+    }
+
+    private void addFileParams(@NonNull String key,@NonNull String filename,@NonNull File file)
+    {
+        fileInputList.add(new FileInput(key,filename,file));
     }
 
     public PostFormBuilder addFiles(@NonNull String key, Map<String,File> files)
     {
-        if (files!=null&&files.size()>0)
+        if (!TextUtils.isEmpty(key)&&files!=null&&files.size()>0)
         {
             for (String filename:files.keySet())
             {
-                addFile(key,filename,files.get(filename));
+                addFileParams(key,filename,files.get(filename));
             }
         }
         return this;
