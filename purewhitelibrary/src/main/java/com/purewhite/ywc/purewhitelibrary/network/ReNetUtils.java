@@ -1,15 +1,11 @@
 package com.purewhite.ywc.purewhitelibrary.network;
 
-import com.google.gson.Gson;
 import com.purewhite.ywc.purewhitelibrary.network.retrofit.RetrofitApi;
 import com.purewhite.ywc.purewhitelibrary.network.retrofit.RetrofitUtils;
-import com.purewhite.ywc.purewhitelibrary.network.rxjava.HttpObserver;
-import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxSchedulers;
 
 import java.util.Map;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
 import okhttp3.ResponseBody;
 
 /**

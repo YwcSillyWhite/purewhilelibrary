@@ -2,25 +2,17 @@ package com.purewhite.ywc.frame.ui.activity.mine;
 
 import android.Manifest;
 import android.content.Intent;
-import android.os.Build;
-import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.purewhite.ywc.frame.BuildConfig;
 import com.purewhite.ywc.frame.R;
-import com.purewhite.ywc.purewhitelibrary.config.file.FileManagerUtils;
-import com.purewhite.ywc.frame.config.TagUtils;
 import com.purewhite.ywc.frame.databinding.ActivityCameraBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
-import com.purewhite.ywc.purewhitelibrary.config.PhotoUtils;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
-import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureUtils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

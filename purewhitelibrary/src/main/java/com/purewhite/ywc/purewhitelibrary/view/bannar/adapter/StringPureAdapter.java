@@ -4,8 +4,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-
 import java.util.List;
 
 public class StringPureAdapter extends BasePureAdapter<String>{

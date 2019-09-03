@@ -8,7 +8,6 @@ import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
 import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
-import com.purewhite.ywc.purewhitelibrary.window.dialog.DialogBuilder;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.BaseDialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;

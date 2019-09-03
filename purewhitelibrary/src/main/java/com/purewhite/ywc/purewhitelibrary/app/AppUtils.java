@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
-import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 import com.squareup.leakcanary.LeakCanary;
 

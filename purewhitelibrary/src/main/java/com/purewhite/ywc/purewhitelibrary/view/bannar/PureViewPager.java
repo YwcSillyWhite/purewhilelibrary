@@ -13,14 +13,9 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.purewhite.ywc.purewhitelibrary.R;
-import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.BasePureAdapter;
-import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.StringPureAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.listener.OnPureChangeListener;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.palette.PureViewPalette;
-
-import java.util.Arrays;
-import java.util.List;
 
 import io.reactivex.annotations.NonNull;
 

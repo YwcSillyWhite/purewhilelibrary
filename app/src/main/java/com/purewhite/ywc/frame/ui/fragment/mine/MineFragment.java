@@ -1,7 +1,5 @@
 package com.purewhite.ywc.frame.ui.fragment.mine;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +11,6 @@ import com.purewhite.ywc.frame.ui.activity.mine.AndroidStudyActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CameraActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.CustomMainActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.PagerActivity;
-import com.purewhite.ywc.frame.ui.activity.mine.SocketActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.WheelViewActivity;
 import com.purewhite.ywc.frame.ui.activity.mine.dialog.DialogHomeActiivty;
 import com.purewhite.ywc.frame.ui.adapter.MineAdapter;

@@ -5,9 +5,6 @@ import android.app.Application;
 import com.example.tbslibrary.app.TbsAppUtils;
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class BaseApp extends Application {
 
 
