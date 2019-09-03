@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.view.bannar.trans;
+package com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.trans;
 
 import android.view.View;
 

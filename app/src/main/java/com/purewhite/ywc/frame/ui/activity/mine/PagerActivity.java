@@ -4,11 +4,10 @@ import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityPagerBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
-import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.StringPureAdapter;
-import com.purewhite.ywc.purewhitelibrary.view.bannar.trans.PagerTransZoom;
+import com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.adapter.StringPureAdapter;
+import com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.trans.PagerTransZoom;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PagerActivity extends MvpActivity<ActivityPagerBinding,PresenterImp> {

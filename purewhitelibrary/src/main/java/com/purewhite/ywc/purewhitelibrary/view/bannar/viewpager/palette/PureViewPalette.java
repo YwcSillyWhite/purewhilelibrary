@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.view.bannar.palette;
+package com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.palette;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;

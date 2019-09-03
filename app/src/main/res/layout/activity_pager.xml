@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.purewhite.ywc.purewhitelibrary.view.bannar.PureViewPager
+    <com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.PureViewPager
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/title_bar_layout"
@@ -10,5 +10,5 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         app:pager_clip="false">
-    </com.purewhite.ywc.purewhitelibrary.view.bannar.PureViewPager>
+    </com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.PureViewPager>
 </layout>

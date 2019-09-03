@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.view.bannar.adapter;
+package com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.adapter;
 
 import android.graphics.Bitmap;
 import android.util.SparseArray;
@@ -13,7 +13,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
-import com.purewhite.ywc.purewhitelibrary.view.bannar.palette.PureViewPalette;
+import com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.palette.PureViewPalette;
 
 import java.util.ArrayList;
 import java.util.List;
