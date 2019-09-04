@@ -28,5 +28,4 @@ public interface RetrofitApi {
     Observable<ResponseBody> post(@Url String uri,@FieldMap Map<String,Object> map);
 
 
-
 }
