@@ -8,13 +8,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnPagerItemListener;
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
+
 /**
+ * view 的 pager adapter
  * @author yuwenchao
  */
-public class BasePagerAdapterImp extends PagerAdapter {
+public class ViewPagerAdapter extends PagerAdapter {
 
     private SparseArray<View> sparseArray;
-    public BasePagerAdapterImp(SparseArray<View> sparseArray) {
+    private OnPagerItemListener onItemListener;
+    private boolean isItemClick=true;
+    public void setOnItemListener(OnPagerItemListener onItemListener) {
+        this.onItemListener = onItemListener;
+    }
+
+    public ViewPagerAdapter(SparseArray<View> sparseArray) {
         this.sparseArray = sparseArray;
     }
 
@@ -45,6 +55,15 @@ public class BasePagerAdapterImp extends PagerAdapter {
         {
             container.addView(view);
         }
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemListener!=null&&isItemClick&& ClickUtils.clickable(view))
+                {
+                    onItemListener.onClick(ViewPagerAdapter.this,view,position,true);
+                }
+            }
+        });
         return view;
     }
 

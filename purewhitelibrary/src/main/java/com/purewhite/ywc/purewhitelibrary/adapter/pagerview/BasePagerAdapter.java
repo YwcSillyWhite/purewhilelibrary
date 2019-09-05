@@ -57,7 +57,12 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
         View view=sparseArray.get(position);
         if (view==null)
         {
-            view= onItemView(container,position, t);
+            view = LayoutInflater.from(container.getContext()).inflate(getLayoutId(position), container, false);
+            if (view!=null)
+            {
+                onData(view,position,t);
+            }
+
             sparseArray.put(position,view);
         }
         view.setOnClickListener(new View.OnClickListener() {
@@ -86,16 +91,6 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
     protected List<T> obtainData()
     {
         return list;
-    }
-
-
-    private View onItemView(ViewGroup container,int position,T t) {
-        View itemView = LayoutInflater.from(container.getContext()).inflate(getLayoutId(position), container, false);
-        if (itemView!=null)
-        {
-            onData(itemView,position,t);
-        }
-        return itemView;
     }
 
     //获取布局id
