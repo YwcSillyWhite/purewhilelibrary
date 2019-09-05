@@ -2,11 +2,15 @@ package com.purewhite.ywc.purewhitelibrary.adapter.pagerview;
 
 
 import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnPagerItemListener;
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +19,12 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
 
     private List<T> list;
     private SparseArray<View> sparseArray;
+    private OnPagerItemListener onItemListener;
+    //item是否可以点击
+    private boolean isItemClick=true;
+    public void setOnItemListener(OnPagerItemListener onItemListener) {
+        this.onItemListener = onItemListener;
+    }
 
     public BasePagerAdapter(List<T> list) {
         this.list = list==null?new ArrayList<T>():list;
@@ -48,10 +58,23 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
         View view=sparseArray.get(position);
         if (view==null)
         {
-            view= obtainView(container,position, t);
+            view = LayoutInflater.from(container.getContext()).inflate(getLayoutId(position), container, false);
+            if (view!=null)
+            {
+                onData(view,position,t);
+            }
+
             sparseArray.put(position,view);
         }
-
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemListener!=null&&isItemClick&&ClickUtils.clickable(view))
+                {
+                    onItemListener.onClick(BasePagerAdapter.this,view,position,true);
+                }
+            }
+        });
         container.addView(view);
         return view;
     }
@@ -71,9 +94,9 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
         return list;
     }
 
-    protected abstract View obtainView(ViewGroup container,int position,T t);
+    //获取布局id
+    protected abstract int getLayoutId(int position);
 
-
-
+    protected abstract void onData(View view,int position,T t);
 
 }

@@ -11,10 +11,10 @@ import androidx.viewpager.widget.PagerAdapter;
 /**
  * @author yuwenchao
  */
-public class BasePagerAdapterImp extends PagerAdapter {
+public class ViewPagerAdapter extends PagerAdapter {
 
     private SparseArray<View> sparseArray;
-    public BasePagerAdapterImp(SparseArray<View> sparseArray) {
+    public ViewPagerAdapter(SparseArray<View> sparseArray) {
         this.sparseArray = sparseArray;
     }
 
