@@ -1,7 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.view.bannar.recyclerview.layoutmanager;
 
 import android.content.Context;
-import android.util.AttributeSet;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

@@ -163,7 +163,7 @@ public class VlayoutAdapter extends DelegateAdapter
                 @Override
                 public void onSingleClick(View v) {
                     //加载失败，点击重新加载  没有网络不允许加载
-                    if (loadView.getLoadStatue()==LoadView.NETWORK&&NetWorkUtils.isConnected())
+                    if (loadView.getLoadStatue()==LoadView.NO_NETWORK&&NetWorkUtils.isConnected())
                     {
                         setLoadState(LoadView.LOAD,true);
                         onLoadListener.loadAgain();
@@ -237,7 +237,7 @@ public class VlayoutAdapter extends DelegateAdapter
             }
             else
             {
-                setLoadState(LoadView.NETWORK,false);
+                setLoadState(LoadView.NO_NETWORK,false);
             }
 
         }
@@ -264,7 +264,7 @@ public class VlayoutAdapter extends DelegateAdapter
                 setLoadState(LoadView.REST,false);
                 if (pagesize==0)
                 {
-                    setFullSate(network?FullView.DATA:FullView.NETWORK,true);
+                    setFullSate(network?FullView.NO_DATA:FullView.NO_NETWORK,true);
                 }
                 else
                 {
@@ -273,7 +273,7 @@ public class VlayoutAdapter extends DelegateAdapter
             }
             else
             {
-                setLoadState(network?LoadView.DATA:LoadView.NETWORK,false);
+                setLoadState(network?LoadView.NO_DATA:LoadView.NO_NETWORK,false);
             }
         }
         else

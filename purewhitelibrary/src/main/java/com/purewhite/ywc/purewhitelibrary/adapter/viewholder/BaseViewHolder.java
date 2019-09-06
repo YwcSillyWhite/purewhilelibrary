@@ -39,35 +39,38 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public final void setTextView(@NonNull@IdRes int id, @NonNull String content)
+    public final BaseViewHolder setTextView(@NonNull@IdRes int id, @NonNull String content)
     {
         View view = findViewId(id);
         if (view instanceof TextView)
         {
             ((TextView) view).setText(content);
         }
+        return this;
     }
 
 
-    public final void setButton(@NonNull@IdRes int id, @NonNull String content)
+    public final BaseViewHolder setButton(@NonNull@IdRes int id, @NonNull String content)
     {
         View view = findViewId(id);
         if (view instanceof Button)
         {
             ((Button) view).setText(content);
         }
+        return this;
     }
 
-    public final void setEditView(@NonNull@IdRes int id, @NonNull String content)
+    public final BaseViewHolder setEditView(@NonNull@IdRes int id, @NonNull String content)
     {
         View view = findViewId(id);
         if (view instanceof EditText)
         {
             ((EditText) view).setText(content);
         }
+        return this;
     }
 
-    public final void setRecycler(@NonNull@IdRes int id,@NonNull RecyclerView.Adapter adapter,@NonNull RecyclerView.LayoutManager layoutManager)
+    public final BaseViewHolder setRecycler(@NonNull@IdRes int id,@NonNull RecyclerView.Adapter adapter,@NonNull RecyclerView.LayoutManager layoutManager)
     {
         View view = findViewId(id);
         if (view instanceof RecyclerView)
@@ -76,19 +79,22 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(layoutManager);
         }
+        return this;
     }
 
 
 
-    public final void setVisibility(@NonNull@IdRes int id,int visibility)
+    public final BaseViewHolder setVisibility(@NonNull@IdRes int id,int visibility)
     {
         View view = findViewId(id);
         view.setVisibility(visibility);
+        return this;
     }
 
-    public final void setVisibility(@NonNull@IdRes int id,boolean show)
+    public final BaseViewHolder setVisibility(@NonNull@IdRes int id,boolean show)
     {
         setVisibility(id,show?View.VISIBLE:View.GONE);
+        return this;
     }
 
 }

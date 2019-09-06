@@ -30,8 +30,6 @@ public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
         implements OnItemListener {
 
 
-
-
     @Override
     public void onClick(RecyclerView.Adapter adapter, View view, int position, boolean itemView) {
         switch (position)

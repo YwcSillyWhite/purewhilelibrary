@@ -1,8 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture.adapter;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.github.chrisbanes.photoview.PhotoView;
 import com.purewhite.ywc.purewhitelibrary.R;
@@ -38,13 +36,6 @@ public class LookPictureAdapter extends BasePagerAdapter<ImageBean> {
         return isPreview()?previewImage.size():super.getCount();
     }
 
-    @Override
-    protected View obtainView(ViewGroup container, int position, ImageBean imageBean) {
-        View view = LayoutInflater.from(container.getContext()).inflate(R.layout.pure_adapter_look_picture, container, false);
-        final PhotoView photoView = (PhotoView) view.findViewById(R.id.photo_view);
-        ImageLoader.newInstance().init(photoView,obtianPath(position));
-        return view;
-    }
 
     public String obtianPath(int position)
     {
@@ -58,5 +49,16 @@ public class LookPictureAdapter extends BasePagerAdapter<ImageBean> {
 
     protected ImageBean obtainT(int position) {
         return isPreview()?null:super.obtainT(position);
+    }
+
+    @Override
+    protected int getLayoutId(int position) {
+        return R.layout.pure_adapter_look_picture;
+    }
+
+    @Override
+    protected void onData(View view, int position, ImageBean imageBean) {
+        final PhotoView photoView = (PhotoView) view.findViewById(R.id.photo_view);
+        ImageLoader.newInstance().init(photoView,obtianPath(position));
     }
 }

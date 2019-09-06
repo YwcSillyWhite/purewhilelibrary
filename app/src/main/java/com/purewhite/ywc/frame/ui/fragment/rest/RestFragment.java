@@ -14,8 +14,21 @@ public class RestFragment extends MvpFragment<FragRestBinding,PresenterImp> {
         return R.layout.frag_rest;
     }
 
+
+    @Override
+    protected void beforView() {
+    }
+
     @Override
     protected void initView() {
+
+
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
     }
 }

@@ -14,12 +14,12 @@ public abstract class LoadView {
 
     //加载  （加载中）
     public static final int LOAD=1;
-    //网络  （网络不好，加载失败）
-    public static final int NETWORK=2;
-    //完成  （加载完成）
-    public static final int FINISH=3;
+    //没有网络
+    public static final int NO_NETWORK=2;
     //数据  （没有更多）
-    public static final int DATA=4;
+    public static final int NO_DATA=3;
+    //完成  （加载完成）
+    public static final int FINISH=4;
     //其他
     public static final int REST=0;
 
@@ -42,12 +42,12 @@ public abstract class LoadView {
                 holder.setVisibility(getNetworkId(),false);
                 holder.setVisibility(getDataId(),false);
                 break;
-            case NETWORK:
+            case NO_NETWORK:
                 holder.setVisibility(getLoadId(),false);
                 holder.setVisibility(getNetworkId(),true);
                 holder.setVisibility(getDataId(),false);
                 break;
-            case DATA:
+            case NO_DATA:
                 holder.setVisibility(getLoadId(),false);
                 holder.setVisibility(getNetworkId(),false);
                 holder.setVisibility(getDataId(),true);

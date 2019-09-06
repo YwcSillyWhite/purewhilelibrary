@@ -1,7 +1,6 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.recyclerview;
 
 
-import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -20,9 +19,7 @@ import java.util.List;
  * 使用数据里面的
  */
 
-public abstract class BindAdapter<T> extends BaseMoreAdapter<T,BindHolder> {
-
-    private SparseIntArray sparseIntArray;
+public abstract class BindAdapter<T> extends BaseLoadAdapter<T,BindHolder> {
 
     public BindAdapter()
     {
@@ -31,7 +28,6 @@ public abstract class BindAdapter<T> extends BaseMoreAdapter<T,BindHolder> {
 
     public BindAdapter(List<T> list) {
         super(list);
-        sparseIntArray=new SparseIntArray();
     }
 
 
