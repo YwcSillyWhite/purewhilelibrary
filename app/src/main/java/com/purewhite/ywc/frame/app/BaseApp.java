@@ -22,7 +22,6 @@ public class BaseApp extends Application {
     }
 
     private void initPure() {
-
-        AppUtils.initLibrary(this,"",375);
+        AppUtils.initLibrary(this,"http://v2.api.haodanku.com",375);
     }
 }

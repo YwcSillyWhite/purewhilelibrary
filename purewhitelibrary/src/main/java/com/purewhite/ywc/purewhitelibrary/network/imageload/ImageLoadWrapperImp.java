@@ -40,9 +40,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ImageLoadWrapperImp implements ImageLoadWrapper{
 
-
-
-
     @Override
     public void init(ImageView imageView, Object url) {
         init(ImageLoadType.initDefalut,imageView,url);

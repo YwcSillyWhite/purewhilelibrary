@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.purewhite.ywc.purewhitelibrary.config.AdaptiveUtils;
+import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkhttpBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxDisposableManager;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -24,14 +25,9 @@ public final class  AppUtils {
     //默认适配宽度是360dp
     public static int adaptiveWightDp=375;
     //retrofit默认请求接口
-    public static String baseUri="http://v2.api.haodanku.com";
+    public static String baseUri;
     private static Application application;
     private static Stack<Activity> stack=new Stack<>();
-
-    private AppUtils() {
-
-    }
-
     static Application.ActivityLifecycleCallbacks activityLifecycleCallbacks=new Application.ActivityLifecycleCallbacks() {
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
@@ -86,7 +82,6 @@ public final class  AppUtils {
      */
     public static void initLibrary(@NonNull Application application, String retrofitBaseUri, int adaptiveWight)
     {
-
         if (!TextUtils.isEmpty(retrofitBaseUri))
         {
             baseUri=retrofitBaseUri;
@@ -98,13 +93,16 @@ public final class  AppUtils {
         }
         AppUtils.application =application;
         application.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
-
         //内存检测
         if (!LeakCanary.isInAnalyzerProcess(application)) {
             LeakCanary.install(application);
         }
-
     }
+
+
+
+
+
 
     public static Activity getTopActivity()
     {
@@ -117,11 +115,11 @@ public final class  AppUtils {
         return null;
     }
 
+
     public static Context getContext()
     {
         return application.getApplicationContext();
     }
-
 
 
     /**

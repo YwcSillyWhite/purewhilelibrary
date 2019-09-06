@@ -17,24 +17,16 @@ public class OkhttpBuilder {
 
     public final OkHttpClient obtianClient(String tag)
     {
-        OkHttpClient okHttpClient=null;
-        if (TextUtils.isEmpty(tag))
+        switch (tag)
         {
+            case defaultOKhttp:
+                return defaultOkhttp();
+            case longLink:
+                return longLink();
+                default:
+                    return rest(tag);
 
         }
-        else if (tag.equals(defaultOKhttp))
-        {
-            okHttpClient=defaultOkhttp();
-        }
-        else if (tag.equals(longLink))
-        {
-            okHttpClient=longLink();
-        }
-        else
-        {
-            okHttpClient=remainOkhttp();
-        }
-        return okHttpClient;
     }
 
 
@@ -75,9 +67,10 @@ public class OkhttpBuilder {
         return builder.build();
     }
 
+    protected OkHttpClient rest(String tag) {
+        return defaultOkhttp();
+    }
 
-    protected OkHttpClient remainOkhttp()
-    {
-        return null;
-    };
+
+
 }

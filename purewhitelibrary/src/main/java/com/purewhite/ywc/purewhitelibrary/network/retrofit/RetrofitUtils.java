@@ -25,20 +25,6 @@ public class RetrofitUtils {
     private Map<String, OkHttpClient> okHttpClientMap=new HashMap<>();
     private OkhttpBuilder okhttpBuilder=new OkhttpBuilder();
 
-    public void setOkhttpBuilder(OkhttpBuilder okhttpBuilder) {
-        if (okhttpBuilder!=null)
-        {
-            this.okhttpBuilder = okhttpBuilder;
-        }
-    }
-
-
-
-
-
-    public RetrofitUtils() {
-        okHttpClientMap.put(OkhttpBuilder.defaultOKhttp,okhttpBuilder.obtianClient(OkhttpBuilder.defaultOKhttp));
-    }
 
     public static RetrofitUtils newInstance() {
         if (basRetrofit==null)
@@ -53,7 +39,6 @@ public class RetrofitUtils {
         }
         return basRetrofit;
     }
-
 
 
     //初始化

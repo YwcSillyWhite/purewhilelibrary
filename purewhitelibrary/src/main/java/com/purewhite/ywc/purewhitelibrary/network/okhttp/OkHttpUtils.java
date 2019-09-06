@@ -2,6 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.network.okhttp;
 
 
 import com.google.gson.Gson;
+import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.GetBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostFormBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostStringBuilder;
@@ -28,22 +29,8 @@ public class OkHttpUtils {
     private static OkHttpUtils okhttpUtils;
     private Map<String,OkHttpClient> map=new HashMap<>();
     private OkhttpBuilder okhttpBuilder=new OkhttpBuilder();
-
-    public void setOkhttpBuilder(OkhttpBuilder okhttpBuilder) {
-        if (okhttpBuilder!=null)
-        {
-            this.okhttpBuilder = okhttpBuilder;
-        }
-    }
-
     private Gson gson=new Gson();
     private OkThreadSave okThreadSave=new OkThreadSave();
-
-
-    private OkHttpUtils() {
-        map.put(OkhttpBuilder.defaultOKhttp,okhttpBuilder.obtianClient(OkhttpBuilder.defaultOKhttp));
-    }
-
 
     public static OkHttpUtils newInstance() {
         if (okhttpUtils==null)
