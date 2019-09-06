@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
+import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemLongListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BaseViewHolder;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 
@@ -78,7 +79,6 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
 
     //点击事件
     protected OnItemListener onItemListener;
-    //是否item存在点击事件，默认是true
     private boolean isItemClick=true;
     public void setOnItemListener(OnItemListener onItemListener) {
         this.onItemListener = onItemListener;
@@ -87,6 +87,16 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         isItemClick = itemClick;
     }
 
+
+    //长按事件
+    protected OnItemLongListener onItemLongListener;
+    private boolean isItemLongClick=true;
+    public void setOnItemLongListener(OnItemLongListener onItemLongListener) {
+        this.onItemLongListener = onItemLongListener;
+    }
+    public void setItemLongClick(boolean itemLongClick) {
+        isItemLongClick = itemLongClick;
+    }
 
     /**
      * 创建布局
@@ -119,29 +129,43 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         return LayoutInflater.from(viewGroup.getContext()).inflate(layoutIds,viewGroup,false);
     }
     //设置点击时间
-    protected final void bindDataListener(final BaseViewHolder viewhold) {
-        if (viewhold == null||!isItemClick||onItemListener==null) {
+    protected final void bindDataListener(final V viewhold) {
+        if (viewhold==null)
             return;
-        }
-        final View view = viewhold.itemView;
-        if (view == null) {
+        View itemView = viewhold.itemView;
+        if (itemView==null)
             return;
-        }
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ClickUtils.clickable(view))
-                {
-                    onItemListener.onClick(BaseAdapter.this,view, obtainDataPosition(viewhold.getLayoutPosition()),true);
+        if (isItemClick&&onItemListener!=null)
+        {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (ClickUtils.clickable(view))
+                    {
+                        int dataPosition = obtainDataPosition(viewhold.getLayoutPosition());
+                        onItemListener.onClick(BaseAdapter.this,view, dataPosition,true);
+                    }
                 }
-            }
-        });
+            });
+        }
+        if (isItemLongClick&&onItemLongListener!=null)
+        {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    int dataPosition = obtainDataPosition(viewhold.getLayoutPosition());
+                    return onItemLongListener.onClick(BaseAdapter.this,view,dataPosition,true);
+                }
+            });
+        }
     }
+
     //获取data数据
     protected int obtainDataPosition(int adapterPosition)
     {
         return adapterPosition;
     }
+
     //获取adapter数据
     protected int obtainAdapterPosition(int dataPosition)
     {
@@ -160,12 +184,12 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         onDataBindView(holder,position,holder.getItemViewType());
     }
 
-    protected void onDataBindView(V holder,int position,int itemViewType)
+    protected void onDataBindView(V holder,int dataPosition,int itemViewType)
     {
-        onData(holder,position,obtainT(position),itemViewType);
+        onData(holder,dataPosition,obtainT(dataPosition),itemViewType);
     }
     //赋值数据
-    protected abstract void onData(V holder,int position,T t,int itemViewType);
+    protected abstract void onData(V holder,int dataPosition,T t,int itemViewType);
 
 
 
@@ -186,30 +210,55 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     //刷新
     public void flush(List<T> list)
     {
-        if (mData.size()>0)
+        if (mData.size()==0)
+        {
+            if (list!=null&&list.size()>0)
+            {
+                mData.addAll(list);
+                notifyDataSetChanged();
+            }
+        }
+        else
         {
             mData.clear();
-        }
-        if (list!=null&&list.size()>0)
-        {
-            mData.addAll(list);
+            if (list!=null&&list.size()>0)
+            {
+                mData.addAll(list);
+            }
             notifyDataSetChanged();
         }
     }
+
+
     //刷新某个数据
-    public void flushPosition(int position)
+    public void flushPosition(int dataPosition)
     {
-        notifyItemChanged(obtainAdapterPosition(position));
+        notifyItemChanged(obtainAdapterPosition(dataPosition));
     }
+
+
     //添加数据
     public void addDatas(List<T> list)
     {
-        if (list!=null&&list.size()>0)
+        if (mData.size()==0)
         {
-            mData.addAll(list);
-            notifyItemRangeInserted(obtainAdapterPosition(obtainDataCount()-list.size()), list.size());
+            if (list!=null&&list.size()>0)
+            {
+                mData.addAll(list);
+                notifyDataSetChanged();
+            }
+        }
+        else
+        {
+            if (list!=null&&list.size()>0)
+            {
+                mData.addAll(list);
+                notifyItemRangeInserted(obtainAdapterPosition(obtainDataCount()-list.size()), list.size());
+            }
         }
     }
+
+
     //添加单个数据
     public void addData(T t)
     {
@@ -219,13 +268,14 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
             notifyItemRangeInserted(obtainAdapterPosition(obtainDataCount()-1),1);
         }
     }
+
     //删除某个数据
-    public void removePosition(int position)
+    public void removePosition(int dataPosition)
     {
-        if (position<obtainDataCount())
+        if (dataPosition<obtainDataCount())
         {
-            mData.remove(position);
-            notifyItemRemoved(obtainAdapterPosition(position));
+            mData.remove(dataPosition);
+            notifyItemRemoved(obtainAdapterPosition(dataPosition));
         }
     }
 }

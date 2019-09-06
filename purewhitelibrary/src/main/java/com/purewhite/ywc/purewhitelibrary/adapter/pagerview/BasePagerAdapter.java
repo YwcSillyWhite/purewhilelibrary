@@ -20,6 +20,7 @@ public abstract class BasePagerAdapter<T> extends PagerAdapter {
     private List<T> list;
     private SparseArray<View> sparseArray;
     private OnPagerItemListener onItemListener;
+    //item是否可以点击
     private boolean isItemClick=true;
     public void setOnItemListener(OnPagerItemListener onItemListener) {
         this.onItemListener = onItemListener;

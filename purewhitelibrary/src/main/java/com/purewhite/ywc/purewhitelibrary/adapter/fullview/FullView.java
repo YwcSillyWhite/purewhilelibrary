@@ -17,10 +17,10 @@ public abstract class FullView {
     private int fullState;
     //加载
     public static final int LODA=1;
-    //网络
-    public static final int NETWORK=2;
-    //数据
-    public static final int DATA=3;
+    //没有网络
+    public static final int NO_NETWORK=2;
+    //没有数据
+    public static final int NO_DATA=3;
     //
     public static final int REST=0;
 
@@ -46,12 +46,12 @@ public abstract class FullView {
     {
         switch (fullState)
         {
-            case DATA:
+            case NO_DATA:
                 holder.setVisibility(getLoadId(),false);
                 holder.setVisibility(getNetworkId(),false);
                 holder.setVisibility(getDataId(),true);
                 break;
-            case NETWORK:
+            case NO_NETWORK:
                 holder.setVisibility(getLoadId(),false);
                 holder.setVisibility(getNetworkId(),true);
                 holder.setVisibility(getDataId(),false);
@@ -74,7 +74,7 @@ public abstract class FullView {
 
     public final  boolean isFullView()
     {
-        if (fullState==DATA||fullState==NETWORK||fullState==LODA) {
+        if (fullState==NO_DATA||fullState==NO_NETWORK||fullState==LODA) {
             return true;
         }
         return false;

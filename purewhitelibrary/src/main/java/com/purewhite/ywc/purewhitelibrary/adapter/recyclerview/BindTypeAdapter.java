@@ -11,7 +11,7 @@ import java.util.List;
  * 使用数据里面的
  */
 
-public abstract class BindTypeAdapter<T extends BaseTypeBean> extends BindAdapter<T>{
+public abstract class BindTypeAdapter<T extends BaseTypeBean> extends BindAdapter<T> {
 
 
     public BindTypeAdapter() {

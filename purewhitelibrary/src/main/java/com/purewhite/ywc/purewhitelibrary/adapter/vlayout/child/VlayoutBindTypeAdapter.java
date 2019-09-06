@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author yuwenchao
  */
-public abstract class VlayoutBindTypeAdapter<T extends BaseTypeBean> extends VlayoutBindAdapter<T>{
+public abstract class VlayoutBindTypeAdapter<T extends BaseTypeBean> extends VlayoutBindAdapter<T> {
 
     public VlayoutBindTypeAdapter() {
     }

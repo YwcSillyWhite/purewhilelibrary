@@ -1,15 +1,20 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.vlayout.child;
 
 
+import android.util.SparseIntArray;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
+import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
+import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemLongListener;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BaseViewHolder;
-import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
+import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,26 +39,6 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
 
     private List<T> mData;
 
-    private OnItemListener onItemListener;
-    public final void setOnItemListener(OnItemListener onItemListener) {
-        this.onItemListener = onItemListener;
-    }
-    //本身是否可以点击
-    private Boolean parentClick=true;
-    public final void setParentClick(Boolean parentClick) {
-        this.parentClick = parentClick;
-    }
-
-    @Override
-    public final int getItemViewType(int position) {
-        return obtianDataType(position);
-    }
-
-    protected  int obtianDataType(int position) {
-        return super.getItemViewType(position);
-    }
-
-
     public List<T> obtainData()
     {
         return mData;
@@ -68,17 +53,129 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
         return null;
     }
 
+    //点击事件
+    private OnItemListener onItemListener;
+    private boolean isItemClick=true;
+    public final void setOnItemListener(OnItemListener onItemListener) {
+        this.onItemListener = onItemListener;
+    }
+
+    public void setItemClick(boolean itemClick) {
+        isItemClick = itemClick;
+    }
+
+    //长按事件
+    protected OnItemLongListener onItemLongListener;
+    private boolean isItemLongClick=true;
+    public void setOnItemLongListener(OnItemLongListener onItemLongListener) {
+        this.onItemLongListener = onItemLongListener;
+    }
+    public void setItemLongClick(boolean itemLongClick) {
+        isItemLongClick = itemLongClick;
+    }
+
+
+    //布局集合
+    private SparseIntArray layoutIds=new SparseIntArray();
+    //添加布局
+    protected final void addLayout(@LayoutRes int layoutId)
+    {
+        addLayout(0,layoutId);
+    }
+    protected final void addLayout(int itemType,@LayoutRes int layoutId)
+    {
+        if (layoutId!=0)
+        {
+            layoutIds.append(itemType,layoutId);
+        }
+    }
+    protected final int obtianLayoutId(int itemType) {
+        return layoutIds.get(itemType, R.layout.pure_adapter_error_layout);
+    }
+
+
+
+
 
     public VlayoutBaseAdapter(List<T> list) {
         this.mData = list!=null?list:new ArrayList<T>();
     }
 
+
+
+    @Override
+    public final int getItemViewType(int position) {
+        return obtianDataType(position);
+    }
+
+    protected  int obtianDataType(int position) {
+        return super.getItemViewType(position);
+    }
+
+
+    /**
+     * 创建布局
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
-    public final V onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        V viewHolder = onCreateData(viewGroup, viewType);
-        return viewHolder;
+    public V onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return onDataCreateViewHolder(parent,viewType,obtianLayoutId(viewType));
     }
+
+    protected V onDataCreateViewHolder(@NonNull ViewGroup parent, int viewType,@LayoutRes int layoutIds)
+    {
+        View itemView = obtainView(parent,layoutIds);
+        V v = createV(itemView);
+        bindDataListener(v);
+        return v;
+    }
+
+    //获取布局
+    protected final View obtainView(ViewGroup viewGroup,int layoutIds)
+    {
+        return LayoutInflater.from(viewGroup.getContext()).inflate(layoutIds,viewGroup,false);
+    }
+
+    //创建viewhold
+    protected final V createV(View view) {
+        return ((V) new BaseViewHolder(view));
+    }
+
+    protected final void bindDataListener(V holder) {
+        if (holder==null)
+            return;
+        View itemView = holder.itemView;
+        if (itemView==null)
+            return;
+        if (isItemClick&&onItemListener!=null)
+        {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (ClickUtils.clickable(view))
+                    {
+                        onItemListener.onClick(VlayoutBaseAdapter.this,view, holder.getLayoutPosition(),true);
+                    }
+                }
+            });
+        }
+        if (isItemLongClick&&onItemLongListener!=null)
+        {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    return onItemLongListener.onClick(VlayoutBaseAdapter.this,view, holder.getLayoutPosition(),true);
+                }
+            });
+        }
+
+
+
+    }
+
 
     @Override
     public final void onBindViewHolder(@NonNull V v, int i) {
@@ -99,43 +196,41 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
     protected  final void onBindViewHolderWithOffset(V holder, int position, int offsetTotal) {
         super.onBindViewHolderWithOffset(holder, position, offsetTotal);
         onData(holder,position,obtain(position));
-        bindClick(holder,position);
+
     }
 
-    private final void bindClick(final V holder, final int position) {
-        if (holder==null&&!parentClick&&onItemListener==null) {
-            return;
-        }
-        View view = holder.itemView;
-        if (view==null)
-        {
-            return;
-        }
-        view.setId(Integer.MAX_VALUE);
-        view.setOnClickListener(new OnSingleListener() {
-            @Override
-            public void onSingleClick(View v) {
-                if (onItemListener!=null&&parentClick)
-                {
-                    onItemListener.onClick(VlayoutBaseAdapter.this,v,position,true);
-                }
-            }
-        });
-    }
+
 
 
     //赋值数据
     protected abstract void onData(V holder,int position,T t);
 
 
-    protected abstract V onCreateData(ViewGroup parent, int viewType);
+
+
+
 
 
     //刷新数据
     public void flush(List<T> list)
     {
-        mData=list!=null&&list.size()>0?list:new ArrayList<T>();
-        notifyDataSetChanged();
+        if (mData.size()==0)
+        {
+            if (list!=null&&list.size()>0)
+            {
+                mData.addAll(list);
+                notifyDataSetChanged();
+            }
+        }
+        else
+        {
+            mData.clear();
+            if (list!=null&&list.size()>0)
+            {
+                mData.addAll(list);
+            }
+            notifyDataSetChanged();
+        }
     }
 
     //添加数据
@@ -143,7 +238,11 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
     {
         if (obtianDataCount()==0)
         {
-            flush(list);
+            if (list!=null&&list.size()>0)
+            {
+                mData.addAll(list);
+                notifyDataSetChanged();
+            }
         }
         else
         {
@@ -155,19 +254,7 @@ public abstract class VlayoutBaseAdapter<T,V extends BaseViewHolder> extends Del
         }
     }
 
-    public void flushT(T t)
-    {
-        if (t==null)
-        {
-            return;
-        }
-        if (mData.size()>0)
-        {
-            mData.clear();
-        }
-        mData.add(t);
-        notifyDataSetChanged();
-    }
+
 
     /**
      * @param

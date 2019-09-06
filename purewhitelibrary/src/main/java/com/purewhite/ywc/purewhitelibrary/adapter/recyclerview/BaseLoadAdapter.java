@@ -30,7 +30,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  * @date 2018/11/15
  */
 
-public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAdapter<T,V>{
+public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAdapter<T,V> {
 
     //用于延迟
     private Handler handler=new Handler();
@@ -39,12 +39,64 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
     public final void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
+    //头部
     private final int HEAD_ITEM=Integer.MIN_VALUE;
+    //尾部
     private final int FOOT_ITEM=Integer.MIN_VALUE+1;
+    //加载更多
     private final int LOAD_ITEM=Integer.MIN_VALUE+2;
+    //全局布局
     private final int FULL_ITEM=Integer.MIN_VALUE+3;
 
-    public BaseMoreAdapter(List<T> mData) {
+
+    //全局布局
+    private FullView fullView=new FullViewImp();
+    private OnFullListener onFullListener;
+    public final void setFullView(FullView fullView) {
+        if (fullView==null) {
+            throw new UnsupportedOperationException("fullview can not null");
+        }
+        this.fullView = fullView;
+    }
+
+    public final void setFullState(int state) {
+        setFullState(state,false);
+    }
+    //设置full状态，并且是否刷新
+    public final void setFullState(int statue,boolean flush) {
+        fullView.setFullState(statue);
+        if (isFullView()&&flush) {
+            notifyDataSetChanged();
+        }
+    }
+    public final void setOnFullListener(OnFullListener onFullListener) {
+        this.onFullListener=onFullListener;
+    }
+
+
+    //加载布局
+    private LoadView loadView=new LoadViewImp();
+    protected OnLoadListener onLoadListener;
+    public final void setLoadView(LoadView loadView) {
+        if (loadView==null) {
+            throw new UnsupportedOperationException("loadview can not null");
+        }
+        this.loadView = loadView;
+    }
+    private final void setLoadState(int statue,boolean flush) {
+        loadView.setLoadStatue(statue);
+        if (isLoadView()&&flush) {
+            notifyItemChanged(getItemCount()-1);
+        }
+    }
+    public final void setOnLoadListener(OnLoadListener onLoadListener) {
+        this.onLoadListener = onLoadListener;
+    }
+
+
+
+
+    public BaseLoadAdapter(List<T> mData) {
         super(mData);
     }
 
@@ -56,21 +108,6 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
     public final int getItemCount() {
         return getFullCount()>0?getFullCount():getHeadCount()+obtainDataCount()+getFootCount()+getLoadCount();
     }
-    //头部数据的长度
-    private final int getHeadCount() {
-        if (mHeaderLayout!=null&&mHeaderLayout.getChildCount()>0) {
-            return 1;
-        }
-        return 0;
-    }
-    //尾部长度
-    private final int getFootCount() {
-        if (mFooterLayout!=null&&mFooterLayout.getChildCount()>0) {
-            return 1;
-        }
-        return 0;
-    }
-
 
     //没有数据长度
     private final int getFullCount() {
@@ -80,9 +117,38 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
         }
         return 0;
     }
+
+    //是否启动fullview
+    private boolean isFullView()
+    {
+        return onFullListener!=null;
+    }
+
+    //头部数据的长度
+    private final int getHeadCount() {
+        if (mHeaderLayout!=null&&mHeaderLayout.getChildCount()>0) {
+            return 1;
+        }
+        return 0;
+    }
+
+    //尾部长度
+    private final int getFootCount() {
+        if (mFooterLayout!=null&&mFooterLayout.getChildCount()>0) {
+            return 1;
+        }
+        return 0;
+    }
+
     //loadview的长度
     private final int getLoadCount() {
         return isLoadView()?1:0;
+    }
+
+    //是否启动loadview
+    private boolean isLoadView()
+    {
+        return onLoadListener!=null;
     }
 
     @Override
@@ -111,7 +177,7 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
         }
         else if (position<getHeadCount()+obtainDataCount())
         {
-            return obtainDataType(position-getHeadCount());
+            return obtainDataType(obtainDataPosition(position));
         }
         else if(position<getHeadCount()+obtainDataCount()+getFootCount())
         {
@@ -122,11 +188,11 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
             return LOAD_ITEM;
         }
     }
+
     //data数据类型
     protected int obtainDataType(int position) {
-        return super.getItemViewType(position+getHeadCount());
+        return super.getItemViewType(obtainAdapterPosition(position));
     }
-
 
 
     /************  onCreateViewHolder ****************/
@@ -141,15 +207,15 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
             if (fullView.getClickLoadId()!=0)
             {
                 viewhold.findViewId(fullView.getClickLoadId()).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (NetWorkUtils.isConnected()&&onFullListener!=null&&ClickUtils.clickable(v))
-                                {
-                                    setFullState(FullView.LODA,true);
-                                    onFullListener.loadAgain();
-                                }
-                            }
-                        });
+                    @Override
+                    public void onClick(View v) {
+                        if (NetWorkUtils.isConnected()&& ClickUtils.clickable(v))
+                        {
+                            setFullState(FullView.LODA,true);
+                            onFullListener.loadAgain();
+                        }
+                    }
+                });
             }
         }
         else if (viewType==HEAD_ITEM)
@@ -167,7 +233,7 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (loadView.getLoadStatue()==LoadView.NETWORK &&NetWorkUtils.isConnected()&&ClickUtils.clickable(view))
+                    if (loadView.getLoadStatue()== LoadView.NO_NETWORK && NetWorkUtils.isConnected()&& ClickUtils.clickable(view))
                     {
                         setLoadState(LoadView.LOAD,true);
                         onLoadListener.loadAgain();
@@ -215,7 +281,7 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
             return;
         }
         //加载结束
-        if (loadView.getLoadStatue()==LoadView.FINISH) {
+        if (loadView.getLoadStatue()== LoadView.FINISH) {
             //网络判断
             if (NetWorkUtils.isConnected())
             {
@@ -229,22 +295,11 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
             }
             else
             {
-                setLoadState(LoadView.NETWORK,false);
+                setLoadState(LoadView.NO_NETWORK,false);
             }
 
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
     /************  解决Layoutmanager影响full，head，foot的宽度bug  ****************/
@@ -297,80 +352,6 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
 
 
 
-
-
-    /**        fullview         **/
-    //全局布局
-    private FullView fullView=new FullViewImp();
-    private OnFullListener onFullListener;
-    //设置全局布局
-    public final void setFullView(FullView fullView) {
-        if (fullView==null) {
-            throw new UnsupportedOperationException("fullview can not null");
-        }
-        this.fullView = fullView;
-    }
-
-    public final void setFullState(int state) {
-        setFullState(state,false);
-    }
-    //设置full状态，并且是否刷新
-    public final void setFullState(int statue,boolean flush) {
-        fullView.setFullState(statue);
-        if (isFullView()&&flush) {
-            notifyDataSetChanged();
-        }
-    }
-
-    //是否启动fullview
-    private boolean isFullView()
-    {
-        return onFullListener!=null;
-
-    }
-    //设置全局布局的监听
-    public final void setOnFullListener(OnFullListener onFullListener) {
-        this.onFullListener=onFullListener;
-    }
-    /**        fullview         **/
-
-
-
-
-
-
-
-
-
-    /**        loadview         **/
-    //加载布局
-    private LoadView loadView=new LoadViewImp();
-    //loadview滑动监听
-    protected OnLoadListener onLoadListener;
-    //设置加载布局
-    public final void setLoadView(LoadView loadView) {
-        if (loadView==null) {
-            throw new UnsupportedOperationException("loadview can not null");
-        }
-        this.loadView = loadView;
-    }
-    //是否启动loadview
-    private boolean isLoadView()
-    {
-        return onLoadListener!=null;
-    }
-    //设置loadview的状态
-    private final void setLoadState(int statue,boolean flush) {
-        loadView.setLoadStatue(statue);
-        if (isLoadView()&&flush) {
-            notifyItemChanged(getItemCount()-1);
-        }
-    }
-    //设置滑动监听
-    public final void setOnLoadListener(OnLoadListener onLoadListener) {
-        this.onLoadListener = onLoadListener;
-    }
-    /**        loadview       **/
 
 
 
@@ -506,6 +487,8 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
 
 
 
+
+
     /**
      * 数据处理
      * @param page
@@ -533,11 +516,11 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
     public void flush(List<T> list,boolean network) {
         if (list!=null&&list.size()>0)
         {
-            setLoadState(list.size()>=pageSize?LoadView.FINISH:LoadView.REST,false);
+            setLoadState(list.size()>=pageSize? LoadView.FINISH: LoadView.REST,false);
         }
         else
         {
-            setFullState(network?FullView.DATA:FullView.NETWORK,false);
+            setFullState(network? FullView.NO_DATA: FullView.NO_NETWORK,false);
         }
         super.flush(list);
     }
@@ -553,11 +536,11 @@ public abstract class BaseMoreAdapter<T,V extends BaseViewHolder> extends BaseAd
         {
             if (list!=null&&list.size()>0)
             {
-                setLoadState(list.size()>=pageSize?LoadView.FINISH:LoadView.DATA,false);
+                setLoadState(list.size()>=pageSize? LoadView.FINISH: LoadView.NO_DATA,false);
             }
             else
             {
-                setLoadState(network?LoadView.DATA:LoadView.NETWORK,true);
+                setLoadState(network? LoadView.NO_DATA: LoadView.NO_NETWORK,true);
             }
             super.addDatas(list);
         }

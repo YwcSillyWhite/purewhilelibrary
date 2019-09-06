@@ -1,10 +1,10 @@
 package com.purewhite.ywc.purewhitelibrary.adapter.vlayout.child;
 
 
-import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
@@ -18,9 +18,8 @@ import java.util.List;
  * @date 2018/11/17
  * 使用数据里面的
  */
-public abstract class VlayoutBindAdapter<T> extends VlayoutBaseAdapter<T,BindHolder>{
+public abstract class VlayoutBindAdapter<T> extends VlayoutBaseAdapter<T, BindHolder> {
 
-    private SparseIntArray sparseIntArray;
     public VlayoutBindAdapter()
     {
         super(null);
@@ -30,39 +29,17 @@ public abstract class VlayoutBindAdapter<T> extends VlayoutBaseAdapter<T,BindHol
         super(list);
     }
 
-    protected final void addLayout(int layoutId)
-    {
-        addLayout(0,layoutId);
-    }
-
-    protected final void addLayout(int viewType,int layoutId)
-    {
-        if (sparseIntArray==null)
-        {
-            sparseIntArray=new SparseIntArray();
-        }
-        sparseIntArray.put(viewType,layoutId);
-    }
-
 
     @Override
-    protected final BindHolder onCreateData(ViewGroup parent, int viewType) {
-        if (getLayout(viewType)!=-1)
-        {
-            ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                    getLayout(viewType), parent, false);
-            return new BindHolder(binding);
-        }
-        return null;
+    protected BindHolder onDataCreateViewHolder(@NonNull ViewGroup parent, int viewType, int layoutIds) {
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
+                , layoutIds, parent, false);
+        BindHolder bindHolder = new BindHolder(binding);
+        bindDataListener(bindHolder);
+        return bindHolder;
     }
 
 
-    private int getLayout(int viewType)
-    {
-        if (sparseIntArray!=null) {
-            return sparseIntArray.get(viewType,-1);
-        }
-        return -1;
-    }
+
 
 }
