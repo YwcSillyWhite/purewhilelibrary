@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
-import com.purewhite.ywc.purewhitelibrary.config.PatternUtils;
+import com.purewhite.ywc.purewhitelibrary.config.pattern.PatternUtils;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
 import com.purewhite.ywc.purewhitelibrary.mvp.view.IBaseUiView;
 

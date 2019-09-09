@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.config;
+package com.purewhite.ywc.purewhitelibrary.config.pattern;
 
 import java.lang.reflect.ParameterizedType;
 
