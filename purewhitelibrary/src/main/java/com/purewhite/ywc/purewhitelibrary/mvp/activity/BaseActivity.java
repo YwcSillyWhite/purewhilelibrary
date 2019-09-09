@@ -48,7 +48,15 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     //初始化之前
     protected void beforeView() {
         //设置横竖平
-        initOrientation();
+        try
+        {
+            initOrientation();
+        }
+        catch (Exception e)
+        {
+
+        }
+
     }
 
     //是否竖屏
@@ -58,17 +66,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     }
 
     //初始化横竖屏幕
-    private void initOrientation() {
+    private void initOrientation() throws Exception{
         //android 8.0之后如果屏幕满屏透明是不能设置屏幕方向
-        try
-        {
-            setRequestedOrientation(isVertical()? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
-                    ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-        catch (Exception e)
-        {
-
-        }
+        setRequestedOrientation(isVertical()? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+                ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
 

@@ -17,12 +17,12 @@ import com.purewhite.ywc.frame.ui.adapter.MineAdapter;
 import com.purewhite.ywc.frame.ui.mvp.MvpFragment;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
 import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
 import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 
 import java.util.Arrays;
 
-public class MineFragment extends MvpFragment<FragMineBinding, PresenterImp>
+public class MineFragment extends MvpFragment<FragMineBinding, BasePresenter>
         implements OnItemListener {
 
 

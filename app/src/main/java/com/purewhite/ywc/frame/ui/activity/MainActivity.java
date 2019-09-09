@@ -18,9 +18,9 @@ import com.purewhite.ywc.frame.ui.fragment.rest.RestFragment;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.adapter.pagerview.BaseFragmentAdapterImp;
 import com.purewhite.ywc.purewhitelibrary.config.ToastUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
 
-public class MainActivity extends MvpActivity<ActivityMainBinding,PresenterImp> {
+public class MainActivity extends MvpActivity<ActivityMainBinding, BasePresenter> {
 
     private SparseArray<Fragment> sparseArray;
     private boolean handlerDestroy=false;

@@ -9,11 +9,9 @@ import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
 import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
-import com.purewhite.ywc.purewhitelibrary.mvp.view.BaseUiView;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import com.purewhite.ywc.purewhitelibrary.config.PatternUtils;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.view.IBaseUiView;
 
 
 /**
@@ -22,38 +20,22 @@ import java.lang.reflect.Type;
  * @date 2018/11/14
  */
 
-public abstract class BaseMvpFragment<D extends ViewDataBinding,P extends PresenterImp>
-        extends BaseBindFragment<D> implements BaseUiView {
+public abstract class BaseMvpFragment<D extends ViewDataBinding,P extends BasePresenter>
+        extends BaseBindFragment<D> implements IBaseUiView {
 
     protected P mPresenter;
     //创建PresenterImp对象
-    private P creartPresenter()
-    {
-        Type genericSuperclass = this.getClass().getGenericSuperclass();
-        if (genericSuperclass!=null&&genericSuperclass instanceof ParameterizedType)
-        {
-            ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
-            Type[] types = parameterizedType.getActualTypeArguments();
-            final int positionPresenter = positionPresenter();
-            if (types!=null&&types.length>positionPresenter)
-            {
-                Type type = types[positionPresenter];
-                try {
-                    return ((Class<P>) type).newInstance();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
+    protected P creartPresenter() {
+        return isPresenter()?PatternUtils.getT(this,positionPresenter()):null;
     }
-
     //第几个范型是Presenter
-    protected int positionPresenter()
-    {
+    protected int positionPresenter() {
         return 1;
     }
-
+    //如果不使用presenter的时候，可以使用false
+    protected boolean isPresenter() {
+        return true;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

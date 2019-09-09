@@ -3,11 +3,11 @@ package com.purewhite.ywc.frame.ui.activity.mine;
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityCustomMainBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
 import com.purewhite.ywc.purewhitelibrary.view.bottom.BottomLayout;
 import com.purewhite.ywc.purewhitelibrary.view.bottom.BottomMenu;
 
-public class CustomMainActivity extends MvpActivity<ActivityCustomMainBinding,PresenterImp> {
+public class CustomMainActivity extends MvpActivity<ActivityCustomMainBinding, BasePresenter> {
 
     private BottomLayout.OnBottomLayoutChageListener onBottomLayoutChageListener=new BottomLayout.OnBottomLayoutChageListener() {
         @Override
