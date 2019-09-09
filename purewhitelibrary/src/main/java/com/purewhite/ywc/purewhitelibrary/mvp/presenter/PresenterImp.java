@@ -7,6 +7,9 @@ import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  *
@@ -17,15 +20,23 @@ import java.lang.ref.WeakReference;
 
 public class PresenterImp<V extends BaseUiView> implements BasePresenter<V> {
 
-    protected V mView;
-    private WeakReference<V> vWeakReference;
+    private V mView;
+    private WeakReference<V> weakReference;
     private DialogUtils dialogUtils;
 
     @Override
     public void addView(V view) {
-        vWeakReference = new WeakReference<>(view);
-        mView=vWeakReference.get();
-        initPage();
+        weakReference = new WeakReference<>(view);
+        //动态代理
+        mView = (V) Proxy.newProxyInstance(view.getClass().getClassLoader(), view.getClass().getInterfaces(), new InvocationHandler() {
+            @Override
+            public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
+                if (weakReference == null || weakReference.get() == null) {
+                    return null;
+                }
+                return method.invoke(weakReference.get(), objects);
+            }
+        });
     }
 
     @Override
@@ -55,37 +66,32 @@ public class PresenterImp<V extends BaseUiView> implements BasePresenter<V> {
     public void deleteView() {
         //销毁dialog
         WindowPureUtils.onDialogDestory(dialogUtils);
-        if (vWeakReference!=null)
+        if (weakReference!=null)
         {
-            vWeakReference.clear();
+            weakReference.clear();
             mView=null;
         }
     }
 
-
-
+    public V getView() {
+        return mView;
+    }
 
 
 
     //当前页数
-    protected int page;
-
-    //初始化页数
-    public void initPage()
-    {
-        page=1;
-    }
-
+    protected int page=1;
     //设置页数
     public void setPage(int count)
     {
         page=count;
     }
-
     //自增
     public void  autoPage()
     {
         page++;
     }
+
+
 
 }

@@ -47,10 +47,10 @@ public class PictureSelectPresenter extends PresenterImp<PictureSelectContract.U
                 return folderList;
             }
 
-        }).compose(RxSchedulers.ioToMain()).subscribe(new HttpObserver<List<Folder>>(mView.getContext()) {
+        }).compose(RxSchedulers.ioToMain()).subscribe(new HttpObserver<List<Folder>>(getView().getContext()) {
             @Override
             protected void onSuccess(List<Folder> folders) {
-                mView.responList(folders);
+                getView().responList(folders);
             }
         });
     }
