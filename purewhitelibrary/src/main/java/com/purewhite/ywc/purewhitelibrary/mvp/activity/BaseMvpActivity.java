@@ -22,7 +22,15 @@ public abstract class BaseMvpActivity<D extends ViewDataBinding,P extends BasePr
     protected P mPresenter;
     //创建PresenterImp对象
     protected P creartPresenter() {
-        return isPresenter()?PatternUtils.getT(this,positionPresenter()):null;
+        if (isPresenter()) {
+            Object object = PatternUtils.getT(this, positionPresenter());
+            if (object instanceof BasePresenter) {
+                return ((P) object);
+            } else {
+                throw new IllegalArgumentException("Two pattern not BasePresenter");
+            }
+        }
+        return null;
     }
     //第几个范型是Presenter
     protected int positionPresenter() {
