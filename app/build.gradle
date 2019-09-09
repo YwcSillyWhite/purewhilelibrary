@@ -41,4 +41,7 @@ dependencies {
     implementation project(':tbslibrary')
     implementation 'com.acker:simplezxing:1.5'
     implementation 'com.contrarywind:Android-PickerView:4.1.8'
+    implementation ('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
+        transitive = true
+    }
 }

@@ -2,7 +2,6 @@ package com.purewhite.ywc.purewhitelibrary.network.okhttp;
 
 
 import com.google.gson.Gson;
-import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.GetBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostFormBuilder;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.build.PostStringBuilder;

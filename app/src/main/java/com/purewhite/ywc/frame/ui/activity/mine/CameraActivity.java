@@ -10,13 +10,13 @@ import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityCameraBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.permisson.PermissonCallBack;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.PresenterImp;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CameraActivity extends MvpActivity<ActivityCameraBinding,PresenterImp>{
+public class CameraActivity extends MvpActivity<ActivityCameraBinding, BasePresenter>{
 
     private List<String> list=new ArrayList<>();
     private PermissonCallBack permissonCallBack=new PermissonCallBack() {
