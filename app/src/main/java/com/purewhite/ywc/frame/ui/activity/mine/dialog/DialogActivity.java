@@ -11,14 +11,14 @@ import com.purewhite.ywc.frame.databinding.ActivityDialogBinding;
 import com.purewhite.ywc.frame.ui.adapter.DialogAdapter;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
 import com.purewhite.ywc.purewhitelibrary.window.anim.WindowAnimStyle;
 import com.purewhite.ywc.purewhitelibrary.window.dialog.utils.DialogUtils;
 import com.purewhite.ywc.purewhitelibrary.window.utils.WindowPureUtils;
 
 import java.util.Arrays;
 
-public class DialogActivity extends MvpActivity<ActivityDialogBinding, BasePresenter> implements View.OnClickListener{
+public class DialogActivity extends MvpActivity<ActivityDialogBinding, BasePurePresenter> implements View.OnClickListener{
 
     private DialogUtils dialogOne,dialogTwo;
 

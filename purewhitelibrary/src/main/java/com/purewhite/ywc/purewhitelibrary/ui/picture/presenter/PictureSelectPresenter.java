@@ -2,7 +2,7 @@ package com.purewhite.ywc.purewhitelibrary.ui.picture.presenter;
 
 import android.text.TextUtils;
 
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.HttpObserver;
 import com.purewhite.ywc.purewhitelibrary.network.rxjava.RxSchedulers;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
@@ -20,7 +20,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
-public class PictureSelectPresenter extends BasePresenter<PictureSelectContract.UiView>
+public class PictureSelectPresenter extends BasePurePresenter<PictureSelectContract.UiView>
         implements PictureSelectContract.Presenter {
 
 

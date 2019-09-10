@@ -5,9 +5,9 @@ import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
 
-public abstract class MvpActivity<DB extends ViewDataBinding,P extends BasePresenter>
+public abstract class MvpActivity<DB extends ViewDataBinding,P extends BasePurePresenter>
         extends BaseMvpActivity<DB,P> {
 
     @Override

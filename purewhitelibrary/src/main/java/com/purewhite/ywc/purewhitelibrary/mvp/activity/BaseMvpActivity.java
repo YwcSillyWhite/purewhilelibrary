@@ -6,8 +6,8 @@ import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
 import com.purewhite.ywc.purewhitelibrary.config.pattern.PatternUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
-import com.purewhite.ywc.purewhitelibrary.mvp.view.IBaseUiView;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.view.IBasePureView;
 
 
 /**
@@ -16,18 +16,18 @@ import com.purewhite.ywc.purewhitelibrary.mvp.view.IBaseUiView;
  * @date 2018/11/5
  */
 
-public abstract class BaseMvpActivity<D extends ViewDataBinding,P extends BasePresenter>
-        extends BaseBindActivity<D> implements IBaseUiView {
+public abstract class BaseMvpActivity<D extends ViewDataBinding,P extends BasePurePresenter>
+        extends BaseBindActivity<D> implements IBasePureView {
 
     protected P mPresenter;
     //创建PresenterImp对象
     protected P creartPresenter() {
         if (isPresenter()) {
             Object object = PatternUtils.getT(this, positionPresenter());
-            if (object instanceof BasePresenter) {
+            if (object instanceof BasePurePresenter) {
                 return ((P) object);
             } else {
-                throw new IllegalArgumentException("Two pattern not BasePresenter");
+                throw new IllegalArgumentException("Two pattern not BasePurePresenter");
             }
         }
         return null;

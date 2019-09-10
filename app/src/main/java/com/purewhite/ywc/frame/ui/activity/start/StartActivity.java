@@ -11,9 +11,9 @@ import com.purewhite.ywc.frame.databinding.ActivityStartBinding;
 import com.purewhite.ywc.frame.ui.activity.MainActivity;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.bar.BarUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
 
-public class StartActivity extends MvpActivity<ActivityStartBinding, BasePresenter> {
+public class StartActivity extends MvpActivity<ActivityStartBinding, BasePurePresenter> {
 
 
     private Animation.AnimationListener animationListener=new Animation.AnimationListener() {

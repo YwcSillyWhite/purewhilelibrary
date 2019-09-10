@@ -21,11 +21,11 @@ import com.purewhite.ywc.frame.wheel.TwoWheelAdapter;
 import com.purewhite.ywc.frame.wheel.bean.WheelBean;
 import com.purewhite.ywc.frame.wheel.callback.WheelCallBack;
 import com.purewhite.ywc.purewhitelibrary.config.click.ClickUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
 
 import java.util.List;
 
-public class WheelViewActivity extends MvpActivity<ActivityWheelBinding, BasePresenter> implements View.OnClickListener {
+public class WheelViewActivity extends MvpActivity<ActivityWheelBinding, BasePurePresenter> implements View.OnClickListener {
 
     @Override
     protected int getLayout() {

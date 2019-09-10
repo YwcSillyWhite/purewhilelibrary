@@ -10,11 +10,11 @@ import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.FragHomeBinding;
 import com.purewhite.ywc.frame.ui.adapter.HomePagerAdapter;
 import com.purewhite.ywc.frame.ui.mvp.MvpFragment;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
 
 import java.util.Arrays;
 
-public class HomeFragment extends MvpFragment<FragHomeBinding, BasePresenter> {
+public class HomeFragment extends MvpFragment<FragHomeBinding, BasePurePresenter> {
 
 
     private TabLayout.OnTabSelectedListener talayout=new TabLayout.OnTabSelectedListener() {

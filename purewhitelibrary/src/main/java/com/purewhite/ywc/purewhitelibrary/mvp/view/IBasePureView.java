@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
  * ；ui视图接口
  */
 
-public interface IBaseUiView {
+public interface IBasePureView {
 
     Context getContext();
 

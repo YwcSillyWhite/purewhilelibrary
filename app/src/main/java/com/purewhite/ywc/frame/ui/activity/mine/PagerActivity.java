@@ -3,14 +3,14 @@ package com.purewhite.ywc.frame.ui.activity.mine;
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityPagerBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.adapter.StringPureAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.trans.PagerTransZoom;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PagerActivity extends MvpActivity<ActivityPagerBinding, BasePresenter> {
+public class PagerActivity extends MvpActivity<ActivityPagerBinding, BasePurePresenter> {
 
     private Integer [] colors={0XFF199AFE,0XFFFF8080,0XFF00AB96,0XFF00ff00,0XFF001133};
 

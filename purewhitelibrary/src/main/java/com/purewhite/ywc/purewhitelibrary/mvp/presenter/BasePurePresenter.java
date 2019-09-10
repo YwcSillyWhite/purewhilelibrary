@@ -1,7 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.mvp.presenter;
 
 
-import com.purewhite.ywc.purewhitelibrary.mvp.view.IBaseUiView;
+import com.purewhite.ywc.purewhitelibrary.mvp.view.IBasePureView;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationHandler;
@@ -15,7 +15,7 @@ import java.lang.reflect.Proxy;
  * Presenter实现类
  */
 
-public class BasePresenter<V extends IBaseUiView> implements IBasePresenter<V> ,InvocationHandler{
+public class BasePurePresenter<V extends IBasePureView> implements IBasePurePresenter<V>,InvocationHandler{
 
     private V mView;
     private WeakReference<V> weakReference;

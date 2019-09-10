@@ -7,7 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.databinding.PureActivityLookPictureBinding;
 import com.purewhite.ywc.purewhitelibrary.mvp.activity.BaseMvpActivity;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureConfig;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.PictureManager;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.adapter.LookPictureAdapter;
@@ -16,7 +16,7 @@ import java.util.List;
 
 
 
-public class LookPictureActivity extends BaseMvpActivity<PureActivityLookPictureBinding, BasePresenter>{
+public class LookPictureActivity extends BaseMvpActivity<PureActivityLookPictureBinding, BasePurePresenter>{
 
     private LookPictureAdapter lookPictureAdapter;
 

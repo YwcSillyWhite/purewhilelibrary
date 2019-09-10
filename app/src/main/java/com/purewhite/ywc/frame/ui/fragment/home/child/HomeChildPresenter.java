@@ -3,7 +3,7 @@ package com.purewhite.ywc.frame.ui.fragment.home.child;
 import com.purewhite.ywc.frame.bean.ShopBean;
 import com.purewhite.ywc.frame.bean.base.BaseBean;
 import com.purewhite.ywc.frame.network.UrlUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
 import com.purewhite.ywc.purewhitelibrary.network.OkNetUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.call.OkCallBack;
 
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HomeChildPresenter extends BasePresenter<HomeChildContract.UiView>
+public class HomeChildPresenter extends BasePurePresenter<HomeChildContract.UiView>
         implements HomeChildContract.Presenter {
 
     @Override

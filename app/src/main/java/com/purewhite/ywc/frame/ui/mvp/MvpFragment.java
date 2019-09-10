@@ -5,9 +5,9 @@ import androidx.databinding.ViewDataBinding;
 
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.purewhitelibrary.mvp.fragment.BaseMvpFragment;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
 
-public abstract class MvpFragment<DB extends ViewDataBinding,P extends BasePresenter>
+public abstract class MvpFragment<DB extends ViewDataBinding,P extends BasePurePresenter>
         extends BaseMvpFragment<DB,P> {
 
 
