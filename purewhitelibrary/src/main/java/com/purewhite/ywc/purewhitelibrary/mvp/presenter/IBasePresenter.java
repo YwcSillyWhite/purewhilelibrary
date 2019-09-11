@@ -1,7 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.mvp.presenter;
 
 
-import com.purewhite.ywc.purewhitelibrary.mvp.view.IBasePureView;
+import com.purewhite.ywc.purewhitelibrary.mvp.view.IBaseView;
 
 /**
  *
@@ -9,7 +9,7 @@ import com.purewhite.ywc.purewhitelibrary.mvp.view.IBasePureView;
  * @date 2018/11/5
  */
 
-public interface IBasePurePresenter<V extends IBasePureView>  {
+public interface IBasePresenter<V extends IBaseView>  {
 
     void addView(V view);
 

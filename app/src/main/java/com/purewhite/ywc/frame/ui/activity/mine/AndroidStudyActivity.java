@@ -13,11 +13,11 @@ import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
 import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
 
 import java.util.Arrays;
 
-public class AndroidStudyActivity extends MvpActivity<ActivityAndroidStudyBinding, BasePurePresenter> {
+public class AndroidStudyActivity extends MvpActivity<ActivityAndroidStudyBinding, BasePresenter> {
 
     private AndroidStudyAdapter androidStudyAdapter;
     private OnItemListener onItemListener=new OnItemListener() {

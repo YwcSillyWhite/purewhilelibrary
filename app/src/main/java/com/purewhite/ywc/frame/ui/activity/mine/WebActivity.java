@@ -10,12 +10,12 @@ import com.purewhite.ywc.frame.config.TagUtils;
 import com.purewhite.ywc.frame.databinding.ActivityWebBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
-public class WebActivity extends MvpActivity<ActivityWebBinding, BasePurePresenter> {
+public class WebActivity extends MvpActivity<ActivityWebBinding, BasePresenter> {
 
     private OnSingleListener onSingleListener=new OnSingleListener() {
         @Override

@@ -10,9 +10,9 @@ import com.purewhite.ywc.frame.databinding.ActivityDialogHomeBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
 import com.purewhite.ywc.purewhitelibrary.config.click.OnSingleListener;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
 
-public class DialogHomeActiivty extends MvpActivity<ActivityDialogHomeBinding, BasePurePresenter> {
+public class DialogHomeActiivty extends MvpActivity<ActivityDialogHomeBinding, BasePresenter> {
 
 
     private OnSingleListener onSingleListener=new OnSingleListener() {

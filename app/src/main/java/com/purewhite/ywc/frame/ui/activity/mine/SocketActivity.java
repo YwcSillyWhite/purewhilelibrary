@@ -7,7 +7,7 @@ import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivitySocketBinding;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.config.LogUtils;
-import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePurePresenter;
+import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkHttpUtils;
 import com.purewhite.ywc.purewhitelibrary.network.okhttp.OkhttpBuilder;
 
@@ -19,7 +19,7 @@ import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import okio.ByteString;
 
-public class SocketActivity extends MvpActivity<ActivitySocketBinding, BasePurePresenter> {
+public class SocketActivity extends MvpActivity<ActivitySocketBinding, BasePresenter> {
 
     private Handler handler=new Handler();
     private WebSocket webSocket;
