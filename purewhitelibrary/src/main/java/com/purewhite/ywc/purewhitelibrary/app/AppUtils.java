@@ -27,6 +27,7 @@ public final class  AppUtils {
     public static String baseUri="http://v2.api.haodanku.com";
     private static Application application;
     private static Stack<Activity> stack=new Stack<>();
+    public static String applicationId="ywc.pure.white.fileprovider";
 
     private AppUtils() {
 

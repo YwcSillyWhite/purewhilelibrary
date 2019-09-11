@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.purewhite.ywc.purewhitelibrary.BuildConfig;
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.callback.OnItemListener;
+import com.purewhite.ywc.purewhitelibrary.app.AppUtils;
 import com.purewhite.ywc.purewhitelibrary.config.PhotoUtils;
 import com.purewhite.ywc.purewhitelibrary.config.bundle.BundleUtils;
 import com.purewhite.ywc.purewhitelibrary.config.file.FileManagerUtils;
@@ -51,7 +52,7 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
                     timeFile = FileManagerUtils.createTimeFile("pure/image",FileManagerUtils.FILE_SD);
                     if (timeFile!=null)
                     {
-                        PhotoUtils.intentCamera(PictureSelectActivity.this, BuildConfig.APPLICATION_ID+".fileprovider"
+                        PhotoUtils.intentCamera(PictureSelectActivity.this, AppUtils.applicationId
                                 ,timeFile, PictureConfig.intent_picture_to_camera);
                     }
                     break;
