@@ -52,8 +52,7 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
                     timeFile = FileManagerUtils.createTimeFile("pure/image",FileManagerUtils.FILE_SD);
                     if (timeFile!=null)
                     {
-                        PhotoUtils.intentCamera(PictureSelectActivity.this, AppUtils.applicationId
-                                ,timeFile, PictureConfig.intent_picture_to_camera);
+                        PhotoUtils.intentCamera(PictureSelectActivity.this,timeFile, PictureConfig.intent_picture_to_camera);
                     }
                     break;
             }

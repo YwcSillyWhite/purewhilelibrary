@@ -7,7 +7,7 @@
 
 
         <provider
-            android:authorities="ywc.pure.white.fileprovider"
+            android:authorities="${applicationId}"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

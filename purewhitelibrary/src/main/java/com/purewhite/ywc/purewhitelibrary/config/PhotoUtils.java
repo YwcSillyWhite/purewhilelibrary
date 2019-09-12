@@ -19,6 +19,17 @@ import java.io.File;
  */
 public class PhotoUtils {
 
+
+    /**
+     *
+     * @param activity
+     * @param file
+     * @param requestCode
+     */
+    public  static void intentCamera(Activity activity, File file, int requestCode)
+    {
+        intentCamera(activity,activity.getPackageName(),file,requestCode);
+    }
     /**
      *
      * @param activity
@@ -34,6 +45,14 @@ public class PhotoUtils {
         }
     }
 
+
+
+
+
+    public  static void intentCamera(Fragment fragment, File file, int requestCode)
+    {
+        intentCamera(fragment,fragment.getActivity().getPackageName(),file,requestCode);
+    }
     /**
      *
      * @param fragment
@@ -73,6 +92,7 @@ public class PhotoUtils {
         intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
         return intent;
     }
+
 
 
 
