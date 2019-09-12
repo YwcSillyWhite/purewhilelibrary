@@ -20,18 +20,6 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
 
-
-        <!--<provider-->
-            <!--android:authorities="com.purewhite.ywc.frame.fileprovider"-->
-            <!--android:name="androidx.core.content.FileProvider"-->
-            <!--android:exported="false"-->
-            <!--android:grantUriPermissions="true">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/pure_file_path">-->
-            <!--</meta-data>-->
-        <!--</provider>-->
-
         <!-- 启动页 -->
         <activity android:name="com.purewhite.ywc.frame.ui.activity.start.StartActivity"
             android:theme="@style/StartTheme">
