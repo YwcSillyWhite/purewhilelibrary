@@ -7,7 +7,7 @@
 
 
         <provider
-            android:authorities="com.purewhite.ywc.purewhitelibrary.fileprovider"
+            android:authorities="${applicationId}"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -16,7 +16,6 @@
                 android:resource="@xml/pure_file_path">
             </meta-data>
         </provider>
-
 
         //图片选择
         <activity android:name=".ui.picture.activity.PictureSelectActivity"/>
