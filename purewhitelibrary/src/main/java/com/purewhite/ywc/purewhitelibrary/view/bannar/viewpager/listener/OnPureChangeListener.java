@@ -1,4 +1,4 @@
-package com.purewhite.ywc.purewhitelibrary.view.bannar.listener;
+package com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.listener;
 
 
 public interface  OnPureChangeListener  {
