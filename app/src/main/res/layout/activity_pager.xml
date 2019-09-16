@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.PureViewPager
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/title_bar_layout"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        app:pager_clip="false">
-    </com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.PureViewPager>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.PureViewPagerLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/view_pager">
+        </com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.PureViewPagerLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
 </layout>

@@ -1,18 +1,17 @@
 package com.purewhite.ywc.frame.ui.activity.mine;
 
+
 import com.purewhite.ywc.frame.R;
 import com.purewhite.ywc.frame.databinding.ActivityPagerBinding;
+import com.purewhite.ywc.frame.ui.adapter.BannerPagerAdapter;
 import com.purewhite.ywc.frame.ui.mvp.MvpActivity;
 import com.purewhite.ywc.purewhitelibrary.mvp.presenter.BasePresenter;
-import com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.adapter.StringPureAdapter;
-import com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.trans.PagerTransZoom;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PagerActivity extends MvpActivity<ActivityPagerBinding, BasePresenter> {
-
-    private Integer [] colors={0XFF199AFE,0XFFFF8080,0XFF00AB96,0XFF00ff00,0XFF001133};
 
     @Override
     protected int getLayout() {
@@ -26,21 +25,26 @@ public class PagerActivity extends MvpActivity<ActivityPagerBinding, BasePresent
         for (int i = 0; i < stringArray.length; i++) {
             list.add(stringArray[i]);
         }
-        mDataBinding.titleBarLayout.setAdapter(new StringPureAdapter(list,5,true),null);
-        mDataBinding.titleBarLayout.setPageTransformer(true,new PagerTransZoom(0.8f));
+
+        BannerPagerAdapter bannerPagerAdapter = new BannerPagerAdapter(Arrays.asList(stringArray));
+        mDataBinding.viewPager.pureViewPager.setAdapter(bannerPagerAdapter);
+        mDataBinding.viewPager.pureViewPager.initCurrentIemt();
+
+        mDataBinding.viewPager.setLayoutView(list.size(),0);
+
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        mDataBinding.titleBarLayout.onResume();
+        mDataBinding.viewPager.pureViewPager.onResume();
     }
 
 
     @Override
     protected void onPause() {
         super.onPause();
-        mDataBinding.titleBarLayout.onPause();
+        mDataBinding.viewPager.pureViewPager.onPause();
     }
 }
