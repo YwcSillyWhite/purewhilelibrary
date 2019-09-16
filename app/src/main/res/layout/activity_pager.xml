@@ -8,15 +8,13 @@
 
 
 
-
-
-        <com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.PureViewPager
+        <com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.PureViewPagerLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="50dp"
-            android:background="@color/pure_back"
-            android:id="@+id/pure_viewpager">
-        </com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.PureViewPager>
+            android:id="@+id/view_pager">
+        </com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.PureViewPagerLayout>
+
+
 
 
 

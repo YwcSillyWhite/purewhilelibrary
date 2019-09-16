@@ -29,8 +29,10 @@ public class PagerActivity extends MvpActivity<ActivityPagerBinding, BasePresent
         }
 
         BannerPagerAdapter bannerPagerAdapter = new BannerPagerAdapter(Arrays.asList(stringArray),true,3);
-        mDataBinding.pureViewpager.setAdapter(bannerPagerAdapter);
-        mDataBinding.pureViewpager.initCurrentIemt();
+        mDataBinding.viewPager.pureViewPager.setAdapter(bannerPagerAdapter);
+        mDataBinding.viewPager.pureViewPager.initCurrentIemt();
+
+        mDataBinding.viewPager.setLayoutView(list.size(),0);
 
     }
 
@@ -38,13 +40,13 @@ public class PagerActivity extends MvpActivity<ActivityPagerBinding, BasePresent
     @Override
     protected void onResume() {
         super.onResume();
-        mDataBinding.pureViewpager.onResume();
+        mDataBinding.viewPager.pureViewPager.onResume();
     }
 
 
     @Override
     protected void onPause() {
         super.onPause();
-        mDataBinding.pureViewpager.onPause();
+        mDataBinding.viewPager.pureViewPager.onPause();
     }
 }
