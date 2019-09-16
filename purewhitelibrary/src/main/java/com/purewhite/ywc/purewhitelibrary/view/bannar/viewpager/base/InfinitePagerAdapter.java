@@ -12,10 +12,21 @@ public abstract class InfinitePagerAdapter<T> extends BasePagerAdapter<T> {
 
     private boolean infinitePage;
     private int lookCard;
+
+    /**
+     *
+     * @param list 数据
+     * @param infinitePage 是否无限循环，无限循环是在页卡2时开启的
+     * @param lookCard 能够看到的也卡的数量，还有2个页卡是看不到的
+     */
     public InfinitePagerAdapter(List<T> list,boolean infinitePage,int lookCard) {
         super(list);
         this.infinitePage=infinitePage;
         this.lookCard=lookCard;
+    }
+
+    public InfinitePagerAdapter(List<T> list) {
+        this(list,true,3);
     }
 
     /**

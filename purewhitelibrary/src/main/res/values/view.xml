@@ -61,10 +61,6 @@
         <attr name="autoTime" format="integer"></attr>
         //是否循环滑动
         <attr name="autoPlay" format="boolean"></attr>
-        //2个viewpager之间的距离
-        <attr name="child_margin" format="dimension"></attr>
-        //viewpager setClipChildren
-        <attr name="pager_clip" format="boolean"></attr>
     </declare-styleable>
 
 

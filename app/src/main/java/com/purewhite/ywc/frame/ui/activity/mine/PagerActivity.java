@@ -28,7 +28,7 @@ public class PagerActivity extends MvpActivity<ActivityPagerBinding, BasePresent
             list.add(stringArray[i]);
         }
 
-        BannerPagerAdapter bannerPagerAdapter = new BannerPagerAdapter(Arrays.asList(stringArray),true,3);
+        BannerPagerAdapter bannerPagerAdapter = new BannerPagerAdapter(Arrays.asList(stringArray));
         mDataBinding.viewPager.pureViewPager.setAdapter(bannerPagerAdapter);
         mDataBinding.viewPager.pureViewPager.initCurrentIemt();
 

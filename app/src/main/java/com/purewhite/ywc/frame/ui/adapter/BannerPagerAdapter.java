@@ -16,6 +16,10 @@ public class BannerPagerAdapter extends InfinitePagerAdapter<String> {
         super(list,infinitePage,lookCard);
     }
 
+    public BannerPagerAdapter(List<String> list) {
+        super(list);
+    }
+
     @Override
     protected int getLayoutId(int position) {
         return R.layout.adapter_pager_banner;

@@ -1,6 +1,7 @@
 package com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Handler;
 import android.util.AttributeSet;
 
@@ -9,15 +10,28 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.base.InfinitePagerAdapter;
 import com.purewhite.ywc.purewhitelibrary.view.bannar.viewpager.listener.OnPureChangeListener;
 
+/**
+ * 自定义banner ，这里面最主要添加了自动播放时间和是否自动播放，做了一些性能上的优化
+ * ，无限放在适配器里做了
+ */
 public class PureViewPager extends ViewPager {
 
     private InfinitePagerAdapter infinitePagerAdapter;
     //自动播放时间
     private int autoTime=3000;
+    //是否可以自动播放
     private boolean autoPlay=true;
+    public void setAutoTime(int autoTime) {
+        this.autoTime = autoTime;
+    }
+
+    public void setAutoPlay(boolean autoPlay) {
+        this.autoPlay = autoPlay;
+    }
     private OnPureChangeListener onPureChangeListener;
     public void setOnPureChangeListener(OnPureChangeListener onPureChangeListener) {
         this.onPureChangeListener = onPureChangeListener;
@@ -39,10 +53,19 @@ public class PureViewPager extends ViewPager {
 
     public PureViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initView();
+        initView(attrs);
     }
 
-    private void initView() {
+    private void initView(AttributeSet attrs) {
+        if (attrs!=null)
+        {
+            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.PureViewPager);
+            autoTime=typedArray.getInt(R.styleable.PureViewPager_autoTime,autoTime);
+            autoPlay=typedArray.getBoolean(R.styleable.PureViewPager_autoPlay,autoPlay);
+            typedArray.recycle();
+        }
+
+
         addOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -69,7 +92,6 @@ public class PureViewPager extends ViewPager {
                 }
             }
         });
-
     }
 
 
@@ -117,17 +139,18 @@ public class PureViewPager extends ViewPager {
         }
     }
 
+    //根据activity生命周期变化，也是一种优化
     public void onResume() {
         statueAuto(true);
     }
 
-
+    //跟哭activity生命周期变化，也是一种优化
     public void onPause() {
         statueAuto(false);
     }
 
 
-    //是否可以移动
+    //判断是否可以移动
     private boolean isMove() {
         if (infinitePagerAdapter!=null) {
             int count = infinitePagerAdapter.getCount();
