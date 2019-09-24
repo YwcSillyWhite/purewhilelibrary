@@ -89,6 +89,11 @@ BaseFragmentAdapter，BaseFragmentAdapterImp，BasePagerAdapter，BasePagerAdapt
 二ScrollPtrLayout<br>
 继承于BasePtrFrameLayout
 
+###### 网络请求 （network里面）
+1.okhtttputils
+2.rxjava+retrofti
+3.glide
+
 
 ###### BarUtils（状态栏处理）
 可以查看这个类对应的方法，本项目是延伸到状态栏下处理的
