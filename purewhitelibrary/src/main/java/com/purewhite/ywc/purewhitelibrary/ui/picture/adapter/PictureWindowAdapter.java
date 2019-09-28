@@ -22,11 +22,10 @@ public class PictureWindowAdapter extends BaseAdapter<Folder, BaseViewHolder> {
 
     @Override
     protected void onData(BaseViewHolder holder, int position, Folder folder, int itemViewType) {
-        ImageView imageView = holder.findViewId(R.id.ratio_image_view);
-        holder.setTextView(R.id.picture_title, StringUtils.obtianString(folder.getName()));
-        ImageLoader.newInstance().init(imageView,folder.getImageBeanList().get(0).getPath());
-        holder.setTextView(R.id.picture_num,folder.getImageBeanList().size()+"张");
-        holder.findViewId(R.id.pure_picture_select).setVisibility(position==selectPosition? View.VISIBLE:View.GONE);
+        holder.setText(R.id.picture_num,folder.getImageBeanList().size()+"张")
+                .setVisibility(R.id.pure_picture_select,position==selectPosition)
+                .setText(R.id.picture_title, StringUtils.obtianString(folder.getName()))
+                .setImage(R.id.ratio_image_view,folder.getImageBeanList().get(0).getPath());
     }
 
 

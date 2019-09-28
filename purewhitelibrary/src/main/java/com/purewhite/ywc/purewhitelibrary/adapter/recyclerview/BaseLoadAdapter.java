@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -30,8 +31,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  * @date 2018/11/15
  */
 
-public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAdapter<T,V>{
-
+public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAdapter<T,V> {
     //用于延迟
     private Handler handler=new Handler();
     //加载最多项
@@ -47,11 +47,21 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
     private final int LOAD_ITEM=Integer.MIN_VALUE+2;
     //全局布局
     private final int FULL_ITEM=Integer.MIN_VALUE+3;
+    public BaseLoadAdapter(List<T> mData) {
+        super(mData);
+    }
 
 
-    //全局布局
+    /**
+     * 全局布局
+     */
     private FullView fullView=new FullViewImp();
     private OnFullListener onFullListener;
+    //是否启动fullview
+    private boolean isFullView()
+    {
+        return onFullListener!=null;
+    }
     public final void setFullView(FullView fullView) {
         if (fullView==null) {
             throw new UnsupportedOperationException("fullview can not null");
@@ -74,9 +84,23 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
     }
 
 
-    //加载布局
+
+
+
+
+
+
+
+    /**
+     * 加载布局
+     */
     private LoadView loadView=new LoadViewImp();
     protected OnLoadListener onLoadListener;
+    //是否启动loadview
+    private boolean isLoadView()
+    {
+        return onLoadListener!=null;
+    }
     public final void setLoadView(LoadView loadView) {
         if (loadView==null) {
             throw new UnsupportedOperationException("loadview can not null");
@@ -96,9 +120,9 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
 
 
 
-    public BaseLoadAdapter(List<T> mData) {
-        super(mData);
-    }
+
+
+
 
     /**
      * 适配器长度
@@ -108,20 +132,13 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
     public final int getItemCount() {
         return getFullCount()>0?getFullCount():getHeadCount()+obtainDataCount()+getFootCount()+getLoadCount();
     }
-
-    //没有数据长度
+    //全局布局长度
     private final int getFullCount() {
         if (isFullView()&&obtainDataCount()==0&&fullView.isFullView())
         {
             return 1;
         }
         return 0;
-    }
-
-    //是否启动fullview
-    private boolean isFullView()
-    {
-        return onFullListener!=null;
     }
 
     //头部数据的长度
@@ -139,30 +156,22 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
         }
         return 0;
     }
-
     //loadview的长度
     private final int getLoadCount() {
         return isLoadView()?1:0;
     }
-
-    //是否启动loadview
-    private boolean isLoadView()
-    {
-        return onLoadListener!=null;
-    }
-
     @Override
-    protected int obtainAdapterPosition(int dataPosition) {
-        return dataPosition+getHeadCount();
+    public int obtainDataHeadCount() {
+        return getHeadCount();
     }
 
-    @Override
-    protected int obtainDataPosition(int adapterPosition) {
-        return adapterPosition-getHeadCount();
-    }
+
+
+
+
 
     /**
-     * item类型，final化避免重写
+     * item类型
      * @param position
      * @return
      */
@@ -177,7 +186,7 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
         }
         else if (position<getHeadCount()+obtainDataCount())
         {
-            return obtainDataType(obtainDataPosition(position));
+            return obtainDataType(position-obtainDataHeadCount());
         }
         else if(position<getHeadCount()+obtainDataCount()+getFootCount())
         {
@@ -191,26 +200,33 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
 
     //data数据类型
     protected int obtainDataType(int position) {
-        return super.getItemViewType(obtainAdapterPosition(position));
+        return super.getItemViewType(position+obtainDataHeadCount());
+    }
+    @Override
+    protected boolean isDataViewType(int viewType) {
+        return viewType!=HEAD_ITEM&&viewType!=FOOT_ITEM&&viewType!=LOAD_ITEM&&viewType!=FULL_ITEM;
     }
 
 
-    /************  onCreateViewHolder ****************/
+    /**
+     * 创建布局
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
-    public final V onCreateViewHolder(ViewGroup parent, int viewType) {
-        V viewhold;
+    protected V onRestCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        V viewhold=null;
         if (viewType==FULL_ITEM)
         {
-            View view =obtainView(parent,fullView.getLayoutId());
-            fullView.setItemView(view);
-            viewhold=createV(view);
+            viewhold=createV(parent,fullView.getLayoutId());
+            fullView.setItemView(viewhold.itemView);
             if (fullView.getClickLoadId()!=0)
             {
-                viewhold.findViewId(fullView.getClickLoadId()).setOnClickListener(new View.OnClickListener() {
+                viewhold.fdbyid(fullView.getClickLoadId()).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (NetWorkUtils.isConnected()&&ClickUtils.clickable(v))
-                        {
+                        if (NetWorkUtils.isConnected()&& ClickUtils.clickable(v)) {
                             setFullState(FullView.LODA,true);
                             onFullListener.loadAgain();
                         }
@@ -228,37 +244,31 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
         }
         else if (viewType==LOAD_ITEM)
         {
-            View view = obtainView(parent,loadView.getLayoutId());
-            viewhold=createV(view);
-            view.setOnClickListener(new View.OnClickListener() {
+            viewhold = createV(parent,loadView.getLayoutId());
+            viewhold.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (loadView.getLoadStatue()==LoadView.NO_NETWORK &&NetWorkUtils.isConnected()&&ClickUtils.clickable(view))
-                    {
+                    if (loadView.getLoadStatue()== LoadView.NO_NETWORK && NetWorkUtils.isConnected()&& ClickUtils.clickable(view)) {
                         setLoadState(LoadView.LOAD,true);
                         onLoadListener.loadAgain();
                     }
                 }
             });
         }
-        else
-        {
-            return onDataCreateViewHolder(parent,viewType,obtianLayoutId(viewType));
-        }
         return viewhold;
     }
 
-    /************  item的类型 ****************/
 
 
-
-
-
-    /************  onBindViewHolder ****************/
+    /**
+     * 绑定数据
+     * @param holder
+     * @param position
+     * @param itemViewType
+     */
     @Override
-    public final void onBindViewHolder(V holder, int position) {
+    protected void onRestBindViewHolder(V holder, int position, int itemViewType) {
         loadMore(position);
-        int itemViewType = holder.getItemViewType();
         if (itemViewType==LOAD_ITEM)
         {
             loadView.onBindView(holder);
@@ -267,13 +277,7 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
         {
             fullView.onBindView(holder);
         }
-        else if (itemViewType!=HEAD_ITEM&&itemViewType!=FOOT_ITEM)
-        {
-            onDataBindView(holder,obtainDataPosition(position),itemViewType);
-        }
     }
-
-
     //判断是不是加载更多
     private void loadMore(int position) {
         //loadview长度不能为0，position等于最后一个，position不能为loadview的position
@@ -281,7 +285,7 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
             return;
         }
         //加载结束
-        if (loadView.getLoadStatue()==LoadView.FINISH) {
+        if (loadView.getLoadStatue()== LoadView.FINISH) {
             //网络判断
             if (NetWorkUtils.isConnected())
             {
@@ -302,37 +306,35 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
     }
 
 
-    /************  解决Layoutmanager影响full，head，foot的宽度bug  ****************/
+
+
+
+
+    /**
+     * 设置itemview占用的长度
+     * @param recyclerView
+     */
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
         if(layoutManager instanceof GridLayoutManager)
         {
-            final GridLayoutManager gridManager = ((GridLayoutManager) layoutManager);
+            GridLayoutManager gridManager = ((GridLayoutManager) layoutManager);
             gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    return dataType(getItemViewType(position))
-                            ? obtainDataSpanSize(position-getHeadCount(),gridManager)
-                            :gridManager.getSpanCount();
+                    int itemViewType = getItemViewType(position);
+                    if (isDataViewType(itemViewType)) {
+                        return obtainDataGrideSpanSize(position-getHeadCount(),gridManager,itemViewType);
+                    }else{
+                        return gridManager.getSpanCount();
+                    }
                 }
             });
         }
     }
 
-    //判断是不是data数据类型
-    public boolean dataType(RecyclerView.ViewHolder viewhold) {
-        return dataType(viewhold.getItemViewType());
-    }
-
-    public boolean dataType(int viewType) {
-        return viewType!=HEAD_ITEM&&viewType!=FOOT_ITEM &&viewType!=LOAD_ITEM&&viewType!=FULL_ITEM;
-    }
-
-    protected int obtainDataSpanSize(int position,GridLayoutManager gridManager) {
-        return 1;
-    }
 
     @Override
     public void onViewAttachedToWindow(V holder) {
@@ -341,11 +343,24 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
         if(layoutParams != null ) {
             if (layoutParams instanceof StaggeredGridLayoutManager.LayoutParams)
             {
-                StaggeredGridLayoutManager.LayoutParams params =
-                        (StaggeredGridLayoutManager.LayoutParams) layoutParams;
-                params.setFullSpan(!dataType(holder));
+                StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) layoutParams;
+                int itemViewType = holder.getItemViewType();
+                if (isDataViewType(itemViewType)) {
+                    params.setFullSpan(obtianDataStaggered(itemViewType));
+                }else {
+                    params.setFullSpan(true);
+                }
             }
         }
+    }
+
+    //GridLayoutManager 数据data占用的长度
+    protected int obtainDataGrideSpanSize(int position,GridLayoutManager gridManager,int viewType) {
+        return 1;
+    }
+
+    protected boolean obtianDataStaggered(int viewType){
+        return false;
     }
 
 
@@ -354,10 +369,9 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
 
 
 
-
-
-
-    /************  添加删除头尾   ****************/
+    /**
+     * 头尾
+     */
     //头部
     private LinearLayout mHeaderLayout;
     //尾部
@@ -476,7 +490,7 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
         }
     }
 
-    /************  添加删除头尾   ****************/
+
 
 
 
@@ -507,7 +521,7 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
         }
         else
         {
-            addDatas(list,network);
+            addData(list,network);
         }
     }
 
@@ -516,18 +530,18 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
     public void flush(List<T> list,boolean network) {
         if (list!=null&&list.size()>0)
         {
-            setLoadState(list.size()>=pageSize?LoadView.FINISH:LoadView.REST,false);
+            setLoadState(list.size()>=pageSize? LoadView.FINISH: LoadView.REST,false);
         }
         else
         {
-            setFullState(network?FullView.NO_DATA:FullView.NO_NETWORK,false);
+            setFullState(network? FullView.NO_DATA: FullView.NO_NETWORK,false);
         }
         super.flush(list);
     }
 
 
     //添加数据
-    public  void addDatas(List<T> list,boolean network) {
+    public  void addData(List<T> list,boolean network) {
         if (obtainDataCount()==0)
         {
             flush(list,network);
@@ -536,13 +550,13 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
         {
             if (list!=null&&list.size()>0)
             {
-                setLoadState(list.size()>=pageSize?LoadView.FINISH:LoadView.NO_DATA,false);
+                setLoadState(list.size()>=pageSize? LoadView.FINISH: LoadView.NO_DATA,false);
             }
             else
             {
-                setLoadState(network?LoadView.NO_DATA:LoadView.NO_NETWORK,true);
+                setLoadState(network? LoadView.NO_DATA: LoadView.NO_NETWORK,true);
             }
-            super.addDatas(list);
+            super.addData(list);
         }
     }
 
@@ -551,7 +565,7 @@ public abstract class BaseLoadAdapter<T,V extends BaseViewHolder> extends BaseAd
         flush(list,true);
     }
 
-    public void addDatas(List<T> list) {
-        addDatas(list,true);
+    public void addData(List<T> list) {
+        addData(list,true);
     }
 }

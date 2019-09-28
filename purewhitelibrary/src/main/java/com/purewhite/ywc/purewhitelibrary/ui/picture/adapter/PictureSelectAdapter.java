@@ -45,13 +45,14 @@ public class PictureSelectAdapter extends BindAdapter<ImageBean> {
     }
 
     @Override
-    protected void onDataBindView(BindHolder holder, int position, int itemViewType) {
+    protected void onDataBindViewHolder(BindHolder holder, int position, int itemViewType) {
         ViewDataBinding binding = holder.getBinding();
         if (binding instanceof PureAdapterPictureSelectBinding)
         {
             onData(holder,position,obtainT(obtainPosition(position)),itemViewType);
         }
     }
+
 
     @Override
     protected void onData(BindHolder holder, int position, ImageBean imageBean, int itemViewType) {

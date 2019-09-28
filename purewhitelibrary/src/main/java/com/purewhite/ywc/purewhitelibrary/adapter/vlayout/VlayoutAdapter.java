@@ -180,7 +180,7 @@ public class VlayoutAdapter extends DelegateAdapter
             viewHolder = new BaseViewHolder(view);
             if (fullView.getClickLoadId()!=0)
             {
-                ((BaseViewHolder) viewHolder).findViewId(fullView.getClickLoadId())
+                ((BaseViewHolder) viewHolder).fdbyid(fullView.getClickLoadId())
                         .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

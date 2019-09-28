@@ -3,13 +3,14 @@ package com.purewhite.ywc.purewhitelibrary.adapter.viewholder;
 
 import android.util.SparseArray;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 
 
 /**
@@ -18,16 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
  * @date 2018/11/15
  */
 
-public class BaseViewHolder extends RecyclerView.ViewHolder {
+public class BaseViewHolder<V extends BaseViewHolder> extends RecyclerView.ViewHolder {
 
-    private SparseArray<View> sparseArray;
+    private SparseArray<View> sparseArray=new SparseArray<>();
     public BaseViewHolder(View itemView) {
         super(itemView);
-        sparseArray=new SparseArray<>();
     }
 
-
-    public <T extends View>T findViewId(@NonNull @IdRes int id)
+    public View fdbyid(@NonNull @IdRes int id)
     {
         View view = sparseArray.get(id);
         if (view==null)
@@ -35,66 +34,63 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
             view=itemView.findViewById(id);
             sparseArray.put(id,view);
         }
-        return (T) view;
+        return  view;
     }
 
 
-    public final BaseViewHolder setTextView(@NonNull@IdRes int id, @NonNull String content)
-    {
-        View view = findViewId(id);
-        if (view instanceof TextView)
-        {
+    public final V setText(@NonNull @IdRes int id, @NonNull String content){
+        View view = fdbyid(id);
+        if (view!=null&&view instanceof TextView){
             ((TextView) view).setText(content);
         }
-        return this;
+        return ((V) this);
     }
 
-
-    public final BaseViewHolder setButton(@NonNull@IdRes int id, @NonNull String content)
-    {
-        View view = findViewId(id);
-        if (view instanceof Button)
-        {
-            ((Button) view).setText(content);
-        }
-        return this;
-    }
-
-    public final BaseViewHolder setEditView(@NonNull@IdRes int id, @NonNull String content)
-    {
-        View view = findViewId(id);
-        if (view instanceof EditText)
-        {
-            ((EditText) view).setText(content);
-        }
-        return this;
-    }
-
-    public final BaseViewHolder setRecycler(@NonNull@IdRes int id,@NonNull RecyclerView.Adapter adapter,@NonNull RecyclerView.LayoutManager layoutManager)
-    {
-        View view = findViewId(id);
-        if (view instanceof RecyclerView)
-        {
+    public final V setRecycler(@NonNull@IdRes int id,@NonNull RecyclerView.Adapter adapter,@NonNull RecyclerView.LayoutManager layoutManager){
+        View view = fdbyid(id);
+        if (view!=null&&view instanceof RecyclerView){
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(layoutManager);
         }
-        return this;
+        return ((V) this);
     }
 
-
-
-    public final BaseViewHolder setVisibility(@NonNull@IdRes int id,int visibility)
-    {
-        View view = findViewId(id);
-        view.setVisibility(visibility);
-        return this;
+    public final V setVisibility(@NonNull@IdRes int id,int visibility){
+        View view = fdbyid(id);
+        if (view!=null){
+            view.setVisibility(visibility);
+        }
+        return ((V) this);
     }
 
-    public final BaseViewHolder setVisibility(@NonNull@IdRes int id,boolean show)
+    public final V setVisibility(@NonNull@IdRes int id,boolean visible)
     {
-        setVisibility(id,show?View.VISIBLE:View.GONE);
-        return this;
+        return setVisibility(id,visible?View.VISIBLE:View.GONE);
+    }
+
+    public final V setSelected(@NonNull@IdRes int id,boolean selected){
+        View view = fdbyid(id);
+        if (view!=null){
+            view.setSelected(selected);
+        }
+        return ((V) this);
+    }
+
+    public final V setEnable(@NonNull@IdRes int id,boolean enable){
+        View view = fdbyid(id);
+        if (view!=null){
+            view.setEnabled(enable);
+        }
+        return ((V) this);
+    }
+
+    public final V setImage(@NonNull@IdRes int id,Object object){
+        View view = fdbyid(id);
+        if (view!=null&&view instanceof ImageView){
+            ImageLoader.newInstance().init(((ImageView) view),object);
+        }
+        return ((V) this);
     }
 
 }

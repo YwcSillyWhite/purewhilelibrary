@@ -26,12 +26,15 @@ import java.util.List;
 public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerView.Adapter<V> {
 
     public BaseAdapter(List<T> mData) {
-        this.mData = mData!=null?mData:new ArrayList<>();
+        if (mData!=null) {
+            this.mData.addAll(mData);
+        }
     }
 
-    //数据
-    private List<T> mData;
-    //获取对应position的t
+    /**
+     * 数据
+     */
+    private List<T> mData=new ArrayList<>();
     public final T obtainT(int position)
     {
         if (position<obtainDataCount())
@@ -40,93 +43,60 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
         }
         return null;
     }
-    //数据长度
-    protected  int obtainDataCount()
+    protected int obtainDataCount()
     {
         return mData.size();
     }
-
-    /**
-     * 获取数据
-     * @return
-     */
     public final List<T> obtainData() {
         return mData;
     }
 
 
 
-    //布局集合
+
+
+
+    /**
+     * 布局
+     */
     private SparseIntArray layoutIds=new SparseIntArray();
-    //添加布局
     protected final void addLayout(@LayoutRes int layoutId)
     {
         addLayout(0,layoutId);
     }
-    protected final void addLayout(int itemType,@LayoutRes int layoutId)
+    protected final void addLayout(int viewType,@LayoutRes int layoutId)
     {
         if (layoutId!=0)
         {
-            layoutIds.append(itemType,layoutId);
+            layoutIds.append(viewType,layoutId);
         }
     }
-    protected final int obtianLayoutId(int itemType)
+    protected final int obtainLayoutId(int viewType)
     {
-        return layoutIds.get(itemType, R.layout.pure_adapter_error_layout);
+        return layoutIds.get(viewType, R.layout.pure_adapter_error_layout);
     }
 
 
 
-    //点击事件
-    protected OnItemListener onItemListener;
-    private boolean isItemClick=true;
-    public void setOnItemListener(OnItemListener onItemListener) {
-        this.onItemListener = onItemListener;
-    }
-    public void setItemClick(boolean itemClick) {
-        isItemClick = itemClick;
-    }
-
-
-    //长按事件
-    protected OnItemLongListener onItemLongListener;
-    private boolean isItemLongClick=true;
-    public void setOnItemLongListener(OnItemLongListener onItemLongListener) {
-        this.onItemLongListener = onItemLongListener;
-    }
-    public void setItemLongClick(boolean itemLongClick) {
-        isItemLongClick = itemLongClick;
-    }
 
     /**
-     * 创建布局
-     * @param parent
-     * @param viewType
-     * @return
+     * 点击事件
      */
-    @NonNull
-    @Override
-    public V onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return onDataCreateViewHolder(parent,viewType,obtianLayoutId(viewType));
+    protected OnItemListener onItemListener;
+    private boolean isItemClick=true;
+    public final void setOnItemListener(OnItemListener onItemListener) {
+        this.onItemListener = onItemListener;
     }
-
-    protected V onDataCreateViewHolder(@NonNull ViewGroup parent, int viewType,@LayoutRes int layoutIds)
-    {
-        View itemView = obtainView(parent,layoutIds);
-        V v = createV(itemView);
-        bindDataListener(v);
-        return v;
+    public final void setItemClick(boolean itemClick) {
+        isItemClick = itemClick;
     }
-
-    //创建viewhold
-    protected final V createV(View view) {
-        return ((V) new BaseViewHolder(view));
+    protected OnItemLongListener onItemLongListener;
+    private boolean isItemLongClick=true;
+    public final void setOnItemLongListener(OnItemLongListener onItemLongListener) {
+        this.onItemLongListener = onItemLongListener;
     }
-
-    //获取布局
-    protected final View obtainView(ViewGroup viewGroup,int layoutIds)
-    {
-        return LayoutInflater.from(viewGroup.getContext()).inflate(layoutIds,viewGroup,false);
+    public final void setItemLongClick(boolean itemLongClick) {
+        isItemLongClick = itemLongClick;
     }
     //设置点击时间
     protected final void bindDataListener(final V viewhold) {
@@ -142,8 +112,8 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
                 public void onClick(View view) {
                     if (ClickUtils.clickable(view))
                     {
-                        int dataPosition = obtainDataPosition(viewhold.getLayoutPosition());
-                        onItemListener.onClick(BaseAdapter.this,view, dataPosition,true);
+                        int layoutPosition = viewhold.getLayoutPosition();
+                        onItemListener.onClick(BaseAdapter.this,view, layoutPosition-obtainDataHeadCount(),true);
                     }
                 }
             });
@@ -153,24 +123,72 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    int dataPosition = obtainDataPosition(viewhold.getLayoutPosition());
-                    return onItemLongListener.onClick(BaseAdapter.this,view,dataPosition,true);
+                    int layoutPosition = viewhold.getLayoutPosition();
+                    return onItemLongListener.onClick(BaseAdapter.this,view,layoutPosition-obtainDataHeadCount(),true);
                 }
             });
         }
     }
 
-    //获取data数据
-    protected int obtainDataPosition(int adapterPosition)
-    {
-        return adapterPosition;
+
+
+
+
+    /**
+     * 类型判断
+     * @param viewType
+     * @return
+     */
+    protected boolean isDataViewType(int viewType){
+        return true;
     }
 
-    //获取adapter数据
-    protected int obtainAdapterPosition(int dataPosition)
-    {
-        return dataPosition;
+
+
+
+
+    /**
+     * createViewholder
+     * @param parent
+     * @param viewType
+     * @return
+     */
+    @NonNull
+    @Override
+    public final V onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return isDataViewType(viewType)?onDataCreateViewHolder(parent,viewType):onRestCreateViewHolder(parent,viewType);
     }
+
+    private final V onDataCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
+
+        int layoutId = obtainLayoutId(viewType);
+        V v = onDataCreateV(parent, layoutId);
+        //
+        bindDataListener(v);
+        return v;
+    }
+    protected V onDataCreateV(@NonNull ViewGroup parent,@LayoutRes int layoutId){
+        return createV(parent,layoutId);
+    }
+
+    protected V onRestCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+        return null;
+    }
+
+    protected final V createV(@NonNull ViewGroup parent,@LayoutRes int layoutid){
+        View view = LayoutInflater.from(parent.getContext()).inflate(layoutid, parent, false);
+        return createV(view);
+    }
+
+    //创建viewhold
+    protected final V createV(View view) {
+        return ((V) new BaseViewHolder(view));
+    }
+
+
+
+
 
 
 
@@ -181,15 +199,26 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
      */
     @Override
     public void onBindViewHolder(@NonNull V holder, int position) {
-        onDataBindView(holder,position,holder.getItemViewType());
+        int itemViewType = holder.getItemViewType();
+        if (isDataViewType(itemViewType)){
+            onDataBindViewHolder(holder,position-obtainDataHeadCount(),itemViewType);
+        }else{
+            onRestBindViewHolder(holder,position,itemViewType);
+        }
+
+    }
+    protected void onDataBindViewHolder(V holder,int position,int itemViewType)
+    {
+        onData(holder,position,obtainT(position),itemViewType);
     }
 
-    protected void onDataBindView(V holder,int dataPosition,int itemViewType)
-    {
-        onData(holder,dataPosition,obtainT(dataPosition),itemViewType);
+    protected void onRestBindViewHolder(V holder,int position,int itemViewType){
+
     }
-    //赋值数据
     protected abstract void onData(V holder,int dataPosition,T t,int itemViewType);
+
+
+
 
 
 
@@ -202,80 +231,83 @@ public abstract class BaseAdapter<T,V extends BaseViewHolder> extends RecyclerVi
     public int getItemCount() {
         return obtainDataCount();
     }
+    //data数据上面的长度
+    public int obtainDataHeadCount(){
+        return 0;
+    }
 
 
 
 
 
-    //刷新
-    public void flush(List<T> list)
-    {
-        if (mData.size()==0)
-        {
-            if (list!=null&&list.size()>0)
-            {
-                mData.addAll(list);
-                notifyDataSetChanged();
-            }
-        }
-        else
-        {
+
+    /**
+     *处理数据
+     */
+
+    public void flush(List<T> data){
+        if (mData.size()>0){
             mData.clear();
-            if (list!=null&&list.size()>0)
-            {
-                mData.addAll(list);
+            if (data!=null&&data.size()>0){
+                mData.addAll(data);
             }
             notifyDataSetChanged();
-        }
-    }
-
-
-    //刷新某个数据
-    public void flushPosition(int dataPosition)
-    {
-        notifyItemChanged(obtainAdapterPosition(dataPosition));
-    }
-
-
-    //添加数据
-    public void addDatas(List<T> list)
-    {
-        if (mData.size()==0)
-        {
-            if (list!=null&&list.size()>0)
-            {
-                mData.addAll(list);
+        }else{
+            if (data!=null&&data.size()>0) {
+                mData.addAll(data);
                 notifyDataSetChanged();
             }
         }
-        else
-        {
-            if (list!=null&&list.size()>0)
-            {
-                mData.addAll(list);
-                notifyItemRangeInserted(obtainAdapterPosition(obtainDataCount()-list.size()), list.size());
+    }
+    public void flush(T t) {
+        if (mData.size()>0){
+            mData.clear();
+            if (t!=null){
+                mData.add(t);
+            }
+            notifyDataSetChanged();
+        }else{
+            if (t!=null) {
+                mData.add(t);
+                notifyDataSetChanged();
             }
         }
     }
-
-
-    //添加单个数据
-    public void addData(T t)
-    {
-        if (t!=null)
-        {
-            mData.add(t);
-            notifyItemRangeInserted(obtainAdapterPosition(obtainDataCount()-1),1);
+    public void flushData(int position){
+        notifyItemChanged(position+obtainDataHeadCount());
+    }
+    public void addData(List<T> data){
+        if (mData.size()>0){
+            if (data!=null&&data.size()>0){
+                mData.addAll(data);
+                notifyItemRangeInserted(obtainDataCount()+obtainDataHeadCount()-data.size(),data.size());
+            }
+        }else{
+            if (data!=null&&data.size()>0){
+                mData.addAll(data);
+                notifyDataSetChanged();
+            }
         }
     }
-
-    //删除某个数据
-    public void removePosition(int dataPosition)
+    public void addData(T t){
+        if (mData.size()>0){
+            if (t!=null){
+                mData.add(t);
+                notifyItemInserted(obtainDataCount()+obtainDataHeadCount()-1);
+            }
+        }else{
+            if (t!=null){
+                mData.add(t);
+                notifyDataSetChanged();
+            }
+        }
+    }
+    public void removePosition(int position)
     {
-        if (dataPosition<obtainDataCount())
+        if (position<obtainDataCount())
         {
-            mData.remove(dataPosition);
-            notifyItemRemoved(obtainAdapterPosition(dataPosition));
+            mData.remove(position);
+            notifyItemRemoved(obtainDataHeadCount());
         }
     }
 }

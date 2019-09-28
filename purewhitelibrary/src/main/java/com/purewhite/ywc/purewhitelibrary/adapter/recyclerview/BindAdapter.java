@@ -19,7 +19,7 @@ import java.util.List;
  * 使用数据里面的
  */
 
-public abstract class BindAdapter<T> extends BaseLoadAdapter<T,BindHolder> {
+public abstract class BindAdapter<T> extends BaseLoadAdapter<T, BindHolder> {
 
     public BindAdapter()
     {
@@ -30,15 +30,11 @@ public abstract class BindAdapter<T> extends BaseLoadAdapter<T,BindHolder> {
         super(list);
     }
 
-
     @Override
-    protected BindHolder onDataCreateViewHolder(@NonNull ViewGroup parent, int viewType, int layoutIds) {
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext())
-                , layoutIds, parent, false);
+    protected BindHolder onDataCreateV(@NonNull ViewGroup parent, int layoutId) {
+        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), layoutId, parent, false);
         BindHolder bindHolder = new BindHolder(binding);
         bindDataListener(bindHolder);
         return bindHolder;
     }
-
-
 }

@@ -102,7 +102,7 @@ public class PictureSelectActivity extends BaseMvpActivity<PureActivityPictureSe
                         ImageBean imageBean = pictureSelectAdapter.obtainT(pictureSelectAdapter.obtainPosition(position));
                         if ( PictureManager.newInstance().alterImage(imageBean.getPath()))
                         {
-                            pictureSelectAdapter.flushPosition(position);
+                            pictureSelectAdapter.flushData(position);
                             setViewStatue();
                         }
                     }

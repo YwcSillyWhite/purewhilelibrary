@@ -31,7 +31,7 @@ public class WheelAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        holder.setTextView(R.id.text_view,list.get(position));
+        holder.setText(R.id.text_view,list.get(position));
     }
 
     @Override
