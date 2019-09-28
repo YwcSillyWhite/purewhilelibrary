@@ -1,13 +1,9 @@
 package com.purewhite.ywc.purewhitelibrary.ui.picture.adapter;
 
-import android.view.View;
-import android.widget.ImageView;
-
 import com.purewhite.ywc.purewhitelibrary.R;
 import com.purewhite.ywc.purewhitelibrary.adapter.recyclerview.BaseAdapter;
 import com.purewhite.ywc.purewhitelibrary.adapter.viewholder.BaseViewHolder;
 import com.purewhite.ywc.purewhitelibrary.config.StringUtils;
-import com.purewhite.ywc.purewhitelibrary.network.imageload.ImageLoader;
 import com.purewhite.ywc.purewhitelibrary.ui.picture.bean.Folder;
 
 import java.util.List;
